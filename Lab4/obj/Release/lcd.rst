@@ -472,10 +472,10 @@
                             472 ; external initialized ram data
                             473 ;--------------------------------------------------------
                             474 	.area XISEG   (XDATA)
-   009B                     475 _write::
-   009B                     476 	.ds 2
-   009D                     477 _read::
-   009D                     478 	.ds 2
+   00A8                     475 _write::
+   00A8                     476 	.ds 2
+   00AA                     477 _read::
+   00AA                     478 	.ds 2
                             479 	.area HOME    (CODE)
                             480 	.area GSINIT0 (CODE)
                             481 	.area GSINIT1 (CODE)
@@ -529,7 +529,7 @@
    03D3 12 06 0C            529 	lcall	_lcd_delay
                             530 ;	lcd.c:12: *write = 0x30;
                             531 ;	genAssign
-   03D6 90 00 9B            532 	mov	dptr,#_write
+   03D6 90 00 A8            532 	mov	dptr,#_write
    03D9 E0                  533 	movx	a,@dptr
    03DA FA                  534 	mov	r2,a
    03DB A3                  535 	inc	dptr
@@ -548,7 +548,7 @@
    03E8 12 06 0C            548 	lcall	_lcd_delay
                             549 ;	lcd.c:14: *write = 0x30;
                             550 ;	genAssign
-   03EB 90 00 9B            551 	mov	dptr,#_write
+   03EB 90 00 A8            551 	mov	dptr,#_write
    03EE E0                  552 	movx	a,@dptr
    03EF FA                  553 	mov	r2,a
    03F0 A3                  554 	inc	dptr
@@ -567,7 +567,7 @@
    03FD 12 06 0C            567 	lcall	_lcd_delay
                             568 ;	lcd.c:16: *write=0x30;
                             569 ;	genAssign
-   0400 90 00 9B            570 	mov	dptr,#_write
+   0400 90 00 A8            570 	mov	dptr,#_write
    0403 E0                  571 	movx	a,@dptr
    0404 FA                  572 	mov	r2,a
    0405 A3                  573 	inc	dptr
@@ -584,7 +584,7 @@
    040F 12 05 04            584 	lcall	_lcdbusywait
                             585 ;	lcd.c:19: *write = 0x38;
                             586 ;	genAssign
-   0412 90 00 9B            587 	mov	dptr,#_write
+   0412 90 00 A8            587 	mov	dptr,#_write
    0415 E0                  588 	movx	a,@dptr
    0416 FA                  589 	mov	r2,a
    0417 A3                  590 	inc	dptr
@@ -606,7 +606,7 @@
    0427 12 05 04            606 	lcall	_lcdbusywait
                             607 ;	lcd.c:22: *write = 0x08;
                             608 ;	genAssign
-   042A 90 00 9B            609 	mov	dptr,#_write
+   042A 90 00 A8            609 	mov	dptr,#_write
    042D E0                  610 	movx	a,@dptr
    042E FA                  611 	mov	r2,a
    042F A3                  612 	inc	dptr
@@ -623,7 +623,7 @@
    0439 12 05 04            623 	lcall	_lcdbusywait
                             624 ;	lcd.c:25: *write = 0x0C;
                             625 ;	genAssign
-   043C 90 00 9B            626 	mov	dptr,#_write
+   043C 90 00 A8            626 	mov	dptr,#_write
    043F E0                  627 	movx	a,@dptr
    0440 FA                  628 	mov	r2,a
    0441 A3                  629 	inc	dptr
@@ -640,7 +640,7 @@
    044B 12 05 04            640 	lcall	_lcdbusywait
                             641 ;	lcd.c:28: *write = 0x06;
                             642 ;	genAssign
-   044E 90 00 9B            643 	mov	dptr,#_write
+   044E 90 00 A8            643 	mov	dptr,#_write
    0451 E0                  644 	movx	a,@dptr
    0452 FA                  645 	mov	r2,a
    0453 A3                  646 	inc	dptr
@@ -657,7 +657,7 @@
    045D 12 05 04            657 	lcall	_lcdbusywait
                             658 ;	lcd.c:31: *write = 0x01;
                             659 ;	genAssign
-   0460 90 00 9B            660 	mov	dptr,#_write
+   0460 90 00 A8            660 	mov	dptr,#_write
    0463 E0                  661 	movx	a,@dptr
    0464 FA                  662 	mov	r2,a
    0465 A3                  663 	inc	dptr
@@ -700,7 +700,7 @@
    0480 12 06 0C            700 	lcall	_lcd_delay
                             701 ;	lcd.c:40: *write = c;
                             702 ;	genAssign
-   0483 90 00 9B            703 	mov	dptr,#_write
+   0483 90 00 A8            703 	mov	dptr,#_write
    0486 E0                  704 	movx	a,@dptr
    0487 FA                  705 	mov	r2,a
    0488 A3                  706 	inc	dptr
@@ -745,7 +745,7 @@
    04A3 12 06 0C            745 	lcall	_lcd_delay
                             746 ;	lcd.c:48: *write = c;
                             747 ;	genAssign
-   04A6 90 00 9B            748 	mov	dptr,#_write
+   04A6 90 00 A8            748 	mov	dptr,#_write
    04A9 E0                  749 	movx	a,@dptr
    04AA FA                  750 	mov	r2,a
    04AB A3                  751 	inc	dptr
@@ -789,7 +789,7 @@
    04C2 12 06 0C            789 	lcall	_lcd_delay
                             790 ;	lcd.c:58: temp = *read;
                             791 ;	genAssign
-   04C5 90 00 9D            792 	mov	dptr,#_read
+   04C5 90 00 AA            792 	mov	dptr,#_read
    04C8 E0                  793 	movx	a,@dptr
    04C9 FA                  794 	mov	r2,a
    04CA A3                  795 	inc	dptr
@@ -841,7 +841,7 @@
    04EC 12 06 0C            841 	lcall	_lcd_delay
                             842 ;	lcd.c:66: *write = addr;
                             843 ;	genAssign
-   04EF 90 00 9B            844 	mov	dptr,#_write
+   04EF 90 00 A8            844 	mov	dptr,#_write
    04F2 E0                  845 	movx	a,@dptr
    04F3 FA                  846 	mov	r2,a
    04F4 A3                  847 	inc	dptr
@@ -877,7 +877,7 @@
    0504 C2 93               877 	clr	_P1_3
                             878 ;	lcd.c:74: temp = *read;
                             879 ;	genAssign
-   0506 90 00 9D            880 	mov	dptr,#_read
+   0506 90 00 AA            880 	mov	dptr,#_read
    0509 E0                  881 	movx	a,@dptr
    050A FA                  882 	mov	r2,a
    050B A3                  883 	inc	dptr
@@ -911,7 +911,7 @@
                             911 ;	Peephole 300	removed redundant label 00108$
                             912 ;	lcd.c:80: temp = *read;
                             913 ;	genAssign
-   0526 90 00 9D            914 	mov	dptr,#_read
+   0526 90 00 AA            914 	mov	dptr,#_read
    0529 E0                  915 	movx	a,@dptr
    052A FA                  916 	mov	r2,a
    052B A3                  917 	inc	dptr
@@ -990,7 +990,7 @@
    0564 8F 82               990 	mov	dpl,r7
    0566 88 83               991 	mov	dph,r0
    0568 89 F0               992 	mov	b,r1
-   056A 12 17 22            993 	lcall	__gptrget
+   056A 12 17 07            993 	lcall	__gptrget
                             994 ;	genCmpEq
                             995 ;	gencjneshort
                             996 ;	Peephole 112.b	changed ljmp to sjmp
@@ -1201,7 +1201,7 @@
                            1201 ;	lcd.c:114: else{lcdputstr("Error");}
                            1202 ;	genCall
                            1203 ;	Peephole 182.a	used 16 bit load of DPTR
-   0603 90 17 3E           1204 	mov	dptr,#__str_0
+   0603 90 17 23           1204 	mov	dptr,#__str_0
    0606 75 F0 80           1205 	mov	b,#0x80
                            1206 ;	Peephole 253.b	replaced lcall/ret with ljmp
    0609 02 05 3D           1207 	ljmp	_lcdputstr
@@ -1283,11 +1283,11 @@
    0646 22                 1283 	ret
                            1284 	.area CSEG    (CODE)
                            1285 	.area CONST   (CODE)
-   173E                    1286 __str_0:
-   173E 45 72 72 6F 72     1287 	.ascii "Error"
-   1743 00                 1288 	.db 0x00
+   1723                    1286 __str_0:
+   1723 45 72 72 6F 72     1287 	.ascii "Error"
+   1728 00                 1288 	.db 0x00
                            1289 	.area XINIT   (CODE)
-   1ADC                    1290 __xinit__write:
-   1ADC 00 A0              1291 	.byte #0x00,#0xA0
-   1ADE                    1292 __xinit__read:
-   1ADE 00 C0              1293 	.byte #0x00,#0xC0
+   1A41                    1290 __xinit__write:
+   1A41 00 A0              1291 	.byte #0x00,#0xA0
+   1A43                    1292 __xinit__read:
+   1A43 00 C0              1293 	.byte #0x00,#0xC0

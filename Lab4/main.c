@@ -15,6 +15,7 @@ void lcd_display(char rd,char p, char *a);
 void hex_dump(void);
 void DDRAM_dump(void);
 void CGRAM_dump(void);
+int atoh_data(char *c);
 _sdcc_external_startup()
 {
     AUXR |= 0xC0;
@@ -23,7 +24,7 @@ _sdcc_external_startup()
 
 void main(void)
 {
-    char ch[10],b[10],store;
+    char ch[10],b[10],d[10],store;
     unsigned char rd;
     unsigned int page,addr,flag=0,dat,aaa;
     P1_0=1;
@@ -50,7 +51,7 @@ void main(void)
             else if(store=='5'){printf_tiny("\n\n\r\t\t Hex Dump Command"); }
         if(store=='1' || store=='2' || store=='3')
         {
-            printf_tiny("\n\n\r Enter Page block number between 1 to 8: ");
+            /*printf_tiny("\n\n\r Enter Page block number between 1 to 8: ");
             do{
             gets(ch);
             page=atoi(ch);
@@ -63,24 +64,25 @@ void main(void)
                         printf_tiny("\n\n\rEnter a valid number: ");
                         flag=0;
                 }
-            }while(flag==0);
+            }while(flag==0);*/
 
-            printf_tiny("\n\n\r Enter Address in Hex in HH format between 00 to FF: ");
+            printf_tiny("\n\n\r Enter Address in Hex in HHH format between 000 to 7FF: ");
             do{
                 flag=0;
                 gets(b);
                 addr=atoh(b);
-                if(addr<256)
+                printf_tiny("Address: %d",addr);
+                if(addr<2048)
                 {
                     flag=1;
                 }
                 else
                 {
                     flag==0;
-                    printf_tiny("\n\n\rEnter valid number Address betweem 00 and FF: ");
+                    printf_tiny("\n\n\rEnter valid number Address betweem 000 and 7FF: ");
                 }
             }while(flag==0);
-
+            page=addr/256;
               if(store=='1')
               {
 
@@ -88,9 +90,9 @@ void main(void)
                 printf_tiny("\n\n\r Enter Data in Hex in HH format between 00 to FF: ");
                 do{
                     flag=0;
-                    gets(b);
-                    dat=atoh(b);
-                    if(addr<256)
+                    gets(d);
+                    dat=atoh_data(d);
+                    if(dat<256)
                     {
                         flag=1;
                     }
@@ -100,17 +102,16 @@ void main(void)
                         printf_tiny("\n\n\rEnter valid data in Hex in HH format between 00 to FF: ");
                     }
                 }while(flag==0);
-                EEPROM_WriteByte(addr,dat,page-1);
+                EEPROM_WriteByte((addr-page*256),dat,page);
             }
             else if(store=='2')
             {
-                aaa = 256*(page-1)+addr;
-                rd=EEPROM_ReadByte(addr,page-1);
-                printf_tiny("\n\n\r%x:%x \n",aaa,rd);
+                rd=EEPROM_ReadByte((addr-page*256),page);
+                printf_tiny("\n\n\r%x:%x \n",addr,rd);
             }
             else if(store=='3')
             {
-                rd=EEPROM_ReadByte(addr,page-1);
+                rd=EEPROM_ReadByte((addr-page*256),page);
                 lcd_display(rd,ch[0],b);
             }
 
@@ -216,7 +217,7 @@ void hex_dump()
     unsigned int st_addr,st_page, end_addr,end_page,flag=0,i,aaa,j=0;
     int bytes=0;
 	do{
-     printf_tiny("\n\n\r Enter Start Page block number between 1 to 8: ");
+     /*printf_tiny("\n\n\r Enter Start Page block number between 1 to 8: ");
         do{
             gets(ch);
             st_page=atoi(ch);
@@ -229,25 +230,25 @@ void hex_dump()
                         printf_tiny("\n\n\rEnter a valid number: ");
                         flag=0;
                 }
-            }while(flag==0);
+            }while(flag==0);*/
 
-            printf_tiny("\n\n\r Enter Start Address in Hex in HH format between 00 to FF: ");
+            printf_tiny("\n\n\r Enter Start Address in Hex in HHH format between 000 to 7FF: ");
             do{
                 flag=0;
                 gets(b);
                 st_addr=atoh(b);
-                if(st_addr<256)
+                if(st_addr<2048)
                 {
                     flag=1;
                 }
                 else
                 {
                     flag==0;
-                    printf_tiny("\n\n\rEnter valid number Address betweem 00 and FF: ");
+                    printf_tiny("\n\n\rEnter valid number Address betweem 000 and 7FF: ");
                 }
             }while(flag==0);
 
-		 printf_tiny("\n\n\r Enter End Page block number between 1 to 8: ");
+		 /*printf_tiny("\n\n\r Enter End Page block number between 1 to 8: ");
         do{
             gets(ch);
             end_page=atoi(ch);
@@ -260,28 +261,29 @@ void hex_dump()
                         printf_tiny("\n\n\rEnter a valid number: ");
                         flag=0;
                 }
-            }while(flag==0);
+            }while(flag==0);*/
 
-            printf_tiny("\n\n\r Enter End Address in Hex in HH format between 00 to FF: ");
+            printf_tiny("\n\n\r Enter End Address in Hex in HHH format between 000 to 7FF: ");
             do{
                 flag=0;
                 gets(d);
                 end_addr=atoh(d);
-                if(end_addr<256)
+                if(end_addr<2048)
                 {
                     flag=1;
                 }
                 else
                 {
                     flag==0;
-                    printf_tiny("\n\n\rEnter valid number Address betweem 00 and FF: ");
+                    printf_tiny("\n\n\rEnter valid number Address betweem 000 and 7FF: ");
                 }
             }while(flag==0);
-    bytes = end_page*256 + end_addr - st_addr - st_page*256;
+    bytes = end_addr - st_addr;
     printf_tiny("\n\r\tTotal Bytes: %d\n\r",bytes);
     if(bytes<0){printf_tiny("End address smaller than start address");}
 	}while(bytes<=0);
-    aaa = 256*(st_page-1)+st_addr;
+    printf_tiny("Number Of bytes: %d",bytes);
+    aaa =st_addr;
     //seq_read(st_addr,st_page-1,bytes,rd);
     for(i=0;i<=bytes;i++)
     {
@@ -291,24 +293,25 @@ void hex_dump()
             printf_tiny("\n\r%x:\t",aaa);
             aaa+=16;
             j=0;
-            seq_read(st_addr,st_page-1,16,r);
-            if(st_addr==0xff)
+             st_page=st_addr/256;
+            seq_read(st_addr-st_page*256,st_page,16,r);
+            /*if(st_addr==0xff)
             {
                 st_addr=0x00;
                 st_page++;
-            }
-            else{st_addr++;}
+            }*/
+            st_addr++;
 
 
         }
         else
         {
-            if(st_addr==0xff)
+            /*if(st_addr==0xff)
             {
                 st_addr=0x00;
                 st_page++;
-            }
-            else{st_addr++;}
+            }*/
+            st_addr++;
 
         }
         printf_tiny("%x\t",r[j]);
@@ -319,6 +322,70 @@ void hex_dump()
 int atoh(char *c)
 {
     int result=0,i=0;
+
+    if(*(c+3) != '\0')
+    {
+        return 2100;
+    }
+
+    if(*(c)>=48 && *(c)<=55 )
+    {
+        result = (*c-48)*256;
+        c++;
+    }
+    else{return 2103;}
+
+
+    if(*(c)>=48 && *(c)<=57 )
+    {
+        result += (*c-48)*16;
+        c++;
+    }
+    else if(*(c)>=97 && *(c)<=102)
+    {
+        result += (*c - 87)*16;
+        c++;
+    }
+    else if(*(c)>=65 && *(c)<=70)
+    {
+        result += (*c - 55)*16;
+        c++;
+    }
+    else
+    {
+        return 2101;
+    }
+
+
+
+    if(*(c)>=48 && *(c)<=57)
+    {
+        result += (*c - 48);
+    }
+    else if(*(c)>=97 && *(c)<=102)
+    {
+        result += (*c - 87);
+    }
+    else if(*(c)>=65 && *(c)<=70)
+    {
+        result += (*c - 55);
+    }
+    else
+    {
+        return 2102;
+    }
+
+    //printf_tiny("\n\r\tConverted: %d\n\r",result);
+
+
+    return result;
+}
+
+
+int atoh_data(char *c)
+{
+    int result=0,i=0;
+
     if(*(c+2) != '\0')
     {
         return 258;
@@ -368,6 +435,7 @@ int atoh(char *c)
 
     return result;
 }
+
 
 void DDRAM_dump()
 {

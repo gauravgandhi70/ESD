@@ -199,7 +199,7 @@ Symbol Table
     _CCF4                                                       =  00DC G
     _CCON                                                       =  00D8 G
     _CF                                                         =  00DF G
- 14 _CGRAM_dump                                                    0BEC GR
+ 14 _CGRAM_dump                                                    0BD1 GR
     _CH                                                         =  00F9 G
     _CKCKON0                                                    =  008F G
     _CKCKON1                                                    =  008F G
@@ -210,7 +210,7 @@ Symbol Table
     _CR                                                         =  00DE G
     _CY                                                         =  00D7 G
     _C_T2                                                       =  00C9 G
- 14 _DDRAM_dump                                                    0B40 GR
+ 14 _DDRAM_dump                                                    0B25 GR
     _DPH                                                        =  0083 G
     _DPL                                                        =  0082 G
     _EA                                                         =  00AF G
@@ -386,55 +386,55 @@ Symbol Table
   5 __start__stack                                                 0000 GR
  15 __str_0                                                        0000 R
  15 __str_1                                                        0003 R
- 15 __str_10                                                       0134 R
- 15 __str_11                                                       016D R
+ 15 __str_10                                                       0135 R
+ 15 __str_11                                                       0169 R
  15 __str_12                                                       019F R
- 15 __str_13                                                       01D5 R
- 15 __str_14                                                       0210 R
- 15 __str_15                                                       021B R
- 15 __str_16                                                       0241 R
- 15 __str_17                                                       026E R
- 15 __str_18                                                       02A1 R
- 15 __str_19                                                       02E0 R
+ 15 __str_13                                                       01DA R
+ 15 __str_14                                                       01E5 R
+ 15 __str_15                                                       020B R
+ 15 __str_16                                                       0238 R
+ 15 __str_17                                                       027A R
+ 15 __str_18                                                       02BA R
+ 15 __str_19                                                       02CF R
  15 __str_2                                                        000F R
- 15 __str_20                                                       0311 R
- 15 __str_21                                                       034E R
- 15 __str_22                                                       0363 R
- 15 __str_23                                                       038A R
- 15 __str_24                                                       0391 R
- 15 __str_25                                                       0395 R
+ 15 __str_20                                                       02F6 R
+ 15 __str_21                                                       030A R
+ 15 __str_22                                                       0311 R
+ 15 __str_23                                                       0315 R
  15 __str_3                                                        008D R
  15 __str_4                                                        00A1 R
  15 __str_5                                                        00B4 R
  15 __str_6                                                        00C6 R
  15 __str_7                                                        00D6 R
  15 __str_8                                                        00ED R
- 15 __str_9                                                        011A R
+ 15 __str_9                                                        0129 R
  16 __xinit__read                                                  0002 R
  16 __xinit__write                                                 0000 R
- 14 _atoh                                                          091E GR
-  9 _atoh_c_1_1                                                    005A R
-  9 _atoh_result_1_1                                               005D R
+ 14 _atoh                                                          066F GR
+  9 _atoh_c_1_1                                                    0062 R
+ 14 _atoh_data                                                     0903 GR
+  9 _atoh_data_c_1_1                                               0067 R
+  9 _atoh_data_result_1_1                                          006A R
+  9 _atoh_result_1_1                                               0065 R
     _atoi                                                          **** GX
     _delay_ms                                                      **** GX
- 14 _getchar                                                       03BA GR
+ 14 _getchar                                                       02F8 GR
     _gets                                                          **** GX
- 14 _hex_dump                                                      0484 GR
-  9 _hex_dump_b_1_1                                                002D R
-  9 _hex_dump_ch_1_1                                               0023 R
-  9 _hex_dump_d_1_1                                                0037 R
-  9 _hex_dump_flag_1_1                                             0056 R
-  9 _hex_dump_j_1_1                                                0058 R
-  9 _hex_dump_r_1_1                                                0041 R
-  3 _hex_dump_sloc0_1_0                                            0004 R
-  9 _hex_dump_st_addr_1_1                                          0052 R
-  9 _hex_dump_st_page_1_1                                          0054 R
- 14 _lcd_display                                                   03DD GR
-  9 _lcd_display_PARM_2                                            0017 GR
-  9 _lcd_display_PARM_3                                            0018 GR
-  9 _lcd_display_d_1_1                                             001C R
-  9 _lcd_display_flag_1_1                                          0021 R
-  9 _lcd_display_rd_1_1                                            001B R
+ 14 _hex_dump                                                      03C2 GR
+  9 _hex_dump_b_1_1                                                0037 R
+  9 _hex_dump_ch_1_1                                               002D R
+  9 _hex_dump_d_1_1                                                0041 R
+  9 _hex_dump_flag_1_1                                             005E R
+  9 _hex_dump_j_1_1                                                0060 R
+  9 _hex_dump_r_1_1                                                004B R
+  3 _hex_dump_sloc0_1_0                                            0002 R
+  9 _hex_dump_st_addr_1_1                                          005C R
+ 14 _lcd_display                                                   031B GR
+  9 _lcd_display_PARM_2                                            0021 GR
+  9 _lcd_display_PARM_3                                            0022 GR
+  9 _lcd_display_d_1_1                                             0026 R
+  9 _lcd_display_flag_1_1                                          002B R
+  9 _lcd_display_rd_1_1                                            0025 R
     _lcd_init                                                      **** GX
     _lcdgotoaddr                                                   **** GX
     _lcdgotoxy                                                     **** GX
@@ -446,18 +446,18 @@ Symbol Table
  14 _main                                                          000C GR
   9 _main_b_1_1                                                    000A R
   9 _main_ch_1_1                                                   0000 R
-  9 _main_flag_1_1                                                 0014 R
+  9 _main_d_1_1                                                    0014 R
+  9 _main_flag_1_1                                                 001E R
   3 _main_sloc0_1_0                                                0000 R
-  3 _main_sloc1_1_0                                                0002 R
     _printf_tiny                                                   **** GX
- 14 _putchar                                                       03A8 GR
-  9 _putchar_c_1_1                                                 0016 R
+ 14 _putchar                                                       02E6 GR
+  9 _putchar_c_1_1                                                 0020 R
   A _read                                                          0002 GR
     _seq_read                                                      **** GX
     _seq_read_PARM_2                                               **** GX
     _seq_read_PARM_3                                               **** GX
     _seq_read_PARM_4                                               **** GX
- 14 _uart_init                                                     03C4 GR
+ 14 _uart_init                                                     0302 GR
   A _write                                                         0000 GR
     a                                                              00D6 
     ac                                                             00D6 
@@ -643,13 +643,13 @@ Area Table
    0 _CODE                                                                              size    0   flags 0
    1 RSEG                                                                               size    0   flags 0
    2 REG_BANK_0                                                                         size    8   flags 4
-   3 DSEG                                                                               size    6   flags 0
+   3 DSEG                                                                               size    4   flags 0
    4 OSEG                                                                               size    0   flags 4
    5 SSEG                                                                               size    1   flags 0
    6 ISEG                                                                               size    0   flags 0
    7 BSEG                                                                               size    0   flags 80
    8 PSEG                                                                               size    0   flags 50
-   9 XSEG                                                                               size   5F   flags 40
+   9 XSEG                                                                               size   6C   flags 40
    A XISEG                                                                              size    4   flags 40
    B HOME                                                                               size    3   flags 20
    C GSINIT0                                                                            size    0   flags 20
@@ -660,6 +660,6 @@ Area Table
   11 GSINIT5                                                                            size    0   flags 20
   12 GSINIT                                                                             size    0   flags 20
   13 GSFINAL                                                                            size    3   flags 20
-  14 CSEG                                                                               size  C37   flags 20
-  15 CONST                                                                              size  398   flags 20
+  14 CSEG                                                                               size  C1C   flags 20
+  15 CONST                                                                              size  318   flags 20
   16 XINIT                                                                              size    4   flags 20
