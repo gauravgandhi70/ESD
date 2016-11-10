@@ -1,0 +1,40 @@
+# depslib dependency file v1.0
+1478288773 source:c:\users\admin\documents\lab4\main.c
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+	"lcd.h"
+	"i2c.h"
+	"eeprom.h"
+	"delay.h"
+	<stdio.h>
+	<stdlib.h>
+
+1478285883 source:c:\users\admin\documents\lab4\lcd.c
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+	"lcd.h"
+
+1478285883 c:\users\admin\documents\lab4\lcd.h
+
+1478210151 source:c:\users\admin\documents\lab4\delay.c
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+
+1478209645 source:c:\users\admin\documents\lab4\eeprom.c
+	<at89c51ed2.h>
+	"i2c.h"
+	"eeprom.h"
+	"delay.h"
+
+1477783933 c:\users\admin\documents\lab4\i2c.h
+
+1477783478 c:\users\admin\documents\lab4\delay.h
+
+1478210627 c:\users\admin\documents\lab4\eeprom.h
+
+1478150905 source:c:\users\admin\documents\lab4\i2c.c
+	<at89c51ed2.h>
+	<mcs51/8051.h>
+	"delay.h"
+	"i2c.h"
+
