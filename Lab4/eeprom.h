@@ -9,8 +9,8 @@ void EEPROM_ReadNBytes(unsigned char EepromAddr, unsigned char *RamAddr, char No
 void EEPROM_WriteString(unsigned char eeprom_address, unsigned char * source_address,unsigned char Page_Number);
 void EEPROM_ReadString(unsigned char eeprom_address, unsigned char * destination_address,unsigned char Page_Number);
 void EEPROM_Erase();
-char* seq_read(unsigned char st_addr,unsigned char st_page, int bytes);
-__xdata unsigned char eeprom_Data[50];
+void seq_read(unsigned char st_addr,unsigned char st_page, int bytes,unsigned char *eeprom_Data);
+//__xdata unsigned char eeprom_Data[50];
 #endif
 
 

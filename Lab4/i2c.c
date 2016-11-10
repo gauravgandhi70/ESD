@@ -1,4 +1,5 @@
 /*---------------------------------------------------------------------------------*
+Source of this library:
                                  8051 I2C  library
 Filename: I2C.c
 Controller: P89V51RD2/89c51(8051 family)

@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.6.0 #4309 (Jul 28 2006)
-; This file generated Thu Nov 10 01:11:13 2016
+; This file generated Thu Nov 10 13:19:57 2016
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mmcs51 --model-large
@@ -211,7 +211,6 @@
 	.globl _write
 	.globl _lcd_display_PARM_3
 	.globl _lcd_display_PARM_2
-	.globl _eeprom_Data
 	.globl _putchar
 	.globl _getchar
 	.globl _uart_init
@@ -439,10 +438,6 @@ _main_sloc1_1_0:
 	.ds 2
 _hex_dump_sloc0_1_0:
 	.ds 2
-_hex_dump_sloc1_1_0:
-	.ds 2
-_hex_dump_sloc2_1_0:
-	.ds 2
 ;--------------------------------------------------------
 ; overlayable items in internal ram 
 ;--------------------------------------------------------
@@ -470,8 +465,6 @@ __start__stack:
 ; external ram data
 ;--------------------------------------------------------
 	.area XSEG    (XDATA)
-_eeprom_Data::
-	.ds 50
 _main_ch_1_1:
 	.ds 10
 _main_b_1_1:
@@ -494,9 +487,17 @@ _hex_dump_ch_1_1:
 	.ds 10
 _hex_dump_b_1_1:
 	.ds 10
+_hex_dump_d_1_1:
+	.ds 10
+_hex_dump_r_1_1:
+	.ds 17
 _hex_dump_st_addr_1_1:
 	.ds 2
+_hex_dump_st_page_1_1:
+	.ds 2
 _hex_dump_flag_1_1:
+	.ds 2
+_hex_dump_j_1_1:
 	.ds 2
 _atoh_c_1_1:
 	.ds 3
@@ -624,13 +625,13 @@ _main:
 	mov	dptr,#__str_0
 	mov	b,#0x80
 	lcall	_lcdputstr
-;	main.c:36: lcdgotoxy(2,3);
+;	main.c:36: lcdgotoxy(4,3);
 ;	genAssign
 	mov	dptr,#_lcdgotoxy_PARM_2
 	mov	a,#0x03
 	movx	@dptr,a
 ;	genCall
-	mov	dpl,#0x02
+	mov	dpl,#0x04
 	lcall	_lcdgotoxy
 ;	main.c:37: lcdputstr("Hello World");
 ;	genCall
@@ -1263,7 +1264,7 @@ _main:
 	mov	dpl,r5
 	lcall	_EEPROM_ReadByte
 	mov	r0,dpl
-;	main.c:109: printf_tiny("\n\n\r%x:%x",aaa,rd);
+;	main.c:109: printf_tiny("\n\n\r%x:%x \n",aaa,rd);
 ;	genCast
 	mov	r3,#0x00
 ;	genIpush
@@ -1669,11 +1670,10 @@ _lcd_display:
 ;Allocation info for local variables in function 'hex_dump'
 ;------------------------------------------------------------
 ;sloc0                     Allocated with name '_hex_dump_sloc0_1_0'
-;sloc1                     Allocated with name '_hex_dump_sloc1_1_0'
-;sloc2                     Allocated with name '_hex_dump_sloc2_1_0'
 ;ch                        Allocated with name '_hex_dump_ch_1_1'
 ;b                         Allocated with name '_hex_dump_b_1_1'
-;rd                        Allocated with name '_hex_dump_rd_1_1'
+;d                         Allocated with name '_hex_dump_d_1_1'
+;r                         Allocated with name '_hex_dump_r_1_1'
 ;st_addr                   Allocated with name '_hex_dump_st_addr_1_1'
 ;st_page                   Allocated with name '_hex_dump_st_page_1_1'
 ;end_addr                  Allocated with name '_hex_dump_end_addr_1_1'
@@ -1681,6 +1681,7 @@ _lcd_display:
 ;flag                      Allocated with name '_hex_dump_flag_1_1'
 ;i                         Allocated with name '_hex_dump_i_1_1'
 ;aaa                       Allocated with name '_hex_dump_aaa_1_1'
+;j                         Allocated with name '_hex_dump_j_1_1'
 ;bytes                     Allocated with name '_hex_dump_bytes_1_1'
 ;------------------------------------------------------------
 ;	main.c:212: void hex_dump()
@@ -1688,6 +1689,13 @@ _lcd_display:
 ;	 function hex_dump
 ;	-----------------------------------------
 _hex_dump:
+;	main.c:216: unsigned int st_addr,st_page, end_addr,end_page,flag=0,i,aaa,j=0;
+;	genAssign
+	mov	dptr,#_hex_dump_j_1_1
+	clr	a
+	movx	@dptr,a
+	inc	dptr
+	movx	@dptr,a
 ;	main.c:218: do{
 00129$:
 ;	main.c:219: printf_tiny("\n\n\r Enter Start Page block number between 1 to 8: ");
@@ -1716,6 +1724,13 @@ _hex_dump:
 	lcall	_atoi
 	mov	r2,dpl
 	mov	r3,dph
+;	genAssign
+	mov	dptr,#_hex_dump_st_page_1_1
+	mov	a,r2
+	movx	@dptr,a
+	inc	dptr
+	mov	a,r3
+	movx	@dptr,a
 ;	main.c:223: if((st_page<9) && (st_page>0))
 ;	genAssign
 	mov	ar4,r2
@@ -1730,14 +1745,14 @@ _hex_dump:
 ;	genIfxJump
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00102$
-;	Peephole 300	removed redundant label 00166$
+;	Peephole 300	removed redundant label 00170$
 ;	genIfx
 	mov	a,r2
 	orl	a,r3
 ;	genIfxJump
 ;	Peephole 108.c	removed ljmp by inverse jump logic
 	jz	00102$
-;	Peephole 300	removed redundant label 00167$
+;	Peephole 300	removed redundant label 00171$
 ;	main.c:225: flag=1;
 ;	genAssign
 	mov	dptr,#_hex_dump_flag_1_1
@@ -1785,7 +1800,7 @@ _hex_dump:
 ;	genIfxJump
 ;	Peephole 108.c	removed ljmp by inverse jump logic
 	jz	00105$
-;	Peephole 300	removed redundant label 00168$
+;	Peephole 300	removed redundant label 00172$
 ;	main.c:234: printf_tiny("\n\n\r Enter Start Address in Hex in HH format between 00 to FF: ");
 ;	genIpush
 	push	ar2
@@ -1850,7 +1865,7 @@ _hex_dump:
 	mov	a,#0x100 - 0x01
 	add	a,r7
 	jc	00109$
-;	Peephole 300	removed redundant label 00169$
+;	Peephole 300	removed redundant label 00173$
 ;	main.c:241: flag=1;
 ;	genAssign
 	mov	dptr,#_hex_dump_flag_1_1
@@ -1895,7 +1910,7 @@ _hex_dump:
 ;	genIfxJump
 ;	Peephole 108.c	removed ljmp by inverse jump logic
 	jz	00111$
-;	Peephole 300	removed redundant label 00170$
+;	Peephole 300	removed redundant label 00174$
 ;	main.c:250: printf_tiny("\n\n\r Enter End Page block number between 1 to 8: ");
 ;	genIpush
 	push	ar2
@@ -1960,14 +1975,14 @@ _hex_dump:
 ;	genIfxJump
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00115$
-;	Peephole 300	removed redundant label 00171$
+;	Peephole 300	removed redundant label 00175$
 ;	genIfx
 	mov	a,r6
 	orl	a,r7
 ;	genIfxJump
 ;	Peephole 108.c	removed ljmp by inverse jump logic
 	jz	00115$
-;	Peephole 300	removed redundant label 00172$
+;	Peephole 300	removed redundant label 00176$
 ;	main.c:256: flag=1;
 ;	genAssign
 	mov	dptr,#_hex_dump_flag_1_1
@@ -2021,9 +2036,9 @@ _hex_dump:
 ;	Peephole 135	removed redundant mov
 	orl	a,r0
 ;	genIfxJump
-	jnz	00173$
+	jnz	00177$
 	ljmp	00118$
-00173$:
+00177$:
 ;	main.c:265: printf_tiny("\n\n\r Enter End Address in Hex in HH format between 00 to FF: ");
 ;	genIpush
 	push	ar2
@@ -2058,10 +2073,10 @@ _hex_dump:
 	movx	@dptr,a
 	inc	dptr
 	movx	@dptr,a
-;	main.c:268: gets(b);
+;	main.c:268: gets(d);
 ;	genCall
 ;	Peephole 182.a	used 16 bit load of DPTR
-	mov	dptr,#_hex_dump_b_1_1
+	mov	dptr,#_hex_dump_d_1_1
 	mov	b,#0x00
 	push	ar2
 	push	ar3
@@ -2076,10 +2091,10 @@ _hex_dump:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	main.c:269: end_addr=atoh(b);
+;	main.c:269: end_addr=atoh(d);
 ;	genCall
 ;	Peephole 182.a	used 16 bit load of DPTR
-	mov	dptr,#_hex_dump_b_1_1
+	mov	dptr,#_hex_dump_d_1_1
 	mov	b,#0x00
 	push	ar2
 	push	ar3
@@ -2114,7 +2129,7 @@ _hex_dump:
 ;	genIfxJump
 ;	Peephole 108.c	removed ljmp by inverse jump logic
 	jz	00122$
-;	Peephole 300	removed redundant label 00174$
+;	Peephole 300	removed redundant label 00178$
 ;	main.c:272: flag=1;
 ;	genAssign
 	mov	dptr,#_hex_dump_flag_1_1
@@ -2161,9 +2176,9 @@ _hex_dump:
 ;	Peephole 135	removed redundant mov
 	orl	a,r0
 ;	genIfxJump
-	jnz	00175$
+	jnz	00179$
 	ljmp	00124$
-00175$:
+00179$:
 ;	main.c:280: bytes = end_page*256 + end_addr - st_addr - st_page*256;
 ;	genLeftShift
 ;	genLeftShiftLiteral
@@ -2204,6 +2219,32 @@ _hex_dump:
 ;	Peephole 236.l	used r1 instead of ar1
 	subb	a,r1
 	mov	r7,a
+;	main.c:281: printf_tiny("\n\r\tTotal Bytes: %d\n\r",bytes);
+;	genIpush
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	push	ar6
+	push	ar7
+	push	ar6
+	push	ar7
+;	genIpush
+	mov	a,#__str_21
+	push	acc
+	mov	a,#(__str_21 >> 8)
+	push	acc
+;	genCall
+	lcall	_printf_tiny
+	mov	a,sp
+	add	a,#0xfc
+	mov	sp,a
+	pop	ar7
+	pop	ar6
+	pop	ar5
+	pop	ar4
+	pop	ar3
+	pop	ar2
 ;	main.c:282: if(bytes<0){printf_tiny("End address smaller than start address");}
 ;	genAssign
 	mov	ar0,r6
@@ -2214,7 +2255,7 @@ _hex_dump:
 ;	genIfxJump
 ;	Peephole 108.d	removed ljmp by inverse jump logic
 	jnb	acc.7,00130$
-;	Peephole 300	removed redundant label 00176$
+;	Peephole 300	removed redundant label 00180$
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -2222,9 +2263,9 @@ _hex_dump:
 	push	ar5
 	push	ar6
 	push	ar7
-	mov	a,#__str_21
+	mov	a,#__str_22
 	push	acc
-	mov	a,#(__str_21 >> 8)
+	mov	a,#(__str_22 >> 8)
 	push	acc
 ;	genCall
 	lcall	_printf_tiny
@@ -2253,233 +2294,75 @@ _hex_dump:
 	xrl	b,#0x80
 	subb	a,b
 ;	genIfxJump
-	jc	00177$
+	jc	00181$
 	ljmp	00129$
-00177$:
-;	main.c:285: rd=seq_read(st_addr,st_page-1,bytes);
-;	genAssign
-;	genCast
-;	genAssign
-	mov	ar5,r2
-	mov	ar0,r3
-;	genCast
+00181$:
+;	main.c:284: aaa = 256*(st_page-1)+st_addr;
 ;	genMinus
 ;	genMinusDec
-	dec	r5
-;	genAssign
-	mov	dptr,#_seq_read_PARM_2
-	mov	a,r5
-	movx	@dptr,a
-;	genAssign
-	mov	dptr,#_seq_read_PARM_3
-	mov	a,r6
-	movx	@dptr,a
-	inc	dptr
-	mov	a,r7
-	movx	@dptr,a
-;	genCall
-	mov	dpl,r4
-	push	ar2
-	push	ar3
-	push	ar6
-	push	ar7
-	lcall	_seq_read
-	mov	r4,dpl
-	mov	r5,dph
-	mov	r0,b
-	pop	ar7
-	pop	ar6
-	pop	ar3
-	pop	ar2
-;	main.c:287: for(i=0;i<=bytes;i++)
-;	genAssign
-	mov	_hex_dump_sloc2_1_0,r6
-	mov	(_hex_dump_sloc2_1_0 + 1),r7
-;	genAssign
-;	genAssign
-	clr	a
-	mov	_hex_dump_sloc0_1_0,a
-	mov	(_hex_dump_sloc0_1_0 + 1),a
-00138$:
-;	genCmpGt
-;	genCmp
-	clr	c
-	mov	a,_hex_dump_sloc2_1_0
-	subb	a,_hex_dump_sloc0_1_0
-	mov	a,(_hex_dump_sloc2_1_0 + 1)
-	subb	a,(_hex_dump_sloc0_1_0 + 1)
-;	genIfxJump
-	jnc	00178$
-;	Peephole 251.a	replaced ljmp to ret with ret
-	ret
-00178$:
-;	main.c:289: if(i%16==0)
-;	genAnd
-	mov	a,_hex_dump_sloc0_1_0
-	anl	a,#0x0F
-;	Peephole 160.c	removed sjmp by inverse jump logic
-	jz	00180$
-;	Peephole 300	removed redundant label 00179$
-;	Peephole 112.b	changed ljmp to sjmp
-	sjmp	00136$
-00180$:
-;	main.c:291: aaa = 256*(st_page-1)+st_addr;
-;	genIpush
-;	genMinus
-;	genMinusDec
-	mov	a,r2
-	add	a,#0xff
-	mov	r1,a
-	mov	a,r3
-	addc	a,#0xff
+	dec	r2
+	cjne	r2,#0xff,00182$
+	dec	r3
+00182$:
 ;	genLeftShift
 ;	genLeftShiftLiteral
 ;	genlshTwo
-;	peephole 177.e	removed redundant move
-	mov	ar6,r1
-	mov	r1,#0x00
+	mov	ar3,r2
+	mov	r2,#0x00
+;	genPlus
+;	Peephole 236.g	used r4 instead of ar4
+	mov	a,r4
+;	Peephole 236.a	used r2 instead of ar2
+	add	a,r2
+	mov	r2,a
+;	Peephole 236.g	used r5 instead of ar5
+	mov	a,r5
+;	Peephole 236.b	used r3 instead of ar3
+	addc	a,r3
+	mov	r3,a
+;	main.c:286: for(i=0;i<=bytes;i++)
 ;	genAssign
-	mov	dptr,#_hex_dump_st_addr_1_1
-	movx	a,@dptr
-	mov	_hex_dump_sloc1_1_0,a
-	inc	dptr
-	movx	a,@dptr
-	mov	(_hex_dump_sloc1_1_0 + 1),a
-;	genPlus
-	mov	a,_hex_dump_sloc1_1_0
-;	Peephole 236.a	used r1 instead of ar1
-	add	a,r1
-	mov	r1,a
-	mov	a,(_hex_dump_sloc1_1_0 + 1)
-;	Peephole 236.b	used r6 instead of ar6
-	addc	a,r6
-	mov	r6,a
-;	main.c:292: printf_tiny("\n\r%x:\t",aaa);
-;	genIpush
-	push	ar2
-	push	ar3
-	push	ar4
-	push	ar5
-	push	ar0
-	push	ar1
-	push	ar6
-;	genIpush
-	mov	a,#__str_22
-	push	acc
-	mov	a,#(__str_22 >> 8)
-	push	acc
-;	genCall
-	lcall	_printf_tiny
-	mov	a,sp
-	add	a,#0xfc
-	mov	sp,a
-	pop	ar0
-	pop	ar5
-	pop	ar4
-	pop	ar3
-	pop	ar2
-;	main.c:293: if(st_addr==0xff)
-;	genCmpEq
-;	gencjne
-;	gencjneshort
-	mov	a,_hex_dump_sloc1_1_0
-	cjne	a,#0xFF,00181$
-	mov	a,(_hex_dump_sloc1_1_0 + 1)
-	jnz	00181$
-	mov	a,#0x01
-	sjmp	00182$
-00181$:
-	clr	a
-00182$:
-;	genIpop
-;	genIfx
-;	genIfxJump
-;	Peephole 108.c	removed ljmp by inverse jump logic
-	jz	00133$
-;	Peephole 300	removed redundant label 00183$
-;	main.c:295: st_addr=0x00;
+	mov	ar4,r6
+	mov	ar5,r7
 ;	genAssign
-	mov	dptr,#_hex_dump_st_addr_1_1
-	clr	a
-	movx	@dptr,a
-	inc	dptr
-	movx	@dptr,a
-;	main.c:296: st_page++;
-;	genPlus
-;     genPlusIncr
-	inc	r2
-;	Peephole 112.b	changed ljmp to sjmp
-;	Peephole 243	avoided branch to sjmp
-	cjne	r2,#0x00,00137$
-	inc	r3
-;	Peephole 300	removed redundant label 00184$
-	sjmp	00137$
-00133$:
-;	main.c:298: else{st_addr++;}
-;	genPlus
-	mov	dptr,#_hex_dump_st_addr_1_1
-;     genPlusIncr
-	mov	a,#0x01
-	add	a,_hex_dump_sloc1_1_0
-	movx	@dptr,a
-;	Peephole 181	changed mov to clr
-	clr	a
-	addc	a,(_hex_dump_sloc1_1_0 + 1)
-	inc	dptr
-	movx	@dptr,a
-;	Peephole 112.b	changed ljmp to sjmp
-	sjmp	00137$
-00136$:
-;	main.c:302: else{st_addr++;}
 ;	genAssign
-	mov	dptr,#_hex_dump_st_addr_1_1
-	movx	a,@dptr
-	mov	r1,a
-	inc	dptr
-	movx	a,@dptr
-	mov	r6,a
-;	genPlus
-	mov	dptr,#_hex_dump_st_addr_1_1
-;     genPlusIncr
-	mov	a,#0x01
-;	Peephole 236.a	used r1 instead of ar1
-	add	a,r1
-	movx	@dptr,a
-;	Peephole 181	changed mov to clr
-	clr	a
-;	Peephole 236.b	used r6 instead of ar6
-	addc	a,r6
-	inc	dptr
-	movx	@dptr,a
-00137$:
-;	main.c:303: printf_tiny("%x\t",*(rd+i));
-;	genPlus
-	mov	a,_hex_dump_sloc0_1_0
-;	Peephole 236.a	used r4 instead of ar4
-	add	a,r4
-	mov	r6,a
-	mov	a,(_hex_dump_sloc0_1_0 + 1)
-;	Peephole 236.b	used r5 instead of ar5
-	addc	a,r5
-	mov	r7,a
-	mov	ar1,r0
-;	genPointerGet
-;	genGenPointerGet
-	mov	dpl,r6
-	mov	dph,r7
-	mov	b,r1
-	lcall	__gptrget
-	mov	r6,a
-;	genCast
+	mov	r6,#0x00
 	mov	r7,#0x00
+00141$:
+;	genCmpGt
+;	genCmp
+	clr	c
+	mov	a,r4
+	subb	a,r6
+	mov	a,r5
+	subb	a,r7
+;	genIfxJump
+	jnc	00183$
+;	Peephole 251.a	replaced ljmp to ret with ret
+	ret
+00183$:
+;	main.c:288: if(i%16==0)
+;	genAnd
+	mov	a,r6
+	anl	a,#0x0F
+;	Peephole 160.c	removed sjmp by inverse jump logic
+	jz	00185$
+;	Peephole 300	removed redundant label 00184$
+	ljmp	00139$
+00185$:
+;	main.c:291: printf_tiny("\n\r%x:\t",aaa);
+;	genIpush
+	push	ar4
+	push	ar5
 ;	genIpush
 	push	ar2
 	push	ar3
 	push	ar4
 	push	ar5
-	push	ar0
 	push	ar6
 	push	ar7
+	push	ar2
+	push	ar3
 ;	genIpush
 	mov	a,#__str_23
 	push	acc
@@ -2490,21 +2373,302 @@ _hex_dump:
 	mov	a,sp
 	add	a,#0xfc
 	mov	sp,a
-	pop	ar0
+	pop	ar7
+	pop	ar6
 	pop	ar5
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	main.c:287: for(i=0;i<=bytes;i++)
+;	main.c:292: aaa+=16;
 ;	genPlus
 ;     genPlusIncr
-	inc	_hex_dump_sloc0_1_0
+	mov	a,#0x10
+;	Peephole 236.a	used r2 instead of ar2
+	add	a,r2
+	mov	r2,a
+;	Peephole 181	changed mov to clr
 	clr	a
-	cjne	a,_hex_dump_sloc0_1_0,00185$
-	inc	(_hex_dump_sloc0_1_0 + 1)
-00185$:
-	ljmp	00138$
-;	Peephole 259.b	removed redundant label 00142$ and ret
+;	Peephole 236.b	used r3 instead of ar3
+	addc	a,r3
+	mov	r3,a
+;	main.c:293: j=0;
+;	genAssign
+	mov	dptr,#_hex_dump_j_1_1
+	clr	a
+	movx	@dptr,a
+	inc	dptr
+	movx	@dptr,a
+;	main.c:294: seq_read(st_addr,st_page-1,16,r);
+;	genAssign
+	mov	dptr,#_hex_dump_st_addr_1_1
+	movx	a,@dptr
+	mov	r0,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r1,a
+;	genCast
+	mov	ar4,r0
+;	genAssign
+	mov	dptr,#_hex_dump_st_page_1_1
+	movx	a,@dptr
+	mov	_hex_dump_sloc0_1_0,a
+	inc	dptr
+	movx	a,@dptr
+	mov	(_hex_dump_sloc0_1_0 + 1),a
+;	genCast
+	mov	r5,_hex_dump_sloc0_1_0
+;	genMinus
+;	genMinusDec
+	dec	r5
+;	genAssign
+	mov	dptr,#_seq_read_PARM_2
+	mov	a,r5
+	movx	@dptr,a
+;	genAssign
+	mov	dptr,#_seq_read_PARM_3
+	mov	a,#0x10
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+;	genAssign
+	mov	dptr,#_seq_read_PARM_4
+	mov	a,#_hex_dump_r_1_1
+	movx	@dptr,a
+	inc	dptr
+	mov	a,#(_hex_dump_r_1_1 >> 8)
+	movx	@dptr,a
+	inc	dptr
+;	Peephole 181	changed mov to clr
+	clr	a
+	movx	@dptr,a
+;	genCall
+	mov	dpl,r4
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	push	ar6
+	push	ar7
+	push	ar0
+	push	ar1
+	lcall	_seq_read
+	pop	ar1
+	pop	ar0
+	pop	ar7
+	pop	ar6
+	pop	ar5
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	main.c:295: if(st_addr==0xff)
+;	genCmpEq
+;	gencjne
+;	gencjneshort
+;	Peephole 241.c	optimized compare
+	clr	a
+	cjne	r0,#0xFF,00186$
+	cjne	r1,#0x00,00186$
+	inc	a
+00186$:
+;	Peephole 300	removed redundant label 00187$
+;	genIpop
+	pop	ar5
+	pop	ar4
+;	genIfx
+;	genIfxJump
+;	Peephole 108.c	removed ljmp by inverse jump logic
+	jz	00133$
+;	Peephole 300	removed redundant label 00188$
+;	main.c:297: st_addr=0x00;
+;	genAssign
+	mov	dptr,#_hex_dump_st_addr_1_1
+	clr	a
+	movx	@dptr,a
+	inc	dptr
+	movx	@dptr,a
+;	main.c:298: st_page++;
+;	genPlus
+	mov	dptr,#_hex_dump_st_page_1_1
+;     genPlusIncr
+	mov	a,#0x01
+	add	a,_hex_dump_sloc0_1_0
+	movx	@dptr,a
+;	Peephole 181	changed mov to clr
+	clr	a
+	addc	a,(_hex_dump_sloc0_1_0 + 1)
+	inc	dptr
+	movx	@dptr,a
+;	Peephole 112.b	changed ljmp to sjmp
+	sjmp	00140$
+00133$:
+;	main.c:300: else{st_addr++;}
+;	genPlus
+	mov	dptr,#_hex_dump_st_addr_1_1
+;     genPlusIncr
+	mov	a,#0x01
+;	Peephole 236.a	used r0 instead of ar0
+	add	a,r0
+	movx	@dptr,a
+;	Peephole 181	changed mov to clr
+	clr	a
+;	Peephole 236.b	used r1 instead of ar1
+	addc	a,r1
+	inc	dptr
+	movx	@dptr,a
+;	Peephole 112.b	changed ljmp to sjmp
+	sjmp	00140$
+00139$:
+;	main.c:306: if(st_addr==0xff)
+;	genAssign
+	mov	dptr,#_hex_dump_st_addr_1_1
+	movx	a,@dptr
+	mov	r0,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r1,a
+;	genCmpEq
+;	gencjneshort
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 198.a	optimized misc jump sequence
+	cjne	r0,#0xFF,00136$
+	cjne	r1,#0x00,00136$
+;	Peephole 200.b	removed redundant sjmp
+;	Peephole 300	removed redundant label 00189$
+;	Peephole 300	removed redundant label 00190$
+;	main.c:308: st_addr=0x00;
+;	genIpush
+	push	ar4
+	push	ar5
+;	genAssign
+	mov	dptr,#_hex_dump_st_addr_1_1
+	clr	a
+	movx	@dptr,a
+	inc	dptr
+	movx	@dptr,a
+;	main.c:309: st_page++;
+;	genAssign
+	mov	dptr,#_hex_dump_st_page_1_1
+	movx	a,@dptr
+	mov	r4,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r5,a
+;	genPlus
+	mov	dptr,#_hex_dump_st_page_1_1
+;     genPlusIncr
+	mov	a,#0x01
+;	Peephole 236.a	used r4 instead of ar4
+	add	a,r4
+	movx	@dptr,a
+;	Peephole 181	changed mov to clr
+	clr	a
+;	Peephole 236.b	used r5 instead of ar5
+	addc	a,r5
+	inc	dptr
+	movx	@dptr,a
+;	genIpop
+	pop	ar5
+	pop	ar4
+;	Peephole 112.b	changed ljmp to sjmp
+	sjmp	00140$
+00136$:
+;	main.c:311: else{st_addr++;}
+;	genPlus
+	mov	dptr,#_hex_dump_st_addr_1_1
+;     genPlusIncr
+	mov	a,#0x01
+;	Peephole 236.a	used r0 instead of ar0
+	add	a,r0
+	movx	@dptr,a
+;	Peephole 181	changed mov to clr
+	clr	a
+;	Peephole 236.b	used r1 instead of ar1
+	addc	a,r1
+	inc	dptr
+	movx	@dptr,a
+00140$:
+;	main.c:314: printf_tiny("%x\t",r[j]);
+;	genIpush
+	push	ar4
+	push	ar5
+;	genAssign
+	mov	dptr,#_hex_dump_j_1_1
+	movx	a,@dptr
+	mov	r0,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r1,a
+;	genPlus
+;	Peephole 236.g	used r0 instead of ar0
+	mov	a,r0
+	add	a,#_hex_dump_r_1_1
+	mov	dpl,a
+;	Peephole 236.g	used r1 instead of ar1
+	mov	a,r1
+	addc	a,#(_hex_dump_r_1_1 >> 8)
+	mov	dph,a
+;	genPointerGet
+;	genFarPointerGet
+	movx	a,@dptr
+	mov	r4,a
+;	genCast
+	mov	r5,#0x00
+;	genIpush
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	push	ar6
+	push	ar7
+	push	ar0
+	push	ar1
+	push	ar4
+	push	ar5
+;	genIpush
+	mov	a,#__str_24
+	push	acc
+	mov	a,#(__str_24 >> 8)
+	push	acc
+;	genCall
+	lcall	_printf_tiny
+	mov	a,sp
+	add	a,#0xfc
+	mov	sp,a
+	pop	ar1
+	pop	ar0
+	pop	ar7
+	pop	ar6
+	pop	ar5
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	main.c:315: j++;
+;	genPlus
+	mov	dptr,#_hex_dump_j_1_1
+;     genPlusIncr
+	mov	a,#0x01
+;	Peephole 236.a	used r0 instead of ar0
+	add	a,r0
+	movx	@dptr,a
+;	Peephole 181	changed mov to clr
+	clr	a
+;	Peephole 236.b	used r1 instead of ar1
+	addc	a,r1
+	inc	dptr
+	movx	@dptr,a
+;	main.c:286: for(i=0;i<=bytes;i++)
+;	genPlus
+;     genPlusIncr
+	inc	r6
+	cjne	r6,#0x00,00191$
+	inc	r7
+00191$:
+;	genIpop
+	pop	ar5
+	pop	ar4
+	ljmp	00141$
+;	Peephole 259.b	removed redundant label 00145$ and ret
 ;
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'atoh'
@@ -2513,7 +2677,7 @@ _hex_dump:
 ;result                    Allocated with name '_atoh_result_1_1'
 ;i                         Allocated with name '_atoh_i_1_1'
 ;------------------------------------------------------------
-;	main.c:307: int atoh(char *c)
+;	main.c:319: int atoh(char *c)
 ;	-----------------------------------------
 ;	 function atoh
 ;	-----------------------------------------
@@ -2530,7 +2694,7 @@ _atoh:
 	inc	dptr
 	mov	a,r2
 	movx	@dptr,a
-;	main.c:310: if(*(c+2) != '\0')
+;	main.c:322: if(*(c+2) != '\0')
 ;	genAssign
 	mov	dptr,#_atoh_c_1_1
 	movx	a,@dptr
@@ -2566,14 +2730,14 @@ _atoh:
 ;	Peephole 115.b	jump optimization
 	jz	00102$
 ;	Peephole 300	removed redundant label 00142$
-;	main.c:312: return 258;
+;	main.c:324: return 258;
 ;	genRet
 ;	Peephole 182.b	used 16 bit load of dptr
 	mov	dptr,#0x0102
 ;	Peephole 251.a	replaced ljmp to ret with ret
 	ret
 00102$:
-;	main.c:315: if(*(c)>=48 && *(c)<=57 )
+;	main.c:327: if(*(c)>=48 && *(c)<=57 )
 ;	genPointerGet
 ;	genGenPointerGet
 	mov	dpl,r2
@@ -2605,7 +2769,7 @@ _atoh:
 ;	Peephole 160.a	removed sjmp by inverse jump logic
 	jc	00112$
 ;	Peephole 300	removed redundant label 00144$
-;	main.c:317: result = (*c-48)*16;
+;	main.c:329: result = (*c-48)*16;
 ;	genCast
 	mov	a,r5
 	rlc	a
@@ -2640,7 +2804,7 @@ _atoh:
 	inc	dptr
 	mov	a,r6
 	movx	@dptr,a
-;	main.c:318: c++;
+;	main.c:330: c++;
 ;	genPlus
 	mov	dptr,#_atoh_c_1_1
 ;     genPlusIncr
@@ -2659,7 +2823,7 @@ _atoh:
 	movx	@dptr,a
 	ljmp	00113$
 00112$:
-;	main.c:320: else if(*(c)>=97 && *(c)<=102)
+;	main.c:332: else if(*(c)>=97 && *(c)<=102)
 ;	genAssign
 	mov	dptr,#_atoh_c_1_1
 	movx	a,@dptr
@@ -2701,7 +2865,7 @@ _atoh:
 ;	Peephole 160.a	removed sjmp by inverse jump logic
 	jc	00108$
 ;	Peephole 300	removed redundant label 00146$
-;	main.c:322: result = (*c - 87)*16;
+;	main.c:334: result = (*c - 87)*16;
 ;	genCast
 	mov	a,r5
 	rlc	a
@@ -2736,7 +2900,7 @@ _atoh:
 	inc	dptr
 	mov	a,r6
 	movx	@dptr,a
-;	main.c:323: c++;
+;	main.c:335: c++;
 ;	genPlus
 	mov	dptr,#_atoh_c_1_1
 ;     genPlusIncr
@@ -2756,7 +2920,7 @@ _atoh:
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00113$
 00108$:
-;	main.c:325: else if(*(c)>=65 && *(c)<=70)
+;	main.c:337: else if(*(c)>=65 && *(c)<=70)
 ;	genAssign
 	mov	dptr,#_atoh_c_1_1
 	movx	a,@dptr
@@ -2798,7 +2962,7 @@ _atoh:
 ;	Peephole 160.a	removed sjmp by inverse jump logic
 	jc	00104$
 ;	Peephole 300	removed redundant label 00148$
-;	main.c:327: result = (*c - 55)*16;
+;	main.c:339: result = (*c - 55)*16;
 ;	genCast
 	mov	a,r5
 	rlc	a
@@ -2833,7 +2997,7 @@ _atoh:
 	inc	dptr
 	mov	a,r6
 	movx	@dptr,a
-;	main.c:328: c++;
+;	main.c:340: c++;
 ;	genPlus
 	mov	dptr,#_atoh_c_1_1
 ;     genPlusIncr
@@ -2853,14 +3017,14 @@ _atoh:
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00113$
 00104$:
-;	main.c:332: return 257;
+;	main.c:344: return 257;
 ;	genRet
 ;	Peephole 182.b	used 16 bit load of dptr
 	mov	dptr,#0x0101
 ;	Peephole 251.a	replaced ljmp to ret with ret
 	ret
 00113$:
-;	main.c:337: if(*(c)>=48 && *(c)<=57)
+;	main.c:349: if(*(c)>=48 && *(c)<=57)
 ;	genAssign
 	mov	dptr,#_atoh_c_1_1
 	movx	a,@dptr
@@ -2902,7 +3066,7 @@ _atoh:
 ;	Peephole 160.a	removed sjmp by inverse jump logic
 	jc	00124$
 ;	Peephole 300	removed redundant label 00150$
-;	main.c:339: result += (*c - 48);
+;	main.c:351: result += (*c - 48);
 ;	genCast
 	mov	a,r2
 	rlc	a
@@ -2937,7 +3101,7 @@ _atoh:
 	movx	@dptr,a
 	ljmp	00125$
 00124$:
-;	main.c:341: else if(*(c)>=97 && *(c)<=102)
+;	main.c:353: else if(*(c)>=97 && *(c)<=102)
 ;	genAssign
 	mov	dptr,#_atoh_c_1_1
 	movx	a,@dptr
@@ -2979,7 +3143,7 @@ _atoh:
 ;	Peephole 160.a	removed sjmp by inverse jump logic
 	jc	00120$
 ;	Peephole 300	removed redundant label 00152$
-;	main.c:343: result += (*c - 87);
+;	main.c:355: result += (*c - 87);
 ;	genCast
 	mov	a,r2
 	rlc	a
@@ -3015,7 +3179,7 @@ _atoh:
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00125$
 00120$:
-;	main.c:345: else if(*(c)>=65 && *(c)<=70)
+;	main.c:357: else if(*(c)>=65 && *(c)<=70)
 ;	genAssign
 	mov	dptr,#_atoh_c_1_1
 	movx	a,@dptr
@@ -3057,7 +3221,7 @@ _atoh:
 ;	Peephole 160.a	removed sjmp by inverse jump logic
 	jc	00116$
 ;	Peephole 300	removed redundant label 00154$
-;	main.c:347: result += (*c - 55);
+;	main.c:359: result += (*c - 55);
 ;	genCast
 	mov	a,r2
 	rlc	a
@@ -3093,7 +3257,7 @@ _atoh:
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00125$
 00116$:
-;	main.c:351: return 257;
+;	main.c:363: return 257;
 ;	genRet
 ;	Peephole 182.b	used 16 bit load of dptr
 	mov	dptr,#0x0101
@@ -3101,7 +3265,7 @@ _atoh:
 ;	Peephole 251.b	replaced sjmp to ret with ret
 	ret
 00125$:
-;	main.c:357: return result;
+;	main.c:369: return result;
 ;	genAssign
 	mov	dptr,#_atoh_result_1_1
 	movx	a,@dptr
@@ -3120,33 +3284,36 @@ _atoh:
 ;temp                      Allocated with name '_DDRAM_dump_temp_1_1'
 ;i                         Allocated with name '_DDRAM_dump_i_1_1'
 ;------------------------------------------------------------
-;	main.c:360: void DDRAM_dump()
+;	main.c:372: void DDRAM_dump()
 ;	-----------------------------------------
 ;	 function DDRAM_dump
 ;	-----------------------------------------
 _DDRAM_dump:
-;	main.c:364: lcdputcmd(0x80);
+;	main.c:376: lcdputcmd(0x80);
 ;	genCall
 	mov	dpl,#0x80
 	lcall	_lcdputcmd
-;	main.c:365: for(i=0;i<64;i++)
+;	main.c:377: for(i=0;i<64;i++)
 ;	genAssign
 	mov	r2,#0x00
+;	genAssign
 	mov	r3,#0x00
+	mov	r4,#0x00
 00103$:
 ;	genCmpLt
 ;	genCmp
 	clr	c
-	mov	a,r2
-	subb	a,#0x40
 	mov	a,r3
+	subb	a,#0x40
+	mov	a,r4
 	xrl	a,#0x80
 	subb	a,#0x80
 ;	genIfxJump
-;	Peephole 108.a	removed ljmp by inverse jump logic
-	jnc	00107$
-;	Peephole 300	removed redundant label 00113$
-;	main.c:367: if(i%16==0)
+	jc	00113$
+;	Peephole 251.a	replaced ljmp to ret with ret
+	ret
+00113$:
+;	main.c:379: if(i%16==0)
 ;	genAssign
 	mov	dptr,#__modsint_PARM_2
 	mov	a,#0x10
@@ -3155,13 +3322,15 @@ _DDRAM_dump:
 	inc	dptr
 	movx	@dptr,a
 ;	genCall
-	mov	dpl,r2
-	mov	dph,r3
+	mov	dpl,r3
+	mov	dph,r4
 	push	ar2
 	push	ar3
+	push	ar4
 	lcall	__modsint
 	mov	a,dpl
 	mov	b,dph
+	pop	ar4
 	pop	ar3
 	pop	ar2
 ;	genIfx
@@ -3170,70 +3339,106 @@ _DDRAM_dump:
 ;	Peephole 108.b	removed ljmp by inverse jump logic
 	jnz	00102$
 ;	Peephole 300	removed redundant label 00114$
-;	main.c:369: printf_tiny("\n\r");
+;	main.c:381: temp++;
+;	genPlus
+;     genPlusIncr
+	inc	r2
+;	main.c:382: printf_tiny("\n\r");
 ;	genIpush
 	push	ar2
 	push	ar3
-	mov	a,#__str_24
+	push	ar4
+	mov	a,#__str_25
 	push	acc
-	mov	a,#(__str_24 >> 8)
+	mov	a,#(__str_25 >> 8)
 	push	acc
 ;	genCall
 	lcall	_printf_tiny
 	dec	sp
 	dec	sp
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	main.c:383: lcdgotoxy(temp,1);
+;	genAssign
+	mov	dptr,#_lcdgotoxy_PARM_2
+	mov	a,#0x01
+	movx	@dptr,a
+;	genCall
+	mov	dpl,r2
+	push	ar2
+	push	ar3
+	push	ar4
+	lcall	_lcdgotoxy
+	pop	ar4
 	pop	ar3
 	pop	ar2
 00102$:
-;	main.c:371: temp = lcdread();
+;	main.c:386: putchar(lcdread());
 ;	genCall
 	push	ar2
 	push	ar3
+	push	ar4
 	lcall	_lcdread
-	mov	r4,dpl
+	mov	r5,dpl
+	pop	ar4
 	pop	ar3
 	pop	ar2
-;	main.c:372: putchar(temp);
 ;	genCall
-	mov	dpl,r4
+	mov	dpl,r5
 	push	ar2
 	push	ar3
+	push	ar4
 	lcall	_putchar
+	pop	ar4
 	pop	ar3
 	pop	ar2
-;	main.c:365: for(i=0;i<64;i++)
+;	main.c:387: delay_ms(10);
+;	genCall
+;	Peephole 182.b	used 16 bit load of dptr
+	mov	dptr,#0x000A
+	push	ar2
+	push	ar3
+	push	ar4
+	lcall	_delay_ms
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	main.c:377: for(i=0;i<64;i++)
 ;	genPlus
 ;     genPlusIncr
-	inc	r2
-;	Peephole 112.b	changed ljmp to sjmp
-;	Peephole 243	avoided branch to sjmp
-	cjne	r2,#0x00,00103$
 	inc	r3
-;	Peephole 300	removed redundant label 00115$
-	sjmp	00103$
-00107$:
-	ret
+	cjne	r3,#0x00,00115$
+	inc	r4
+00115$:
+	ljmp	00103$
+;	Peephole 259.b	removed redundant label 00107$ and ret
+;
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'CGRAM_dump'
 ;------------------------------------------------------------
 ;temp                      Allocated with name '_CGRAM_dump_temp_1_1'
 ;i                         Allocated with name '_CGRAM_dump_i_1_1'
 ;------------------------------------------------------------
-;	main.c:381: void CGRAM_dump()
+;	main.c:394: void CGRAM_dump()
 ;	-----------------------------------------
 ;	 function CGRAM_dump
 ;	-----------------------------------------
 _CGRAM_dump:
-;	main.c:385: lcdputcmd(0x40);
+;	main.c:398: putchar('\n');
+;	genCall
+	mov	dpl,#0x0A
+	lcall	_putchar
+;	main.c:399: lcdputcmd(0x40);
 ;	genCall
 	mov	dpl,#0x40
 	lcall	_lcdputcmd
-;	main.c:386: for(i=0;i<32;i++)
+;	main.c:400: for(i=0;i<32;i++)
 ;	genAssign
 	mov	r2,#0x20
 	mov	r3,#0x00
 00103$:
-;	main.c:388: temp = lcdread();
+;	main.c:402: temp = lcdread();
 ;	genCall
 	push	ar2
 	push	ar3
@@ -3241,7 +3446,17 @@ _CGRAM_dump:
 	mov	r4,dpl
 	pop	ar3
 	pop	ar2
-;	main.c:389: putchar(temp);
+;	main.c:403: putchar('\t');
+;	genCall
+	mov	dpl,#0x09
+	push	ar2
+	push	ar3
+	push	ar4
+	lcall	_putchar
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	main.c:404: putchar(temp);
 ;	genCall
 	mov	dpl,r4
 	push	ar2
@@ -3255,7 +3470,7 @@ _CGRAM_dump:
 	cjne	r2,#0xff,00109$
 	dec	r3
 00109$:
-;	main.c:386: for(i=0;i<32;i++)
+;	main.c:400: for(i=0;i<32;i++)
 ;	genIfx
 	mov	a,r2
 	orl	a,r3
@@ -3263,8 +3478,13 @@ _CGRAM_dump:
 ;	Peephole 108.b	removed ljmp by inverse jump logic
 	jnz	00103$
 ;	Peephole 300	removed redundant label 00110$
-;	Peephole 300	removed redundant label 00104$
-	ret
+;	main.c:408: delay_ms(10);
+;	genCall
+;	Peephole 182.b	used 16 bit load of dptr
+	mov	dptr,#0x000A
+;	Peephole 253.b	replaced lcall/ret with ljmp
+	ljmp	_delay_ms
+;
 	.area CSEG    (CODE)
 	.area CONST   (CODE)
 __str_0:
@@ -3382,7 +3602,8 @@ __str_14:
 	.db 0x0A
 	.db 0x0A
 	.db 0x0D
-	.ascii "%x:%x"
+	.ascii "%x:%x "
+	.db 0x0A
 	.db 0x00
 __str_15:
 	.db 0x0A
@@ -3422,19 +3643,27 @@ __str_20:
 	.ascii " Enter End Address in Hex in HH format between 00 to FF: "
 	.db 0x00
 __str_21:
-	.ascii "End address smaller than start address"
+	.db 0x0A
+	.db 0x0D
+	.db 0x09
+	.ascii "Total Bytes: %d"
+	.db 0x0A
+	.db 0x0D
 	.db 0x00
 __str_22:
+	.ascii "End address smaller than start address"
+	.db 0x00
+__str_23:
 	.db 0x0A
 	.db 0x0D
 	.ascii "%x:"
 	.db 0x09
 	.db 0x00
-__str_23:
+__str_24:
 	.ascii "%x"
 	.db 0x09
 	.db 0x00
-__str_24:
+__str_25:
 	.db 0x0A
 	.db 0x0D
 	.db 0x00

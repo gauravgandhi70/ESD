@@ -40,10 +40,10 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
      0008    s_REG_BANK_1
      000A    l_GSINIT2
      0010    s_GSINIT3
+     0010    s_OSEG
      0010    s_REG_BANK_2
-     0014    s_OSEG
-     0015    s_RSEG
-     0015    s_SSEG
+     0011    s_RSEG
+     0011    s_SSEG
      0018    s_REG_BANK_3
      0020    s_BIT_BANK
      0020    s_BSEG_BYTES
@@ -104,6 +104,8 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
      009A    _RB8
      009B    _BDRCON
      009B    _TB8
+     009B    l_XSEG
+     009B    s_XISEG
      009C    _KBLS
      009C    _REN
      009D    _KBE
@@ -243,12 +245,10 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
      00E9    _CL
      00EA    _CCAP0L
      00EB    _CCAP1L
-     00EB    l_SSEG
      00EC    _CCAP2L
      00ED    _CCAP3L
-     00ED    l_XSEG
-     00ED    s_XISEG
      00EE    _CCAP4L
+     00EF    l_SSEG
      00F0    _B
      00F5    _B_5
      00F6    _B_6
@@ -260,10 +260,10 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
      00FD    _CCAP3H
      00FE    _CCAP4H
      0100    l_IRAM
-     0387    l_CONST
-     16E6    l_CSEG
-     1745    s_CONST
-     1ACC    s_XINIT
+     039E    l_CONST
+     16DF    l_CSEG
+     173E    s_CONST
+     1ADC    s_XINIT
 
 Hexadecimal
 
@@ -321,13 +321,13 @@ DSEG                               0000   0080 =    128. bytes (REL,CON)
 
       Value  Global
    --------  --------------------------------
-     0014    _bp
+     0010    _bp
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-OSEG                               0014   0000 =      0. bytes (REL,OVR)
+OSEG                               0010   0000 =      0. bytes (REL,OVR)
 
 Hexadecimal
 
@@ -339,17 +339,17 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-SSEG                               0015   00EB =    235. bytes (REL,OVR)
+SSEG                               0011   00EF =    239. bytes (REL,OVR)
 
       Value  Global
    --------  --------------------------------
-     0015    __start__stack
+     0011    __start__stack
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-RSEG                               0015   0000 =      0. bytes (REL,CON)
+RSEG                               0011   0000 =      0. bytes (REL,CON)
 
 Hexadecimal
 
@@ -361,44 +361,37 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-XSEG                               0000   00ED =    237. bytes (REL,CON,XDATA)
+XSEG                               0000   009B =    155. bytes (REL,CON,XDATA)
 
       Value  Global
    --------  --------------------------------
-  0D:0037    _EEPROM_WriteByte_PARM_2
-  0D:0038    _EEPROM_WriteByte_PARM_3
-  0D:003A    _EEPROM_ReadByte_PARM_2
-  0D:003C    _EEPROM_WriteNBytes_PARM_2
-  0D:003F    _EEPROM_WriteNBytes_PARM_3
-  0D:0040    _EEPROM_WriteNBytes_PARM_4
-  0D:0042    _EEPROM_ReadNBytes_PARM_2
-  0D:0045    _EEPROM_ReadNBytes_PARM_3
-  0D:0046    _EEPROM_ReadNBytes_PARM_4
-  0D:0048    _EEPROM_WriteString_PARM_2
-  0D:004B    _EEPROM_WriteString_PARM_3
-  0D:004D    _EEPROM_ReadString_PARM_2
-  0D:0050    _EEPROM_ReadString_PARM_3
-  0D:0052    _seq_read_PARM_2
-  0D:0053    _seq_read_PARM_3
-  0D:0060    _lcdgotoxy_PARM_2
-  0D:0064    _eeprom_Data
-  0D:00AD    _lcd_display_PARM_2
-  0D:00AE    _lcd_display_PARM_3
-  0D:00E1    __gptrput_PARM_2
-  0D:00E2    __mulint_PARM_2
-  0D:00E4    __modsint_PARM_2
-  0D:00E8    __moduint_PARM_2
+  0D:0005    _EEPROM_WriteByte_PARM_2
+  0D:0006    _EEPROM_WriteByte_PARM_3
+  0D:0008    _EEPROM_ReadByte_PARM_2
+  0D:000A    _EEPROM_WriteNBytes_PARM_2
+  0D:000D    _EEPROM_WriteNBytes_PARM_3
+  0D:000E    _EEPROM_WriteNBytes_PARM_4
+  0D:0010    _seq_read_PARM_2
+  0D:0011    _seq_read_PARM_3
+  0D:0013    _seq_read_PARM_4
+  0D:0021    _lcdgotoxy_PARM_2
+  0D:003C    _lcd_display_PARM_2
+  0D:003D    _lcd_display_PARM_3
+  0D:008F    __gptrput_PARM_2
+  0D:0090    __mulint_PARM_2
+  0D:0092    __modsint_PARM_2
+  0D:0096    __moduint_PARM_2
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-XISEG                              00ED   0008 =      8. bytes (REL,CON,XDATA)
+XISEG                              009B   0008 =      8. bytes (REL,CON,XDATA)
 
       Value  Global
    --------  --------------------------------
-  0D:00F1    _write
-  0D:00F3    _read
+  0D:009F    _write
+  0D:00A1    _read
 
 Hexadecimal
 
@@ -471,7 +464,7 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CSEG                               005F   16E6 =   5862. bytes (REL,CON,CODE)
+CSEG                               005F   16DF =   5855. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
@@ -481,57 +474,54 @@ CSEG                               005F   16E6 =   5862. bytes (REL,CON,CODE)
   0C:00FB    _EEPROM_WriteByte
   0C:0139    _EEPROM_ReadByte
   0C:01A4    _EEPROM_WriteNBytes
-  0C:020E    _EEPROM_ReadNBytes
-  0C:0275    _EEPROM_WriteString
-  0C:02E6    _EEPROM_ReadString
-  0C:033F    _seq_read
-  0C:0412    _I2C_Clock
-  0C:0423    _I2C_Start
-  0C:0440    _I2C_Stop
-  0C:045B    _I2C_Write
-  0C:0488    _I2C_Read
-  0C:04D2    _I2C_Ack
-  0C:04DA    _I2C_NoAck
-  0C:04E2    _lcd_init
-  0C:0589    _lcdputch
-  0C:05AC    _lcdputcmd
-  0C:05D1    _lcdread
-  0C:05F5    _lcdgotoaddr
-  0C:0618    _lcdbusywait
-  0C:0651    _lcdputstr
-  0C:06A5    _lcdgotoxy
-  0C:0720    _lcd_delay
-  0C:075B    __sdcc_program_startup
-  0C:0760    __sdcc_external_startup
-  0C:0767    _main
-  0C:0B03    _putchar
-  0C:0B15    _getchar
-  0C:0B1F    _uart_init
-  0C:0B38    _lcd_display
-  0C:0BDF    _hex_dump
-  0C:0FC6    _atoh
-  0C:11E8    _DDRAM_dump
-  0C:1257    _CGRAM_dump
-  0C:1285    _atoi
-  0C:13B8    _gets
-  0C:14CC    __gptrput
-  0C:14E5    _printf_tiny
-  0C:15ED    __mulint
-  0C:160D    __modsint
-  0C:167B    __moduint
-  0C:1729    __gptrget
+  0C:020E    _seq_read
+  0C:02FE    _I2C_Clock
+  0C:030F    _I2C_Start
+  0C:032C    _I2C_Stop
+  0C:0347    _I2C_Write
+  0C:0374    _I2C_Read
+  0C:03BE    _I2C_Ack
+  0C:03C6    _I2C_NoAck
+  0C:03CE    _lcd_init
+  0C:0475    _lcdputch
+  0C:0498    _lcdputcmd
+  0C:04BD    _lcdread
+  0C:04E1    _lcdgotoaddr
+  0C:0504    _lcdbusywait
+  0C:053D    _lcdputstr
+  0C:0591    _lcdgotoxy
+  0C:060C    _lcd_delay
+  0C:0647    __sdcc_program_startup
+  0C:064C    __sdcc_external_startup
+  0C:0653    _main
+  0C:09EF    _putchar
+  0C:0A01    _getchar
+  0C:0A0B    _uart_init
+  0C:0A24    _lcd_display
+  0C:0ACB    _hex_dump
+  0C:0F65    _atoh
+  0C:1187    _DDRAM_dump
+  0C:1233    _CGRAM_dump
+  0C:127E    _atoi
+  0C:13B1    _gets
+  0C:14C5    __gptrput
+  0C:14DE    _printf_tiny
+  0C:15E6    __mulint
+  0C:1606    __modsint
+  0C:1674    __moduint
+  0C:1722    __gptrget
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CONST                              1745   0387 =    903. bytes (REL,CON,CODE)
+CONST                              173E   039E =    926. bytes (REL,CON,CODE)
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-XINIT                              1ACC   0008 =      8. bytes (REL,CON,CODE)
+XINIT                              1ADC   0008 =      8. bytes (REL,CON,CODE)
 ASxxxx Linker V01.70 + NoICE + SDCC Feb 1999,  page 1.
 
 Files Linked      [ module(s) ]

@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.6.0 #4309 (Jul 28 2006)
-; This file generated Thu Nov 03 16:03:47 2016
+; This file generated Thu Nov 10 13:25:24 2016
 ;--------------------------------------------------------
 	.module eeprom
 	.optsdcc -mmcs51 --model-large
@@ -205,28 +205,18 @@
 	.globl _DPL
 	.globl _SP
 	.globl _P0
+	.globl _seq_read_PARM_4
 	.globl _seq_read_PARM_3
 	.globl _seq_read_PARM_2
-	.globl _EEPROM_ReadString_PARM_3
-	.globl _EEPROM_ReadString_PARM_2
-	.globl _EEPROM_WriteString_PARM_3
-	.globl _EEPROM_WriteString_PARM_2
-	.globl _EEPROM_ReadNBytes_PARM_4
-	.globl _EEPROM_ReadNBytes_PARM_3
-	.globl _EEPROM_ReadNBytes_PARM_2
 	.globl _EEPROM_WriteNBytes_PARM_4
 	.globl _EEPROM_WriteNBytes_PARM_3
 	.globl _EEPROM_WriteNBytes_PARM_2
 	.globl _EEPROM_ReadByte_PARM_2
 	.globl _EEPROM_WriteByte_PARM_3
 	.globl _EEPROM_WriteByte_PARM_2
-	.globl _eeprom_Data
 	.globl _EEPROM_WriteByte
 	.globl _EEPROM_ReadByte
 	.globl _EEPROM_WriteNBytes
-	.globl _EEPROM_ReadNBytes
-	.globl _EEPROM_WriteString
-	.globl _EEPROM_ReadString
 	.globl _seq_read
 ;--------------------------------------------------------
 ; special function registers
@@ -461,8 +451,6 @@ _P5_7	=	0x00df
 ; external ram data
 ;--------------------------------------------------------
 	.area XSEG    (XDATA)
-_eeprom_Data::
-	.ds 50
 _EEPROM_WriteByte_PARM_2:
 	.ds 1
 _EEPROM_WriteByte_PARM_3:
@@ -481,30 +469,12 @@ _EEPROM_WriteNBytes_PARM_4:
 	.ds 1
 _EEPROM_WriteNBytes_EepromAddr_1_1:
 	.ds 1
-_EEPROM_ReadNBytes_PARM_2:
-	.ds 3
-_EEPROM_ReadNBytes_PARM_3:
-	.ds 1
-_EEPROM_ReadNBytes_PARM_4:
-	.ds 1
-_EEPROM_ReadNBytes_EepromAddr_1_1:
-	.ds 1
-_EEPROM_WriteString_PARM_2:
-	.ds 3
-_EEPROM_WriteString_PARM_3:
-	.ds 1
-_EEPROM_WriteString_eeprom_address_1_1:
-	.ds 1
-_EEPROM_ReadString_PARM_2:
-	.ds 3
-_EEPROM_ReadString_PARM_3:
-	.ds 1
-_EEPROM_ReadString_eeprom_address_1_1:
-	.ds 1
 _seq_read_PARM_2:
 	.ds 1
 _seq_read_PARM_3:
 	.ds 2
+_seq_read_PARM_4:
+	.ds 3
 _seq_read_st_addr_1_1:
 	.ds 1
 ;--------------------------------------------------------
@@ -822,313 +792,15 @@ _EEPROM_WriteNBytes:
 ;	Peephole 300	removed redundant label 00104$
 	ret
 ;------------------------------------------------------------
-;Allocation info for local variables in function 'EEPROM_ReadNBytes'
-;------------------------------------------------------------
-;RamAddr                   Allocated with name '_EEPROM_ReadNBytes_PARM_2'
-;NoOfBytes                 Allocated with name '_EEPROM_ReadNBytes_PARM_3'
-;Page_Number               Allocated with name '_EEPROM_ReadNBytes_PARM_4'
-;EepromAddr                Allocated with name '_EEPROM_ReadNBytes_EepromAddr_1_1'
-;------------------------------------------------------------
-;	eeprom.c:141: void EEPROM_ReadNBytes(unsigned char EepromAddr, unsigned char *RamAddr, char NoOfBytes,unsigned char Page_Number)
-;	-----------------------------------------
-;	 function EEPROM_ReadNBytes
-;	-----------------------------------------
-_EEPROM_ReadNBytes:
-;	genReceive
-	mov	a,dpl
-	mov	dptr,#_EEPROM_ReadNBytes_EepromAddr_1_1
-	movx	@dptr,a
-;	eeprom.c:143: while(NoOfBytes !=  0)
-;	genAssign
-	mov	dptr,#_EEPROM_ReadNBytes_PARM_4
-	movx	a,@dptr
-	mov	r2,a
-;	genAssign
-	mov	dptr,#_EEPROM_ReadNBytes_EepromAddr_1_1
-	movx	a,@dptr
-	mov	r3,a
-;	genAssign
-	mov	dptr,#_EEPROM_ReadNBytes_PARM_2
-	movx	a,@dptr
-	mov	r4,a
-	inc	dptr
-	movx	a,@dptr
-	mov	r5,a
-	inc	dptr
-	movx	a,@dptr
-	mov	r6,a
-;	genAssign
-	mov	dptr,#_EEPROM_ReadNBytes_PARM_3
-	movx	a,@dptr
-	mov	r7,a
-00101$:
-;	genCmpEq
-;	gencjneshort
-	cjne	r7,#0x00,00109$
-;	Peephole 112.b	changed ljmp to sjmp
-	sjmp	00108$
-00109$:
-;	eeprom.c:145: *RamAddr = EEPROM_ReadByte(EepromAddr,Page_Number);//Read a byte from EEPROM to RAM
-;	genAssign
-	mov	dptr,#_EEPROM_ReadByte_PARM_2
-	mov	a,r2
-	movx	@dptr,a
-;	genCall
-	mov	dpl,r3
-	push	ar2
-	push	ar3
-	push	ar4
-	push	ar5
-	push	ar6
-	push	ar7
-	lcall	_EEPROM_ReadByte
-	mov	r0,dpl
-	pop	ar7
-	pop	ar6
-	pop	ar5
-	pop	ar4
-	pop	ar3
-	pop	ar2
-;	genPointerSet
-;	genGenPointerSet
-	mov	dpl,r4
-	mov	dph,r5
-	mov	b,r6
-	mov	a,r0
-	lcall	__gptrput
-	inc	dptr
-	mov	r4,dpl
-	mov	r5,dph
-;	eeprom.c:146: EepromAddr++;						//Incerement the Eeprom Address
-;	genPlus
-;     genPlusIncr
-	inc	r3
-;	genAssign
-	mov	dptr,#_EEPROM_ReadNBytes_EepromAddr_1_1
-	mov	a,r3
-	movx	@dptr,a
-;	eeprom.c:147: RamAddr++;							//Increment the RAM Address
-;	eeprom.c:148: NoOfBytes--;						//Decrement NoOfBytes after Reading each Byte
-;	genMinus
-;	genMinusDec
-	dec	r7
-;	Peephole 112.b	changed ljmp to sjmp
-	sjmp	00101$
-00108$:
-;	genAssign
-	mov	dptr,#_EEPROM_ReadNBytes_EepromAddr_1_1
-	mov	a,r3
-	movx	@dptr,a
-;	Peephole 300	removed redundant label 00104$
-	ret
-;------------------------------------------------------------
-;Allocation info for local variables in function 'EEPROM_WriteString'
-;------------------------------------------------------------
-;source_address            Allocated with name '_EEPROM_WriteString_PARM_2'
-;Page_Number               Allocated with name '_EEPROM_WriteString_PARM_3'
-;eeprom_address            Allocated with name '_EEPROM_WriteString_eeprom_address_1_1'
-;------------------------------------------------------------
-;	eeprom.c:174: void EEPROM_WriteString(unsigned char eeprom_address, unsigned char * source_address,unsigned char Page_Number)
-;	-----------------------------------------
-;	 function EEPROM_WriteString
-;	-----------------------------------------
-_EEPROM_WriteString:
-;	genReceive
-	mov	a,dpl
-	mov	dptr,#_EEPROM_WriteString_eeprom_address_1_1
-	movx	@dptr,a
-;	eeprom.c:177: do
-;	genAssign
-	mov	dptr,#_EEPROM_WriteString_PARM_3
-	movx	a,@dptr
-	mov	r2,a
-;	genAssign
-	mov	dptr,#_EEPROM_WriteString_PARM_2
-	movx	a,@dptr
-	mov	r3,a
-	inc	dptr
-	movx	a,@dptr
-	mov	r4,a
-	inc	dptr
-	movx	a,@dptr
-	mov	r5,a
-;	genAssign
-	mov	dptr,#_EEPROM_WriteString_eeprom_address_1_1
-	movx	a,@dptr
-	mov	r6,a
-00101$:
-;	eeprom.c:179: EEPROM_WriteByte(eeprom_address,*source_address,Page_Number); //Write a byte from RAM to EEPROM
-;	genPointerGet
-;	genGenPointerGet
-	mov	dpl,r3
-	mov	dph,r4
-	mov	b,r5
-	lcall	__gptrget
-	mov	r7,a
-	inc	dptr
-	mov	r3,dpl
-	mov	r4,dph
-;	genAssign
-	mov	dptr,#_EEPROM_WriteByte_PARM_2
-	mov	a,r7
-	movx	@dptr,a
-;	genAssign
-	mov	dptr,#_EEPROM_WriteByte_PARM_3
-	mov	a,r2
-	movx	@dptr,a
-;	genCall
-	mov	dpl,r6
-	push	ar2
-	push	ar3
-	push	ar4
-	push	ar5
-	push	ar6
-	lcall	_EEPROM_WriteByte
-	pop	ar6
-	pop	ar5
-	pop	ar4
-	pop	ar3
-	pop	ar2
-;	eeprom.c:180: source_address++;								//Incerement the RAM Address
-;	eeprom.c:181: eeprom_address++;								//Increment the Eeprom Address
-;	genPlus
-;     genPlusIncr
-	inc	r6
-;	genAssign
-	mov	dptr,#_EEPROM_WriteString_eeprom_address_1_1
-	mov	a,r6
-	movx	@dptr,a
-;	eeprom.c:182: }while(*(source_address-1) !=0);
-;	genMinus
-;	genMinusDec
-	mov	a,r3
-	add	a,#0xff
-	mov	r7,a
-	mov	a,r4
-	addc	a,#0xff
-	mov	r0,a
-	mov	ar1,r5
-;	genPointerGet
-;	genGenPointerGet
-	mov	dpl,r7
-	mov	dph,r0
-	mov	b,r1
-	lcall	__gptrget
-;	genCmpEq
-;	gencjneshort
-	mov	r7,a
-;	Peephole 115.b	jump optimization
-	jz	00109$
-;	Peephole 300	removed redundant label 00108$
-;	Peephole 112.b	changed ljmp to sjmp
-	sjmp	00101$
-00109$:
-;	genAssign
-	mov	dptr,#_EEPROM_WriteString_eeprom_address_1_1
-	mov	a,r6
-	movx	@dptr,a
-;	Peephole 300	removed redundant label 00104$
-	ret
-;------------------------------------------------------------
-;Allocation info for local variables in function 'EEPROM_ReadString'
-;------------------------------------------------------------
-;destination_address       Allocated with name '_EEPROM_ReadString_PARM_2'
-;Page_Number               Allocated with name '_EEPROM_ReadString_PARM_3'
-;eeprom_address            Allocated with name '_EEPROM_ReadString_eeprom_address_1_1'
-;eeprom_data               Allocated with name '_EEPROM_ReadString_eeprom_data_1_1'
-;------------------------------------------------------------
-;	eeprom.c:202: void EEPROM_ReadString(unsigned char eeprom_address, unsigned char * destination_address,unsigned char Page_Number)
-;	-----------------------------------------
-;	 function EEPROM_ReadString
-;	-----------------------------------------
-_EEPROM_ReadString:
-;	genReceive
-	mov	a,dpl
-	mov	dptr,#_EEPROM_ReadString_eeprom_address_1_1
-	movx	@dptr,a
-;	eeprom.c:206: do
-;	genAssign
-	mov	dptr,#_EEPROM_ReadString_PARM_3
-	movx	a,@dptr
-	mov	r2,a
-;	genAssign
-	mov	dptr,#_EEPROM_ReadString_PARM_2
-	movx	a,@dptr
-	mov	r3,a
-	inc	dptr
-	movx	a,@dptr
-	mov	r4,a
-	inc	dptr
-	movx	a,@dptr
-	mov	r5,a
-;	genAssign
-	mov	dptr,#_EEPROM_ReadString_eeprom_address_1_1
-	movx	a,@dptr
-	mov	r6,a
-00101$:
-;	eeprom.c:208: eeprom_data = EEPROM_ReadByte(eeprom_address,Page_Number); //Read a byte from EEPROM to RAM
-;	genAssign
-	mov	dptr,#_EEPROM_ReadByte_PARM_2
-	mov	a,r2
-	movx	@dptr,a
-;	genCall
-	mov	dpl,r6
-	push	ar2
-	push	ar3
-	push	ar4
-	push	ar5
-	push	ar6
-	lcall	_EEPROM_ReadByte
-	mov	r7,dpl
-	pop	ar6
-	pop	ar5
-	pop	ar4
-	pop	ar3
-	pop	ar2
-;	eeprom.c:209: *destination_address = eeprom_data;			 //Copy the data into String Buffer
-;	genPointerSet
-;	genGenPointerSet
-	mov	dpl,r3
-	mov	dph,r4
-	mov	b,r5
-	mov	a,r7
-	lcall	__gptrput
-	inc	dptr
-	mov	r3,dpl
-	mov	r4,dph
-;	eeprom.c:210: destination_address++;						 //Incerement the RAM Address
-;	eeprom.c:211: eeprom_address++;							 //Increment the Eeprom Address
-;	genPlus
-;     genPlusIncr
-	inc	r6
-;	genAssign
-	mov	dptr,#_EEPROM_ReadString_eeprom_address_1_1
-	mov	a,r6
-	movx	@dptr,a
-;	eeprom.c:212: }while(eeprom_data!=0);
-;	genCmpEq
-;	gencjneshort
-;	Peephole 112.b	changed ljmp to sjmp
-;	Peephole 198.b	optimized misc jump sequence
-	cjne	r7,#0x00,00101$
-;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00108$
-;	Peephole 300	removed redundant label 00109$
-;	genAssign
-	mov	dptr,#_EEPROM_ReadString_eeprom_address_1_1
-	mov	a,r6
-	movx	@dptr,a
-;	Peephole 300	removed redundant label 00104$
-	ret
-;------------------------------------------------------------
 ;Allocation info for local variables in function 'seq_read'
 ;------------------------------------------------------------
 ;st_page                   Allocated with name '_seq_read_PARM_2'
 ;bytes                     Allocated with name '_seq_read_PARM_3'
+;eeprom_Data               Allocated with name '_seq_read_PARM_4'
 ;st_addr                   Allocated with name '_seq_read_st_addr_1_1'
 ;i                         Allocated with name '_seq_read_i_1_1'
 ;------------------------------------------------------------
-;	eeprom.c:243: char* seq_read(unsigned char st_addr,unsigned char st_page, int bytes)
+;	eeprom.c:130: void seq_read(unsigned char st_addr,unsigned char st_page, int bytes,unsigned char *eeprom_Data)
 ;	-----------------------------------------
 ;	 function seq_read
 ;	-----------------------------------------
@@ -1137,10 +809,10 @@ _seq_read:
 	mov	a,dpl
 	mov	dptr,#_seq_read_st_addr_1_1
 	movx	@dptr,a
-;	eeprom.c:247: I2C_Start();               // Start i2c communication
+;	eeprom.c:134: I2C_Start();               // Start i2c communication
 ;	genCall
 	lcall	_I2C_Start
-;	eeprom.c:248: I2C_Write(EEPROM_ID|(st_page<<1));	   // connect to AT2404(write) by sending its ID on I2c Bus
+;	eeprom.c:135: I2C_Write(EEPROM_ID|(st_page<<1));	   // connect to AT2404(write) by sending its ID on I2c Bus
 ;	genAssign
 	mov	dptr,#_seq_read_PARM_2
 	movx	a,@dptr
@@ -1161,12 +833,12 @@ _seq_read:
 	push	ar2
 	lcall	_I2C_Write
 	pop	ar2
-;	eeprom.c:249: I2C_Ack();
+;	eeprom.c:136: I2C_Ack();
 ;	genCall
 	push	ar2
 	lcall	_I2C_Ack
 	pop	ar2
-;	eeprom.c:250: I2C_Write(st_addr); // Select the Specified EEPROM address of AT2404
+;	eeprom.c:137: I2C_Write(st_addr); // Select the Specified EEPROM address of AT2404
 ;	genAssign
 	mov	dptr,#_seq_read_st_addr_1_1
 	movx	a,@dptr
@@ -1177,26 +849,26 @@ _seq_read:
 	push	ar2
 	lcall	_I2C_Write
 	pop	ar2
-;	eeprom.c:251: I2C_Ack();
+;	eeprom.c:138: I2C_Ack();
 ;	genCall
 	push	ar2
 	lcall	_I2C_Ack
 	pop	ar2
-;	eeprom.c:253: I2C_Start();		       // Start i2c communication
+;	eeprom.c:140: I2C_Start();		       // Start i2c communication
 ;	genCall
 	push	ar2
 	lcall	_I2C_Start
 	pop	ar2
-;	eeprom.c:254: I2C_Write(0xA1|(st_page<<1));           // connect to AT2404(read) by sending its ID on I2c Bus
+;	eeprom.c:141: I2C_Write(0xA1|(st_page<<1));           // connect to AT2404(read) by sending its ID on I2c Bus
 ;	genOr
 	orl	ar2,#0xA1
 ;	genCall
 	mov	dpl,r2
 	lcall	_I2C_Write
-;	eeprom.c:255: I2C_Ack();
+;	eeprom.c:142: I2C_Ack();
 ;	genCall
 	lcall	_I2C_Ack
-;	eeprom.c:256: for(i=0;i<bytes;i++)
+;	eeprom.c:143: for(i=0;i<bytes;i++)
 ;	genAssign
 	mov	dptr,#_seq_read_PARM_3
 	movx	a,@dptr
@@ -1205,15 +877,25 @@ _seq_read:
 	movx	a,@dptr
 	mov	r3,a
 ;	genAssign
-	mov	r4,#0x00
-	mov	r5,#0x00
+	mov	dptr,#_seq_read_PARM_4
+	movx	a,@dptr
+	mov	r4,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r5,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r6,a
+;	genAssign
+	mov	r7,#0x00
+	mov	r0,#0x00
 00101$:
 ;	genCmpLt
 ;	genCmp
 	clr	c
-	mov	a,r4
+	mov	a,r7
 	subb	a,r2
-	mov	a,r5
+	mov	a,r0
 	xrl	a,#0x80
 	mov	b,r3
 	xrl	b,#0x80
@@ -1222,16 +904,7 @@ _seq_read:
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00104$
 ;	Peephole 300	removed redundant label 00110$
-;	eeprom.c:258: eeprom_Data[i]= I2C_Read();  // Read the data from specified address
-;	genPlus
-;	Peephole 236.g	used r4 instead of ar4
-	mov	a,r4
-	add	a,#_eeprom_Data
-	mov	r6,a
-;	Peephole 236.g	used r5 instead of ar5
-	mov	a,r5
-	addc	a,#(_eeprom_Data >> 8)
-	mov	r7,a
+;	eeprom.c:145: *eeprom_Data= I2C_Read();  // Read the data from specified address
 ;	genCall
 	push	ar2
 	push	ar3
@@ -1239,8 +912,10 @@ _seq_read:
 	push	ar5
 	push	ar6
 	push	ar7
+	push	ar0
 	lcall	_I2C_Read
-	mov	r0,dpl
+	mov	r1,dpl
+	pop	ar0
 	pop	ar7
 	pop	ar6
 	pop	ar5
@@ -1248,68 +923,80 @@ _seq_read:
 	pop	ar3
 	pop	ar2
 ;	genPointerSet
-;     genFarPointerSet
-	mov	dpl,r6
-	mov	dph,r7
-	mov	a,r0
-	movx	@dptr,a
-;	eeprom.c:259: I2C_Ack();
+;	genGenPointerSet
+	mov	dpl,r4
+	mov	dph,r5
+	mov	b,r6
+	mov	a,r1
+	lcall	__gptrput
+	inc	dptr
+	mov	r4,dpl
+	mov	r5,dph
+;	eeprom.c:146: I2C_Ack();
 ;	genCall
 	push	ar2
 	push	ar3
 	push	ar4
 	push	ar5
+	push	ar6
+	push	ar7
+	push	ar0
 	lcall	_I2C_Ack
+	pop	ar0
+	pop	ar7
+	pop	ar6
 	pop	ar5
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	eeprom.c:256: for(i=0;i<bytes;i++)
+;	eeprom.c:147: eeprom_Data++;
+;	eeprom.c:143: for(i=0;i<bytes;i++)
 ;	genPlus
 ;     genPlusIncr
-;	tail increment optimized (range 8)
-	inc	r4
-	cjne	r4,#0x00,00101$
-	inc	r5
+;	tail increment optimized (range 7)
+	inc	r7
+	cjne	r7,#0x00,00101$
+	inc	r0
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00101$
 00104$:
-;	eeprom.c:262: eeprom_Data[bytes]= I2C_Read();  // Read the data from specified address
+;	eeprom.c:150: eeprom_Data[bytes]= I2C_Read();  // Read the data from specified address
 ;	genPlus
 ;	Peephole 236.g	used r2 instead of ar2
 	mov	a,r2
-	add	a,#_eeprom_Data
+;	Peephole 236.a	used r4 instead of ar4
+	add	a,r4
 	mov	r2,a
 ;	Peephole 236.g	used r3 instead of ar3
 	mov	a,r3
-	addc	a,#(_eeprom_Data >> 8)
+;	Peephole 236.b	used r5 instead of ar5
+	addc	a,r5
 	mov	r3,a
+	mov	ar7,r6
 ;	genCall
 	push	ar2
 	push	ar3
+	push	ar7
 	lcall	_I2C_Read
 	mov	r4,dpl
+	pop	ar7
 	pop	ar3
 	pop	ar2
 ;	genPointerSet
-;     genFarPointerSet
+;	genGenPointerSet
 	mov	dpl,r2
 	mov	dph,r3
+	mov	b,r7
 	mov	a,r4
-	movx	@dptr,a
-;	eeprom.c:263: I2C_NoAck();
+	lcall	__gptrput
+;	eeprom.c:151: I2C_NoAck();
 ;	genCall
 	lcall	_I2C_NoAck
-;	eeprom.c:264: I2C_Stop();
+;	eeprom.c:152: I2C_Stop();
 ;	genCall
-	lcall	_I2C_Stop
-;	eeprom.c:265: return eeprom_Data;
-;	genRet
-;	Peephole 182.a	used 16 bit load of DPTR
-	mov	dptr,#_eeprom_Data
-	mov	b,#0x00
-;	Peephole 300	removed redundant label 00105$
-	ret
+;	Peephole 253.b	replaced lcall/ret with ljmp
+	ljmp	_I2C_Stop
+;
 	.area CSEG    (CODE)
 	.area CONST   (CODE)
 	.area XINIT   (CODE)

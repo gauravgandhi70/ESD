@@ -122,125 +122,12 @@ void EEPROM_WriteNBytes(unsigned char EepromAddr, unsigned char *RamAddr, char N
 
 
 
-/*---------------------------------------------------------------------------------------
-void EEPROM_ReadNBytes(unsigned char EepromAddr, unsigned char *RamAddr, char NoOfBytes)
- ----------------------------------------------------------------------------------------
- * I/P Arguments: char,-->eeprom_address from where the N-bytes is to be read.
-                  char*-->Pointer into which the N-bytes of data is to be read.
-                  char --> Number of bytes to be Read
-
- * Return value	: none
-
- * description:
-            This function is used to Read N-bytes of data from specified EEPROM_address.
-            EEPROM_ReadByte() func is called to read a byte at a time.
-            Source(RAM) and destination(EEPROM) address are incremented each time.
-            NoOfBytes is Decemented after a byte is read.
-            Above Operation is carried out till all the bytes are read(NoOfBytes!=0)
----------------------------------------------------------------------------------------*/
-void EEPROM_ReadNBytes(unsigned char EepromAddr, unsigned char *RamAddr, char NoOfBytes,unsigned char Page_Number)
- {
-   while(NoOfBytes !=  0)
-	{
-	 *RamAddr = EEPROM_ReadByte(EepromAddr,Page_Number);//Read a byte from EEPROM to RAM
-	    EepromAddr++;						//Incerement the Eeprom Address
-	 	RamAddr++;							//Increment the RAM Address
-	 	NoOfBytes--;						//Decrement NoOfBytes after Reading each Byte
-
-	 }
- }
 
 
 
 
 
-
-
-/*---------------------------------------------------------------------------------------
- void EEPROM_WriteString(unsigned char eeprom_address, unsigned char * source_address)
- ----------------------------------------------------------------------------------------
- * I/P Arguments: char,-->eeprom_address where the String is to be written.
-                  char*-->Pointer to String which has to be written.
-
- * Return value	: none
-
- * description:This function is used to Write a String at specified EEPROM_address.
-               EEPROM_WriteByte() function is called to write a byte at a time.
-               Source(RAM) and destination(EEPOM) address are incremented each time.
-               Above Operation is carried out till Null char is identified.
-
-   NOTE: Null char is also written into the eeprom.
----------------------------------------------------------------------------------------*/
-void EEPROM_WriteString(unsigned char eeprom_address, unsigned char * source_address,unsigned char Page_Number)
-  {
-
-   do
- 	{
- 	  EEPROM_WriteByte(eeprom_address,*source_address,Page_Number); //Write a byte from RAM to EEPROM
- 	    source_address++;								//Incerement the RAM Address
- 		eeprom_address++;								//Increment the Eeprom Address
- 	  }while(*(source_address-1) !=0);
-  }
-
-
-
-
-
-/*---------------------------------------------------------------------------------------
-void EEPROM_ReadString(unsigned char eeprom_address, unsigned char * destination_address)
- ----------------------------------------------------------------------------------------
- * I/P Arguments: char,-->eeprom_address from where the String is to be read.
-                  char*-->Pointer into which the String is to be read.
-
- * Return value	: none
-
- * description:This function is used to Read a String from specified EEPROM_address.
-               EEPROM_ReadByte() function is called to read a byte at a time.
-               Source(EEPROM) and destination(RAM) address are incremented each time.
-               Above Operation is carried out till Null char is identified.
----------------------------------------------------------------------------------------*/
-void EEPROM_ReadString(unsigned char eeprom_address, unsigned char * destination_address,unsigned char Page_Number)
-  {
-   char eeprom_data;
-
-     do
- 	 {
-	  eeprom_data = EEPROM_ReadByte(eeprom_address,Page_Number); //Read a byte from EEPROM to RAM
- 	    *destination_address = eeprom_data;			 //Copy the data into String Buffer
- 	     destination_address++;						 //Incerement the RAM Address
- 	 	 eeprom_address++;							 //Increment the Eeprom Address
- 		}while(eeprom_data!=0);
-  }
-
-
-
-
-
-/*-----------------------------------------------------------------------------------------
-                                   void EEPROM_Erase()
- ------------------------------------------------------------------------------------------
- * I/P Arguments: none
-
- * Return value	: none
-
- * description:This function is used to erase the entire Eeprom memory.
-               Eeprom is filled with 0xFF to accomplish the Eeprom Erase.
-               EEPROM_WriteByte() function is called to write a byte at a time.
-               Whole memory(0-255) is traversed and filled with 0xFF
------------------------------------------------------------------------------------------*/
- /* void EEPROM_Erase()
-   {
-	 unsigned char eeprom_address;
-
-	 for(eeprom_address=0;eeprom_address<255;eeprom_address++)
-	    {
-		   EEPROM_WriteByte(eeprom_address,0xff); // Write Each memory location with OxFF
-	      }
-   }*/
-
-
-
-char* seq_read(unsigned char st_addr,unsigned char st_page, int bytes)
+void seq_read(unsigned char st_addr,unsigned char st_page, int bytes,unsigned char *eeprom_Data)
 {
     int i;
 
@@ -255,14 +142,14 @@ char* seq_read(unsigned char st_addr,unsigned char st_page, int bytes)
     I2C_Ack();
     for(i=0;i<bytes;i++)
     {
-        eeprom_Data[i]= I2C_Read();  // Read the data from specified address
+        *eeprom_Data= I2C_Read();  // Read the data from specified address
         I2C_Ack();
+        eeprom_Data++;
     }
 
     eeprom_Data[bytes]= I2C_Read();  // Read the data from specified address
     I2C_NoAck();
     I2C_Stop();
-    return eeprom_Data;
 }
 
 

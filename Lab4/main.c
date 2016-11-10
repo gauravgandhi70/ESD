@@ -33,7 +33,7 @@ void main(void)
     lcdgotoaddr(0x85);
     lcdputstr("Hi");
 
-    lcdgotoxy(2,3);
+    lcdgotoxy(4,3);
     lcdputstr("Hello World");
 
     printf_tiny("\n\rControl Commands: \n\r1. Write Byte \n\r2. Read Byte \n\r3. LCD Display\n\r4. Clear LCD\n\r5. Hex Dump\n\r6. DDRAM Dump\n\r7. CGRAM Dump\t");
@@ -106,7 +106,7 @@ void main(void)
             {
                 aaa = 256*(page-1)+addr;
                 rd=EEPROM_ReadByte(addr,page-1);
-                printf_tiny("\n\n\r%x:%x",aaa,rd);
+                printf_tiny("\n\n\r%x:%x \n",aaa,rd);
             }
             else if(store=='3')
             {
@@ -211,9 +211,9 @@ void lcd_display(char rd, char p, char *a)
 
 void hex_dump()
 {
-    char ch[10],b[10];
-    unsigned char *rd;
-    unsigned int st_addr,st_page, end_addr,end_page,flag=0,i,aaa;
+    char ch[10],b[10],d[10];
+    unsigned char r[17];
+    unsigned int st_addr,st_page, end_addr,end_page,flag=0,i,aaa,j=0;
     int bytes=0;
 	do{
      printf_tiny("\n\n\r Enter Start Page block number between 1 to 8: ");
@@ -265,8 +265,8 @@ void hex_dump()
             printf_tiny("\n\n\r Enter End Address in Hex in HH format between 00 to FF: ");
             do{
                 flag=0;
-                gets(b);
-                end_addr=atoh(b);
+                gets(d);
+                end_addr=atoh(d);
                 if(end_addr<256)
                 {
                     flag=1;
@@ -278,18 +278,20 @@ void hex_dump()
                 }
             }while(flag==0);
     bytes = end_page*256 + end_addr - st_addr - st_page*256;
-
+    printf_tiny("\n\r\tTotal Bytes: %d\n\r",bytes);
     if(bytes<0){printf_tiny("End address smaller than start address");}
 	}while(bytes<=0);
-
-    rd=seq_read(st_addr,st_page-1,bytes);
-
+    aaa = 256*(st_page-1)+st_addr;
+    //seq_read(st_addr,st_page-1,bytes,rd);
     for(i=0;i<=bytes;i++)
     {
         if(i%16==0)
         {
-            aaa = 256*(st_page-1)+st_addr;
+
             printf_tiny("\n\r%x:\t",aaa);
+            aaa+=16;
+            j=0;
+            seq_read(st_addr,st_page-1,16,r);
             if(st_addr==0xff)
             {
                 st_addr=0x00;
@@ -299,8 +301,18 @@ void hex_dump()
 
 
         }
-        else{st_addr++;}
-        printf_tiny("%x\t",*(rd+i));
+        else
+        {
+            if(st_addr==0xff)
+            {
+                st_addr=0x00;
+                st_page++;
+            }
+            else{st_addr++;}
+
+        }
+        printf_tiny("%x\t",r[j]);
+        j++;
     }
 	//printf_tiny("\n\n\rNumber of Bytes: %d",bytes);
 }
@@ -351,7 +363,7 @@ int atoh(char *c)
         return 257;
     }
 
-
+    //printf_tiny("\n\r\tConverted: %d\n\r",result);
 
 
     return result;
@@ -359,21 +371,22 @@ int atoh(char *c)
 
 void DDRAM_dump()
 {
-    char temp;
+    char temp=0;
     int i;
     lcdputcmd(0x80);
     for(i=0;i<64;i++)
     {
         if(i%16==0)
         {
+            temp++;
             printf_tiny("\n\r");
+            lcdgotoxy(temp,1);
         }
-        temp = lcdread();
-        putchar(temp);
+
+        putchar(lcdread());
+        delay_ms(10);
 
     }
-
-
 
 }
 
@@ -382,14 +395,16 @@ void CGRAM_dump()
 {
     char temp;
     int i;
+     putchar('\n');
     lcdputcmd(0x40);
     for(i=0;i<32;i++)
     {
         temp = lcdread();
+        putchar('\t');
         putchar(temp);
 
     }
 
-
+     delay_ms(10);
 
 }
