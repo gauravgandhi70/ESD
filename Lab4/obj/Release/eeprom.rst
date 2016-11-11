@@ -640,7 +640,7 @@
    0645 8D 83               640 	mov	dph,r5
    0647 8E F0               641 	mov	b,r6
    0649 E9                  642 	mov	a,r1
-   064A 12 14 0A            643 	lcall	__gptrput
+   064A 12 15 2A            643 	lcall	__gptrput
    064D A3                  644 	inc	dptr
    064E AC 82               645 	mov	r4,dpl
    0650 AD 83               646 	mov	r5,dph
@@ -700,7 +700,7 @@
    0693 8B 83               700 	mov	dph,r3
    0695 8F F0               701 	mov	b,r7
    0697 EC                  702 	mov	a,r4
-   0698 12 14 0A            703 	lcall	__gptrput
+   0698 12 15 2A            703 	lcall	__gptrput
                             704 ;	eeprom.c:52: I2C_NoAck();
                             705 ;	genCall
    069B 12 08 36            706 	lcall	_I2C_NoAck

@@ -199,7 +199,7 @@ Symbol Table
     _CCF4                                                       =  00DC G
     _CCON                                                       =  00D8 G
     _CF                                                         =  00DF G
- 14 _CGRAM_dump                                                    0636 GR
+ 14 _CGRAM_dump                                                    06F5 GR
     _CH                                                         =  00F9 G
     _CKCKON0                                                    =  008F G
     _CKCKON1                                                    =  008F G
@@ -402,7 +402,12 @@ Symbol Table
  15 __str_23                                                       04D1 R
  15 __str_24                                                       04D9 R
  15 __str_25                                                       04DD R
+ 15 __str_26                                                       04F8 R
+ 15 __str_27                                                       04FD R
+ 15 __str_28                                                       0516 R
+ 15 __str_29                                                       051E R
  15 __str_3                                                        000F R
+ 15 __str_30                                                       0523 R
  15 __str_4                                                        00A9 R
  15 __str_5                                                        00CC R
  15 __str_6                                                        00EF R
@@ -648,6 +653,6 @@ Area Table
   11 GSINIT5                                                                            size    0   flags 20
   12 GSINIT                                                                             size    0   flags 20
   13 GSFINAL                                                                            size    3   flags 20
-  14 CSEG                                                                               size  681   flags 20
-  15 CONST                                                                              size  4E0   flags 20
+  14 CSEG                                                                               size  7A3   flags 20
+  15 CONST                                                                              size  526   flags 20
   16 XINIT                                                                              size    4   flags 20

@@ -260,10 +260,10 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
      00FD    _CCAP3H
      00FE    _CCAP4H
      0100    l_IRAM
-     0539    l_CONST
-     1628    l_CSEG
-     1687    s_CONST
-     1BC0    s_XINIT
+     057F    l_CONST
+     1748    l_CSEG
+     17A7    s_CONST
+     1D26    s_XINIT
 
 Hexadecimal
 
@@ -460,7 +460,7 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CSEG                               005F   1628 =   5672. bytes (REL,CON,CODE)
+CSEG                               005F   1748 =   5960. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
@@ -483,42 +483,42 @@ CSEG                               005F   1628 =   5672. bytes (REL,CON,CODE)
   0C:083E    _lcd_init
   0C:08DA    _lcdputch
   0C:08FD    _lcdputcmd
-  0C:0922    _lcdread
-  0C:0946    _lcdgotoaddr
-  0C:0969    _lcdbusywait
-  0C:09A2    _lcdputstr
-  0C:09F6    _lcdgotoxy
-  0C:0A71    _lcd_display
-  0C:0B0D    __sdcc_program_startup
-  0C:0B12    ___sdcc_external_startup
-  0C:0B19    _main
-  0C:0E12    _hex_dump
-  0C:1097    _DDRAM_dump
-  0C:1143    _CGRAM_dump
-  0C:118E    _putchar
-  0C:11A0    _getchar
-  0C:11AA    _uart_init
-  0C:11C3    _atoi
-  0C:12F6    _gets
-  0C:140A    __gptrput
-  0C:1423    _printf_tiny
-  0C:152B    __mulint
-  0C:154B    __modsint
-  0C:15B9    __moduint
-  0C:1667    __gptrget
-  0C:1683    __sdcc_external_startup
+  0C:0920    _lcdread
+  0C:0944    _lcdgotoaddr
+  0C:0967    _lcdbusywait
+  0C:09A0    _lcdputstr
+  0C:09F4    _lcdgotoxy
+  0C:0A6F    _lcd_display
+  0C:0B0B    __sdcc_program_startup
+  0C:0B10    ___sdcc_external_startup
+  0C:0B17    _main
+  0C:0E10    _hex_dump
+  0C:1095    _DDRAM_dump
+  0C:1200    _CGRAM_dump
+  0C:12AE    _putchar
+  0C:12C0    _getchar
+  0C:12CA    _uart_init
+  0C:12E3    _atoi
+  0C:1416    _gets
+  0C:152A    __gptrput
+  0C:1543    _printf_tiny
+  0C:164B    __mulint
+  0C:166B    __modsint
+  0C:16D9    __moduint
+  0C:1787    __gptrget
+  0C:17A3    __sdcc_external_startup
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CONST                              1687   0539 =   1337. bytes (REL,CON,CODE)
+CONST                              17A7   057F =   1407. bytes (REL,CON,CODE)
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-XINIT                              1BC0   000C =     12. bytes (REL,CON,CODE)
+XINIT                              1D26   000C =     12. bytes (REL,CON,CODE)
 ASxxxx Linker V01.70 + NoICE + SDCC Feb 1999,  page 1.
 
 Files Linked      [ module(s) ]

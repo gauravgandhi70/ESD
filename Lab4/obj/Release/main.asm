@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.6.0 #4309 (Jul 28 2006)
-; This file generated Fri Nov 11 04:07:46 2016
+; This file generated Fri Nov 11 16:06:12 2016
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mmcs51 --model-large
@@ -1834,13 +1834,23 @@ _DDRAM_dump:
 ;	genCall
 	mov	dpl,#0x80
 	lcall	_lcdputcmd
-;	main.c:260: for(i=0;i<64;i++)       // Reading contents of the DDRAM
+;	main.c:260: printf_tiny("\n\r\t\tAscii Representation\n\r");
+;	genIpush
+	mov	a,#__str_25
+	push	acc
+	mov	a,#(__str_25 >> 8)
+	push	acc
+;	genCall
+	lcall	_printf_tiny
+	dec	sp
+	dec	sp
+;	main.c:261: for(i=0;i<64;i++)       // Reading contents of the DDRAM
 ;	genAssign
 	mov	r2,#0x00
 ;	genAssign
 	mov	r3,#0x00
 	mov	r4,#0x00
-00103$:
+00105$:
 ;	genCmpLt
 ;	genCmp
 	clr	c
@@ -1850,11 +1860,10 @@ _DDRAM_dump:
 	xrl	a,#0x80
 	subb	a,#0x80
 ;	genIfxJump
-	jc	00113$
-;	Peephole 251.a	replaced ljmp to ret with ret
-	ret
-00113$:
-;	main.c:262: if(i%16==0)         // After every 16 characters , go to new line of the terminal
+	jc	00123$
+	ljmp	00108$
+00123$:
+;	main.c:263: if(i%16==0)         // After every 16 characters , go to new line of the terminal
 ;	genAssign
 	mov	dptr,#__modsint_PARM_2
 	mov	a,#0x10
@@ -1879,19 +1888,19 @@ _DDRAM_dump:
 ;	genIfxJump
 ;	Peephole 108.b	removed ljmp by inverse jump logic
 	jnz	00102$
-;	Peephole 300	removed redundant label 00114$
-;	main.c:264: temp++;
+;	Peephole 300	removed redundant label 00124$
+;	main.c:265: temp++;
 ;	genPlus
 ;     genPlusIncr
 	inc	r2
-;	main.c:265: printf_tiny("\n\r");
+;	main.c:266: printf_tiny("\n\r\t\t");
 ;	genIpush
 	push	ar2
 	push	ar3
 	push	ar4
-	mov	a,#__str_25
+	mov	a,#__str_26
 	push	acc
-	mov	a,#(__str_25 >> 8)
+	mov	a,#(__str_26 >> 8)
 	push	acc
 ;	genCall
 	lcall	_printf_tiny
@@ -1900,7 +1909,7 @@ _DDRAM_dump:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	main.c:266: lcdgotoxy(temp,1);
+;	main.c:267: lcdgotoxy(temp,1);
 ;	genAssign
 	mov	dptr,#_lcdgotoxy_PARM_2
 	mov	a,#0x01
@@ -1915,7 +1924,7 @@ _DDRAM_dump:
 	pop	ar3
 	pop	ar2
 00102$:
-;	main.c:270: putchar(lcdread());     // Read character from the DDRAM and peint it to the terminal
+;	main.c:271: putchar(lcdread());     // Read character from the DDRAM and peint it to the terminal
 ;	genCall
 	push	ar2
 	push	ar3
@@ -1934,7 +1943,7 @@ _DDRAM_dump:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	main.c:271: delay_ms(10);           // Wait for 10 ms
+;	main.c:272: delay_ms(10);           // Wait for 10 ms
 ;	genCall
 ;	Peephole 182.b	used 16 bit load of dptr
 	mov	dptr,#0x000A
@@ -1945,41 +1954,95 @@ _DDRAM_dump:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	main.c:260: for(i=0;i<64;i++)       // Reading contents of the DDRAM
+;	main.c:261: for(i=0;i<64;i++)       // Reading contents of the DDRAM
 ;	genPlus
 ;     genPlusIncr
 	inc	r3
-	cjne	r3,#0x00,00115$
+	cjne	r3,#0x00,00125$
 	inc	r4
-00115$:
-	ljmp	00103$
-;	Peephole 259.b	removed redundant label 00107$ and ret
-;
-;------------------------------------------------------------
-;Allocation info for local variables in function 'CGRAM_dump'
-;------------------------------------------------------------
-;temp                      Allocated with name '_CGRAM_dump_temp_1_1'
-;i                         Allocated with name '_CGRAM_dump_i_1_1'
-;------------------------------------------------------------
-;	main.c:301: void CGRAM_dump()
-;	-----------------------------------------
-;	 function CGRAM_dump
-;	-----------------------------------------
-_CGRAM_dump:
-;	main.c:305: putchar('\n');
-;	genCall
-	mov	dpl,#0x0A
-	lcall	_putchar
-;	main.c:306: lcdputcmd(0x40);        // 0x40 is Passed to select CGRAM and setting its address as 00
-;	genCall
-	mov	dpl,#0x40
-	lcall	_lcdputcmd
-;	main.c:307: for(i=0;i<64;i++)       // 64 bytes of CGRAM are read
+00125$:
+	ljmp	00105$
+00108$:
+;	main.c:276: lcdgotoxy(1,1);
 ;	genAssign
-	mov	r2,#0x40
+	mov	dptr,#_lcdgotoxy_PARM_2
+	mov	a,#0x01
+	movx	@dptr,a
+;	genCall
+	mov	dpl,#0x01
+	lcall	_lcdgotoxy
+;	main.c:277: printf_tiny("\n\r\t\tHex Representation\n\r");
+;	genIpush
+	mov	a,#__str_27
+	push	acc
+	mov	a,#(__str_27 >> 8)
+	push	acc
+;	genCall
+	lcall	_printf_tiny
+	dec	sp
+	dec	sp
+;	main.c:278: for(i=0;i<80;i++)
+;	genAssign
+	mov	r2,#0x00
 	mov	r3,#0x00
-00103$:
-;	main.c:309: temp = lcdread();   // Reading data from the LCD
+00109$:
+;	genCmpLt
+;	genCmp
+	clr	c
+	mov	a,r2
+	subb	a,#0x50
+	mov	a,r3
+	xrl	a,#0x80
+	subb	a,#0x80
+;	genIfxJump
+	jc	00126$
+;	Peephole 251.a	replaced ljmp to ret with ret
+	ret
+00126$:
+;	main.c:280: if(i%16==0)
+;	genAssign
+	mov	dptr,#__modsint_PARM_2
+	mov	a,#0x10
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+;	genCall
+	mov	dpl,r2
+	mov	dph,r3
+	push	ar2
+	push	ar3
+	lcall	__modsint
+	mov	a,dpl
+	mov	b,dph
+	pop	ar3
+	pop	ar2
+;	genIfx
+	orl	a,b
+;	genIfxJump
+;	Peephole 108.b	removed ljmp by inverse jump logic
+	jnz	00104$
+;	Peephole 300	removed redundant label 00127$
+;	main.c:282: printf_tiny("\n\n\r0x%x",i);
+;	genIpush
+	push	ar2
+	push	ar3
+	push	ar2
+	push	ar3
+;	genIpush
+	mov	a,#__str_28
+	push	acc
+	mov	a,#(__str_28 >> 8)
+	push	acc
+;	genCall
+	lcall	_printf_tiny
+	mov	a,sp
+	add	a,#0xfc
+	mov	sp,a
+	pop	ar3
+	pop	ar2
+00104$:
+;	main.c:286: printf_tiny("\t %x",lcdread());
 ;	genCall
 	push	ar2
 	push	ar3
@@ -1987,7 +2050,136 @@ _CGRAM_dump:
 	mov	r4,dpl
 	pop	ar3
 	pop	ar2
-;	main.c:310: putchar('\t');
+;	genCast
+	mov	a,r4
+	rlc	a
+	subb	a,acc
+	mov	r5,a
+;	genIpush
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+;	genIpush
+	mov	a,#__str_29
+	push	acc
+	mov	a,#(__str_29 >> 8)
+	push	acc
+;	genCall
+	lcall	_printf_tiny
+	mov	a,sp
+	add	a,#0xfc
+	mov	sp,a
+	pop	ar3
+	pop	ar2
+;	main.c:287: delay_ms(10);
+;	genCall
+;	Peephole 182.b	used 16 bit load of dptr
+	mov	dptr,#0x000A
+	push	ar2
+	push	ar3
+	lcall	_delay_ms
+	pop	ar3
+	pop	ar2
+;	main.c:278: for(i=0;i<80;i++)
+;	genPlus
+;     genPlusIncr
+	inc	r2
+	cjne	r2,#0x00,00128$
+	inc	r3
+00128$:
+	ljmp	00109$
+;	Peephole 259.b	removed redundant label 00113$ and ret
+;
+;------------------------------------------------------------
+;Allocation info for local variables in function 'CGRAM_dump'
+;------------------------------------------------------------
+;temp                      Allocated with name '_CGRAM_dump_temp_1_1'
+;i                         Allocated with name '_CGRAM_dump_i_1_1'
+;------------------------------------------------------------
+;	main.c:302: void CGRAM_dump()
+;	-----------------------------------------
+;	 function CGRAM_dump
+;	-----------------------------------------
+_CGRAM_dump:
+;	main.c:306: putchar('\n');
+;	genCall
+	mov	dpl,#0x0A
+	lcall	_putchar
+;	main.c:307: lcdputcmd(0x40);        // 0x40 is Passed to select CGRAM and setting its address as 00
+;	genCall
+	mov	dpl,#0x40
+	lcall	_lcdputcmd
+;	main.c:308: for(i=0;i<64;i++)       // 64 bytes of CGRAM are read
+;	genAssign
+	mov	r2,#0x00
+	mov	r3,#0x00
+00103$:
+;	genCmpLt
+;	genCmp
+	clr	c
+	mov	a,r2
+	subb	a,#0x40
+	mov	a,r3
+	xrl	a,#0x80
+	subb	a,#0x80
+;	genIfxJump
+	jc	00113$
+;	Peephole 251.a	replaced ljmp to ret with ret
+	ret
+00113$:
+;	main.c:310: if(i%16==0)
+;	genAssign
+	mov	dptr,#__modsint_PARM_2
+	mov	a,#0x10
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+;	genCall
+	mov	dpl,r2
+	mov	dph,r3
+	push	ar2
+	push	ar3
+	lcall	__modsint
+	mov	a,dpl
+	mov	b,dph
+	pop	ar3
+	pop	ar2
+;	genIfx
+	orl	a,b
+;	genIfxJump
+;	Peephole 108.b	removed ljmp by inverse jump logic
+	jnz	00102$
+;	Peephole 300	removed redundant label 00114$
+;	main.c:312: printf_tiny("\n\n\r0x%x",i);
+;	genIpush
+	push	ar2
+	push	ar3
+	push	ar2
+	push	ar3
+;	genIpush
+	mov	a,#__str_28
+	push	acc
+	mov	a,#(__str_28 >> 8)
+	push	acc
+;	genCall
+	lcall	_printf_tiny
+	mov	a,sp
+	add	a,#0xfc
+	mov	sp,a
+	pop	ar3
+	pop	ar2
+00102$:
+;	main.c:314: temp = lcdread();   // Reading data from the LCD
+;	genCall
+	push	ar2
+	push	ar3
+	lcall	_lcdread
+	mov	r4,dpl
+	pop	ar3
+	pop	ar2
+;	main.c:315: putchar('\t');
 ;	genCall
 	mov	dpl,#0x09
 	push	ar2
@@ -1997,34 +2189,45 @@ _CGRAM_dump:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	main.c:311: putchar(temp);      // Displaying Data on the terminal
-;	genCall
-	mov	dpl,r4
+;	main.c:316: printf_tiny("%x",temp);      // Displaying Data on the terminal
+;	genAssign
+;	genCast
+	mov	r5,#0x00
+;	genIpush
 	push	ar2
 	push	ar3
-	lcall	_putchar
+	push	ar4
+	push	ar5
+;	genIpush
+	mov	a,#__str_30
+	push	acc
+	mov	a,#(__str_30 >> 8)
+	push	acc
+;	genCall
+	lcall	_printf_tiny
+	mov	a,sp
+	add	a,#0xfc
+	mov	sp,a
 	pop	ar3
 	pop	ar2
-;	genMinus
-;	genMinusDec
-	dec	r2
-	cjne	r2,#0xff,00109$
-	dec	r3
-00109$:
-;	main.c:307: for(i=0;i<64;i++)       // 64 bytes of CGRAM are read
-;	genIfx
-	mov	a,r2
-	orl	a,r3
-;	genIfxJump
-;	Peephole 108.b	removed ljmp by inverse jump logic
-	jnz	00103$
-;	Peephole 300	removed redundant label 00110$
-;	main.c:315: delay_ms(10);
+;	main.c:317: delay_ms(10);
 ;	genCall
 ;	Peephole 182.b	used 16 bit load of dptr
 	mov	dptr,#0x000A
-;	Peephole 253.b	replaced lcall/ret with ljmp
-	ljmp	_delay_ms
+	push	ar2
+	push	ar3
+	lcall	_delay_ms
+	pop	ar3
+	pop	ar2
+;	main.c:308: for(i=0;i<64;i++)       // 64 bytes of CGRAM are read
+;	genPlus
+;     genPlusIncr
+	inc	r2
+	cjne	r2,#0x00,00115$
+	inc	r3
+00115$:
+	ljmp	00103$
+;	Peephole 259.b	removed redundant label 00107$ and ret
 ;
 	.area CSEG    (CODE)
 	.area CONST   (CODE)
@@ -2285,6 +2488,39 @@ __str_24:
 __str_25:
 	.db 0x0A
 	.db 0x0D
+	.db 0x09
+	.db 0x09
+	.ascii "Ascii Representation"
+	.db 0x0A
+	.db 0x0D
+	.db 0x00
+__str_26:
+	.db 0x0A
+	.db 0x0D
+	.db 0x09
+	.db 0x09
+	.db 0x00
+__str_27:
+	.db 0x0A
+	.db 0x0D
+	.db 0x09
+	.db 0x09
+	.ascii "Hex Representation"
+	.db 0x0A
+	.db 0x0D
+	.db 0x00
+__str_28:
+	.db 0x0A
+	.db 0x0A
+	.db 0x0D
+	.ascii "0x%x"
+	.db 0x00
+__str_29:
+	.db 0x09
+	.ascii " %x"
+	.db 0x00
+__str_30:
+	.ascii "%x"
 	.db 0x00
 	.area XINIT   (CODE)
 __xinit__write:

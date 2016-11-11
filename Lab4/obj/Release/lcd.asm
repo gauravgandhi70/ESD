@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.6.0 #4309 (Jul 28 2006)
-; This file generated Fri Nov 11 04:05:14 2016
+; This file generated Fri Nov 11 14:52:20 2016
 ;--------------------------------------------------------
 	.module lcd
 	.optsdcc -mmcs51 --model-large
@@ -526,15 +526,15 @@ _lcd_init:
 	ar7 = 0x07
 	ar0 = 0x00
 	ar1 = 0x01
-;	lcd.c:27: RS=0;
+;	lcd.c:27: RS=0;                       // Command register selected
 ;	genAssign
 	clr	_P1_3
-;	lcd.c:28: delay_ms(20);
+;	lcd.c:28: delay_ms(20);               // wait 15 ms after power on
 ;	genCall
 ;	Peephole 182.b	used 16 bit load of dptr
 	mov	dptr,#0x0014
 	lcall	_delay_ms
-;	lcd.c:29: *write = 0x30;
+;	lcd.c:29: *write = 0x30;              // Unlock Command
 ;	genAssign
 	mov	dptr,#_write
 	movx	a,@dptr
@@ -548,12 +548,12 @@ _lcd_init:
 	mov	dph,r3
 	mov	a,#0x30
 	movx	@dptr,a
-;	lcd.c:31: delay_ms(6);
+;	lcd.c:31: delay_ms(6);                // Wait for more than 4.1ms
 ;	genCall
 ;	Peephole 182.b	used 16 bit load of dptr
 	mov	dptr,#0x0006
 	lcall	_delay_ms
-;	lcd.c:32: *write = 0x30;
+;	lcd.c:32: *write = 0x30;              // Unlock Command
 ;	genAssign
 	mov	dptr,#_write
 	movx	a,@dptr
@@ -567,12 +567,12 @@ _lcd_init:
 	mov	dph,r3
 	mov	a,#0x30
 	movx	@dptr,a
-;	lcd.c:34: delay_ms(5);
+;	lcd.c:34: delay_ms(5);                // Wait for more than 100ms
 ;	genCall
 ;	Peephole 182.b	used 16 bit load of dptr
 	mov	dptr,#0x0005
 	lcall	_delay_ms
-;	lcd.c:35: *write=0x30;
+;	lcd.c:35: *write=0x30;                // Unlock Command
 ;	genAssign
 	mov	dptr,#_write
 	movx	a,@dptr
@@ -586,10 +586,10 @@ _lcd_init:
 	mov	dph,r3
 	mov	a,#0x30
 	movx	@dptr,a
-;	lcd.c:37: lcdbusywait();
+;	lcd.c:37: lcdbusywait();               // Pooll for busy flag
 ;	genCall
 	lcall	_lcdbusywait
-;	lcd.c:38: *write = 0x38;
+;	lcd.c:38: *write = 0x38;              // Function Set command
 ;	genAssign
 	mov	dptr,#_write
 	movx	a,@dptr
@@ -606,7 +606,7 @@ _lcd_init:
 ;	lcd.c:40: lcdbusywait();
 ;	genCall
 	lcall	_lcdbusywait
-;	lcd.c:41: *write = 0x08;
+;	lcd.c:41: *write = 0x08;              // Turn The display OFF
 ;	genAssign
 	mov	dptr,#_write
 	movx	a,@dptr
@@ -623,7 +623,7 @@ _lcd_init:
 ;	lcd.c:43: lcdbusywait();
 ;	genCall
 	lcall	_lcdbusywait
-;	lcd.c:44: *write = 0x0C;
+;	lcd.c:44: *write = 0x0C;              // Turn the display ON
 ;	genAssign
 	mov	dptr,#_write
 	movx	a,@dptr
@@ -640,7 +640,7 @@ _lcd_init:
 ;	lcd.c:46: lcdbusywait();
 ;	genCall
 	lcall	_lcdbusywait
-;	lcd.c:47: *write = 0x06;
+;	lcd.c:47: *write = 0x06;              // Entry Mode Set command
 ;	genAssign
 	mov	dptr,#_write
 	movx	a,@dptr
@@ -657,7 +657,7 @@ _lcd_init:
 ;	lcd.c:49: lcdbusywait();
 ;	genCall
 	lcall	_lcdbusywait
-;	lcd.c:50: *write = 0x01;
+;	lcd.c:50: *write = 0x01;              // Clear screen and send the cursor home
 ;	genAssign
 	mov	dptr,#_write
 	movx	a,@dptr
@@ -687,7 +687,7 @@ _lcdputch:
 	mov	a,dpl
 	mov	dptr,#_lcdputch_c_1_1
 	movx	@dptr,a
-;	lcd.c:67: RS=1;
+;	lcd.c:67: RS=1;                       // DATA register selected
 ;	genAssign
 	setb	_P1_3
 ;	lcd.c:68: delay_ms(1);
@@ -695,7 +695,7 @@ _lcdputch:
 ;	Peephole 182.b	used 16 bit load of dptr
 	mov	dptr,#0x0001
 	lcall	_delay_ms
-;	lcd.c:69: *write = c;
+;	lcd.c:69: *write = c;                 // Write data at address 0xA000
 ;	genAssign
 	mov	dptr,#_write
 	movx	a,@dptr
@@ -713,7 +713,7 @@ _lcdputch:
 	mov	dph,r3
 ;	Peephole 136	removed redundant move
 	movx	@dptr,a
-;	lcd.c:70: lcdbusywait();
+;	lcd.c:70: lcdbusywait();              // Poll for busy flag
 ;	genCall
 ;	Peephole 253.b	replaced lcall/ret with ljmp
 	ljmp	_lcdbusywait
@@ -732,7 +732,7 @@ _lcdputcmd:
 	mov	a,dpl
 	mov	dptr,#_lcdputcmd_c_1_1
 	movx	@dptr,a
-;	lcd.c:84: RS=0;
+;	lcd.c:84: RS=0;                      // Command register selected
 ;	genAssign
 	clr	_P1_3
 ;	lcd.c:85: delay_ms(1);
@@ -740,7 +740,7 @@ _lcdputcmd:
 ;	Peephole 182.b	used 16 bit load of dptr
 	mov	dptr,#0x0001
 	lcall	_delay_ms
-;	lcd.c:86: *write = c;
+;	lcd.c:86: *write = c;                 //Write command at address 0xA000
 ;	genAssign
 	mov	dptr,#_write
 	movx	a,@dptr
@@ -758,10 +758,7 @@ _lcdputcmd:
 	mov	dph,r3
 ;	Peephole 136	removed redundant move
 	movx	@dptr,a
-;	lcd.c:87: P1_0=1;
-;	genAssign
-	setb	_P1_0
-;	lcd.c:88: lcdbusywait();
+;	lcd.c:87: lcdbusywait();              // Poll for busy flag
 ;	genCall
 ;	Peephole 253.b	replaced lcall/ret with ljmp
 	ljmp	_lcdbusywait
@@ -771,20 +768,20 @@ _lcdputcmd:
 ;------------------------------------------------------------
 ;temp                      Allocated with name '_lcdread_temp_1_1'
 ;------------------------------------------------------------
-;	lcd.c:100: char lcdread()
+;	lcd.c:99: char lcdread()
 ;	-----------------------------------------
 ;	 function lcdread
 ;	-----------------------------------------
 _lcdread:
-;	lcd.c:103: RS=1;
+;	lcd.c:102: RS=1;                       // Data register selected
 ;	genAssign
 	setb	_P1_3
-;	lcd.c:104: delay_ms(1);
+;	lcd.c:103: delay_ms(1);
 ;	genCall
 ;	Peephole 182.b	used 16 bit load of dptr
 	mov	dptr,#0x0001
 	lcall	_delay_ms
-;	lcd.c:105: temp = *read;
+;	lcd.c:104: temp = *read;               //Read Data from address 0xC000
 ;	genAssign
 	mov	dptr,#_read
 	movx	a,@dptr
@@ -802,10 +799,10 @@ _lcdread:
 	mov	dptr,#_lcdread_temp_1_1
 ;	Peephole 100	removed redundant mov
 	movx	@dptr,a
-;	lcd.c:106: lcdbusywait();
+;	lcd.c:105: lcdbusywait();              //Poll for busyflag
 ;	genCall
 	lcall	_lcdbusywait
-;	lcd.c:107: return temp;
+;	lcd.c:106: return temp;
 ;	genAssign
 	mov	dptr,#_lcdread_temp_1_1
 	movx	a,@dptr
@@ -819,7 +816,7 @@ _lcdread:
 ;------------------------------------------------------------
 ;addr                      Allocated with name '_lcdgotoaddr_addr_1_1'
 ;------------------------------------------------------------
-;	lcd.c:118: void lcdgotoaddr(unsigned char addr)
+;	lcd.c:117: void lcdgotoaddr(unsigned char addr)
 ;	-----------------------------------------
 ;	 function lcdgotoaddr
 ;	-----------------------------------------
@@ -828,15 +825,15 @@ _lcdgotoaddr:
 	mov	a,dpl
 	mov	dptr,#_lcdgotoaddr_addr_1_1
 	movx	@dptr,a
-;	lcd.c:120: RS=0;
+;	lcd.c:119: RS=0;                           // Command register selected
 ;	genAssign
 	clr	_P1_3
-;	lcd.c:121: delay_ms(1);
+;	lcd.c:120: delay_ms(1);
 ;	genCall
 ;	Peephole 182.b	used 16 bit load of dptr
 	mov	dptr,#0x0001
 	lcall	_delay_ms
-;	lcd.c:122: *write = addr;
+;	lcd.c:121: *write = addr;                  // Go to DDRAM address
 ;	genAssign
 	mov	dptr,#_write
 	movx	a,@dptr
@@ -854,7 +851,7 @@ _lcdgotoaddr:
 	mov	dph,r3
 ;	Peephole 136	removed redundant move
 	movx	@dptr,a
-;	lcd.c:123: lcdbusywait();
+;	lcd.c:122: lcdbusywait();                  //Poll for busyflag
 ;	genCall
 ;	Peephole 253.b	replaced lcall/ret with ljmp
 	ljmp	_lcdbusywait
@@ -864,15 +861,15 @@ _lcdgotoaddr:
 ;------------------------------------------------------------
 ;temp                      Allocated with name '_lcdbusywait_temp_1_1'
 ;------------------------------------------------------------
-;	lcd.c:134: void lcdbusywait()
+;	lcd.c:133: void lcdbusywait()
 ;	-----------------------------------------
 ;	 function lcdbusywait
 ;	-----------------------------------------
 _lcdbusywait:
-;	lcd.c:137: RS=0;
+;	lcd.c:136: RS=0;                       // Command Register selected
 ;	genAssign
 	clr	_P1_3
-;	lcd.c:138: temp = *read;
+;	lcd.c:137: temp = *read;               // Read Busy flag
 ;	genAssign
 	mov	dptr,#_read
 	movx	a,@dptr
@@ -890,12 +887,12 @@ _lcdbusywait:
 	mov	dptr,#_lcdbusywait_temp_1_1
 ;	Peephole 100	removed redundant mov
 	movx	@dptr,a
-;	lcd.c:140: delay_ms(1);
+;	lcd.c:139: delay_ms(1);
 ;	genCall
 ;	Peephole 182.b	used 16 bit load of dptr
 	mov	dptr,#0x0001
 	lcall	_delay_ms
-;	lcd.c:142: while(temp & 0x80)
+;	lcd.c:141: while(temp & 0x80)           // Wait till busy flag is set
 00101$:
 ;	genAssign
 	mov	dptr,#_lcdbusywait_temp_1_1
@@ -906,7 +903,7 @@ _lcdbusywait:
 ;	Peephole 108.d	removed ljmp by inverse jump logic
 	jnb	acc.7,00103$
 ;	Peephole 300	removed redundant label 00108$
-;	lcd.c:144: temp = *read;
+;	lcd.c:143: temp = *read;
 ;	genAssign
 	mov	dptr,#_read
 	movx	a,@dptr
@@ -927,7 +924,7 @@ _lcdbusywait:
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00101$
 00103$:
-;	lcd.c:146: P1_0=0;
+;	lcd.c:145: P1_0=0;
 ;	genAssign
 	clr	_P1_0
 ;	Peephole 300	removed redundant label 00104$
@@ -938,7 +935,7 @@ _lcdbusywait:
 ;str                       Allocated with name '_lcdputstr_str_1_1'
 ;i                         Allocated with name '_lcdputstr_i_1_1'
 ;------------------------------------------------------------
-;	lcd.c:161: void lcdputstr(char *str)
+;	lcd.c:160: void lcdputstr(char *str)
 ;	-----------------------------------------
 ;	 function lcdputstr
 ;	-----------------------------------------
@@ -955,7 +952,7 @@ _lcdputstr:
 	inc	dptr
 	mov	a,r2
 	movx	@dptr,a
-;	lcd.c:164: while(*(str+i) != '\0')
+;	lcd.c:163: while(*(str+i) != '\0')                     // While end of string is reached data is sent to LCD
 ;	genAssign
 	mov	dptr,#_lcdputstr_str_1_1
 	movx	a,@dptr
@@ -995,7 +992,7 @@ _lcdputstr:
 ;	Peephole 115.b	jump optimization
 	jz	00104$
 ;	Peephole 300	removed redundant label 00109$
-;	lcd.c:166: lcdputch(*(str+i));
+;	lcd.c:165: lcdputch(*(str+i));
 ;	genCall
 	mov	dpl,r7
 	push	ar2
@@ -1009,7 +1006,7 @@ _lcdputstr:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	lcd.c:167: i++;
+;	lcd.c:166: i++;
 ;	genPlus
 ;     genPlusIncr
 ;	tail increment optimized (range 7)
@@ -1026,7 +1023,7 @@ _lcdputstr:
 ;column                    Allocated with name '_lcdgotoxy_PARM_2'
 ;row                       Allocated with name '_lcdgotoxy_row_1_1'
 ;------------------------------------------------------------
-;	lcd.c:181: void lcdgotoxy(unsigned char row, unsigned char column)
+;	lcd.c:180: void lcdgotoxy(unsigned char row, unsigned char column)
 ;	-----------------------------------------
 ;	 function lcdgotoxy
 ;	-----------------------------------------
@@ -1035,7 +1032,7 @@ _lcdgotoxy:
 	mov	a,dpl
 	mov	dptr,#_lcdgotoxy_row_1_1
 	movx	@dptr,a
-;	lcd.c:183: if(row==1 && column < 17)
+;	lcd.c:182: if(row==1 && column < 17)
 ;	genAssign
 	mov	dptr,#_lcdgotoxy_row_1_1
 	movx	a,@dptr
@@ -1060,7 +1057,7 @@ _lcdgotoxy:
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00114$
 ;	Peephole 300	removed redundant label 00130$
-;	lcd.c:185: lcdgotoaddr(0x80 + column - 1);
+;	lcd.c:184: lcdgotoaddr(0x80 + column - 1);              // For row 1 cursor is set to 0x80 address of DDRAM
 ;	genPlus
 ;     genPlusIncr
 	mov	a,#0x7F
@@ -1075,7 +1072,7 @@ _lcdgotoxy:
 ;	Peephole 253.a	replaced lcall/ret with ljmp
 	ljmp	_lcdgotoaddr
 00114$:
-;	lcd.c:187: else if(row==2 && column < 17)
+;	lcd.c:186: else if(row==2 && column < 17)
 ;	genAssign
 	mov	dptr,#_lcdgotoxy_row_1_1
 	movx	a,@dptr
@@ -1100,7 +1097,7 @@ _lcdgotoxy:
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00110$
 ;	Peephole 300	removed redundant label 00134$
-;	lcd.c:189: lcdgotoaddr(0xC0 + column - 1);
+;	lcd.c:188: lcdgotoaddr(0xC0 + column - 1);             // For row 2 cursor is set to 0xC0 address of DDRAM
 ;	genPlus
 ;     genPlusIncr
 	mov	a,#0xBF
@@ -1115,7 +1112,7 @@ _lcdgotoxy:
 ;	Peephole 253.a	replaced lcall/ret with ljmp
 	ljmp	_lcdgotoaddr
 00110$:
-;	lcd.c:191: else if(row==3 && column < 17)
+;	lcd.c:190: else if(row==3 && column < 17)
 ;	genAssign
 	mov	dptr,#_lcdgotoxy_row_1_1
 	movx	a,@dptr
@@ -1140,7 +1137,7 @@ _lcdgotoxy:
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00106$
 ;	Peephole 300	removed redundant label 00138$
-;	lcd.c:193: lcdgotoaddr(0x90 + column - 1);
+;	lcd.c:192: lcdgotoaddr(0x90 + column - 1);             // For row 3 cursor is set to 0x90 address of DDRAM
 ;	genPlus
 ;     genPlusIncr
 	mov	a,#0x8F
@@ -1155,7 +1152,7 @@ _lcdgotoxy:
 ;	Peephole 253.a	replaced lcall/ret with ljmp
 	ljmp	_lcdgotoaddr
 00106$:
-;	lcd.c:195: else if(row==4 && column < 17)
+;	lcd.c:194: else if(row==4 && column < 17)
 ;	genAssign
 	mov	dptr,#_lcdgotoxy_row_1_1
 	movx	a,@dptr
@@ -1180,7 +1177,7 @@ _lcdgotoxy:
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00102$
 ;	Peephole 300	removed redundant label 00142$
-;	lcd.c:197: lcdgotoaddr(0xD0 + column - 1);
+;	lcd.c:196: lcdgotoaddr(0xD0 + column - 1);             // For row 4 cursor is set to 0xD0 address of DDRAM
 ;	genPlus
 ;     genPlusIncr
 	mov	a,#0xCF
@@ -1195,7 +1192,7 @@ _lcdgotoxy:
 ;	Peephole 253.a	replaced lcall/ret with ljmp
 	ljmp	_lcdgotoaddr
 00102$:
-;	lcd.c:199: else{lcdputstr("Error");}
+;	lcd.c:198: else{lcdputstr("Error");}
 ;	genCall
 ;	Peephole 182.a	used 16 bit load of DPTR
 	mov	dptr,#__str_0
@@ -1212,7 +1209,7 @@ _lcdgotoxy:
 ;row                       Allocated with name '_lcd_display_row_1_1'
 ;flag                      Allocated with name '_lcd_display_flag_1_1'
 ;------------------------------------------------------------
-;	lcd.c:203: void lcd_display(char rd, char *a)
+;	lcd.c:202: void lcd_display(char rd, char *a)
 ;	-----------------------------------------
 ;	 function lcd_display
 ;	-----------------------------------------
@@ -1221,7 +1218,7 @@ _lcd_display:
 	mov	a,dpl
 	mov	dptr,#_lcd_display_rd_1_1
 	movx	@dptr,a
-;	lcd.c:208: printf_tiny("\n\n\r Enter Row number between 0 to 3: ");
+;	lcd.c:207: printf_tiny("\n\n\r Enter Row number between 0 to 3: ");
 ;	genIpush
 	mov	a,#__str_1
 	push	acc
@@ -1231,22 +1228,22 @@ _lcd_display:
 	lcall	_printf_tiny
 	dec	sp
 	dec	sp
-;	lcd.c:209: do{
+;	lcd.c:208: do{
 00104$:
-;	lcd.c:210: flag=0;
+;	lcd.c:209: flag=0;
 ;	genAssign
 	mov	dptr,#_lcd_display_flag_1_1
 	clr	a
 	movx	@dptr,a
 	inc	dptr
 	movx	@dptr,a
-;	lcd.c:211: gets(d);
+;	lcd.c:210: gets(d);
 ;	genCall
 ;	Peephole 182.a	used 16 bit load of DPTR
 	mov	dptr,#_lcd_display_d_1_1
 	mov	b,#0x00
 	lcall	_gets
-;	lcd.c:212: row=atoi(d);
+;	lcd.c:211: row=atoi(d);
 ;	genCall
 ;	Peephole 182.a	used 16 bit load of DPTR
 	mov	dptr,#_lcd_display_d_1_1
@@ -1254,7 +1251,7 @@ _lcd_display:
 	lcall	_atoi
 	mov	r2,dpl
 	mov	r3,dph
-;	lcd.c:213: if(row<4)
+;	lcd.c:212: if(row<4)
 ;	genAssign
 	mov	ar4,r2
 	mov	ar5,r3
@@ -1269,7 +1266,7 @@ _lcd_display:
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00102$
 ;	Peephole 300	removed redundant label 00112$
-;	lcd.c:215: flag=1;
+;	lcd.c:214: flag=1;
 ;	genAssign
 	mov	dptr,#_lcd_display_flag_1_1
 	mov	a,#0x01
@@ -1280,7 +1277,7 @@ _lcd_display:
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00105$
 00102$:
-;	lcd.c:220: printf_tiny("\n\n\r Enter valid row number betweem 0 and 3: ");
+;	lcd.c:219: printf_tiny("\n\n\r Enter valid row number betweem 0 and 3: ");
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -1295,7 +1292,7 @@ _lcd_display:
 	pop	ar3
 	pop	ar2
 00105$:
-;	lcd.c:222: }while(flag==0);
+;	lcd.c:221: }while(flag==0);
 ;	genAssign
 	mov	dptr,#_lcd_display_flag_1_1
 	movx	a,@dptr
@@ -1310,7 +1307,7 @@ _lcd_display:
 ;	Peephole 108.c	removed ljmp by inverse jump logic
 	jz	00104$
 ;	Peephole 300	removed redundant label 00113$
-;	lcd.c:224: lcdgotoxy(row+1,1);
+;	lcd.c:223: lcdgotoxy(row+1,1);
 ;	genAssign
 ;	genCast
 ;	genPlus
@@ -1323,7 +1320,7 @@ _lcd_display:
 ;	genCall
 	mov	dpl,r2
 	lcall	_lcdgotoxy
-;	lcd.c:225: lcdputstr(a);
+;	lcd.c:224: lcdputstr(a);
 ;	genAssign
 	mov	dptr,#_lcd_display_PARM_2
 	movx	a,@dptr
@@ -1339,11 +1336,11 @@ _lcd_display:
 	mov	dph,r3
 	mov	b,r4
 	lcall	_lcdputstr
-;	lcd.c:226: lcdputch(':');
+;	lcd.c:225: lcdputch(':');
 ;	genCall
 	mov	dpl,#0x3A
 	lcall	_lcdputch
-;	lcd.c:227: lcdputch(rd);
+;	lcd.c:226: lcdputch(rd);
 ;	genAssign
 	mov	dptr,#_lcd_display_rd_1_1
 	movx	a,@dptr

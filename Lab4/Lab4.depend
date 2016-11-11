@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1478862466 source:c:\users\admin\documents\lab4\main.c
+1478905070 source:c:\users\admin\documents\lab4\main.c
 	<mcs51/8051.h>
 	<at89c51ed2.h>
 	<stdio.h>
@@ -11,7 +11,7 @@
 	"uart.h"
 	"atoh_f.h"
 
-1478862101 source:c:\users\admin\documents\lab4\lcd.c
+1478901116 source:c:\users\admin\documents\lab4\lcd.c
 	<mcs51/8051.h>
 	<at89c51ed2.h>
 	<stdio.h>

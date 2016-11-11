@@ -257,12 +257,13 @@ void DDRAM_dump()
     char temp=0;
     int i;
     lcdputcmd(0x80);        // 0x80 command is passed to the LCD to select DDRAM and Setting its address as 00
+    printf_tiny("\n\r\t\tAscii Representation\n\r");
     for(i=0;i<64;i++)       // Reading contents of the DDRAM
     {
         if(i%16==0)         // After every 16 characters , go to new line of the terminal
         {
             temp++;
-            printf_tiny("\n\r");
+            printf_tiny("\n\r\t\t");
             lcdgotoxy(temp,1);
         }
 
@@ -272,20 +273,20 @@ void DDRAM_dump()
 
     }
 
-    /*for(i=0;i<80;i++)
+     lcdgotoxy(1,1);
+    printf_tiny("\n\r\t\tHex Representation\n\r");
+    for(i=0;i<80;i++)
     {
-        if(i%40==0)
+        if(i%16==0)
         {
-            temp++;
-            printf_tiny("\n\r");
-            //lcdgotoxy(temp,1);
+            printf_tiny("\n\n\r0x%x",i);
         }
 
 
-        putchar(lcdread());
+        printf_tiny("\t %x",lcdread());
         delay_ms(10);
 
-    }*/
+    }
 
 
 }
@@ -300,18 +301,22 @@ void DDRAM_dump()
 -----------------------------------------------------------------------------------*/
 void CGRAM_dump()
 {
-    char temp;
+    unsigned char temp;
     int i;
      putchar('\n');
     lcdputcmd(0x40);        // 0x40 is Passed to select CGRAM and setting its address as 00
     for(i=0;i<64;i++)       // 64 bytes of CGRAM are read
     {
+        if(i%16==0)
+        {
+            printf_tiny("\n\n\r0x%x",i);
+        }
         temp = lcdread();   // Reading data from the LCD
         putchar('\t');
-        putchar(temp);      // Displaying Data on the terminal
-
+        printf_tiny("%x",temp);      // Displaying Data on the terminal
+        delay_ms(10);
     }
 
-     delay_ms(10);
+
 
 }

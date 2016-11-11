@@ -24,30 +24,30 @@ Author: Gaurav Gandhi
 
 void lcd_init()
 {
-    RS=0;
-    delay_ms(20);
-    *write = 0x30;
+    RS=0;                       // Command register selected
+    delay_ms(20);               // wait 15 ms after power on
+    *write = 0x30;              // Unlock Command
 
-    delay_ms(6);
-    *write = 0x30;
+    delay_ms(6);                // Wait for more than 4.1ms
+    *write = 0x30;              // Unlock Command
 
-    delay_ms(5);
-    *write=0x30;
+    delay_ms(5);                // Wait for more than 100ms
+    *write=0x30;                // Unlock Command
 
-    lcdbusywait();
-    *write = 0x38;
-
-    lcdbusywait();
-    *write = 0x08;
+    lcdbusywait();               // Pooll for busy flag
+    *write = 0x38;              // Function Set command
 
     lcdbusywait();
-    *write = 0x0C;
+    *write = 0x08;              // Turn The display OFF
 
     lcdbusywait();
-    *write = 0x06;
+    *write = 0x0C;              // Turn the display ON
 
     lcdbusywait();
-    *write = 0x01;
+    *write = 0x06;              // Entry Mode Set command
+
+    lcdbusywait();
+    *write = 0x01;              // Clear screen and send the cursor home
 
 }
 
@@ -64,10 +64,10 @@ void lcd_init()
 
 void lcdputch(char c)
 {
-    RS=1;
+    RS=1;                       // DATA register selected
     delay_ms(1);
-    *write = c;
-    lcdbusywait();
+    *write = c;                 // Write data at address 0xA000
+    lcdbusywait();              // Poll for busy flag
 }
 
 /*-----------------------------------------------------------------------------------------
@@ -81,11 +81,10 @@ void lcdputch(char c)
 
 void lcdputcmd(char c)
 {
-    RS=0;
+    RS=0;                      // Command register selected
     delay_ms(1);
-    *write = c;
-    P1_0=1;
-    lcdbusywait();
+    *write = c;                 //Write command at address 0xA000
+    lcdbusywait();              // Poll for busy flag
 }
 
 
@@ -100,10 +99,10 @@ void lcdputcmd(char c)
 char lcdread()
 {
     char temp;
-    RS=1;
+    RS=1;                       // Data register selected
     delay_ms(1);
-    temp = *read;
-    lcdbusywait();
+    temp = *read;               //Read Data from address 0xC000
+    lcdbusywait();              //Poll for busyflag
     return temp;
 }
 
@@ -117,10 +116,10 @@ char lcdread()
 -----------------------------------------------------------------------------------------*/
 void lcdgotoaddr(unsigned char addr)
 {
-    RS=0;
+    RS=0;                           // Command register selected
     delay_ms(1);
-    *write = addr;
-    lcdbusywait();
+    *write = addr;                  // Go to DDRAM address
+    lcdbusywait();                  //Poll for busyflag
 }
 
 /*-----------------------------------------------------------------------------------------
@@ -134,12 +133,12 @@ void lcdgotoaddr(unsigned char addr)
 void lcdbusywait()
 {
     volatile char temp;
-    RS=0;
-    temp = *read;
+    RS=0;                       // Command Register selected
+    temp = *read;               // Read Busy flag
 
     delay_ms(1);
 
-   while(temp & 0x80)
+   while(temp & 0x80)           // Wait till busy flag is set
    {
        temp = *read;
    }
@@ -161,7 +160,7 @@ void lcdbusywait()
 void lcdputstr(char *str)
 {
     int i=0;
-    while(*(str+i) != '\0')
+    while(*(str+i) != '\0')                     // While end of string is reached data is sent to LCD
     {
         lcdputch(*(str+i));
         i++;
@@ -182,19 +181,19 @@ void lcdgotoxy(unsigned char row, unsigned char column)
 {
     if(row==1 && column < 17)
     {
-       lcdgotoaddr(0x80 + column - 1);
+       lcdgotoaddr(0x80 + column - 1);              // For row 1 cursor is set to 0x80 address of DDRAM
     }
     else if(row==2 && column < 17)
     {
-        lcdgotoaddr(0xC0 + column - 1);
+        lcdgotoaddr(0xC0 + column - 1);             // For row 2 cursor is set to 0xC0 address of DDRAM
     }
     else if(row==3 && column < 17)
     {
-        lcdgotoaddr(0x90 + column - 1);
+        lcdgotoaddr(0x90 + column - 1);             // For row 3 cursor is set to 0x90 address of DDRAM
     }
     else if(row==4 && column < 17)
     {
-        lcdgotoaddr(0xD0 + column - 1);
+        lcdgotoaddr(0xD0 + column - 1);             // For row 4 cursor is set to 0xD0 address of DDRAM
     }
     else{lcdputstr("Error");}
 }
