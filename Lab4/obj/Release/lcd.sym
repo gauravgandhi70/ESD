@@ -373,29 +373,28 @@ Symbol Table
  15 __xinit__read                                                  0002 R
  15 __xinit__write                                                 0000 R
     _atoi                                                          **** GX
+    _delay_ms                                                      **** GX
     _gets                                                          **** GX
- 13 _lcd_delay                                                     023E GR
-  8 _lcd_delay_ms_1_1                                              000A R
- 13 _lcd_display                                                   0279 GR
-  8 _lcd_display_PARM_2                                            000C GR
-  8 _lcd_display_d_1_1                                             0010 R
-  8 _lcd_display_flag_1_1                                          0015 R
-  8 _lcd_display_rd_1_1                                            000F R
+ 13 _lcd_display                                                   0233 GR
+  8 _lcd_display_PARM_2                                            000A GR
+  8 _lcd_display_d_1_1                                             000E R
+  8 _lcd_display_flag_1_1                                          0013 R
+  8 _lcd_display_rd_1_1                                            000D R
  13 _lcd_init                                                      0000 GR
- 13 _lcdbusywait                                                   0136 GR
+ 13 _lcdbusywait                                                   012B GR
   8 _lcdbusywait_temp_1_1                                          0004 R
- 13 _lcdgotoaddr                                                   0113 GR
+ 13 _lcdgotoaddr                                                   0108 GR
   8 _lcdgotoaddr_addr_1_1                                          0003 R
- 13 _lcdgotoxy                                                     01C3 GR
+ 13 _lcdgotoxy                                                     01B8 GR
   8 _lcdgotoxy_PARM_2                                              0008 GR
   8 _lcdgotoxy_row_1_1                                             0009 R
- 13 _lcdputch                                                      00A7 GR
+ 13 _lcdputch                                                      009C GR
   8 _lcdputch_c_1_1                                                0000 R
- 13 _lcdputcmd                                                     00CA GR
+ 13 _lcdputcmd                                                     00BF GR
   8 _lcdputcmd_c_1_1                                               0001 R
- 13 _lcdputstr                                                     016F GR
+ 13 _lcdputstr                                                     0164 GR
   8 _lcdputstr_str_1_1                                             0005 R
- 13 _lcdread                                                       00EF GR
+ 13 _lcdread                                                       00E4 GR
   8 _lcdread_temp_1_1                                              0002 R
     _printf_tiny                                                   **** GX
   9 _read                                                          0002 GR
@@ -589,7 +588,7 @@ Area Table
    5 ISEG                                                                               size    0   flags 0
    6 BSEG                                                                               size    0   flags 80
    7 PSEG                                                                               size    0   flags 50
-   8 XSEG                                                                               size   17   flags 40
+   8 XSEG                                                                               size   15   flags 40
    9 XISEG                                                                              size    4   flags 40
    A HOME                                                                               size    0   flags 20
    B GSINIT0                                                                            size    0   flags 20
@@ -600,6 +599,6 @@ Area Table
   10 GSINIT5                                                                            size    0   flags 20
   11 GSINIT                                                                             size    0   flags 20
   12 GSFINAL                                                                            size    0   flags 20
-  13 CSEG                                                                               size  315   flags 20
+  13 CSEG                                                                               size  2CF   flags 20
   14 CONST                                                                              size   59   flags 20
   15 XINIT                                                                              size    4   flags 20

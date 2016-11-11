@@ -367,11 +367,11 @@ Symbol Table
     _WDTRST                                                     =  00A6 G
     _WR                                                         =  00B6 G
  13 _delay_ms                                                      0033 GR
-  8 _delay_ms_ms_count_1_1                                         0002 R
+  8 _delay_ms_ms_1_1                                               0002 R
  13 _delay_sec                                                     0074 GR
-  8 _delay_sec_sec_count_1_1                                       0004 R
+  8 _delay_sec_sec_1_1                                             0004 R
  13 _delay_us                                                      0000 GR
-  8 _delay_us_us_count_1_1                                         0000 R
+  8 _delay_us_us_1_1                                               0000 R
     a                                                              00D6 
     ac                                                             00D6 
     acc                                                            00E0 

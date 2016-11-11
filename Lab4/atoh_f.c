@@ -1,3 +1,9 @@
+/*---------------------------------------------------------------------------------------*
+                                User defined ascii to hex converter
+Filename: atoh_f.c
+Controller: AT89c51RC2
+Author: Gaurav Gandhi
+ ----------------------------------------------------------------------------------------*/
 #include <mcs51/8051.h>
 #include<at89c51ed2.h>
 #include<stdio.h>

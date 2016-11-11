@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.6.0 #4309 (Jul 28 2006)
-; This file generated Thu Nov 10 20:32:49 2016
+; This file generated Fri Nov 11 03:34:05 2016
 ;--------------------------------------------------------
 	.module uart
 	.optsdcc -mmcs51 --model-large
@@ -478,7 +478,7 @@ _putchar_c_1_1:
 ;------------------------------------------------------------
 ;c                         Allocated with name '_putchar_c_1_1'
 ;------------------------------------------------------------
-;	uart.c:8: void putchar(char c)											// Putchar function is used to send a single character to the
+;	uart.c:14: void putchar(char c)											// Putchar function is used to send a single character to the
 ;	-----------------------------------------
 ;	 function putchar
 ;	-----------------------------------------
@@ -495,19 +495,19 @@ _putchar:
 	mov	a,dpl
 	mov	dptr,#_putchar_c_1_1
 	movx	@dptr,a
-;	uart.c:10: while (TI==0);												// wait for tx to be ready and send data and clear TI flag
+;	uart.c:16: while (TI==0);												// wait for tx to be ready and send data and clear TI flag
 00101$:
 ;	genIfx
 ;	genIfxJump
 ;	Peephole 108.d	removed ljmp by inverse jump logic
 	jnb	_TI,00101$
 ;	Peephole 300	removed redundant label 00108$
-;	uart.c:11: SBUF = c;
+;	uart.c:17: SBUF = c;
 ;	genAssign
 	mov	dptr,#_putchar_c_1_1
 	movx	a,@dptr
 	mov	_SBUF,a
-;	uart.c:12: TI = 0;
+;	uart.c:18: TI = 0;
 ;	genAssign
 	clr	_TI
 ;	Peephole 300	removed redundant label 00104$
@@ -516,23 +516,23 @@ _putchar:
 ;Allocation info for local variables in function 'getchar'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	uart.c:17: char getchar ()													// getchar function is used to recieve a single character from the
+;	uart.c:23: char getchar ()													// getchar function is used to recieve a single character from the
 ;	-----------------------------------------
 ;	 function getchar
 ;	-----------------------------------------
 _getchar:
-;	uart.c:19: while (!RI);
+;	uart.c:25: while (!RI);
 00101$:
 ;	genIfx
 ;	genIfxJump
 ;	Peephole 108.d	removed ljmp by inverse jump logic
-;	uart.c:20: RI = 0;
+;	uart.c:26: RI = 0;
 ;	genAssign
 ;	Peephole 250.a	using atomic test and clear
 	jbc	_RI,00108$
 	sjmp	00101$
 00108$:
-;	uart.c:21: return SBUF;
+;	uart.c:27: return SBUF;
 ;	genAssign
 	mov	r2,_SBUF
 ;	genRet
@@ -543,33 +543,33 @@ _getchar:
 ;Allocation info for local variables in function 'uart_init'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	uart.c:26: void uart_init()												// UART initialized
+;	uart.c:32: void uart_init()												// UART initialized
 ;	-----------------------------------------
 ;	 function uart_init
 ;	-----------------------------------------
 _uart_init:
-;	uart.c:28: T2CON=0;
+;	uart.c:34: T2CON=0;
 ;	genAssign
 	mov	_T2CON,#0x00
-;	uart.c:29: BDRCON=0;
+;	uart.c:35: BDRCON=0;
 ;	genAssign
 	mov	_BDRCON,#0x00
-;	uart.c:30: PCON |= 0x00;
+;	uart.c:36: PCON |= 0x00;
 ;	genAssign
 	mov	_PCON,_PCON
-;	uart.c:31: TH1  =  0xFD;												// Timer 1 is used in mode 2 auto reload mode
+;	uart.c:37: TH1  =  0xFD;												// Timer 1 is used in mode 2 auto reload mode
 ;	genAssign
 	mov	_TH1,#0xFD
-;	uart.c:32: TL1  =  0X00;												// Setting baud rate to 9600 by loading FF into TH1
+;	uart.c:38: TL1  =  0X00;												// Setting baud rate to 9600 by loading FF into TH1
 ;	genAssign
 	mov	_TL1,#0x00
-;	uart.c:33: TCON |= 0x40;
+;	uart.c:39: TCON |= 0x40;
 ;	genOr
 	orl	_TCON,#0x40
-;	uart.c:34: SCON |= 0x52;
+;	uart.c:40: SCON |= 0x52;
 ;	genOr
 	orl	_SCON,#0x52
-;	uart.c:35: TMOD = 0x20;												// Start timer
+;	uart.c:41: TMOD = 0x20;												// Start timer
 ;	genAssign
 	mov	_TMOD,#0x20
 ;	Peephole 300	removed redundant label 00101$

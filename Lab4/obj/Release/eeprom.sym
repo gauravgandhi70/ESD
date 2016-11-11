@@ -214,18 +214,13 @@ Symbol Table
     _EA                                                         =  00AF G
     _EC                                                         =  00AE G
     _EECON                                                      =  00D2 G
- 13 _EEPROM_ReadByte                                               003E GR
-  8 _EEPROM_ReadByte_PARM_2                                        0003 GR
-  8 _EEPROM_ReadByte_eeprom_Address_1_1                            0004 R
- 13 _EEPROM_WriteByte                                              0000 GR
-  8 _EEPROM_WriteByte_PARM_2                                       0000 GR
-  8 _EEPROM_WriteByte_PARM_3                                       0001 GR
-  8 _EEPROM_WriteByte_eeprom_Address_1_1                           0002 R
- 13 _EEPROM_WriteNBytes                                            00A9 GR
-  8 _EEPROM_WriteNBytes_EepromAddr_1_1                             000A R
-  8 _EEPROM_WriteNBytes_PARM_2                                     0005 GR
-  8 _EEPROM_WriteNBytes_PARM_3                                     0008 GR
-  8 _EEPROM_WriteNBytes_PARM_4                                     0009 GR
+ 13 _EEPROM_ReadByte                                               012E GR
+  8 _EEPROM_ReadByte_PARM_2                                        000A GR
+  8 _EEPROM_ReadByte_eeprom_Address_1_1                            000B R
+ 13 _EEPROM_WriteByte                                              00F0 GR
+  8 _EEPROM_WriteByte_PARM_2                                       0007 GR
+  8 _EEPROM_WriteByte_PARM_3                                       0008 GR
+  8 _EEPROM_WriteByte_eeprom_Address_1_1                           0009 R
     _ES                                                         =  00AC G
     _ET0                                                        =  00A9 G
     _ET1                                                        =  00AB G
@@ -385,15 +380,14 @@ Symbol Table
     _WDTPRG                                                     =  00A7 G
     _WDTRST                                                     =  00A6 G
     _WR                                                         =  00B6 G
-    __gptrget                                                      **** GX
     __gptrput                                                      **** GX
     _delay_ms                                                      **** GX
     _delay_us                                                      **** GX
- 13 _seq_read                                                      0113 GR
-  8 _seq_read_PARM_2                                               000B GR
-  8 _seq_read_PARM_3                                               000C GR
-  8 _seq_read_PARM_4                                               000E GR
-  8 _seq_read_st_addr_1_1                                          0011 R
+ 13 _seq_read                                                      0000 GR
+  8 _seq_read_PARM_2                                               0000 GR
+  8 _seq_read_PARM_3                                               0001 GR
+  8 _seq_read_PARM_4                                               0003 GR
+  8 _seq_read_st_addr_1_1                                          0006 R
     a                                                              00D6 
     ac                                                             00D6 
     acc                                                            00E0 
@@ -583,7 +577,7 @@ Area Table
    5 ISEG                                                                               size    0   flags 0
    6 BSEG                                                                               size    0   flags 80
    7 PSEG                                                                               size    0   flags 50
-   8 XSEG                                                                               size   12   flags 40
+   8 XSEG                                                                               size    C   flags 40
    9 XISEG                                                                              size    0   flags 40
    A HOME                                                                               size    0   flags 20
    B GSINIT0                                                                            size    0   flags 20
@@ -594,6 +588,6 @@ Area Table
   10 GSINIT5                                                                            size    0   flags 20
   11 GSINIT                                                                             size    0   flags 20
   12 GSFINAL                                                                            size    0   flags 20
-  13 CSEG                                                                               size  203   flags 20
+  13 CSEG                                                                               size  199   flags 20
   14 CONST                                                                              size    0   flags 20
   15 XINIT                                                                              size    0   flags 20

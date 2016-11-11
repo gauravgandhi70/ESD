@@ -1,10 +1,9 @@
 /*---------------------------------------------------------------------------------------*
-                                8051 At2404/02  library
+                                8051 to EEPROM Over I2C Library
 Filename: eeprom.c
-Controller: P89V51RD2/89c51(8051 family)
-Oscillator: 11.0592 MHz
-Author: ExploreEmbedded
-website: www.ExploreEmbedded.com
+Controller: AT89c51RC2
+Author: Gaurav Gandhi
+reference  link : http://exploreembedded.com/wiki/A6b:8051_Interfacing:_EEPROM_AT24C16
 
  ----------------------------------------------------------------------------------------*/
 
@@ -12,13 +11,47 @@ website: www.ExploreEmbedded.com
 #include"i2c.h"
 #include"eeprom.h"
 #include"delay.h"
-
-
-/* EEPROM_ID is fixed and should not be changed,
-   Refer At2404/02 DataSheet for more info*/
 #define EEPROM_ID 0xA0
 
 
+/*-----------------------------------------------------------------------------------------
+               void seq_read(unsigned char st_addr,unsigned char st_page, int bytes,unsigned char *eeprom_Data)
+ ------------------------------------------------------------------------------------------
+ * I/P Arguments: Start address from which data is to read, Number of bytes to read and Destination address where data will be stored
+ * Return value	: none
+
+ * description:
+           This function is used to sequentially read the data from specified starting EEPROM_address.
+           First EEPROM ID and then Word address is sent of I2C
+           Then Again EEPROM ID is sent with read bit to read byte.
+           Now after every read istead of sending stop bit controller sends ACK to the EEPROM
+           So the EEPROM increaments Address counter and then sends next data byte
+-----------------------------------------------------------------------------------------*/
+
+void seq_read(unsigned char st_addr,unsigned char st_page, int bytes,unsigned char *eeprom_Data)
+{
+    int i;
+
+    I2C_Start();               // Start i2c communication
+   	I2C_Write(EEPROM_ID|(st_page<<1));	   // connect to AT2404(write) by sending its ID on I2c Bus
+	I2C_Ack();
+   	I2C_Write(st_addr); // Select the Specified EEPROM address of AT2404
+    I2C_Ack();
+
+    I2C_Start();		       // Start i2c communication
+    I2C_Write(0xA1|(st_page<<1));           // connect to AT2404(read) by sending its ID on I2c Bus
+    I2C_Ack();
+    for(i=0;i<bytes;i++)
+    {
+        *eeprom_Data= I2C_Read();  // Read the data from specified address
+        I2C_Ack_seq();
+        eeprom_Data++;
+    }
+
+    eeprom_Data[bytes]= I2C_Read();  // Read the data from specified address
+    I2C_NoAck();
+    I2C_Stop();
+}
 
 
 
@@ -89,68 +122,6 @@ unsigned char EEPROM_ReadByte(unsigned char eeprom_Address,unsigned char Page_Nu
 }
 
 
-
-
-
-
-/*---------------------------------------------------------------------------------------
-void EEPROM_WriteNBytes(unsigned char EepromAddr, unsigned char *RamAddr, char NoOfBytes)
- ----------------------------------------------------------------------------------------
- * I/P Arguments: char,-->eeprom_address from where the N-bytes are to be written.
-                  char*-->Pointer to the N-bytes of data to be written.
-                  char --> Number of bytes to be written
-
- * Return value	: none
-
- * description:
-            This function is used to write N-bytes of data at specified EEPROM_address.
-            EEPROM_WriteByte() function is called to write a byte at atime.
-            Source(RAM) and destination(EEPROM) address are incremented after each write
-            NoOfBytes is Decemented each time a byte is written.
-            Above Operation is carried out till all the bytes are written(NoOfBytes!=0)
----------------------------------------------------------------------------------------*/
-void EEPROM_WriteNBytes(unsigned char EepromAddr, unsigned char *RamAddr, char NoOfBytes, unsigned char Page_Number)
- {
-  while(NoOfBytes !=  0)
-   {
-	EEPROM_WriteByte(EepromAddr,*RamAddr,Page_Number); //Write a byte from RAM to EEPROM
-	    EepromAddr++;					   //Incerement the Eeprom Address
-		RamAddr++;						   //Increment the RAM Address
-		NoOfBytes--;					   //Decrement NoOfBytes after writing each Byte
-	   }
- }
-
-
-
-
-
-
-
-
-void seq_read(unsigned char st_addr,unsigned char st_page, int bytes,unsigned char *eeprom_Data)
-{
-    int i;
-
-    I2C_Start();               // Start i2c communication
-   	I2C_Write(EEPROM_ID|(st_page<<1));	   // connect to AT2404(write) by sending its ID on I2c Bus
-	I2C_Ack();
-   	I2C_Write(st_addr); // Select the Specified EEPROM address of AT2404
-    I2C_Ack();
-
-    I2C_Start();		       // Start i2c communication
-    I2C_Write(0xA1|(st_page<<1));           // connect to AT2404(read) by sending its ID on I2c Bus
-    I2C_Ack();
-    for(i=0;i<bytes;i++)
-    {
-        *eeprom_Data= I2C_Read();  // Read the data from specified address
-        I2C_Ack_seq();
-        eeprom_Data++;
-    }
-
-    eeprom_Data[bytes]= I2C_Read();  // Read the data from specified address
-    I2C_NoAck();
-    I2C_Stop();
-}
 
 
 

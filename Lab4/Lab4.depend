@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1478846745 source:c:\users\admin\documents\lab4\main.c
+1478862466 source:c:\users\admin\documents\lab4\main.c
 	<mcs51/8051.h>
 	<at89c51ed2.h>
 	<stdio.h>
@@ -11,21 +11,22 @@
 	"uart.h"
 	"atoh_f.h"
 
-1478821872 source:c:\users\admin\documents\lab4\lcd.c
+1478862101 source:c:\users\admin\documents\lab4\lcd.c
 	<mcs51/8051.h>
 	<at89c51ed2.h>
 	<stdio.h>
 	<stdlib.h>
 	"lcd.h"
 	"uart.h"
+	"delay.h"
 
-1478821635 c:\users\admin\documents\lab4\lcd.h
+1478860924 c:\users\admin\documents\lab4\lcd.h
 
-1478210151 source:c:\users\admin\documents\lab4\delay.c
+1478860253 source:c:\users\admin\documents\lab4\delay.c
 	<mcs51/8051.h>
 	<at89c51ed2.h>
 
-1478845997 source:c:\users\admin\documents\lab4\eeprom.c
+1478860131 source:c:\users\admin\documents\lab4\eeprom.c
 	<at89c51ed2.h>
 	"i2c.h"
 	"eeprom.h"
@@ -35,15 +36,15 @@
 
 1477783478 c:\users\admin\documents\lab4\delay.h
 
-1478774360 c:\users\admin\documents\lab4\eeprom.h
+1478859326 c:\users\admin\documents\lab4\eeprom.h
 
-1478845857 source:c:\users\admin\documents\lab4\i2c.c
+1478859341 source:c:\users\admin\documents\lab4\i2c.c
 	<at89c51ed2.h>
 	<mcs51/8051.h>
 	"delay.h"
 	"i2c.h"
 
-1478820687 source:c:\users\admin\documents\lab4\uart.c
+1478860331 source:c:\users\admin\documents\lab4\uart.c
 	<mcs51/8051.h>
 	<at89c51ed2.h>
 	"delay.h"
@@ -51,7 +52,7 @@
 
 1478820874 c:\users\admin\documents\lab4\uart.h
 
-1478822058 source:c:\users\admin\documents\lab4\atoh_f.c
+1478861806 source:c:\users\admin\documents\lab4\atoh_f.c
 	<mcs51/8051.h>
 	<at89c51ed2.h>
 	<stdio.h>

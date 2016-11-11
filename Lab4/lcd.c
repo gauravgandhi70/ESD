@@ -1,83 +1,143 @@
+/*---------------------------------------------------------------------------------------*
+                                LCD Device Drivers for the 8051
+Filename: lcd.c
+Controller: AT89c51RC2
+Author: Gaurav Gandhi
+ ----------------------------------------------------------------------------------------*/
 #include <mcs51/8051.h>
 #include<at89c51ed2.h>
 #include<stdio.h>
 #include<stdlib.h>
 #include"lcd.h"
 #include"uart.h"
+#include"delay.h"
 
-#define RS P1_3
 
+/*-----------------------------------------------------------------------------------------
+                                void lcd_init()
+ ------------------------------------------------------------------------------------------
+ * I/P Arguments: none
+ * Return value	: none
 
+ * description: Used for initial setup of the lcd
+-----------------------------------------------------------------------------------------*/
 
 void lcd_init()
 {
     RS=0;
-    lcd_delay(200);
+    delay_ms(20);
     *write = 0x30;
-    lcd_delay(60);
+
+    delay_ms(6);
     *write = 0x30;
-    lcd_delay(5);
+
+    delay_ms(5);
     *write=0x30;
-    //lcd_delay(1);
+
     lcdbusywait();
     *write = 0x38;
-    lcd_delay(1);
+
     lcdbusywait();
     *write = 0x08;
-    //lcd_delay(1);
+
     lcdbusywait();
     *write = 0x0C;
-    //lcd_delay(1);
+
     lcdbusywait();
     *write = 0x06;
-    //lcd_delay(1);
+
     lcdbusywait();
     *write = 0x01;
-    lcd_delay(1);
+
 }
+
+
+/*-----------------------------------------------------------------------------------------
+                                void lcdputch(char c)
+ ------------------------------------------------------------------------------------------
+ * I/P Arguments: Character to write on LCD
+ * Return value	: none
+
+ * description: Used for writing single character to the LCD
+-----------------------------------------------------------------------------------------*/
 
 
 void lcdputch(char c)
 {
     RS=1;
-    lcd_delay(1);
+    delay_ms(1);
     *write = c;
     lcdbusywait();
 }
 
+/*-----------------------------------------------------------------------------------------
+                                void lcdputcmd(char c)
+ ------------------------------------------------------------------------------------------
+ * I/P Arguments: Command that user wants to send to the LCD
+ * Return value	: none
+
+ * description: Used for sending any 8 bit command to the LCD
+-----------------------------------------------------------------------------------------*/
+
 void lcdputcmd(char c)
 {
     RS=0;
-    lcd_delay(1);
+    delay_ms(1);
     *write = c;
     P1_0=1;
     lcdbusywait();
 }
 
+
+/*-----------------------------------------------------------------------------------------
+                                char lcdread()
+ ------------------------------------------------------------------------------------------
+ * I/P Arguments: none
+ * Return value	: Character that is read from the LCD
+
+ * description: Used to read the data from the LCD(either from DDRAM or CGRAM)
+-----------------------------------------------------------------------------------------*/
 char lcdread()
 {
     char temp;
     RS=1;
-    lcd_delay(1);
+    delay_ms(1);
     temp = *read;
     lcdbusywait();
     return temp;
 }
+
+/*-----------------------------------------------------------------------------------------
+                               void lcdgotoaddr(unsigned char addr)
+ ------------------------------------------------------------------------------------------
+ * I/P Arguments: Destination address
+ * Return value	: none
+
+ * description: Sets the cursor to the specified LCD DDRAM address.
+-----------------------------------------------------------------------------------------*/
 void lcdgotoaddr(unsigned char addr)
 {
     RS=0;
-    lcd_delay(1);
+    delay_ms(1);
     *write = addr;
     lcdbusywait();
 }
 
+/*-----------------------------------------------------------------------------------------
+                                void lcdbusywait()
+ ------------------------------------------------------------------------------------------
+ * I/P Arguments: none
+ * Return value	: none
+
+ * description: Polls the LCD busy flag. Function does not return until the LCD controller is ready to accept another command.
+-----------------------------------------------------------------------------------------*/
 void lcdbusywait()
 {
     volatile char temp;
     RS=0;
     temp = *read;
 
-    lcd_delay(1);
+    delay_ms(1);
 
    while(temp & 0x80)
    {
@@ -85,6 +145,18 @@ void lcdbusywait()
    }
     P1_0=0;
 }
+
+/*-----------------------------------------------------------------------------------------
+                                void lcdputstr(char *str)
+ ------------------------------------------------------------------------------------------
+ * I/P Arguments: none
+ * Return value	: none
+
+ * description:Writes the specified null-terminated string to the LCD
+// starting at the current LCD cursor position. Automatically wraps
+// long strings to the next LCD line after the right edge of the
+// display screen has been reached.
+-----------------------------------------------------------------------------------------*/
 
 void lcdputstr(char *str)
 {
@@ -96,7 +168,16 @@ void lcdputstr(char *str)
     }
 }
 
+/*-----------------------------------------------------------------------------------------
+                    void lcdgotoxy(unsigned char row, unsigned char column)
+ ------------------------------------------------------------------------------------------
+ * I/P Arguments: Row and Column of the LCD to set the cursor
+ * Return value	: none
 
+ * description: Sets the cursor to the LCD DDRAM address corresponding
+// to the specified row and column. Location (0,0) is the top left
+// corner of the LCD screen.
+-----------------------------------------------------------------------------------------*/
 void lcdgotoxy(unsigned char row, unsigned char column)
 {
     if(row==1 && column < 17)
@@ -118,16 +199,6 @@ void lcdgotoxy(unsigned char row, unsigned char column)
     else{lcdputstr("Error");}
 }
 
-void lcd_delay(int ms)
-{
-    int i,j;
-    for (i=0;i<ms;i++)
-    {
-        for(j=0;j<100;j++)
-        {
-        }
-    }
-}
 
 void lcd_display(char rd, char *a)
 {

@@ -1,5 +1,5 @@
 /*---------------------------------------------------------------------------------*
-Source of this library:
+Reference of this library:http://exploreembedded.com/wiki/A6b:8051_Interfacing:_EEPROM_AT24C16
                                  8051 I2C  library
 Filename: I2C.c
 Controller: P89V51RD2/89c51(8051 family)
@@ -8,9 +8,8 @@ Author: ExploreEmbedded
 website: www.ExploreEmbedded.com
 
 Note:
-1.The SDA and SCL lines are connected to P0.7 and P0.6
-2.The code can be modified to connect the
-  SDA and SCL to any of the PORTs by changing the "sbit".
+1.The SDA and SCL lines are connected to P0.2 and P0.1
+
 
  ----------------------------------------------------------------------------------*/
 #include<at89c51ed2.h>
@@ -219,8 +218,8 @@ unsigned char I2C_Read(void)
  * I/P Arguments: none.
  * Return value	: none
 
- * description  :This function is used to generate a the Positive ACK
-                 pulse on SDA after receiving a byte.
+ * description  :This function is used to wait for a the Positive ACK
+                 pulse on SDA after sending a byte.
 -----------------------------------------------------------------------------------*/
 void I2C_Ack()
 {
@@ -232,7 +231,7 @@ void I2C_Ack()
         P1_1 = 1;			// Pull SCL High
 		delay_us(1);
 
-		dat = P1_2;	//ORed with the received bit to pack into byte
+		dat = P1_2;
 
 		P1_1 = 0;
     }

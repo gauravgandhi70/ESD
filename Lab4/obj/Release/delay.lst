@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.6.0 #4309 (Jul 28 2006)
-                              4 ; This file generated Thu Nov 10 20:32:49 2016
+                              4 ; This file generated Fri Nov 11 03:30:55 2016
                               5 ;--------------------------------------------------------
                               6 	.module delay
                               7 	.optsdcc -mmcs51 --model-large
@@ -441,11 +441,11 @@
                             441 ; external ram data
                             442 ;--------------------------------------------------------
                             443 	.area XSEG    (XDATA)
-   0000                     444 _delay_us_us_count_1_1:
+   0000                     444 _delay_us_us_1_1:
    0000                     445 	.ds 2
-   0002                     446 _delay_ms_ms_count_1_1:
+   0002                     446 _delay_ms_ms_1_1:
    0002                     447 	.ds 2
-   0004                     448 _delay_sec_sec_count_1_1:
+   0004                     448 _delay_sec_sec_1_1:
    0004                     449 	.ds 1
                             450 ;--------------------------------------------------------
                             451 ; external initialized ram data
@@ -480,9 +480,9 @@
                             480 ;------------------------------------------------------------
                             481 ;Allocation info for local variables in function 'delay_us'
                             482 ;------------------------------------------------------------
-                            483 ;us_count                  Allocated with name '_delay_us_us_count_1_1'
+                            483 ;us                        Allocated with name '_delay_us_us_1_1'
                             484 ;------------------------------------------------------------
-                            485 ;	delay.c:25: void delay_us(unsigned int us_count)
+                            485 ;	delay.c:12: void delay_us(unsigned int us)
                             486 ;	-----------------------------------------
                             487 ;	 function delay_us
                             488 ;	-----------------------------------------
@@ -498,14 +498,14 @@
                             498 ;	genReceive
    0000 AA 83               499 	mov	r2,dph
    0002 E5 82               500 	mov	a,dpl
-   0004 90s00r00            501 	mov	dptr,#_delay_us_us_count_1_1
+   0004 90s00r00            501 	mov	dptr,#_delay_us_us_1_1
    0007 F0                  502 	movx	@dptr,a
    0008 A3                  503 	inc	dptr
    0009 EA                  504 	mov	a,r2
    000A F0                  505 	movx	@dptr,a
-                            506 ;	delay.c:27: while(us_count!=0)
+                            506 ;	delay.c:14: while(us!=0)
                             507 ;	genAssign
-   000B 90s00r00            508 	mov	dptr,#_delay_us_us_count_1_1
+   000B 90s00r00            508 	mov	dptr,#_delay_us_us_1_1
    000E E0                  509 	movx	a,@dptr
    000F FA                  510 	mov	r2,a
    0010 A3                  511 	inc	dptr
@@ -519,7 +519,7 @@
                             519 ;	Peephole 112.b	changed ljmp to sjmp
    0019 80 0F               520 	sjmp	00108$
    001B                     521 00109$:
-                            522 ;	delay.c:29: us_count--;
+                            522 ;	delay.c:16: us--;
                             523 ;	genMinus
                             524 ;	genMinusDec
    001B 1A                  525 	dec	r2
@@ -527,7 +527,7 @@
    001F 1B                  527 	dec	r3
    0020                     528 00110$:
                             529 ;	genAssign
-   0020 90s00r00            530 	mov	dptr,#_delay_us_us_count_1_1
+   0020 90s00r00            530 	mov	dptr,#_delay_us_us_1_1
    0023 EA                  531 	mov	a,r2
    0024 F0                  532 	movx	@dptr,a
    0025 A3                  533 	inc	dptr
@@ -537,7 +537,7 @@
    0028 80 E9               537 	sjmp	00101$
    002A                     538 00108$:
                             539 ;	genAssign
-   002A 90s00r00            540 	mov	dptr,#_delay_us_us_count_1_1
+   002A 90s00r00            540 	mov	dptr,#_delay_us_us_1_1
    002D EA                  541 	mov	a,r2
    002E F0                  542 	movx	@dptr,a
    002F A3                  543 	inc	dptr
@@ -548,9 +548,9 @@
                             548 ;------------------------------------------------------------
                             549 ;Allocation info for local variables in function 'delay_ms'
                             550 ;------------------------------------------------------------
-                            551 ;ms_count                  Allocated with name '_delay_ms_ms_count_1_1'
+                            551 ;ms                        Allocated with name '_delay_ms_ms_1_1'
                             552 ;------------------------------------------------------------
-                            553 ;	delay.c:46: void delay_ms(unsigned int ms_count)
+                            553 ;	delay.c:23: void delay_ms(unsigned int ms)
                             554 ;	-----------------------------------------
                             555 ;	 function delay_ms
                             556 ;	-----------------------------------------
@@ -558,14 +558,14 @@
                             558 ;	genReceive
    0033 AA 83               559 	mov	r2,dph
    0035 E5 82               560 	mov	a,dpl
-   0037 90s00r02            561 	mov	dptr,#_delay_ms_ms_count_1_1
+   0037 90s00r02            561 	mov	dptr,#_delay_ms_ms_1_1
    003A F0                  562 	movx	@dptr,a
    003B A3                  563 	inc	dptr
    003C EA                  564 	mov	a,r2
    003D F0                  565 	movx	@dptr,a
-                            566 ;	delay.c:48: while(ms_count!=0)
+                            566 ;	delay.c:25: while(ms!=0)
                             567 ;	genAssign
-   003E 90s00r02            568 	mov	dptr,#_delay_ms_ms_count_1_1
+   003E 90s00r02            568 	mov	dptr,#_delay_ms_ms_1_1
    0041 E0                  569 	movx	a,@dptr
    0042 FA                  570 	mov	r2,a
    0043 A3                  571 	inc	dptr
@@ -579,7 +579,7 @@
                             579 ;	Peephole 112.b	changed ljmp to sjmp
    004C 80 1D               580 	sjmp	00108$
    004E                     581 00109$:
-                            582 ;	delay.c:50: delay_us(112);	 //delay_us is called to generate 1ms delay
+                            582 ;	delay.c:27: delay_us(112);	 //delay_us is called to generate 1ms delay
                             583 ;	genCall
                             584 ;	Peephole 182.b	used 16 bit load of dptr
    004E 90 00 70            585 	mov	dptr,#0x0070
@@ -588,7 +588,7 @@
    0055 12s00r00            588 	lcall	_delay_us
    0058 D0 03               589 	pop	ar3
    005A D0 02               590 	pop	ar2
-                            591 ;	delay.c:51: ms_count--;
+                            591 ;	delay.c:28: ms--;
                             592 ;	genMinus
                             593 ;	genMinusDec
    005C 1A                  594 	dec	r2
@@ -596,7 +596,7 @@
    0060 1B                  596 	dec	r3
    0061                     597 00110$:
                             598 ;	genAssign
-   0061 90s00r02            599 	mov	dptr,#_delay_ms_ms_count_1_1
+   0061 90s00r02            599 	mov	dptr,#_delay_ms_ms_1_1
    0064 EA                  600 	mov	a,r2
    0065 F0                  601 	movx	@dptr,a
    0066 A3                  602 	inc	dptr
@@ -606,7 +606,7 @@
    0069 80 DB               606 	sjmp	00101$
    006B                     607 00108$:
                             608 ;	genAssign
-   006B 90s00r02            609 	mov	dptr,#_delay_ms_ms_count_1_1
+   006B 90s00r02            609 	mov	dptr,#_delay_ms_ms_1_1
    006E EA                  610 	mov	a,r2
    006F F0                  611 	movx	@dptr,a
    0070 A3                  612 	inc	dptr
@@ -617,20 +617,20 @@
                             617 ;------------------------------------------------------------
                             618 ;Allocation info for local variables in function 'delay_sec'
                             619 ;------------------------------------------------------------
-                            620 ;sec_count                 Allocated with name '_delay_sec_sec_count_1_1'
+                            620 ;sec                       Allocated with name '_delay_sec_sec_1_1'
                             621 ;------------------------------------------------------------
-                            622 ;	delay.c:74: void delay_sec(unsigned char sec_count)
+                            622 ;	delay.c:39: void delay_sec(unsigned char sec)
                             623 ;	-----------------------------------------
                             624 ;	 function delay_sec
                             625 ;	-----------------------------------------
    0074                     626 _delay_sec:
                             627 ;	genReceive
    0074 E5 82               628 	mov	a,dpl
-   0076 90s00r04            629 	mov	dptr,#_delay_sec_sec_count_1_1
+   0076 90s00r04            629 	mov	dptr,#_delay_sec_sec_1_1
    0079 F0                  630 	movx	@dptr,a
-                            631 ;	delay.c:78: while(sec_count!=0)
+                            631 ;	delay.c:43: while(sec!=0)
                             632 ;	genAssign
-   007A 90s00r04            633 	mov	dptr,#_delay_sec_sec_count_1_1
+   007A 90s00r04            633 	mov	dptr,#_delay_sec_sec_1_1
    007D E0                  634 	movx	a,@dptr
    007E FA                  635 	mov	r2,a
    007F                     636 00101$:
@@ -640,26 +640,26 @@
                             640 ;	Peephole 112.b	changed ljmp to sjmp
    0082 80 12               641 	sjmp	00108$
    0084                     642 00109$:
-                            643 ;	delay.c:80: delay_ms(1000);	//delay_ms is called to generate 1sec delay
+                            643 ;	delay.c:45: delay_ms(1000);	//delay_ms is called to generate 1sec delay
                             644 ;	genCall
                             645 ;	Peephole 182.b	used 16 bit load of dptr
    0084 90 03 E8            646 	mov	dptr,#0x03E8
    0087 C0 02               647 	push	ar2
    0089 12s00r33            648 	lcall	_delay_ms
    008C D0 02               649 	pop	ar2
-                            650 ;	delay.c:81: sec_count--;
+                            650 ;	delay.c:46: sec--;
                             651 ;	genMinus
                             652 ;	genMinusDec
    008E 1A                  653 	dec	r2
                             654 ;	genAssign
-   008F 90s00r04            655 	mov	dptr,#_delay_sec_sec_count_1_1
+   008F 90s00r04            655 	mov	dptr,#_delay_sec_sec_1_1
    0092 EA                  656 	mov	a,r2
    0093 F0                  657 	movx	@dptr,a
                             658 ;	Peephole 112.b	changed ljmp to sjmp
    0094 80 E9               659 	sjmp	00101$
    0096                     660 00108$:
                             661 ;	genAssign
-   0096 90s00r04            662 	mov	dptr,#_delay_sec_sec_count_1_1
+   0096 90s00r04            662 	mov	dptr,#_delay_sec_sec_1_1
    0099 EA                  663 	mov	a,r2
    009A F0                  664 	movx	@dptr,a
                             665 ;	Peephole 300	removed redundant label 00104$
