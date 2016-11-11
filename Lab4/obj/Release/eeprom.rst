@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.6.0 #4309 (Jul 28 2006)
-                              4 ; This file generated Thu Nov 10 20:32:49 2016
+                              4 ; This file generated Thu Nov 10 23:33:17 2016
                               5 ;--------------------------------------------------------
                               6 	.module eeprom
                               7 	.optsdcc -mmcs51 --model-large
@@ -669,7 +669,7 @@
                             669 ;	eeprom.c:84: I2C_NoAck();
                             670 ;	genCall
    063F C0 02               671 	push	ar2
-   0641 12 08 7C            672 	lcall	_I2C_NoAck
+   0641 12 08 A0            672 	lcall	_I2C_NoAck
    0644 D0 02               673 	pop	ar2
                             674 ;	eeprom.c:85: I2C_Stop();		           // Stop i2c communication after Reading the data
                             675 ;	genCall
@@ -741,7 +741,7 @@
    067F 8C 82               741 	mov	dpl,r4
    0681 8D 83               742 	mov	dph,r5
    0683 8E F0               743 	mov	b,r6
-   0685 12 16 F6            744 	lcall	__gptrget
+   0685 12 17 1A            744 	lcall	__gptrget
    0688 F8                  745 	mov	r0,a
    0689 A3                  746 	inc	dptr
    068A AC 82               747 	mov	r4,dpl
@@ -928,11 +928,11 @@
    0758 8D 83               928 	mov	dph,r5
    075A 8E F0               929 	mov	b,r6
    075C E9                  930 	mov	a,r1
-   075D 12 14 99            931 	lcall	__gptrput
+   075D 12 14 BD            931 	lcall	__gptrput
    0760 A3                  932 	inc	dptr
    0761 AC 82               933 	mov	r4,dpl
    0763 AD 83               934 	mov	r5,dph
-                            935 ;	eeprom.c:146: I2C_Ack();
+                            935 ;	eeprom.c:146: I2C_Ack_seq();
                             936 ;	genCall
    0765 C0 02               937 	push	ar2
    0767 C0 03               938 	push	ar3
@@ -941,7 +941,7 @@
    076D C0 06               941 	push	ar6
    076F C0 07               942 	push	ar7
    0771 C0 00               943 	push	ar0
-   0773 12 08 74            944 	lcall	_I2C_Ack
+   0773 12 08 98            944 	lcall	_I2C_Ack_seq
    0776 D0 00               945 	pop	ar0
    0778 D0 07               946 	pop	ar7
    077A D0 06               947 	pop	ar6
@@ -988,10 +988,10 @@
    07A6 8B 83               988 	mov	dph,r3
    07A8 8F F0               989 	mov	b,r7
    07AA EC                  990 	mov	a,r4
-   07AB 12 14 99            991 	lcall	__gptrput
+   07AB 12 14 BD            991 	lcall	__gptrput
                             992 ;	eeprom.c:151: I2C_NoAck();
                             993 ;	genCall
-   07AE 12 08 7C            994 	lcall	_I2C_NoAck
+   07AE 12 08 A0            994 	lcall	_I2C_NoAck
                             995 ;	eeprom.c:152: I2C_Stop();
                             996 ;	genCall
                             997 ;	Peephole 253.b	replaced lcall/ret with ljmp

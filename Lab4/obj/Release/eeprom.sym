@@ -237,6 +237,7 @@ Symbol Table
     _F0                                                         =  00D5 G
     _F1                                                         =  00D1 G
     _I2C_Ack                                                       **** GX
+    _I2C_Ack_seq                                                   **** GX
     _I2C_NoAck                                                     **** GX
     _I2C_Read                                                      **** GX
     _I2C_Start                                                     **** GX

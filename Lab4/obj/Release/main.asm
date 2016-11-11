@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.6.0 #4309 (Jul 28 2006)
-; This file generated Thu Nov 10 22:44:38 2016
+; This file generated Thu Nov 10 23:45:45 2016
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mmcs51 --model-large
@@ -1971,9 +1971,9 @@ _CGRAM_dump:
 ;	genCall
 	mov	dpl,#0x40
 	lcall	_lcdputcmd
-;	main.c:262: for(i=0;i<32;i++)
+;	main.c:262: for(i=0;i<64;i++)
 ;	genAssign
-	mov	r2,#0x20
+	mov	r2,#0x40
 	mov	r3,#0x00
 00103$:
 ;	main.c:264: temp = lcdread();
@@ -2008,7 +2008,7 @@ _CGRAM_dump:
 	cjne	r2,#0xff,00109$
 	dec	r3
 00109$:
-;	main.c:262: for(i=0;i<32;i++)
+;	main.c:262: for(i=0;i<64;i++)
 ;	genIfx
 	mov	a,r2
 	orl	a,r3

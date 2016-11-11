@@ -11,6 +11,6 @@ void I2C_Write(unsigned char );
 unsigned char I2C_Read(void);
 void I2C_Ack();
 void I2C_NoAck();
-
+void I2C_Ack_seq();
 
 #endif

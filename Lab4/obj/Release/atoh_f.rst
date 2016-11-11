@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.6.0 #4309 (Jul 28 2006)
-                              4 ; This file generated Thu Nov 10 20:32:48 2016
+                              4 ; This file generated Thu Nov 10 23:33:17 2016
                               5 ;--------------------------------------------------------
                               6 	.module atoh_f
                               7 	.optsdcc -mmcs51 --model-large
@@ -454,10 +454,10 @@
                             454 ; external initialized ram data
                             455 ;--------------------------------------------------------
                             456 	.area XISEG   (XDATA)
-   0093                     457 _write::
-   0093                     458 	.ds 2
-   0095                     459 _read::
-   0095                     460 	.ds 2
+   0094                     457 _write::
+   0094                     458 	.ds 2
+   0096                     459 _read::
+   0096                     460 	.ds 2
                             461 	.area HOME    (CODE)
                             462 	.area GSINIT0 (CODE)
                             463 	.area GSINIT1 (CODE)
@@ -544,7 +544,7 @@
    0083 8D 82               544 	mov	dpl,r5
    0085 8E 83               545 	mov	dph,r6
    0087 8F F0               546 	mov	b,r7
-   0089 12 16 F6            547 	lcall	__gptrget
+   0089 12 17 1A            547 	lcall	__gptrget
                             548 ;	genCmpEq
                             549 ;	gencjneshort
                             550 ;	Peephole 112.b	changed ljmp to sjmp
@@ -565,7 +565,7 @@
    0093 8A 82               565 	mov	dpl,r2
    0095 8B 83               566 	mov	dph,r3
    0097 8C F0               567 	mov	b,r4
-   0099 12 16 F6            568 	lcall	__gptrget
+   0099 12 17 1A            568 	lcall	__gptrget
                             569 ;	genCmpLt
                             570 ;	genCmp
    009C FD                  571 	mov	r5,a
@@ -659,7 +659,7 @@
    00E6 8A 82               659 	mov	dpl,r2
    00E8 8B 83               660 	mov	dph,r3
    00EA 8C F0               661 	mov	b,r4
-   00EC 12 16 F6            662 	lcall	__gptrget
+   00EC 12 17 1A            662 	lcall	__gptrget
                             663 ;	genCmpLt
                             664 ;	genCmp
    00EF FD                  665 	mov	r5,a
@@ -768,7 +768,7 @@
    014A 8A 82               768 	mov	dpl,r2
    014C 8B 83               769 	mov	dph,r3
    014E 8C F0               770 	mov	b,r4
-   0150 12 16 F6            771 	lcall	__gptrget
+   0150 12 17 1A            771 	lcall	__gptrget
                             772 ;	genCmpLt
                             773 ;	genCmp
    0153 FD                  774 	mov	r5,a
@@ -877,7 +877,7 @@
    01AE 8A 82               877 	mov	dpl,r2
    01B0 8B 83               878 	mov	dph,r3
    01B2 8C F0               879 	mov	b,r4
-   01B4 12 16 F6            880 	lcall	__gptrget
+   01B4 12 17 1A            880 	lcall	__gptrget
                             881 ;	genCmpLt
                             882 ;	genCmp
    01B7 FD                  883 	mov	r5,a
@@ -994,7 +994,7 @@
    0215 8A 82               994 	mov	dpl,r2
    0217 8B 83               995 	mov	dph,r3
    0219 8C F0               996 	mov	b,r4
-   021B 12 16 F6            997 	lcall	__gptrget
+   021B 12 17 1A            997 	lcall	__gptrget
                             998 ;	genCmpLt
                             999 ;	genCmp
    021E FA                 1000 	mov	r2,a
@@ -1071,7 +1071,7 @@
    025E 8A 82              1071 	mov	dpl,r2
    0260 8B 83              1072 	mov	dph,r3
    0262 8C F0              1073 	mov	b,r4
-   0264 12 16 F6           1074 	lcall	__gptrget
+   0264 12 17 1A           1074 	lcall	__gptrget
                            1075 ;	genCmpLt
                            1076 ;	genCmp
    0267 FA                 1077 	mov	r2,a
@@ -1149,7 +1149,7 @@
    02A6 8A 82              1149 	mov	dpl,r2
    02A8 8B 83              1150 	mov	dph,r3
    02AA 8C F0              1151 	mov	b,r4
-   02AC 12 16 F6           1152 	lcall	__gptrget
+   02AC 12 17 1A           1152 	lcall	__gptrget
                            1153 ;	genCmpLt
                            1154 ;	genCmp
    02AF FA                 1155 	mov	r2,a
@@ -1284,7 +1284,7 @@
    0317 8D 82              1284 	mov	dpl,r5
    0319 8E 83              1285 	mov	dph,r6
    031B 8F F0              1286 	mov	b,r7
-   031D 12 16 F6           1287 	lcall	__gptrget
+   031D 12 17 1A           1287 	lcall	__gptrget
                            1288 ;	genCmpEq
                            1289 ;	gencjneshort
                            1290 ;	Peephole 112.b	changed ljmp to sjmp
@@ -1305,7 +1305,7 @@
    0327 8A 82              1305 	mov	dpl,r2
    0329 8B 83              1306 	mov	dph,r3
    032B 8C F0              1307 	mov	b,r4
-   032D 12 16 F6           1308 	lcall	__gptrget
+   032D 12 17 1A           1308 	lcall	__gptrget
                            1309 ;	genCmpLt
                            1310 ;	genCmp
    0330 FD                 1311 	mov	r5,a
@@ -1401,7 +1401,7 @@
    0381 8A 82              1401 	mov	dpl,r2
    0383 8B 83              1402 	mov	dph,r3
    0385 8C F0              1403 	mov	b,r4
-   0387 12 16 F6           1404 	lcall	__gptrget
+   0387 12 17 1A           1404 	lcall	__gptrget
                            1405 ;	genCmpLt
                            1406 ;	genCmp
    038A FD                 1407 	mov	r5,a
@@ -1498,7 +1498,7 @@
    03DA 8A 82              1498 	mov	dpl,r2
    03DC 8B 83              1499 	mov	dph,r3
    03DE 8C F0              1500 	mov	b,r4
-   03E0 12 16 F6           1501 	lcall	__gptrget
+   03E0 12 17 1A           1501 	lcall	__gptrget
                            1502 ;	genCmpLt
                            1503 ;	genCmp
    03E3 FD                 1504 	mov	r5,a
@@ -1602,7 +1602,7 @@
    0437 8A 82              1602 	mov	dpl,r2
    0439 8B 83              1603 	mov	dph,r3
    043B 8C F0              1604 	mov	b,r4
-   043D 12 16 F6           1605 	lcall	__gptrget
+   043D 12 17 1A           1605 	lcall	__gptrget
                            1606 ;	genCmpLt
                            1607 ;	genCmp
    0440 FA                 1608 	mov	r2,a
@@ -1679,7 +1679,7 @@
    0480 8A 82              1679 	mov	dpl,r2
    0482 8B 83              1680 	mov	dph,r3
    0484 8C F0              1681 	mov	b,r4
-   0486 12 16 F6           1682 	lcall	__gptrget
+   0486 12 17 1A           1682 	lcall	__gptrget
                            1683 ;	genCmpLt
                            1684 ;	genCmp
    0489 FA                 1685 	mov	r2,a
@@ -1757,7 +1757,7 @@
    04C8 8A 82              1757 	mov	dpl,r2
    04CA 8B 83              1758 	mov	dph,r3
    04CC 8C F0              1759 	mov	b,r4
-   04CE 12 16 F6           1760 	lcall	__gptrget
+   04CE 12 17 1A           1760 	lcall	__gptrget
                            1761 ;	genCmpLt
                            1762 ;	genCmp
    04D1 FA                 1763 	mov	r2,a
@@ -1843,7 +1843,7 @@
                            1843 	.area CSEG    (CODE)
                            1844 	.area CONST   (CODE)
                            1845 	.area XINIT   (CODE)
-   1BA3                    1846 __xinit__write:
-   1BA3 00 A0              1847 	.byte #0x00,#0xA0
-   1BA5                    1848 __xinit__read:
-   1BA5 00 C0              1849 	.byte #0x00,#0xC0
+   1BC7                    1846 __xinit__write:
+   1BC7 00 A0              1847 	.byte #0x00,#0xA0
+   1BC9                    1848 __xinit__read:
+   1BC9 00 C0              1849 	.byte #0x00,#0xC0

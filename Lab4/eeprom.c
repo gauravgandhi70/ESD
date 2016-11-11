@@ -143,7 +143,7 @@ void seq_read(unsigned char st_addr,unsigned char st_page, int bytes,unsigned ch
     for(i=0;i<bytes;i++)
     {
         *eeprom_Data= I2C_Read();  // Read the data from specified address
-        I2C_Ack();
+        I2C_Ack_seq();
         eeprom_Data++;
     }
 

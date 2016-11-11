@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.6.0 #4309 (Jul 28 2006)
-; This file generated Thu Nov 10 20:32:49 2016
+; This file generated Thu Nov 10 23:33:17 2016
 ;--------------------------------------------------------
 	.module eeprom
 	.optsdcc -mmcs51 --model-large
@@ -932,7 +932,7 @@ _seq_read:
 	inc	dptr
 	mov	r4,dpl
 	mov	r5,dph
-;	eeprom.c:146: I2C_Ack();
+;	eeprom.c:146: I2C_Ack_seq();
 ;	genCall
 	push	ar2
 	push	ar3
@@ -941,7 +941,7 @@ _seq_read:
 	push	ar6
 	push	ar7
 	push	ar0
-	lcall	_I2C_Ack
+	lcall	_I2C_Ack_seq
 	pop	ar0
 	pop	ar7
 	pop	ar6

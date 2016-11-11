@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.6.0 #4309 (Jul 28 2006)
-                              4 ; This file generated Thu Nov 10 22:44:38 2016
+                              4 ; This file generated Thu Nov 10 23:45:45 2016
                               5 ;--------------------------------------------------------
                               6 	.module main
                               7 	.optsdcc -mmcs51 --model-large
@@ -1971,9 +1971,9 @@
                            1971 ;	genCall
    063F 75 82 40           1972 	mov	dpl,#0x40
    0642 12s00r00           1973 	lcall	_lcdputcmd
-                           1974 ;	main.c:262: for(i=0;i<32;i++)
+                           1974 ;	main.c:262: for(i=0;i<64;i++)
                            1975 ;	genAssign
-   0645 7A 20              1976 	mov	r2,#0x20
+   0645 7A 40              1976 	mov	r2,#0x40
    0647 7B 00              1977 	mov	r3,#0x00
    0649                    1978 00103$:
                            1979 ;	main.c:264: temp = lcdread();
@@ -2008,7 +2008,7 @@
    0676 BA FF 01           2008 	cjne	r2,#0xff,00109$
    0679 1B                 2009 	dec	r3
    067A                    2010 00109$:
-                           2011 ;	main.c:262: for(i=0;i<32;i++)
+                           2011 ;	main.c:262: for(i=0;i<64;i++)
                            2012 ;	genIfx
    067A EA                 2013 	mov	a,r2
    067B 4B                 2014 	orl	a,r3

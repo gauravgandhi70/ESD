@@ -225,8 +225,10 @@ Symbol Table
     _F0                                                         =  00D5 G
     _F1                                                         =  00D1 G
  13 _I2C_Ack                                                       00C0 GR
+  8 _I2C_Ack_dat_1_1                                               0002 R
+ 13 _I2C_Ack_seq                                                   00E4 GR
  13 _I2C_Clock                                                     0000 GR
- 13 _I2C_NoAck                                                     00C8 GR
+ 13 _I2C_NoAck                                                     00EC GR
  13 _I2C_Read                                                      0076 GR
   8 _I2C_Read_dat_1_1                                              0001 R
  13 _I2C_Start                                                     0011 GR
@@ -565,7 +567,7 @@ Area Table
    5 ISEG                                                                               size    0   flags 0
    6 BSEG                                                                               size    0   flags 80
    7 PSEG                                                                               size    0   flags 50
-   8 XSEG                                                                               size    2   flags 40
+   8 XSEG                                                                               size    3   flags 40
    9 XISEG                                                                              size    0   flags 40
    A HOME                                                                               size    0   flags 20
    B GSINIT0                                                                            size    0   flags 20
@@ -576,6 +578,6 @@ Area Table
   10 GSINIT5                                                                            size    0   flags 20
   11 GSINIT                                                                             size    0   flags 20
   12 GSFINAL                                                                            size    0   flags 20
-  13 CSEG                                                                               size   D0   flags 20
+  13 CSEG                                                                               size   F4   flags 20
   14 CONST                                                                              size    0   flags 20
   15 XINIT                                                                              size    0   flags 20

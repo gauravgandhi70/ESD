@@ -259,7 +259,7 @@ void CGRAM_dump()
     int i;
      putchar('\n');
     lcdputcmd(0x40);
-    for(i=0;i<32;i++)
+    for(i=0;i<64;i++)
     {
         temp = lcdread();
         putchar('\t');

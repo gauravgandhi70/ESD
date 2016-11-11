@@ -18,8 +18,7 @@ Note:
 #include "delay.h"
 #include "i2c.h"
 
-#define SCL P1_1;		//SCL Connected to P0.6
-#define SDA P1_2;	 	//SDA Connected to P0.7
+
 
 
 
@@ -225,11 +224,27 @@ unsigned char I2C_Read(void)
 -----------------------------------------------------------------------------------*/
 void I2C_Ack()
 {
+    char dat=1;
+	P1_2 = 1;
+	while(dat!=0)
+    {
+
+        P1_1 = 1;			// Pull SCL High
+		delay_us(1);
+
+		dat = P1_2;	//ORed with the received bit to pack into byte
+
+		P1_1 = 0;
+    }
+}
+
+
+void I2C_Ack_seq()
+{
 	P1_2 = 0;		//Pull SDA low to indicate Positive ACK
 	I2C_Clock();	//Generate the Clock
 	P1_2 = 1;		// Pull SDA back to High(IDLE state)
 }
-
 
 
 
