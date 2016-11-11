@@ -3,15 +3,12 @@
 ; Version 2.6.0 #4309 (Jul 28 2006)
 ; This file generated Thu Nov 10 20:32:49 2016
 ;--------------------------------------------------------
-	.module delay
+	.module uart
 	.optsdcc -mmcs51 --model-large
 	
 ;--------------------------------------------------------
 ; Public variables in this module
 ;--------------------------------------------------------
-	.globl _delay_sec
-	.globl _delay_ms
-	.globl _delay_us
 	.globl _P5_7
 	.globl _P5_6
 	.globl _P5_5
@@ -208,6 +205,9 @@
 	.globl _DPL
 	.globl _SP
 	.globl _P0
+	.globl _putchar
+	.globl _getchar
+	.globl _uart_init
 ;--------------------------------------------------------
 ; special function registers
 ;--------------------------------------------------------
@@ -441,11 +441,7 @@ _P5_7	=	0x00df
 ; external ram data
 ;--------------------------------------------------------
 	.area XSEG    (XDATA)
-_delay_us_us_count_1_1:
-	.ds 2
-_delay_ms_ms_count_1_1:
-	.ds 2
-_delay_sec_sec_count_1_1:
+_putchar_c_1_1:
 	.ds 1
 ;--------------------------------------------------------
 ; external initialized ram data
@@ -478,15 +474,15 @@ _delay_sec_sec_count_1_1:
 ;--------------------------------------------------------
 	.area CSEG    (CODE)
 ;------------------------------------------------------------
-;Allocation info for local variables in function 'delay_us'
+;Allocation info for local variables in function 'putchar'
 ;------------------------------------------------------------
-;us_count                  Allocated with name '_delay_us_us_count_1_1'
+;c                         Allocated with name '_putchar_c_1_1'
 ;------------------------------------------------------------
-;	delay.c:25: void delay_us(unsigned int us_count)
+;	uart.c:8: void putchar(char c)											// Putchar function is used to send a single character to the
 ;	-----------------------------------------
-;	 function delay_us
+;	 function putchar
 ;	-----------------------------------------
-_delay_us:
+_putchar:
 	ar2 = 0x02
 	ar3 = 0x03
 	ar4 = 0x04
@@ -496,173 +492,87 @@ _delay_us:
 	ar0 = 0x00
 	ar1 = 0x01
 ;	genReceive
-	mov	r2,dph
 	mov	a,dpl
-	mov	dptr,#_delay_us_us_count_1_1
+	mov	dptr,#_putchar_c_1_1
 	movx	@dptr,a
-	inc	dptr
-	mov	a,r2
-	movx	@dptr,a
-;	delay.c:27: while(us_count!=0)
-;	genAssign
-	mov	dptr,#_delay_us_us_count_1_1
-	movx	a,@dptr
-	mov	r2,a
-	inc	dptr
-	movx	a,@dptr
-	mov	r3,a
+;	uart.c:10: while (TI==0);												// wait for tx to be ready and send data and clear TI flag
 00101$:
-;	genCmpEq
-;	gencjneshort
-	cjne	r2,#0x00,00109$
-	cjne	r3,#0x00,00109$
-;	Peephole 112.b	changed ljmp to sjmp
-	sjmp	00108$
-00109$:
-;	delay.c:29: us_count--;
-;	genMinus
-;	genMinusDec
-	dec	r2
-	cjne	r2,#0xff,00110$
-	dec	r3
-00110$:
+;	genIfx
+;	genIfxJump
+;	Peephole 108.d	removed ljmp by inverse jump logic
+	jnb	_TI,00101$
+;	Peephole 300	removed redundant label 00108$
+;	uart.c:11: SBUF = c;
 ;	genAssign
-	mov	dptr,#_delay_us_us_count_1_1
-	mov	a,r2
-	movx	@dptr,a
-	inc	dptr
-	mov	a,r3
-	movx	@dptr,a
-;	Peephole 112.b	changed ljmp to sjmp
-	sjmp	00101$
-00108$:
+	mov	dptr,#_putchar_c_1_1
+	movx	a,@dptr
+	mov	_SBUF,a
+;	uart.c:12: TI = 0;
 ;	genAssign
-	mov	dptr,#_delay_us_us_count_1_1
-	mov	a,r2
-	movx	@dptr,a
-	inc	dptr
-	mov	a,r3
-	movx	@dptr,a
+	clr	_TI
 ;	Peephole 300	removed redundant label 00104$
 	ret
 ;------------------------------------------------------------
-;Allocation info for local variables in function 'delay_ms'
+;Allocation info for local variables in function 'getchar'
 ;------------------------------------------------------------
-;ms_count                  Allocated with name '_delay_ms_ms_count_1_1'
 ;------------------------------------------------------------
-;	delay.c:46: void delay_ms(unsigned int ms_count)
+;	uart.c:17: char getchar ()													// getchar function is used to recieve a single character from the
 ;	-----------------------------------------
-;	 function delay_ms
+;	 function getchar
 ;	-----------------------------------------
-_delay_ms:
-;	genReceive
-	mov	r2,dph
-	mov	a,dpl
-	mov	dptr,#_delay_ms_ms_count_1_1
-	movx	@dptr,a
-	inc	dptr
-	mov	a,r2
-	movx	@dptr,a
-;	delay.c:48: while(ms_count!=0)
-;	genAssign
-	mov	dptr,#_delay_ms_ms_count_1_1
-	movx	a,@dptr
-	mov	r2,a
-	inc	dptr
-	movx	a,@dptr
-	mov	r3,a
+_getchar:
+;	uart.c:19: while (!RI);
 00101$:
-;	genCmpEq
-;	gencjneshort
-	cjne	r2,#0x00,00109$
-	cjne	r3,#0x00,00109$
-;	Peephole 112.b	changed ljmp to sjmp
-	sjmp	00108$
-00109$:
-;	delay.c:50: delay_us(112);	 //delay_us is called to generate 1ms delay
-;	genCall
-;	Peephole 182.b	used 16 bit load of dptr
-	mov	dptr,#0x0070
-	push	ar2
-	push	ar3
-	lcall	_delay_us
-	pop	ar3
-	pop	ar2
-;	delay.c:51: ms_count--;
-;	genMinus
-;	genMinusDec
-	dec	r2
-	cjne	r2,#0xff,00110$
-	dec	r3
-00110$:
+;	genIfx
+;	genIfxJump
+;	Peephole 108.d	removed ljmp by inverse jump logic
+;	uart.c:20: RI = 0;
 ;	genAssign
-	mov	dptr,#_delay_ms_ms_count_1_1
-	mov	a,r2
-	movx	@dptr,a
-	inc	dptr
-	mov	a,r3
-	movx	@dptr,a
-;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 250.a	using atomic test and clear
+	jbc	_RI,00108$
 	sjmp	00101$
 00108$:
+;	uart.c:21: return SBUF;
 ;	genAssign
-	mov	dptr,#_delay_ms_ms_count_1_1
-	mov	a,r2
-	movx	@dptr,a
-	inc	dptr
-	mov	a,r3
-	movx	@dptr,a
+	mov	r2,_SBUF
+;	genRet
+	mov	dpl,r2
 ;	Peephole 300	removed redundant label 00104$
 	ret
 ;------------------------------------------------------------
-;Allocation info for local variables in function 'delay_sec'
+;Allocation info for local variables in function 'uart_init'
 ;------------------------------------------------------------
-;sec_count                 Allocated with name '_delay_sec_sec_count_1_1'
 ;------------------------------------------------------------
-;	delay.c:74: void delay_sec(unsigned char sec_count)
+;	uart.c:26: void uart_init()												// UART initialized
 ;	-----------------------------------------
-;	 function delay_sec
+;	 function uart_init
 ;	-----------------------------------------
-_delay_sec:
-;	genReceive
-	mov	a,dpl
-	mov	dptr,#_delay_sec_sec_count_1_1
-	movx	@dptr,a
-;	delay.c:78: while(sec_count!=0)
+_uart_init:
+;	uart.c:28: T2CON=0;
 ;	genAssign
-	mov	dptr,#_delay_sec_sec_count_1_1
-	movx	a,@dptr
-	mov	r2,a
-00101$:
-;	genCmpEq
-;	gencjneshort
-	cjne	r2,#0x00,00109$
-;	Peephole 112.b	changed ljmp to sjmp
-	sjmp	00108$
-00109$:
-;	delay.c:80: delay_ms(1000);	//delay_ms is called to generate 1sec delay
-;	genCall
-;	Peephole 182.b	used 16 bit load of dptr
-	mov	dptr,#0x03E8
-	push	ar2
-	lcall	_delay_ms
-	pop	ar2
-;	delay.c:81: sec_count--;
-;	genMinus
-;	genMinusDec
-	dec	r2
+	mov	_T2CON,#0x00
+;	uart.c:29: BDRCON=0;
 ;	genAssign
-	mov	dptr,#_delay_sec_sec_count_1_1
-	mov	a,r2
-	movx	@dptr,a
-;	Peephole 112.b	changed ljmp to sjmp
-	sjmp	00101$
-00108$:
+	mov	_BDRCON,#0x00
+;	uart.c:30: PCON |= 0x00;
 ;	genAssign
-	mov	dptr,#_delay_sec_sec_count_1_1
-	mov	a,r2
-	movx	@dptr,a
-;	Peephole 300	removed redundant label 00104$
+	mov	_PCON,_PCON
+;	uart.c:31: TH1  =  0xFD;												// Timer 1 is used in mode 2 auto reload mode
+;	genAssign
+	mov	_TH1,#0xFD
+;	uart.c:32: TL1  =  0X00;												// Setting baud rate to 9600 by loading FF into TH1
+;	genAssign
+	mov	_TL1,#0x00
+;	uart.c:33: TCON |= 0x40;
+;	genOr
+	orl	_TCON,#0x40
+;	uart.c:34: SCON |= 0x52;
+;	genOr
+	orl	_SCON,#0x52
+;	uart.c:35: TMOD = 0x20;												// Start timer
+;	genAssign
+	mov	_TMOD,#0x20
+;	Peephole 300	removed redundant label 00101$
 	ret
 	.area CSEG    (CODE)
 	.area CONST   (CODE)

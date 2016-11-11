@@ -11,10 +11,12 @@
 -l libint
 -l liblong
 -l libfloat
+obj\Release\atoh_f.rel
 obj\Release\delay.rel
 obj\Release\eeprom.rel
 obj\Release\i2c.rel
 obj\Release\lcd.rel
 obj\Release\main.rel
+obj\Release\uart.rel
 
 -e

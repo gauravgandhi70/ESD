@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.6.0 #4309 (Jul 28 2006)
-                              4 ; This file generated Thu Nov 10 13:25:05 2016
+                              4 ; This file generated Thu Nov 10 20:32:49 2016
                               5 ;--------------------------------------------------------
                               6 	.module i2c
                               7 	.optsdcc -mmcs51 --model-large
@@ -445,10 +445,10 @@
                             445 ; external ram data
                             446 ;--------------------------------------------------------
                             447 	.area XSEG    (XDATA)
-   0017                     448 _I2C_Write_dat_1_1:
-   0017                     449 	.ds 1
-   0018                     450 _I2C_Read_dat_1_1:
-   0018                     451 	.ds 1
+   0021                     448 _I2C_Write_dat_1_1:
+   0021                     449 	.ds 1
+   0022                     450 _I2C_Read_dat_1_1:
+   0022                     451 	.ds 1
                             452 ;--------------------------------------------------------
                             453 ; external initialized ram data
                             454 ;--------------------------------------------------------
@@ -487,7 +487,7 @@
                             487 ;	-----------------------------------------
                             488 ;	 function I2C_Clock
                             489 ;	-----------------------------------------
-   02FE                     490 _I2C_Clock:
+   07B4                     490 _I2C_Clock:
                     0002    491 	ar2 = 0x02
                     0003    492 	ar3 = 0x03
                     0004    493 	ar4 = 0x04
@@ -499,21 +499,21 @@
                             499 ;	i2c.c:41: delay_us(1);
                             500 ;	genCall
                             501 ;	Peephole 182.b	used 16 bit load of dptr
-   02FE 90 00 01            502 	mov	dptr,#0x0001
-   0301 12 00 5F            503 	lcall	_delay_us
+   07B4 90 00 01            502 	mov	dptr,#0x0001
+   07B7 12 05 15            503 	lcall	_delay_us
                             504 ;	i2c.c:42: P1_1 = 1 ;		// Wait for Some time and Pull the SCL line High
                             505 ;	genAssign
-   0304 D2 91               506 	setb	_P1_1
+   07BA D2 91               506 	setb	_P1_1
                             507 ;	i2c.c:44: delay_us(1);        // Wait for Some time
                             508 ;	genCall
                             509 ;	Peephole 182.b	used 16 bit load of dptr
-   0306 90 00 01            510 	mov	dptr,#0x0001
-   0309 12 00 5F            511 	lcall	_delay_us
+   07BC 90 00 01            510 	mov	dptr,#0x0001
+   07BF 12 05 15            511 	lcall	_delay_us
                             512 ;	i2c.c:45: P1_1 = 0;		// Pull back the SCL line low to Generate a clock pulse
                             513 ;	genAssign
-   030C C2 91               514 	clr	_P1_1
+   07C2 C2 91               514 	clr	_P1_1
                             515 ;	Peephole 300	removed redundant label 00101$
-   030E 22                  516 	ret
+   07C4 22                  516 	ret
                             517 ;------------------------------------------------------------
                             518 ;Allocation info for local variables in function 'I2C_Start'
                             519 ;------------------------------------------------------------
@@ -522,39 +522,39 @@
                             522 ;	-----------------------------------------
                             523 ;	 function I2C_Start
                             524 ;	-----------------------------------------
-   030F                     525 _I2C_Start:
+   07C5                     525 _I2C_Start:
                             526 ;	i2c.c:74: P1_1 = 0;		// Pull SCL low
                             527 ;	genAssign
-   030F C2 91               528 	clr	_P1_1
+   07C5 C2 91               528 	clr	_P1_1
                             529 ;	i2c.c:76: P1_2 = 1;        // Pull SDA High
                             530 ;	genAssign
-   0311 D2 92               531 	setb	_P1_2
+   07C7 D2 92               531 	setb	_P1_2
                             532 ;	i2c.c:77: delay_us(1);
                             533 ;	genCall
                             534 ;	Peephole 182.b	used 16 bit load of dptr
-   0313 90 00 01            535 	mov	dptr,#0x0001
-   0316 12 00 5F            536 	lcall	_delay_us
+   07C9 90 00 01            535 	mov	dptr,#0x0001
+   07CC 12 05 15            536 	lcall	_delay_us
                             537 ;	i2c.c:79: P1_1 = 1;		//Pull SCL high
                             538 ;	genAssign
-   0319 D2 91               539 	setb	_P1_1
+   07CF D2 91               539 	setb	_P1_1
                             540 ;	i2c.c:80: delay_us(1);
                             541 ;	genCall
                             542 ;	Peephole 182.b	used 16 bit load of dptr
-   031B 90 00 01            543 	mov	dptr,#0x0001
-   031E 12 00 5F            544 	lcall	_delay_us
+   07D1 90 00 01            543 	mov	dptr,#0x0001
+   07D4 12 05 15            544 	lcall	_delay_us
                             545 ;	i2c.c:82: P1_2 = 0;        //Now Pull SDA LOW, to generate the Start Condition
                             546 ;	genAssign
-   0321 C2 92               547 	clr	_P1_2
+   07D7 C2 92               547 	clr	_P1_2
                             548 ;	i2c.c:83: delay_us(1);
                             549 ;	genCall
                             550 ;	Peephole 182.b	used 16 bit load of dptr
-   0323 90 00 01            551 	mov	dptr,#0x0001
-   0326 12 00 5F            552 	lcall	_delay_us
+   07D9 90 00 01            551 	mov	dptr,#0x0001
+   07DC 12 05 15            552 	lcall	_delay_us
                             553 ;	i2c.c:85: P1_1 = 0;        //Finally Clear the SCL to complete the cycle
                             554 ;	genAssign
-   0329 C2 91               555 	clr	_P1_1
+   07DF C2 91               555 	clr	_P1_1
                             556 ;	Peephole 300	removed redundant label 00101$
-   032B 22                  557 	ret
+   07E1 22                  557 	ret
                             558 ;------------------------------------------------------------
                             559 ;Allocation info for local variables in function 'I2C_Stop'
                             560 ;------------------------------------------------------------
@@ -563,36 +563,36 @@
                             563 ;	-----------------------------------------
                             564 ;	 function I2C_Stop
                             565 ;	-----------------------------------------
-   032C                     566 _I2C_Stop:
+   07E2                     566 _I2C_Stop:
                             567 ;	i2c.c:114: P1_1 = 0;			// Pull SCL low
                             568 ;	genAssign
-   032C C2 91               569 	clr	_P1_1
+   07E2 C2 91               569 	clr	_P1_1
                             570 ;	i2c.c:115: delay_us(1);
                             571 ;	genCall
                             572 ;	Peephole 182.b	used 16 bit load of dptr
-   032E 90 00 01            573 	mov	dptr,#0x0001
-   0331 12 00 5F            574 	lcall	_delay_us
+   07E4 90 00 01            573 	mov	dptr,#0x0001
+   07E7 12 05 15            574 	lcall	_delay_us
                             575 ;	i2c.c:117: P1_2 = 0;			// Pull SDA  low
                             576 ;	genAssign
-   0334 C2 92               577 	clr	_P1_2
+   07EA C2 92               577 	clr	_P1_2
                             578 ;	i2c.c:118: delay_us(1);
                             579 ;	genCall
                             580 ;	Peephole 182.b	used 16 bit load of dptr
-   0336 90 00 01            581 	mov	dptr,#0x0001
-   0339 12 00 5F            582 	lcall	_delay_us
+   07EC 90 00 01            581 	mov	dptr,#0x0001
+   07EF 12 05 15            582 	lcall	_delay_us
                             583 ;	i2c.c:120: P1_1 = 1;			// Pull SCL High
                             584 ;	genAssign
-   033C D2 91               585 	setb	_P1_1
+   07F2 D2 91               585 	setb	_P1_1
                             586 ;	i2c.c:121: delay_us(1);
                             587 ;	genCall
                             588 ;	Peephole 182.b	used 16 bit load of dptr
-   033E 90 00 01            589 	mov	dptr,#0x0001
-   0341 12 00 5F            590 	lcall	_delay_us
+   07F4 90 00 01            589 	mov	dptr,#0x0001
+   07F7 12 05 15            590 	lcall	_delay_us
                             591 ;	i2c.c:123: P1_2 = 1;			// Now Pull SDA High, to generate the Stop Condition
                             592 ;	genAssign
-   0344 D2 92               593 	setb	_P1_2
+   07FA D2 92               593 	setb	_P1_2
                             594 ;	Peephole 300	removed redundant label 00101$
-   0346 22                  595 	ret
+   07FC 22                  595 	ret
                             596 ;------------------------------------------------------------
                             597 ;Allocation info for local variables in function 'I2C_Write'
                             598 ;------------------------------------------------------------
@@ -603,63 +603,63 @@
                             603 ;	-----------------------------------------
                             604 ;	 function I2C_Write
                             605 ;	-----------------------------------------
-   0347                     606 _I2C_Write:
+   07FD                     606 _I2C_Write:
                             607 ;	genReceive
-   0347 E5 82               608 	mov	a,dpl
-   0349 90 00 17            609 	mov	dptr,#_I2C_Write_dat_1_1
-   034C F0                  610 	movx	@dptr,a
+   07FD E5 82               608 	mov	a,dpl
+   07FF 90 00 21            609 	mov	dptr,#_I2C_Write_dat_1_1
+   0802 F0                  610 	movx	@dptr,a
                             611 ;	i2c.c:156: for(i=0;i<8;i++)		 // loop 8 times to send 1-byte of data
                             612 ;	genAssign
-   034D 7A 00               613 	mov	r2,#0x00
-   034F                     614 00101$:
+   0803 7A 00               613 	mov	r2,#0x00
+   0805                     614 00101$:
                             615 ;	genCmpLt
                             616 ;	genCmp
-   034F BA 08 00            617 	cjne	r2,#0x08,00110$
-   0352                     618 00110$:
+   0805 BA 08 00            617 	cjne	r2,#0x08,00110$
+   0808                     618 00110$:
                             619 ;	genIfxJump
                             620 ;	Peephole 108.a	removed ljmp by inverse jump logic
-   0352 50 1D               621 	jnc	00104$
+   0808 50 1D               621 	jnc	00104$
                             622 ;	Peephole 300	removed redundant label 00111$
                             623 ;	i2c.c:158: P1_2 = dat & 0x80;    // Send Bit by Bit on SDA line
                             624 ;	genAssign
-   0354 90 00 17            625 	mov	dptr,#_I2C_Write_dat_1_1
-   0357 E0                  626 	movx	a,@dptr
+   080A 90 00 21            625 	mov	dptr,#_I2C_Write_dat_1_1
+   080D E0                  626 	movx	a,@dptr
                             627 ;	genGetHbit
-   0358 FB                  628 	mov	r3,a
+   080E FB                  628 	mov	r3,a
                             629 ;	Peephole 105	removed redundant mov
-   0359 33                  630 	rlc	a
-   035A 92 92               631 	mov	_P1_2,c
+   080F 33                  630 	rlc	a
+   0810 92 92               631 	mov	_P1_2,c
                             632 ;	i2c.c:159: I2C_Clock();      	 // Generate Clock at SCL
                             633 ;	genCall
-   035C C0 02               634 	push	ar2
-   035E C0 03               635 	push	ar3
-   0360 12 02 FE            636 	lcall	_I2C_Clock
-   0363 D0 03               637 	pop	ar3
-   0365 D0 02               638 	pop	ar2
+   0812 C0 02               634 	push	ar2
+   0814 C0 03               635 	push	ar3
+   0816 12 07 B4            636 	lcall	_I2C_Clock
+   0819 D0 03               637 	pop	ar3
+   081B D0 02               638 	pop	ar2
                             639 ;	i2c.c:160: dat = dat<<1;
                             640 ;	genLeftShift
                             641 ;	genLeftShiftLiteral
                             642 ;	genlshOne
-   0367 EB                  643 	mov	a,r3
+   081D EB                  643 	mov	a,r3
                             644 ;	Peephole 254	optimized left shift
-   0368 2B                  645 	add	a,r3
+   081E 2B                  645 	add	a,r3
                             646 ;	genAssign
-   0369 FB                  647 	mov	r3,a
-   036A 90 00 17            648 	mov	dptr,#_I2C_Write_dat_1_1
+   081F FB                  647 	mov	r3,a
+   0820 90 00 21            648 	mov	dptr,#_I2C_Write_dat_1_1
                             649 ;	Peephole 100	removed redundant mov
-   036D F0                  650 	movx	@dptr,a
+   0823 F0                  650 	movx	@dptr,a
                             651 ;	i2c.c:156: for(i=0;i<8;i++)		 // loop 8 times to send 1-byte of data
                             652 ;	genPlus
                             653 ;     genPlusIncr
-   036E 0A                  654 	inc	r2
+   0824 0A                  654 	inc	r2
                             655 ;	Peephole 112.b	changed ljmp to sjmp
-   036F 80 DE               656 	sjmp	00101$
-   0371                     657 00104$:
+   0825 80 DE               656 	sjmp	00101$
+   0827                     657 00104$:
                             658 ;	i2c.c:162: P1_2 = 1;			     // Set SDA at last
                             659 ;	genAssign
-   0371 D2 92               660 	setb	_P1_2
+   0827 D2 92               660 	setb	_P1_2
                             661 ;	Peephole 300	removed redundant label 00105$
-   0373 22                  662 	ret
+   0829 22                  662 	ret
                             663 ;------------------------------------------------------------
                             664 ;Allocation info for local variables in function 'I2C_Read'
                             665 ;------------------------------------------------------------
@@ -670,94 +670,94 @@
                             670 ;	-----------------------------------------
                             671 ;	 function I2C_Read
                             672 ;	-----------------------------------------
-   0374                     673 _I2C_Read:
+   082A                     673 _I2C_Read:
                             674 ;	i2c.c:192: unsigned char i, dat=0x00;
                             675 ;	genAssign
-   0374 90 00 18            676 	mov	dptr,#_I2C_Read_dat_1_1
+   082A 90 00 22            676 	mov	dptr,#_I2C_Read_dat_1_1
                             677 ;	Peephole 181	changed mov to clr
-   0377 E4                  678 	clr	a
-   0378 F0                  679 	movx	@dptr,a
+   082D E4                  678 	clr	a
+   082E F0                  679 	movx	@dptr,a
                             680 ;	i2c.c:194: P1_2=1;			    //Make SDA as I/P
                             681 ;	genAssign
-   0379 D2 92               682 	setb	_P1_2
+   082F D2 92               682 	setb	_P1_2
                             683 ;	i2c.c:195: for(i=0;i<8;i++)		// loop 8times read 1-byte of data
                             684 ;	genAssign
-   037B 7A 00               685 	mov	r2,#0x00
-   037D                     686 00101$:
+   0831 7A 00               685 	mov	r2,#0x00
+   0833                     686 00101$:
                             687 ;	genCmpLt
                             688 ;	genCmp
-   037D BA 08 00            689 	cjne	r2,#0x08,00110$
-   0380                     690 00110$:
+   0833 BA 08 00            689 	cjne	r2,#0x08,00110$
+   0836                     690 00110$:
                             691 ;	genIfxJump
                             692 ;	Peephole 108.a	removed ljmp by inverse jump logic
-   0380 50 35               693 	jnc	00104$
+   0836 50 35               693 	jnc	00104$
                             694 ;	Peephole 300	removed redundant label 00111$
                             695 ;	i2c.c:197: delay_us(1);
                             696 ;	genCall
                             697 ;	Peephole 182.b	used 16 bit load of dptr
-   0382 90 00 01            698 	mov	dptr,#0x0001
-   0385 C0 02               699 	push	ar2
-   0387 12 00 5F            700 	lcall	_delay_us
-   038A D0 02               701 	pop	ar2
+   0838 90 00 01            698 	mov	dptr,#0x0001
+   083B C0 02               699 	push	ar2
+   083D 12 05 15            700 	lcall	_delay_us
+   0840 D0 02               701 	pop	ar2
                             702 ;	i2c.c:200: P1_1 = 1;			// Pull SCL High
                             703 ;	genAssign
-   038C D2 91               704 	setb	_P1_1
+   0842 D2 91               704 	setb	_P1_1
                             705 ;	i2c.c:201: delay_us(1);
                             706 ;	genCall
                             707 ;	Peephole 182.b	used 16 bit load of dptr
-   038E 90 00 01            708 	mov	dptr,#0x0001
-   0391 C0 02               709 	push	ar2
-   0393 12 00 5F            710 	lcall	_delay_us
-   0396 D0 02               711 	pop	ar2
+   0844 90 00 01            708 	mov	dptr,#0x0001
+   0847 C0 02               709 	push	ar2
+   0849 12 05 15            710 	lcall	_delay_us
+   084C D0 02               711 	pop	ar2
                             712 ;	i2c.c:203: dat = dat<<1;		//dat is Shifted each time and
                             713 ;	genAssign
-   0398 90 00 18            714 	mov	dptr,#_I2C_Read_dat_1_1
-   039B E0                  715 	movx	a,@dptr
+   084E 90 00 22            714 	mov	dptr,#_I2C_Read_dat_1_1
+   0851 E0                  715 	movx	a,@dptr
                             716 ;	genLeftShift
                             717 ;	genLeftShiftLiteral
                             718 ;	genlshOne
                             719 ;	Peephole 105	removed redundant mov
                             720 ;	genAssign
                             721 ;	Peephole 204	removed redundant mov
-   039C 25 E0               722 	add	a,acc
-   039E FB                  723 	mov	r3,a
-   039F 90 00 18            724 	mov	dptr,#_I2C_Read_dat_1_1
+   0852 25 E0               722 	add	a,acc
+   0854 FB                  723 	mov	r3,a
+   0855 90 00 22            724 	mov	dptr,#_I2C_Read_dat_1_1
                             725 ;	Peephole 100	removed redundant mov
-   03A2 F0                  726 	movx	@dptr,a
+   0858 F0                  726 	movx	@dptr,a
                             727 ;	i2c.c:204: dat = dat | P1_2;	//ORed with the received bit to pack into byte
                             728 ;	genAssign
-   03A3 90 00 18            729 	mov	dptr,#_I2C_Read_dat_1_1
-   03A6 E0                  730 	movx	a,@dptr
-   03A7 FB                  731 	mov	r3,a
+   0859 90 00 22            729 	mov	dptr,#_I2C_Read_dat_1_1
+   085C E0                  730 	movx	a,@dptr
+   085D FB                  731 	mov	r3,a
                             732 ;	genAssign
-   03A8 E4                  733 	clr	a
-   03A9 A2 92               734 	mov	c,_P1_2
-   03AB 33                  735 	rlc	a
+   085E E4                  733 	clr	a
+   085F A2 92               734 	mov	c,_P1_2
+   0861 33                  735 	rlc	a
                             736 ;	genOr
-   03AC FC                  737 	mov	r4,a
-   03AD 90 00 18            738 	mov	dptr,#_I2C_Read_dat_1_1
+   0862 FC                  737 	mov	r4,a
+   0863 90 00 22            738 	mov	dptr,#_I2C_Read_dat_1_1
                             739 ;	Peephole 177.d	removed redundant move
-   03B0 4B                  740 	orl	a,r3
-   03B1 F0                  741 	movx	@dptr,a
+   0866 4B                  740 	orl	a,r3
+   0867 F0                  741 	movx	@dptr,a
                             742 ;	i2c.c:206: P1_1 = 0;			// Clear SCL to complete the Clock
                             743 ;	genAssign
-   03B2 C2 91               744 	clr	_P1_1
+   0868 C2 91               744 	clr	_P1_1
                             745 ;	i2c.c:195: for(i=0;i<8;i++)		// loop 8times read 1-byte of data
                             746 ;	genPlus
                             747 ;     genPlusIncr
-   03B4 0A                  748 	inc	r2
+   086A 0A                  748 	inc	r2
                             749 ;	Peephole 112.b	changed ljmp to sjmp
-   03B5 80 C6               750 	sjmp	00101$
-   03B7                     751 00104$:
+   086B 80 C6               750 	sjmp	00101$
+   086D                     751 00104$:
                             752 ;	i2c.c:208: return dat;		         // Finally return the received Byte*
                             753 ;	genAssign
-   03B7 90 00 18            754 	mov	dptr,#_I2C_Read_dat_1_1
-   03BA E0                  755 	movx	a,@dptr
+   086D 90 00 22            754 	mov	dptr,#_I2C_Read_dat_1_1
+   0870 E0                  755 	movx	a,@dptr
                             756 ;	genRet
                             757 ;	Peephole 234.a	loading dpl directly from a(ccumulator), r2 not set
-   03BB F5 82               758 	mov	dpl,a
+   0871 F5 82               758 	mov	dpl,a
                             759 ;	Peephole 300	removed redundant label 00105$
-   03BD 22                  760 	ret
+   0873 22                  760 	ret
                             761 ;------------------------------------------------------------
                             762 ;Allocation info for local variables in function 'I2C_Ack'
                             763 ;------------------------------------------------------------
@@ -766,18 +766,18 @@
                             766 ;	-----------------------------------------
                             767 ;	 function I2C_Ack
                             768 ;	-----------------------------------------
-   03BE                     769 _I2C_Ack:
+   0874                     769 _I2C_Ack:
                             770 ;	i2c.c:228: P1_2 = 0;		//Pull SDA low to indicate Positive ACK
                             771 ;	genAssign
-   03BE C2 92               772 	clr	_P1_2
+   0874 C2 92               772 	clr	_P1_2
                             773 ;	i2c.c:229: I2C_Clock();	//Generate the Clock
                             774 ;	genCall
-   03C0 12 02 FE            775 	lcall	_I2C_Clock
+   0876 12 07 B4            775 	lcall	_I2C_Clock
                             776 ;	i2c.c:230: P1_2 = 1;		// Pull SDA back to High(IDLE state)
                             777 ;	genAssign
-   03C3 D2 92               778 	setb	_P1_2
+   0879 D2 92               778 	setb	_P1_2
                             779 ;	Peephole 300	removed redundant label 00101$
-   03C5 22                  780 	ret
+   087B 22                  780 	ret
                             781 ;------------------------------------------------------------
                             782 ;Allocation info for local variables in function 'I2C_NoAck'
                             783 ;------------------------------------------------------------
@@ -786,18 +786,18 @@
                             786 ;	-----------------------------------------
                             787 ;	 function I2C_NoAck
                             788 ;	-----------------------------------------
-   03C6                     789 _I2C_NoAck:
+   087C                     789 _I2C_NoAck:
                             790 ;	i2c.c:248: P1_2 = 1;		//Pull SDA high to indicate Negative/NO ACK
                             791 ;	genAssign
-   03C6 D2 92               792 	setb	_P1_2
+   087C D2 92               792 	setb	_P1_2
                             793 ;	i2c.c:249: I2C_Clock();	    // Generate the Clock
                             794 ;	genCall
-   03C8 12 02 FE            795 	lcall	_I2C_Clock
+   087E 12 07 B4            795 	lcall	_I2C_Clock
                             796 ;	i2c.c:250: P1_1 = 1;		// Set SCL */
                             797 ;	genAssign
-   03CB D2 91               798 	setb	_P1_1
+   0881 D2 91               798 	setb	_P1_1
                             799 ;	Peephole 300	removed redundant label 00101$
-   03CD 22                  800 	ret
+   0883 22                  800 	ret
                             801 	.area CSEG    (CODE)
                             802 	.area CONST   (CODE)
                             803 	.area XINIT   (CODE)

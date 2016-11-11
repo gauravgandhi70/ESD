@@ -1,6 +1,10 @@
 #include <mcs51/8051.h>
 #include<at89c51ed2.h>
+#include<stdio.h>
+#include<stdlib.h>
 #include"lcd.h"
+#include"uart.h"
+
 #define RS P1_3
 
 
@@ -123,4 +127,32 @@ void lcd_delay(int ms)
         {
         }
     }
+}
+
+void lcd_display(char rd, char *a)
+{
+    char d[5];
+    unsigned int row,flag=0;
+
+    printf_tiny("\n\n\r Enter Row number between 0 to 3: ");
+            do{
+                flag=0;
+                gets(d);
+                row=atoi(d);
+                if(row<4)
+                {
+                    flag=1;
+                }
+                else
+                {
+                    flag==0;
+                    printf_tiny("\n\n\r Enter valid row number betweem 0 and 3: ");
+                }
+            }while(flag==0);
+
+            lcdgotoxy(row+1,1);
+            lcdputstr(a);
+            lcdputch(':');
+            lcdputch(rd);
+
 }
