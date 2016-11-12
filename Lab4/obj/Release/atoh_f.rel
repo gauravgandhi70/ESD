@@ -1,5 +1,5 @@
 XH
-H 16 areas C9 global symbols
+H 16 areas CA global symbols
 M atoh_f
 O -mmcs51 --model-large
 S _P1 Def0090
@@ -207,7 +207,7 @@ A OSEG size 0 flags 4 addr 50006174
 A ISEG size 0 flags 0 addr 0
 A BSEG size 0 flags 80 addr 0
 A PSEG size 0 flags 50 addr 0
-A XSEG size A flags 40 addr 0
+A XSEG size D flags 40 addr 0
 A XISEG size 4 flags 40 addr 0
 S _write Def0000
 S _read Def0002
@@ -220,8 +220,9 @@ A GSINIT4 size 0 flags 20 addr 0
 A GSINIT5 size 0 flags 20 addr 0
 A GSINIT size 0 flags 20 addr 0
 A GSFINAL size 0 flags 20 addr 0
-A CSEG size 4B6 flags 20 addr 0
+A CSEG size 4FE flags 20 addr 0
 S _atoh_data Def0294
+S _ctoa Def04B6
 S _atoh Def0000
 A CONST size 0 flags 20 addr 0
 A XINIT size 4 flags 20 addr 0
@@ -242,6 +243,14 @@ R 00 00 00 08
 T 00 08
 R 00 00 00 08
 T 00 08
+R 00 00 00 08
+T 00 0A
+R 00 00 00 08
+T 00 0A
+R 00 00 00 08
+T 00 0C
+R 00 00 00 08
+T 00 0C
 R 00 00 00 08
 T 00 00
 R 00 00 00 09
@@ -495,6 +504,28 @@ T 04 AA
 R 00 00 00 13
 T 04 AA 90 00 08 E0 FA A3 E0 8A 82 F5 83 22
 R 00 00 00 13 00 03 00 08
+T 04 B6
+R 00 00 00 13
+T 04 B6 AA 83 E5 82 90 00 0A F0 A3 EA F0 90 00 0C
+R 00 00 00 13 00 07 00 08 00 0E 00 08
+T 04 C4 74 30 F0 90 00 0A E0 FA A3 E0 FB 7C 30 7D
+R 00 00 00 13 00 06 00 08
+T 04 D2 00 7E 00
+R 00 00 00 13
+T 04 D5
+R 00 00 00 13
+T 04 D5 C3 ED 94 10 EE 64 80 94 80 50 1D EA B5 05
+R 00 00 00 13
+T 04 E3 0C EB B5 06 08 90 00 0C E0 FF F5 82 22
+R 00 00 00 13 00 08 00 08
+T 04 F0
+R 00 00 00 13
+T 04 F0 0C 90 00 0C EC F0 0D BD 00 DB 0E 80 D8
+R 00 00 00 13 00 04 00 08
+T 04 FD
+R 00 00 00 13
+T 04 FD 22
+R 00 00 00 13
 T 00 00
 R 00 00 00 15
 T 00 00 00 A0

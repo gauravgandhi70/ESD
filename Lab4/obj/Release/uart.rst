@@ -441,8 +441,8 @@
                             441 ; external ram data
                             442 ;--------------------------------------------------------
                             443 	.area XSEG    (XDATA)
-   0074                     444 _putchar_c_1_1:
-   0074                     445 	.ds 1
+   007B                     444 _putchar_c_1_1:
+   007B                     445 	.ds 1
                             446 ;--------------------------------------------------------
                             447 ; external initialized ram data
                             448 ;--------------------------------------------------------
@@ -482,7 +482,7 @@
                             482 ;	-----------------------------------------
                             483 ;	 function putchar
                             484 ;	-----------------------------------------
-   12AE                     485 _putchar:
+   1345                     485 _putchar:
                     0002    486 	ar2 = 0x02
                     0003    487 	ar3 = 0x03
                     0004    488 	ar4 = 0x04
@@ -492,26 +492,26 @@
                     0000    492 	ar0 = 0x00
                     0001    493 	ar1 = 0x01
                             494 ;	genReceive
-   12AE E5 82               495 	mov	a,dpl
-   12B0 90 00 74            496 	mov	dptr,#_putchar_c_1_1
-   12B3 F0                  497 	movx	@dptr,a
+   1345 E5 82               495 	mov	a,dpl
+   1347 90 00 7B            496 	mov	dptr,#_putchar_c_1_1
+   134A F0                  497 	movx	@dptr,a
                             498 ;	uart.c:16: while (TI==0);												// wait for tx to be ready and send data and clear TI flag
-   12B4                     499 00101$:
+   134B                     499 00101$:
                             500 ;	genIfx
                             501 ;	genIfxJump
                             502 ;	Peephole 108.d	removed ljmp by inverse jump logic
-   12B4 30 99 FD            503 	jnb	_TI,00101$
+   134B 30 99 FD            503 	jnb	_TI,00101$
                             504 ;	Peephole 300	removed redundant label 00108$
                             505 ;	uart.c:17: SBUF = c;
                             506 ;	genAssign
-   12B7 90 00 74            507 	mov	dptr,#_putchar_c_1_1
-   12BA E0                  508 	movx	a,@dptr
-   12BB F5 99               509 	mov	_SBUF,a
+   134E 90 00 7B            507 	mov	dptr,#_putchar_c_1_1
+   1351 E0                  508 	movx	a,@dptr
+   1352 F5 99               509 	mov	_SBUF,a
                             510 ;	uart.c:18: TI = 0;
                             511 ;	genAssign
-   12BD C2 99               512 	clr	_TI
+   1354 C2 99               512 	clr	_TI
                             513 ;	Peephole 300	removed redundant label 00104$
-   12BF 22                  514 	ret
+   1356 22                  514 	ret
                             515 ;------------------------------------------------------------
                             516 ;Allocation info for local variables in function 'getchar'
                             517 ;------------------------------------------------------------
@@ -520,25 +520,25 @@
                             520 ;	-----------------------------------------
                             521 ;	 function getchar
                             522 ;	-----------------------------------------
-   12C0                     523 _getchar:
+   1357                     523 _getchar:
                             524 ;	uart.c:25: while (!RI);
-   12C0                     525 00101$:
+   1357                     525 00101$:
                             526 ;	genIfx
                             527 ;	genIfxJump
                             528 ;	Peephole 108.d	removed ljmp by inverse jump logic
                             529 ;	uart.c:26: RI = 0;
                             530 ;	genAssign
                             531 ;	Peephole 250.a	using atomic test and clear
-   12C0 10 98 02            532 	jbc	_RI,00108$
-   12C3 80 FB               533 	sjmp	00101$
-   12C5                     534 00108$:
+   1357 10 98 02            532 	jbc	_RI,00108$
+   135A 80 FB               533 	sjmp	00101$
+   135C                     534 00108$:
                             535 ;	uart.c:27: return SBUF;
                             536 ;	genAssign
-   12C5 AA 99               537 	mov	r2,_SBUF
+   135C AA 99               537 	mov	r2,_SBUF
                             538 ;	genRet
-   12C7 8A 82               539 	mov	dpl,r2
+   135E 8A 82               539 	mov	dpl,r2
                             540 ;	Peephole 300	removed redundant label 00104$
-   12C9 22                  541 	ret
+   1360 22                  541 	ret
                             542 ;------------------------------------------------------------
                             543 ;Allocation info for local variables in function 'uart_init'
                             544 ;------------------------------------------------------------
@@ -547,33 +547,33 @@
                             547 ;	-----------------------------------------
                             548 ;	 function uart_init
                             549 ;	-----------------------------------------
-   12CA                     550 _uart_init:
+   1361                     550 _uart_init:
                             551 ;	uart.c:34: T2CON=0;
                             552 ;	genAssign
-   12CA 75 C8 00            553 	mov	_T2CON,#0x00
+   1361 75 C8 00            553 	mov	_T2CON,#0x00
                             554 ;	uart.c:35: BDRCON=0;
                             555 ;	genAssign
-   12CD 75 9B 00            556 	mov	_BDRCON,#0x00
+   1364 75 9B 00            556 	mov	_BDRCON,#0x00
                             557 ;	uart.c:36: PCON |= 0x00;
                             558 ;	genAssign
-   12D0 85 87 87            559 	mov	_PCON,_PCON
+   1367 85 87 87            559 	mov	_PCON,_PCON
                             560 ;	uart.c:37: TH1  =  0xFD;												// Timer 1 is used in mode 2 auto reload mode
                             561 ;	genAssign
-   12D3 75 8D FD            562 	mov	_TH1,#0xFD
+   136A 75 8D FD            562 	mov	_TH1,#0xFD
                             563 ;	uart.c:38: TL1  =  0X00;												// Setting baud rate to 9600 by loading FF into TH1
                             564 ;	genAssign
-   12D6 75 8B 00            565 	mov	_TL1,#0x00
+   136D 75 8B 00            565 	mov	_TL1,#0x00
                             566 ;	uart.c:39: TCON |= 0x40;
                             567 ;	genOr
-   12D9 43 88 40            568 	orl	_TCON,#0x40
+   1370 43 88 40            568 	orl	_TCON,#0x40
                             569 ;	uart.c:40: SCON |= 0x52;
                             570 ;	genOr
-   12DC 43 98 52            571 	orl	_SCON,#0x52
+   1373 43 98 52            571 	orl	_SCON,#0x52
                             572 ;	uart.c:41: TMOD = 0x20;												// Start timer
                             573 ;	genAssign
-   12DF 75 89 20            574 	mov	_TMOD,#0x20
+   1376 75 89 20            574 	mov	_TMOD,#0x20
                             575 ;	Peephole 300	removed redundant label 00101$
-   12E2 22                  576 	ret
+   1379 22                  576 	ret
                             577 	.area CSEG    (CODE)
                             578 	.area CONST   (CODE)
                             579 	.area XINIT   (CODE)

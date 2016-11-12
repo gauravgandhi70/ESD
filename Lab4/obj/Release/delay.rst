@@ -441,12 +441,12 @@
                             441 ; external ram data
                             442 ;--------------------------------------------------------
                             443 	.area XSEG    (XDATA)
-   000A                     444 _delay_us_us_1_1:
-   000A                     445 	.ds 2
-   000C                     446 _delay_ms_ms_1_1:
-   000C                     447 	.ds 2
-   000E                     448 _delay_sec_sec_1_1:
-   000E                     449 	.ds 1
+   000D                     444 _delay_us_us_1_1:
+   000D                     445 	.ds 2
+   000F                     446 _delay_ms_ms_1_1:
+   000F                     447 	.ds 2
+   0011                     448 _delay_sec_sec_1_1:
+   0011                     449 	.ds 1
                             450 ;--------------------------------------------------------
                             451 ; external initialized ram data
                             452 ;--------------------------------------------------------
@@ -486,7 +486,7 @@
                             486 ;	-----------------------------------------
                             487 ;	 function delay_us
                             488 ;	-----------------------------------------
-   0515                     489 _delay_us:
+   055D                     489 _delay_us:
                     0002    490 	ar2 = 0x02
                     0003    491 	ar3 = 0x03
                     0004    492 	ar4 = 0x04
@@ -496,55 +496,55 @@
                     0000    496 	ar0 = 0x00
                     0001    497 	ar1 = 0x01
                             498 ;	genReceive
-   0515 AA 83               499 	mov	r2,dph
-   0517 E5 82               500 	mov	a,dpl
-   0519 90 00 0A            501 	mov	dptr,#_delay_us_us_1_1
-   051C F0                  502 	movx	@dptr,a
-   051D A3                  503 	inc	dptr
-   051E EA                  504 	mov	a,r2
-   051F F0                  505 	movx	@dptr,a
+   055D AA 83               499 	mov	r2,dph
+   055F E5 82               500 	mov	a,dpl
+   0561 90 00 0D            501 	mov	dptr,#_delay_us_us_1_1
+   0564 F0                  502 	movx	@dptr,a
+   0565 A3                  503 	inc	dptr
+   0566 EA                  504 	mov	a,r2
+   0567 F0                  505 	movx	@dptr,a
                             506 ;	delay.c:14: while(us!=0)
                             507 ;	genAssign
-   0520 90 00 0A            508 	mov	dptr,#_delay_us_us_1_1
-   0523 E0                  509 	movx	a,@dptr
-   0524 FA                  510 	mov	r2,a
-   0525 A3                  511 	inc	dptr
-   0526 E0                  512 	movx	a,@dptr
-   0527 FB                  513 	mov	r3,a
-   0528                     514 00101$:
+   0568 90 00 0D            508 	mov	dptr,#_delay_us_us_1_1
+   056B E0                  509 	movx	a,@dptr
+   056C FA                  510 	mov	r2,a
+   056D A3                  511 	inc	dptr
+   056E E0                  512 	movx	a,@dptr
+   056F FB                  513 	mov	r3,a
+   0570                     514 00101$:
                             515 ;	genCmpEq
                             516 ;	gencjneshort
-   0528 BA 00 05            517 	cjne	r2,#0x00,00109$
-   052B BB 00 02            518 	cjne	r3,#0x00,00109$
+   0570 BA 00 05            517 	cjne	r2,#0x00,00109$
+   0573 BB 00 02            518 	cjne	r3,#0x00,00109$
                             519 ;	Peephole 112.b	changed ljmp to sjmp
-   052E 80 0F               520 	sjmp	00108$
-   0530                     521 00109$:
+   0576 80 0F               520 	sjmp	00108$
+   0578                     521 00109$:
                             522 ;	delay.c:16: us--;
                             523 ;	genMinus
                             524 ;	genMinusDec
-   0530 1A                  525 	dec	r2
-   0531 BA FF 01            526 	cjne	r2,#0xff,00110$
-   0534 1B                  527 	dec	r3
-   0535                     528 00110$:
+   0578 1A                  525 	dec	r2
+   0579 BA FF 01            526 	cjne	r2,#0xff,00110$
+   057C 1B                  527 	dec	r3
+   057D                     528 00110$:
                             529 ;	genAssign
-   0535 90 00 0A            530 	mov	dptr,#_delay_us_us_1_1
-   0538 EA                  531 	mov	a,r2
-   0539 F0                  532 	movx	@dptr,a
-   053A A3                  533 	inc	dptr
-   053B EB                  534 	mov	a,r3
-   053C F0                  535 	movx	@dptr,a
+   057D 90 00 0D            530 	mov	dptr,#_delay_us_us_1_1
+   0580 EA                  531 	mov	a,r2
+   0581 F0                  532 	movx	@dptr,a
+   0582 A3                  533 	inc	dptr
+   0583 EB                  534 	mov	a,r3
+   0584 F0                  535 	movx	@dptr,a
                             536 ;	Peephole 112.b	changed ljmp to sjmp
-   053D 80 E9               537 	sjmp	00101$
-   053F                     538 00108$:
+   0585 80 E9               537 	sjmp	00101$
+   0587                     538 00108$:
                             539 ;	genAssign
-   053F 90 00 0A            540 	mov	dptr,#_delay_us_us_1_1
-   0542 EA                  541 	mov	a,r2
-   0543 F0                  542 	movx	@dptr,a
-   0544 A3                  543 	inc	dptr
-   0545 EB                  544 	mov	a,r3
-   0546 F0                  545 	movx	@dptr,a
+   0587 90 00 0D            540 	mov	dptr,#_delay_us_us_1_1
+   058A EA                  541 	mov	a,r2
+   058B F0                  542 	movx	@dptr,a
+   058C A3                  543 	inc	dptr
+   058D EB                  544 	mov	a,r3
+   058E F0                  545 	movx	@dptr,a
                             546 ;	Peephole 300	removed redundant label 00104$
-   0547 22                  547 	ret
+   058F 22                  547 	ret
                             548 ;------------------------------------------------------------
                             549 ;Allocation info for local variables in function 'delay_ms'
                             550 ;------------------------------------------------------------
@@ -554,66 +554,66 @@
                             554 ;	-----------------------------------------
                             555 ;	 function delay_ms
                             556 ;	-----------------------------------------
-   0548                     557 _delay_ms:
+   0590                     557 _delay_ms:
                             558 ;	genReceive
-   0548 AA 83               559 	mov	r2,dph
-   054A E5 82               560 	mov	a,dpl
-   054C 90 00 0C            561 	mov	dptr,#_delay_ms_ms_1_1
-   054F F0                  562 	movx	@dptr,a
-   0550 A3                  563 	inc	dptr
-   0551 EA                  564 	mov	a,r2
-   0552 F0                  565 	movx	@dptr,a
+   0590 AA 83               559 	mov	r2,dph
+   0592 E5 82               560 	mov	a,dpl
+   0594 90 00 0F            561 	mov	dptr,#_delay_ms_ms_1_1
+   0597 F0                  562 	movx	@dptr,a
+   0598 A3                  563 	inc	dptr
+   0599 EA                  564 	mov	a,r2
+   059A F0                  565 	movx	@dptr,a
                             566 ;	delay.c:25: while(ms!=0)
                             567 ;	genAssign
-   0553 90 00 0C            568 	mov	dptr,#_delay_ms_ms_1_1
-   0556 E0                  569 	movx	a,@dptr
-   0557 FA                  570 	mov	r2,a
-   0558 A3                  571 	inc	dptr
-   0559 E0                  572 	movx	a,@dptr
-   055A FB                  573 	mov	r3,a
-   055B                     574 00101$:
+   059B 90 00 0F            568 	mov	dptr,#_delay_ms_ms_1_1
+   059E E0                  569 	movx	a,@dptr
+   059F FA                  570 	mov	r2,a
+   05A0 A3                  571 	inc	dptr
+   05A1 E0                  572 	movx	a,@dptr
+   05A2 FB                  573 	mov	r3,a
+   05A3                     574 00101$:
                             575 ;	genCmpEq
                             576 ;	gencjneshort
-   055B BA 00 05            577 	cjne	r2,#0x00,00109$
-   055E BB 00 02            578 	cjne	r3,#0x00,00109$
+   05A3 BA 00 05            577 	cjne	r2,#0x00,00109$
+   05A6 BB 00 02            578 	cjne	r3,#0x00,00109$
                             579 ;	Peephole 112.b	changed ljmp to sjmp
-   0561 80 1D               580 	sjmp	00108$
-   0563                     581 00109$:
+   05A9 80 1D               580 	sjmp	00108$
+   05AB                     581 00109$:
                             582 ;	delay.c:27: delay_us(112);	 //delay_us is called to generate 1ms delay
                             583 ;	genCall
                             584 ;	Peephole 182.b	used 16 bit load of dptr
-   0563 90 00 70            585 	mov	dptr,#0x0070
-   0566 C0 02               586 	push	ar2
-   0568 C0 03               587 	push	ar3
-   056A 12 05 15            588 	lcall	_delay_us
-   056D D0 03               589 	pop	ar3
-   056F D0 02               590 	pop	ar2
+   05AB 90 00 70            585 	mov	dptr,#0x0070
+   05AE C0 02               586 	push	ar2
+   05B0 C0 03               587 	push	ar3
+   05B2 12 05 5D            588 	lcall	_delay_us
+   05B5 D0 03               589 	pop	ar3
+   05B7 D0 02               590 	pop	ar2
                             591 ;	delay.c:28: ms--;
                             592 ;	genMinus
                             593 ;	genMinusDec
-   0571 1A                  594 	dec	r2
-   0572 BA FF 01            595 	cjne	r2,#0xff,00110$
-   0575 1B                  596 	dec	r3
-   0576                     597 00110$:
+   05B9 1A                  594 	dec	r2
+   05BA BA FF 01            595 	cjne	r2,#0xff,00110$
+   05BD 1B                  596 	dec	r3
+   05BE                     597 00110$:
                             598 ;	genAssign
-   0576 90 00 0C            599 	mov	dptr,#_delay_ms_ms_1_1
-   0579 EA                  600 	mov	a,r2
-   057A F0                  601 	movx	@dptr,a
-   057B A3                  602 	inc	dptr
-   057C EB                  603 	mov	a,r3
-   057D F0                  604 	movx	@dptr,a
+   05BE 90 00 0F            599 	mov	dptr,#_delay_ms_ms_1_1
+   05C1 EA                  600 	mov	a,r2
+   05C2 F0                  601 	movx	@dptr,a
+   05C3 A3                  602 	inc	dptr
+   05C4 EB                  603 	mov	a,r3
+   05C5 F0                  604 	movx	@dptr,a
                             605 ;	Peephole 112.b	changed ljmp to sjmp
-   057E 80 DB               606 	sjmp	00101$
-   0580                     607 00108$:
+   05C6 80 DB               606 	sjmp	00101$
+   05C8                     607 00108$:
                             608 ;	genAssign
-   0580 90 00 0C            609 	mov	dptr,#_delay_ms_ms_1_1
-   0583 EA                  610 	mov	a,r2
-   0584 F0                  611 	movx	@dptr,a
-   0585 A3                  612 	inc	dptr
-   0586 EB                  613 	mov	a,r3
-   0587 F0                  614 	movx	@dptr,a
+   05C8 90 00 0F            609 	mov	dptr,#_delay_ms_ms_1_1
+   05CB EA                  610 	mov	a,r2
+   05CC F0                  611 	movx	@dptr,a
+   05CD A3                  612 	inc	dptr
+   05CE EB                  613 	mov	a,r3
+   05CF F0                  614 	movx	@dptr,a
                             615 ;	Peephole 300	removed redundant label 00104$
-   0588 22                  616 	ret
+   05D0 22                  616 	ret
                             617 ;------------------------------------------------------------
                             618 ;Allocation info for local variables in function 'delay_sec'
                             619 ;------------------------------------------------------------
@@ -623,47 +623,47 @@
                             623 ;	-----------------------------------------
                             624 ;	 function delay_sec
                             625 ;	-----------------------------------------
-   0589                     626 _delay_sec:
+   05D1                     626 _delay_sec:
                             627 ;	genReceive
-   0589 E5 82               628 	mov	a,dpl
-   058B 90 00 0E            629 	mov	dptr,#_delay_sec_sec_1_1
-   058E F0                  630 	movx	@dptr,a
+   05D1 E5 82               628 	mov	a,dpl
+   05D3 90 00 11            629 	mov	dptr,#_delay_sec_sec_1_1
+   05D6 F0                  630 	movx	@dptr,a
                             631 ;	delay.c:43: while(sec!=0)
                             632 ;	genAssign
-   058F 90 00 0E            633 	mov	dptr,#_delay_sec_sec_1_1
-   0592 E0                  634 	movx	a,@dptr
-   0593 FA                  635 	mov	r2,a
-   0594                     636 00101$:
+   05D7 90 00 11            633 	mov	dptr,#_delay_sec_sec_1_1
+   05DA E0                  634 	movx	a,@dptr
+   05DB FA                  635 	mov	r2,a
+   05DC                     636 00101$:
                             637 ;	genCmpEq
                             638 ;	gencjneshort
-   0594 BA 00 02            639 	cjne	r2,#0x00,00109$
+   05DC BA 00 02            639 	cjne	r2,#0x00,00109$
                             640 ;	Peephole 112.b	changed ljmp to sjmp
-   0597 80 12               641 	sjmp	00108$
-   0599                     642 00109$:
+   05DF 80 12               641 	sjmp	00108$
+   05E1                     642 00109$:
                             643 ;	delay.c:45: delay_ms(1000);	//delay_ms is called to generate 1sec delay
                             644 ;	genCall
                             645 ;	Peephole 182.b	used 16 bit load of dptr
-   0599 90 03 E8            646 	mov	dptr,#0x03E8
-   059C C0 02               647 	push	ar2
-   059E 12 05 48            648 	lcall	_delay_ms
-   05A1 D0 02               649 	pop	ar2
+   05E1 90 03 E8            646 	mov	dptr,#0x03E8
+   05E4 C0 02               647 	push	ar2
+   05E6 12 05 90            648 	lcall	_delay_ms
+   05E9 D0 02               649 	pop	ar2
                             650 ;	delay.c:46: sec--;
                             651 ;	genMinus
                             652 ;	genMinusDec
-   05A3 1A                  653 	dec	r2
+   05EB 1A                  653 	dec	r2
                             654 ;	genAssign
-   05A4 90 00 0E            655 	mov	dptr,#_delay_sec_sec_1_1
-   05A7 EA                  656 	mov	a,r2
-   05A8 F0                  657 	movx	@dptr,a
+   05EC 90 00 11            655 	mov	dptr,#_delay_sec_sec_1_1
+   05EF EA                  656 	mov	a,r2
+   05F0 F0                  657 	movx	@dptr,a
                             658 ;	Peephole 112.b	changed ljmp to sjmp
-   05A9 80 E9               659 	sjmp	00101$
-   05AB                     660 00108$:
+   05F1 80 E9               659 	sjmp	00101$
+   05F3                     660 00108$:
                             661 ;	genAssign
-   05AB 90 00 0E            662 	mov	dptr,#_delay_sec_sec_1_1
-   05AE EA                  663 	mov	a,r2
-   05AF F0                  664 	movx	@dptr,a
+   05F3 90 00 11            662 	mov	dptr,#_delay_sec_sec_1_1
+   05F6 EA                  663 	mov	a,r2
+   05F7 F0                  664 	movx	@dptr,a
                             665 ;	Peephole 300	removed redundant label 00104$
-   05B0 22                  666 	ret
+   05F8 22                  666 	ret
                             667 	.area CSEG    (CODE)
                             668 	.area CONST   (CODE)
                             669 	.area XINIT   (CODE)

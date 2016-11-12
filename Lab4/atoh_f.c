@@ -125,3 +125,19 @@ int atoh_data(char *c)
     return result;
 }
 
+char ctoa(int c)
+{ int i;
+    char d=0x30;
+    for(i=0;i<16;i++)
+        {
+            if(c==i)
+            {
+                return d;
+                break;
+            }
+            else{d++;}
+        }
+
+
+}
+

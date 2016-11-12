@@ -225,8 +225,8 @@ void I2C_Ack()
 {
     char dat=1;
 	P1_2 = 1;
-	while(dat!=0)
-    {
+	//while(dat!=0)
+    //{
 
         P1_1 = 1;			// Pull SCL High
 		delay_us(1);
@@ -234,7 +234,8 @@ void I2C_Ack()
 		dat = P1_2;
 
 		P1_1 = 0;
-    }
+		if(dat==0){;}
+    //}
 }
 
 

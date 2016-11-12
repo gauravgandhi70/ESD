@@ -11,8 +11,7 @@ Author: Gaurav Gandhi
 #include"lcd.h"
 #include"uart.h"
 #include"delay.h"
-
-
+#include"atoh_f.h"
 /*-----------------------------------------------------------------------------------------
                                 void lcd_init()
  ------------------------------------------------------------------------------------------
@@ -201,9 +200,15 @@ void lcdgotoxy(unsigned char row, unsigned char column)
 
 void lcd_display(char rd, char *a)
 {
-    char d[5];
-    unsigned int row,flag=0;
+    char d[5],c[5];
+    unsigned int row,flag=0,b;
+    b=rd/16;
+    c[0]=ctoa(b);
+    b=rd-(b*16);
+    c[1]=ctoa(b);
+    c[2]='\0';
 
+    //printf_tiny("\n%c",c);
     printf_tiny("\n\n\r Enter Row number between 0 to 3: ");
             do{
                 flag=0;
@@ -223,6 +228,7 @@ void lcd_display(char rd, char *a)
             lcdgotoxy(row+1,1);
             lcdputstr(a);
             lcdputch(':');
-            lcdputch(rd);
+            lcdputstr(c);
 
 }
+

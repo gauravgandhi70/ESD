@@ -447,24 +447,24 @@
                             447 ; external ram data
                             448 ;--------------------------------------------------------
                             449 	.area XSEG    (XDATA)
-   000F                     450 _seq_read_PARM_2:
-   000F                     451 	.ds 1
-   0010                     452 _seq_read_PARM_3:
-   0010                     453 	.ds 2
-   0012                     454 _seq_read_PARM_4:
-   0012                     455 	.ds 3
-   0015                     456 _seq_read_st_addr_1_1:
-   0015                     457 	.ds 1
-   0016                     458 _EEPROM_WriteByte_PARM_2:
-   0016                     459 	.ds 1
-   0017                     460 _EEPROM_WriteByte_PARM_3:
-   0017                     461 	.ds 1
-   0018                     462 _EEPROM_WriteByte_eeprom_Address_1_1:
-   0018                     463 	.ds 1
-   0019                     464 _EEPROM_ReadByte_PARM_2:
-   0019                     465 	.ds 1
-   001A                     466 _EEPROM_ReadByte_eeprom_Address_1_1:
-   001A                     467 	.ds 1
+   0012                     450 _seq_read_PARM_2:
+   0012                     451 	.ds 1
+   0013                     452 _seq_read_PARM_3:
+   0013                     453 	.ds 2
+   0015                     454 _seq_read_PARM_4:
+   0015                     455 	.ds 3
+   0018                     456 _seq_read_st_addr_1_1:
+   0018                     457 	.ds 1
+   0019                     458 _EEPROM_WriteByte_PARM_2:
+   0019                     459 	.ds 1
+   001A                     460 _EEPROM_WriteByte_PARM_3:
+   001A                     461 	.ds 1
+   001B                     462 _EEPROM_WriteByte_eeprom_Address_1_1:
+   001B                     463 	.ds 1
+   001C                     464 _EEPROM_ReadByte_PARM_2:
+   001C                     465 	.ds 1
+   001D                     466 _EEPROM_ReadByte_eeprom_Address_1_1:
+   001D                     467 	.ds 1
                             468 ;--------------------------------------------------------
                             469 ; external initialized ram data
                             470 ;--------------------------------------------------------
@@ -508,7 +508,7 @@
                             508 ;	-----------------------------------------
                             509 ;	 function seq_read
                             510 ;	-----------------------------------------
-   05B1                     511 _seq_read:
+   05F9                     511 _seq_read:
                     0002    512 	ar2 = 0x02
                     0003    513 	ar3 = 0x03
                     0004    514 	ar4 = 0x04
@@ -518,196 +518,196 @@
                     0000    518 	ar0 = 0x00
                     0001    519 	ar1 = 0x01
                             520 ;	genReceive
-   05B1 E5 82               521 	mov	a,dpl
-   05B3 90 00 15            522 	mov	dptr,#_seq_read_st_addr_1_1
-   05B6 F0                  523 	movx	@dptr,a
+   05F9 E5 82               521 	mov	a,dpl
+   05FB 90 00 18            522 	mov	dptr,#_seq_read_st_addr_1_1
+   05FE F0                  523 	movx	@dptr,a
                             524 ;	eeprom.c:35: I2C_Start();               // Start i2c communication
                             525 ;	genCall
-   05B7 12 07 5B            526 	lcall	_I2C_Start
+   05FF 12 07 A3            526 	lcall	_I2C_Start
                             527 ;	eeprom.c:36: I2C_Write(EEPROM_ID|(st_page<<1));	   // connect to AT2404(write) by sending its ID on I2c Bus
                             528 ;	genAssign
-   05BA 90 00 0F            529 	mov	dptr,#_seq_read_PARM_2
-   05BD E0                  530 	movx	a,@dptr
+   0602 90 00 12            529 	mov	dptr,#_seq_read_PARM_2
+   0605 E0                  530 	movx	a,@dptr
                             531 ;	genLeftShift
                             532 ;	genLeftShiftLiteral
                             533 ;	genlshOne
                             534 ;	Peephole 105	removed redundant mov
                             535 ;	Peephole 204	removed redundant mov
-   05BE 25 E0               536 	add	a,acc
-   05C0 FA                  537 	mov	r2,a
+   0606 25 E0               536 	add	a,acc
+   0608 FA                  537 	mov	r2,a
                             538 ;	genOr
-   05C1 74 A0               539 	mov	a,#0xA0
-   05C3 4A                  540 	orl	a,r2
+   0609 74 A0               539 	mov	a,#0xA0
+   060B 4A                  540 	orl	a,r2
                             541 ;	genCall
-   05C4 FB                  542 	mov	r3,a
+   060C FB                  542 	mov	r3,a
                             543 ;	Peephole 244.c	loading dpl from a instead of r3
-   05C5 F5 82               544 	mov	dpl,a
-   05C7 C0 02               545 	push	ar2
-   05C9 12 07 93            546 	lcall	_I2C_Write
-   05CC D0 02               547 	pop	ar2
+   060D F5 82               544 	mov	dpl,a
+   060F C0 02               545 	push	ar2
+   0611 12 07 DB            546 	lcall	_I2C_Write
+   0614 D0 02               547 	pop	ar2
                             548 ;	eeprom.c:37: I2C_Ack();
                             549 ;	genCall
-   05CE C0 02               550 	push	ar2
-   05D0 12 08 0A            551 	lcall	_I2C_Ack
-   05D3 D0 02               552 	pop	ar2
+   0616 C0 02               550 	push	ar2
+   0618 12 08 52            551 	lcall	_I2C_Ack
+   061B D0 02               552 	pop	ar2
                             553 ;	eeprom.c:38: I2C_Write(st_addr); // Select the Specified EEPROM address of AT2404
                             554 ;	genAssign
-   05D5 90 00 15            555 	mov	dptr,#_seq_read_st_addr_1_1
-   05D8 E0                  556 	movx	a,@dptr
+   061D 90 00 18            555 	mov	dptr,#_seq_read_st_addr_1_1
+   0620 E0                  556 	movx	a,@dptr
                             557 ;	genCall
-   05D9 FB                  558 	mov	r3,a
+   0621 FB                  558 	mov	r3,a
                             559 ;	Peephole 244.c	loading dpl from a instead of r3
-   05DA F5 82               560 	mov	dpl,a
-   05DC C0 02               561 	push	ar2
-   05DE 12 07 93            562 	lcall	_I2C_Write
-   05E1 D0 02               563 	pop	ar2
+   0622 F5 82               560 	mov	dpl,a
+   0624 C0 02               561 	push	ar2
+   0626 12 07 DB            562 	lcall	_I2C_Write
+   0629 D0 02               563 	pop	ar2
                             564 ;	eeprom.c:39: I2C_Ack();
                             565 ;	genCall
-   05E3 C0 02               566 	push	ar2
-   05E5 12 08 0A            567 	lcall	_I2C_Ack
-   05E8 D0 02               568 	pop	ar2
+   062B C0 02               566 	push	ar2
+   062D 12 08 52            567 	lcall	_I2C_Ack
+   0630 D0 02               568 	pop	ar2
                             569 ;	eeprom.c:41: I2C_Start();		       // Start i2c communication
                             570 ;	genCall
-   05EA C0 02               571 	push	ar2
-   05EC 12 07 5B            572 	lcall	_I2C_Start
-   05EF D0 02               573 	pop	ar2
+   0632 C0 02               571 	push	ar2
+   0634 12 07 A3            572 	lcall	_I2C_Start
+   0637 D0 02               573 	pop	ar2
                             574 ;	eeprom.c:42: I2C_Write(0xA1|(st_page<<1));           // connect to AT2404(read) by sending its ID on I2c Bus
                             575 ;	genOr
-   05F1 43 02 A1            576 	orl	ar2,#0xA1
+   0639 43 02 A1            576 	orl	ar2,#0xA1
                             577 ;	genCall
-   05F4 8A 82               578 	mov	dpl,r2
-   05F6 12 07 93            579 	lcall	_I2C_Write
+   063C 8A 82               578 	mov	dpl,r2
+   063E 12 07 DB            579 	lcall	_I2C_Write
                             580 ;	eeprom.c:43: I2C_Ack();
                             581 ;	genCall
-   05F9 12 08 0A            582 	lcall	_I2C_Ack
+   0641 12 08 52            582 	lcall	_I2C_Ack
                             583 ;	eeprom.c:44: for(i=0;i<bytes;i++)
                             584 ;	genAssign
-   05FC 90 00 10            585 	mov	dptr,#_seq_read_PARM_3
-   05FF E0                  586 	movx	a,@dptr
-   0600 FA                  587 	mov	r2,a
-   0601 A3                  588 	inc	dptr
-   0602 E0                  589 	movx	a,@dptr
-   0603 FB                  590 	mov	r3,a
+   0644 90 00 13            585 	mov	dptr,#_seq_read_PARM_3
+   0647 E0                  586 	movx	a,@dptr
+   0648 FA                  587 	mov	r2,a
+   0649 A3                  588 	inc	dptr
+   064A E0                  589 	movx	a,@dptr
+   064B FB                  590 	mov	r3,a
                             591 ;	genAssign
-   0604 90 00 12            592 	mov	dptr,#_seq_read_PARM_4
-   0607 E0                  593 	movx	a,@dptr
-   0608 FC                  594 	mov	r4,a
-   0609 A3                  595 	inc	dptr
-   060A E0                  596 	movx	a,@dptr
-   060B FD                  597 	mov	r5,a
-   060C A3                  598 	inc	dptr
-   060D E0                  599 	movx	a,@dptr
-   060E FE                  600 	mov	r6,a
+   064C 90 00 15            592 	mov	dptr,#_seq_read_PARM_4
+   064F E0                  593 	movx	a,@dptr
+   0650 FC                  594 	mov	r4,a
+   0651 A3                  595 	inc	dptr
+   0652 E0                  596 	movx	a,@dptr
+   0653 FD                  597 	mov	r5,a
+   0654 A3                  598 	inc	dptr
+   0655 E0                  599 	movx	a,@dptr
+   0656 FE                  600 	mov	r6,a
                             601 ;	genAssign
-   060F 7F 00               602 	mov	r7,#0x00
-   0611 78 00               603 	mov	r0,#0x00
-   0613                     604 00101$:
+   0657 7F 00               602 	mov	r7,#0x00
+   0659 78 00               603 	mov	r0,#0x00
+   065B                     604 00101$:
                             605 ;	genCmpLt
                             606 ;	genCmp
-   0613 C3                  607 	clr	c
-   0614 EF                  608 	mov	a,r7
-   0615 9A                  609 	subb	a,r2
-   0616 E8                  610 	mov	a,r0
-   0617 64 80               611 	xrl	a,#0x80
-   0619 8B F0               612 	mov	b,r3
-   061B 63 F0 80            613 	xrl	b,#0x80
-   061E 95 F0               614 	subb	a,b
+   065B C3                  607 	clr	c
+   065C EF                  608 	mov	a,r7
+   065D 9A                  609 	subb	a,r2
+   065E E8                  610 	mov	a,r0
+   065F 64 80               611 	xrl	a,#0x80
+   0661 8B F0               612 	mov	b,r3
+   0663 63 F0 80            613 	xrl	b,#0x80
+   0666 95 F0               614 	subb	a,b
                             615 ;	genIfxJump
                             616 ;	Peephole 108.a	removed ljmp by inverse jump logic
-   0620 50 56               617 	jnc	00104$
+   0668 50 56               617 	jnc	00104$
                             618 ;	Peephole 300	removed redundant label 00110$
                             619 ;	eeprom.c:46: *eeprom_Data= I2C_Read();  // Read the data from specified address
                             620 ;	genCall
-   0622 C0 02               621 	push	ar2
-   0624 C0 03               622 	push	ar3
-   0626 C0 04               623 	push	ar4
-   0628 C0 05               624 	push	ar5
-   062A C0 06               625 	push	ar6
-   062C C0 07               626 	push	ar7
-   062E C0 00               627 	push	ar0
-   0630 12 07 C0            628 	lcall	_I2C_Read
-   0633 A9 82               629 	mov	r1,dpl
-   0635 D0 00               630 	pop	ar0
-   0637 D0 07               631 	pop	ar7
-   0639 D0 06               632 	pop	ar6
-   063B D0 05               633 	pop	ar5
-   063D D0 04               634 	pop	ar4
-   063F D0 03               635 	pop	ar3
-   0641 D0 02               636 	pop	ar2
+   066A C0 02               621 	push	ar2
+   066C C0 03               622 	push	ar3
+   066E C0 04               623 	push	ar4
+   0670 C0 05               624 	push	ar5
+   0672 C0 06               625 	push	ar6
+   0674 C0 07               626 	push	ar7
+   0676 C0 00               627 	push	ar0
+   0678 12 08 08            628 	lcall	_I2C_Read
+   067B A9 82               629 	mov	r1,dpl
+   067D D0 00               630 	pop	ar0
+   067F D0 07               631 	pop	ar7
+   0681 D0 06               632 	pop	ar6
+   0683 D0 05               633 	pop	ar5
+   0685 D0 04               634 	pop	ar4
+   0687 D0 03               635 	pop	ar3
+   0689 D0 02               636 	pop	ar2
                             637 ;	genPointerSet
                             638 ;	genGenPointerSet
-   0643 8C 82               639 	mov	dpl,r4
-   0645 8D 83               640 	mov	dph,r5
-   0647 8E F0               641 	mov	b,r6
-   0649 E9                  642 	mov	a,r1
-   064A 12 15 2A            643 	lcall	__gptrput
-   064D A3                  644 	inc	dptr
-   064E AC 82               645 	mov	r4,dpl
-   0650 AD 83               646 	mov	r5,dph
+   068B 8C 82               639 	mov	dpl,r4
+   068D 8D 83               640 	mov	dph,r5
+   068F 8E F0               641 	mov	b,r6
+   0691 E9                  642 	mov	a,r1
+   0692 12 15 C1            643 	lcall	__gptrput
+   0695 A3                  644 	inc	dptr
+   0696 AC 82               645 	mov	r4,dpl
+   0698 AD 83               646 	mov	r5,dph
                             647 ;	eeprom.c:47: I2C_Ack_seq();
                             648 ;	genCall
-   0652 C0 02               649 	push	ar2
-   0654 C0 03               650 	push	ar3
-   0656 C0 04               651 	push	ar4
-   0658 C0 05               652 	push	ar5
-   065A C0 06               653 	push	ar6
-   065C C0 07               654 	push	ar7
-   065E C0 00               655 	push	ar0
-   0660 12 08 2E            656 	lcall	_I2C_Ack_seq
-   0663 D0 00               657 	pop	ar0
-   0665 D0 07               658 	pop	ar7
-   0667 D0 06               659 	pop	ar6
-   0669 D0 05               660 	pop	ar5
-   066B D0 04               661 	pop	ar4
-   066D D0 03               662 	pop	ar3
-   066F D0 02               663 	pop	ar2
+   069A C0 02               649 	push	ar2
+   069C C0 03               650 	push	ar3
+   069E C0 04               651 	push	ar4
+   06A0 C0 05               652 	push	ar5
+   06A2 C0 06               653 	push	ar6
+   06A4 C0 07               654 	push	ar7
+   06A6 C0 00               655 	push	ar0
+   06A8 12 08 61            656 	lcall	_I2C_Ack_seq
+   06AB D0 00               657 	pop	ar0
+   06AD D0 07               658 	pop	ar7
+   06AF D0 06               659 	pop	ar6
+   06B1 D0 05               660 	pop	ar5
+   06B3 D0 04               661 	pop	ar4
+   06B5 D0 03               662 	pop	ar3
+   06B7 D0 02               663 	pop	ar2
                             664 ;	eeprom.c:48: eeprom_Data++;
                             665 ;	eeprom.c:44: for(i=0;i<bytes;i++)
                             666 ;	genPlus
                             667 ;     genPlusIncr
                             668 ;	tail increment optimized (range 7)
-   0671 0F                  669 	inc	r7
-   0672 BF 00 9E            670 	cjne	r7,#0x00,00101$
-   0675 08                  671 	inc	r0
+   06B9 0F                  669 	inc	r7
+   06BA BF 00 9E            670 	cjne	r7,#0x00,00101$
+   06BD 08                  671 	inc	r0
                             672 ;	Peephole 112.b	changed ljmp to sjmp
-   0676 80 9B               673 	sjmp	00101$
-   0678                     674 00104$:
+   06BE 80 9B               673 	sjmp	00101$
+   06C0                     674 00104$:
                             675 ;	eeprom.c:51: eeprom_Data[bytes]= I2C_Read();  // Read the data from specified address
                             676 ;	genPlus
                             677 ;	Peephole 236.g	used r2 instead of ar2
-   0678 EA                  678 	mov	a,r2
+   06C0 EA                  678 	mov	a,r2
                             679 ;	Peephole 236.a	used r4 instead of ar4
-   0679 2C                  680 	add	a,r4
-   067A FA                  681 	mov	r2,a
+   06C1 2C                  680 	add	a,r4
+   06C2 FA                  681 	mov	r2,a
                             682 ;	Peephole 236.g	used r3 instead of ar3
-   067B EB                  683 	mov	a,r3
+   06C3 EB                  683 	mov	a,r3
                             684 ;	Peephole 236.b	used r5 instead of ar5
-   067C 3D                  685 	addc	a,r5
-   067D FB                  686 	mov	r3,a
-   067E 8E 07               687 	mov	ar7,r6
+   06C4 3D                  685 	addc	a,r5
+   06C5 FB                  686 	mov	r3,a
+   06C6 8E 07               687 	mov	ar7,r6
                             688 ;	genCall
-   0680 C0 02               689 	push	ar2
-   0682 C0 03               690 	push	ar3
-   0684 C0 07               691 	push	ar7
-   0686 12 07 C0            692 	lcall	_I2C_Read
-   0689 AC 82               693 	mov	r4,dpl
-   068B D0 07               694 	pop	ar7
-   068D D0 03               695 	pop	ar3
-   068F D0 02               696 	pop	ar2
+   06C8 C0 02               689 	push	ar2
+   06CA C0 03               690 	push	ar3
+   06CC C0 07               691 	push	ar7
+   06CE 12 08 08            692 	lcall	_I2C_Read
+   06D1 AC 82               693 	mov	r4,dpl
+   06D3 D0 07               694 	pop	ar7
+   06D5 D0 03               695 	pop	ar3
+   06D7 D0 02               696 	pop	ar2
                             697 ;	genPointerSet
                             698 ;	genGenPointerSet
-   0691 8A 82               699 	mov	dpl,r2
-   0693 8B 83               700 	mov	dph,r3
-   0695 8F F0               701 	mov	b,r7
-   0697 EC                  702 	mov	a,r4
-   0698 12 15 2A            703 	lcall	__gptrput
+   06D9 8A 82               699 	mov	dpl,r2
+   06DB 8B 83               700 	mov	dph,r3
+   06DD 8F F0               701 	mov	b,r7
+   06DF EC                  702 	mov	a,r4
+   06E0 12 15 C1            703 	lcall	__gptrput
                             704 ;	eeprom.c:52: I2C_NoAck();
                             705 ;	genCall
-   069B 12 08 36            706 	lcall	_I2C_NoAck
+   06E3 12 08 69            706 	lcall	_I2C_NoAck
                             707 ;	eeprom.c:53: I2C_Stop();
                             708 ;	genCall
                             709 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   069E 02 07 78            710 	ljmp	_I2C_Stop
+   06E6 02 07 C0            710 	ljmp	_I2C_Stop
                             711 ;
                             712 ;------------------------------------------------------------
                             713 ;Allocation info for local variables in function 'EEPROM_WriteByte'
@@ -720,66 +720,66 @@
                             720 ;	-----------------------------------------
                             721 ;	 function EEPROM_WriteByte
                             722 ;	-----------------------------------------
-   06A1                     723 _EEPROM_WriteByte:
+   06E9                     723 _EEPROM_WriteByte:
                             724 ;	genReceive
-   06A1 E5 82               725 	mov	a,dpl
-   06A3 90 00 18            726 	mov	dptr,#_EEPROM_WriteByte_eeprom_Address_1_1
-   06A6 F0                  727 	movx	@dptr,a
+   06E9 E5 82               725 	mov	a,dpl
+   06EB 90 00 1B            726 	mov	dptr,#_EEPROM_WriteByte_eeprom_Address_1_1
+   06EE F0                  727 	movx	@dptr,a
                             728 ;	eeprom.c:73: I2C_Start();               // Start i2c communication
                             729 ;	genCall
-   06A7 12 07 5B            730 	lcall	_I2C_Start
+   06EF 12 07 A3            730 	lcall	_I2C_Start
                             731 ;	eeprom.c:74: I2C_Write(EEPROM_ID|(Page_Number<<1));	   // connect to AT2404 by sending its ID on I2c Bus
                             732 ;	genAssign
-   06AA 90 00 17            733 	mov	dptr,#_EEPROM_WriteByte_PARM_3
-   06AD E0                  734 	movx	a,@dptr
+   06F2 90 00 1A            733 	mov	dptr,#_EEPROM_WriteByte_PARM_3
+   06F5 E0                  734 	movx	a,@dptr
                             735 ;	genLeftShift
                             736 ;	genLeftShiftLiteral
                             737 ;	genlshOne
                             738 ;	Peephole 105	removed redundant mov
                             739 ;	Peephole 204	removed redundant mov
-   06AE 25 E0               740 	add	a,acc
-   06B0 FA                  741 	mov	r2,a
+   06F6 25 E0               740 	add	a,acc
+   06F8 FA                  741 	mov	r2,a
                             742 ;	genOr
-   06B1 43 02 A0            743 	orl	ar2,#0xA0
+   06F9 43 02 A0            743 	orl	ar2,#0xA0
                             744 ;	genCall
-   06B4 8A 82               745 	mov	dpl,r2
-   06B6 12 07 93            746 	lcall	_I2C_Write
+   06FC 8A 82               745 	mov	dpl,r2
+   06FE 12 07 DB            746 	lcall	_I2C_Write
                             747 ;	eeprom.c:75: I2C_Ack();
                             748 ;	genCall
-   06B9 12 08 0A            749 	lcall	_I2C_Ack
+   0701 12 08 52            749 	lcall	_I2C_Ack
                             750 ;	eeprom.c:76: I2C_Write(eeprom_Address); // Select the Specified EEPROM address of AT2404
                             751 ;	genAssign
-   06BC 90 00 18            752 	mov	dptr,#_EEPROM_WriteByte_eeprom_Address_1_1
-   06BF E0                  753 	movx	a,@dptr
+   0704 90 00 1B            752 	mov	dptr,#_EEPROM_WriteByte_eeprom_Address_1_1
+   0707 E0                  753 	movx	a,@dptr
                             754 ;	genCall
-   06C0 FA                  755 	mov	r2,a
+   0708 FA                  755 	mov	r2,a
                             756 ;	Peephole 244.c	loading dpl from a instead of r2
-   06C1 F5 82               757 	mov	dpl,a
-   06C3 12 07 93            758 	lcall	_I2C_Write
+   0709 F5 82               757 	mov	dpl,a
+   070B 12 07 DB            758 	lcall	_I2C_Write
                             759 ;	eeprom.c:77: I2C_Ack();
                             760 ;	genCall
-   06C6 12 08 0A            761 	lcall	_I2C_Ack
+   070E 12 08 52            761 	lcall	_I2C_Ack
                             762 ;	eeprom.c:78: I2C_Write(eeprom_Data);    // Write the data at specified address
                             763 ;	genAssign
-   06C9 90 00 16            764 	mov	dptr,#_EEPROM_WriteByte_PARM_2
-   06CC E0                  765 	movx	a,@dptr
+   0711 90 00 19            764 	mov	dptr,#_EEPROM_WriteByte_PARM_2
+   0714 E0                  765 	movx	a,@dptr
                             766 ;	genCall
-   06CD FA                  767 	mov	r2,a
+   0715 FA                  767 	mov	r2,a
                             768 ;	Peephole 244.c	loading dpl from a instead of r2
-   06CE F5 82               769 	mov	dpl,a
-   06D0 12 07 93            770 	lcall	_I2C_Write
+   0716 F5 82               769 	mov	dpl,a
+   0718 12 07 DB            770 	lcall	_I2C_Write
                             771 ;	eeprom.c:79: I2C_Ack();
                             772 ;	genCall
-   06D3 12 08 0A            773 	lcall	_I2C_Ack
+   071B 12 08 52            773 	lcall	_I2C_Ack
                             774 ;	eeprom.c:80: I2C_Stop();           	   // Stop i2c communication after Writing the data
                             775 ;	genCall
-   06D6 12 07 78            776 	lcall	_I2C_Stop
+   071E 12 07 C0            776 	lcall	_I2C_Stop
                             777 ;	eeprom.c:81: delay_ms(5);               // Write operation takes max 5ms, refer At2404 datasheet
                             778 ;	genCall
                             779 ;	Peephole 182.b	used 16 bit load of dptr
-   06D9 90 00 05            780 	mov	dptr,#0x0005
+   0721 90 00 05            780 	mov	dptr,#0x0005
                             781 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   06DC 02 05 48            782 	ljmp	_delay_ms
+   0724 02 05 90            782 	ljmp	_delay_ms
                             783 ;
                             784 ;------------------------------------------------------------
                             785 ;Allocation info for local variables in function 'EEPROM_ReadByte'
@@ -792,96 +792,96 @@
                             792 ;	-----------------------------------------
                             793 ;	 function EEPROM_ReadByte
                             794 ;	-----------------------------------------
-   06DF                     795 _EEPROM_ReadByte:
+   0727                     795 _EEPROM_ReadByte:
                             796 ;	genReceive
-   06DF E5 82               797 	mov	a,dpl
-   06E1 90 00 1A            798 	mov	dptr,#_EEPROM_ReadByte_eeprom_Address_1_1
-   06E4 F0                  799 	movx	@dptr,a
+   0727 E5 82               797 	mov	a,dpl
+   0729 90 00 1D            798 	mov	dptr,#_EEPROM_ReadByte_eeprom_Address_1_1
+   072C F0                  799 	movx	@dptr,a
                             800 ;	eeprom.c:107: I2C_Start();               // Start i2c communication
                             801 ;	genCall
-   06E5 12 07 5B            802 	lcall	_I2C_Start
+   072D 12 07 A3            802 	lcall	_I2C_Start
                             803 ;	eeprom.c:108: I2C_Write(EEPROM_ID|(Page_Number<<1));	   // connect to AT2404(write) by sending its ID on I2c Bus
                             804 ;	genAssign
-   06E8 90 00 19            805 	mov	dptr,#_EEPROM_ReadByte_PARM_2
-   06EB E0                  806 	movx	a,@dptr
+   0730 90 00 1C            805 	mov	dptr,#_EEPROM_ReadByte_PARM_2
+   0733 E0                  806 	movx	a,@dptr
                             807 ;	genLeftShift
                             808 ;	genLeftShiftLiteral
                             809 ;	genlshOne
                             810 ;	Peephole 105	removed redundant mov
                             811 ;	Peephole 204	removed redundant mov
-   06EC 25 E0               812 	add	a,acc
-   06EE FA                  813 	mov	r2,a
+   0734 25 E0               812 	add	a,acc
+   0736 FA                  813 	mov	r2,a
                             814 ;	genOr
-   06EF 74 A0               815 	mov	a,#0xA0
-   06F1 4A                  816 	orl	a,r2
+   0737 74 A0               815 	mov	a,#0xA0
+   0739 4A                  816 	orl	a,r2
                             817 ;	genCall
-   06F2 FB                  818 	mov	r3,a
+   073A FB                  818 	mov	r3,a
                             819 ;	Peephole 244.c	loading dpl from a instead of r3
-   06F3 F5 82               820 	mov	dpl,a
-   06F5 C0 02               821 	push	ar2
-   06F7 12 07 93            822 	lcall	_I2C_Write
-   06FA D0 02               823 	pop	ar2
+   073B F5 82               820 	mov	dpl,a
+   073D C0 02               821 	push	ar2
+   073F 12 07 DB            822 	lcall	_I2C_Write
+   0742 D0 02               823 	pop	ar2
                             824 ;	eeprom.c:109: I2C_Ack();
                             825 ;	genCall
-   06FC C0 02               826 	push	ar2
-   06FE 12 08 0A            827 	lcall	_I2C_Ack
-   0701 D0 02               828 	pop	ar2
+   0744 C0 02               826 	push	ar2
+   0746 12 08 52            827 	lcall	_I2C_Ack
+   0749 D0 02               828 	pop	ar2
                             829 ;	eeprom.c:110: I2C_Write(eeprom_Address); // Select the Specified EEPROM address of AT2404
                             830 ;	genAssign
-   0703 90 00 1A            831 	mov	dptr,#_EEPROM_ReadByte_eeprom_Address_1_1
-   0706 E0                  832 	movx	a,@dptr
+   074B 90 00 1D            831 	mov	dptr,#_EEPROM_ReadByte_eeprom_Address_1_1
+   074E E0                  832 	movx	a,@dptr
                             833 ;	genCall
-   0707 FB                  834 	mov	r3,a
+   074F FB                  834 	mov	r3,a
                             835 ;	Peephole 244.c	loading dpl from a instead of r3
-   0708 F5 82               836 	mov	dpl,a
-   070A C0 02               837 	push	ar2
-   070C 12 07 93            838 	lcall	_I2C_Write
-   070F D0 02               839 	pop	ar2
+   0750 F5 82               836 	mov	dpl,a
+   0752 C0 02               837 	push	ar2
+   0754 12 07 DB            838 	lcall	_I2C_Write
+   0757 D0 02               839 	pop	ar2
                             840 ;	eeprom.c:111: I2C_Ack();
                             841 ;	genCall
-   0711 C0 02               842 	push	ar2
-   0713 12 08 0A            843 	lcall	_I2C_Ack
-   0716 D0 02               844 	pop	ar2
+   0759 C0 02               842 	push	ar2
+   075B 12 08 52            843 	lcall	_I2C_Ack
+   075E D0 02               844 	pop	ar2
                             845 ;	eeprom.c:113: I2C_Start();		       // Start i2c communication
                             846 ;	genCall
-   0718 C0 02               847 	push	ar2
-   071A 12 07 5B            848 	lcall	_I2C_Start
-   071D D0 02               849 	pop	ar2
+   0760 C0 02               847 	push	ar2
+   0762 12 07 A3            848 	lcall	_I2C_Start
+   0765 D0 02               849 	pop	ar2
                             850 ;	eeprom.c:114: I2C_Write(0xA1|(Page_Number<<1));           // connect to AT2404(read) by sending its ID on I2c Bus
                             851 ;	genOr
-   071F 43 02 A1            852 	orl	ar2,#0xA1
+   0767 43 02 A1            852 	orl	ar2,#0xA1
                             853 ;	genCall
-   0722 8A 82               854 	mov	dpl,r2
-   0724 12 07 93            855 	lcall	_I2C_Write
+   076A 8A 82               854 	mov	dpl,r2
+   076C 12 07 DB            855 	lcall	_I2C_Write
                             856 ;	eeprom.c:115: I2C_Ack();
                             857 ;	genCall
-   0727 12 08 0A            858 	lcall	_I2C_Ack
+   076F 12 08 52            858 	lcall	_I2C_Ack
                             859 ;	eeprom.c:116: eeprom_Data = I2C_Read();  // Read the data from specified address
                             860 ;	genCall
-   072A 12 07 C0            861 	lcall	_I2C_Read
-   072D AA 82               862 	mov	r2,dpl
+   0772 12 08 08            861 	lcall	_I2C_Read
+   0775 AA 82               862 	mov	r2,dpl
                             863 ;	eeprom.c:117: I2C_NoAck();
                             864 ;	genCall
-   072F C0 02               865 	push	ar2
-   0731 12 08 36            866 	lcall	_I2C_NoAck
-   0734 D0 02               867 	pop	ar2
+   0777 C0 02               865 	push	ar2
+   0779 12 08 69            866 	lcall	_I2C_NoAck
+   077C D0 02               867 	pop	ar2
                             868 ;	eeprom.c:118: I2C_Stop();		           // Stop i2c communication after Reading the data
                             869 ;	genCall
-   0736 C0 02               870 	push	ar2
-   0738 12 07 78            871 	lcall	_I2C_Stop
-   073B D0 02               872 	pop	ar2
+   077E C0 02               870 	push	ar2
+   0780 12 07 C0            871 	lcall	_I2C_Stop
+   0783 D0 02               872 	pop	ar2
                             873 ;	eeprom.c:119: delay_us(10);
                             874 ;	genCall
                             875 ;	Peephole 182.b	used 16 bit load of dptr
-   073D 90 00 0A            876 	mov	dptr,#0x000A
-   0740 C0 02               877 	push	ar2
-   0742 12 05 15            878 	lcall	_delay_us
-   0745 D0 02               879 	pop	ar2
+   0785 90 00 0A            876 	mov	dptr,#0x000A
+   0788 C0 02               877 	push	ar2
+   078A 12 05 5D            878 	lcall	_delay_us
+   078D D0 02               879 	pop	ar2
                             880 ;	eeprom.c:120: return eeprom_Data;          // Return the Read data
                             881 ;	genRet
-   0747 8A 82               882 	mov	dpl,r2
+   078F 8A 82               882 	mov	dpl,r2
                             883 ;	Peephole 300	removed redundant label 00101$
-   0749 22                  884 	ret
+   0791 22                  884 	ret
                             885 	.area CSEG    (CODE)
                             886 	.area CONST   (CODE)
                             887 	.area XINIT   (CODE)

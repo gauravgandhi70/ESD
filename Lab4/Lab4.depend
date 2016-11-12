@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1478905070 source:c:\users\admin\documents\lab4\main.c
+1478905530 source:c:\users\admin\documents\lab4\main.c
 	<mcs51/8051.h>
 	<at89c51ed2.h>
 	<stdio.h>
@@ -11,7 +11,7 @@
 	"uart.h"
 	"atoh_f.h"
 
-1478901116 source:c:\users\admin\documents\lab4\lcd.c
+1478916420 source:c:\users\admin\documents\lab4\lcd.c
 	<mcs51/8051.h>
 	<at89c51ed2.h>
 	<stdio.h>
@@ -38,7 +38,7 @@
 
 1478859326 c:\users\admin\documents\lab4\eeprom.h
 
-1478859341 source:c:\users\admin\documents\lab4\i2c.c
+1478910457 source:c:\users\admin\documents\lab4\i2c.c
 	<at89c51ed2.h>
 	<mcs51/8051.h>
 	"delay.h"
@@ -63,5 +63,5 @@
 	"delay.h"
 	"uart.h"
 
-1478822115 c:\users\admin\documents\lab4\atoh_f.h
+1478929253 c:\users\admin\documents\lab4\atoh_f.h
 
