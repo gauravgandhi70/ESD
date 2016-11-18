@@ -9,10 +9,14 @@ Author: Gaurav Gandhi
 #include<stdio.h>
 #include<stdlib.h>
 #include"lcd.h"
-#include"uart.h"
+#include"i2c.h"
+#include"eeprom.h"
 #include"delay.h"
+#include"uart.h"
 #include"atoh_f.h"
-/*-----------------------------------------------------------------------------------------
+#include"clock.h"
+#include"data_dump.h"
+#include"io_exp.h"/*-----------------------------------------------------------------------------------------
                                 void lcd_init()
  ------------------------------------------------------------------------------------------
  * I/P Arguments: none
@@ -47,6 +51,8 @@ void lcd_init()
 
     lcdbusywait();
     *write = 0x01;              // Clear screen and send the cursor home
+
+    lcdgotoxy(1,1);
 
 }
 
@@ -141,7 +147,7 @@ void lcdbusywait()
    {
        temp = *read;
    }
-    P1_0=0;
+
 }
 
 /*-----------------------------------------------------------------------------------------
@@ -198,7 +204,7 @@ void lcdgotoxy(unsigned char row, unsigned char column)
 }
 
 
-void lcd_display(char rd, char *a)
+void lcd_display(unsigned char rd, char *a)
 {
     char d[5],c[5];
     unsigned int row,flag=0,b;
@@ -229,6 +235,70 @@ void lcd_display(char rd, char *a)
             lcdputstr(a);
             lcdputch(':');
             lcdputstr(c);
+
+}
+
+void lcdcreatechar(unsigned char ccode,unsigned char *row_vals) __critical
+{
+    char c;
+    ccode=(ccode<<3);
+    c=ccode|0x40;
+    lcdputcmd(c);
+
+    for(c=0;c<8;c++)
+    {
+        lcdputch(*(row_vals+c));
+    }
+
+
+
+}
+
+
+void logo_creator() __critical
+{
+    unsigned char row[7]={4,4,3,1,1},column[7]={2,3,5,4,5};
+    int i;
+
+     lcdputcmd(1);
+
+
+        lcd_dis_cus(6,2,1);       lcd_dis_cus(0,3,4);
+        lcd_dis_cus(0,3,1);       lcd_dis_cus(0,2,6);
+        lcd_dis_cus(6,2,4);
+
+        lcd_dis_cus(1,4,1);
+
+
+
+
+       for(i=0;i<5;i++)
+       {
+           lcd_dis_cus(2,row[i],column[i]);
+
+       }
+
+
+
+           lcd_dis_cus(3,4,4);
+           lcd_dis_cus(3,3,6);
+
+           lcd_dis_cus(4,1,6);
+
+           lcd_dis_cus(5,3,3);
+           lcd_dis_cus(5,1,3);
+
+}
+void lcd_dis_cus(unsigned char ccode,unsigned char row,unsigned char col) __critical
+{
+
+    WDTPRG |=0x07;
+    WDTRST = 0x01E;
+    WDTRST = 0x0E1;
+    lcdgotoxy(row,col);
+    lcdputch(ccode);
+
+
 
 }
 

@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.6.0 #4309 (Jul 28 2006)
-; This file generated Fri Nov 11 03:30:55 2016
+; This file generated Tue Nov 15 08:41:24 2016
 ;--------------------------------------------------------
 	.module eeprom
 	.optsdcc -mmcs51 --model-large
@@ -214,6 +214,7 @@
 	.globl _seq_read
 	.globl _EEPROM_WriteByte
 	.globl _EEPROM_ReadByte
+	.globl _eereset
 ;--------------------------------------------------------
 ; special function registers
 ;--------------------------------------------------------
@@ -882,6 +883,60 @@ _EEPROM_ReadByte:
 	mov	dpl,r2
 ;	Peephole 300	removed redundant label 00101$
 	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'eereset'
+;------------------------------------------------------------
+;i                         Allocated with name '_eereset_i_1_1'
+;dat                       Allocated with name '_eereset_dat_1_1'
+;------------------------------------------------------------
+;	eeprom.c:125: void eereset()
+;	-----------------------------------------
+;	 function eereset
+;	-----------------------------------------
+_eereset:
+;	eeprom.c:129: I2C_Start();               // Start i2c communication
+;	genCall
+	lcall	_I2C_Start
+;	eeprom.c:130: for(i=0;i<9;i++)
+;	genAssign
+	mov	r2,#0x00
+00101$:
+;	genCmpLt
+;	genCmp
+	cjne	r2,#0x09,00110$
+00110$:
+;	genIfxJump
+;	Peephole 108.a	removed ljmp by inverse jump logic
+	jnc	00104$
+;	Peephole 300	removed redundant label 00111$
+;	eeprom.c:132: P1_2 = dat & 0x80;    // Send Bit by Bit on SDA line
+;	genAssign
+	setb	_P1_2
+;	eeprom.c:133: I2C_Clock();      	 // Generate Clock at SCL
+;	genCall
+	push	ar2
+	lcall	_I2C_Clock
+	pop	ar2
+;	eeprom.c:130: for(i=0;i<9;i++)
+;	genPlus
+;     genPlusIncr
+	inc	r2
+;	Peephole 112.b	changed ljmp to sjmp
+	sjmp	00101$
+00104$:
+;	eeprom.c:136: I2C_Start();               // Start i2c communication
+;	genCall
+	lcall	_I2C_Start
+;	eeprom.c:138: I2C_Stop();           	   // Stop i2c communication after Writing the data
+;	genCall
+	lcall	_I2C_Stop
+;	eeprom.c:140: delay_ms(5);               // Write operation takes max 5ms, refer At2404 datasheet
+;	genCall
+;	Peephole 182.b	used 16 bit load of dptr
+	mov	dptr,#0x0005
+;	Peephole 253.b	replaced lcall/ret with ljmp
+	ljmp	_delay_ms
+;
 	.area CSEG    (CODE)
 	.area CONST   (CODE)
 	.area XINIT   (CODE)

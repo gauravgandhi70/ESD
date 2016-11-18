@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.6.0 #4309 (Jul 28 2006)
-; This file generated Fri Nov 11 22:40:53 2016
+; This file generated Wed Nov 16 16:14:44 2016
 ;--------------------------------------------------------
 	.module atoh_f
 	.optsdcc -mmcs51 --model-large
@@ -9,6 +9,7 @@
 ;--------------------------------------------------------
 ; Public variables in this module
 ;--------------------------------------------------------
+	.globl _atob
 	.globl _ctoa
 	.globl _atoh_data
 	.globl _atoh
@@ -208,8 +209,6 @@
 	.globl _DPL
 	.globl _SP
 	.globl _P0
-	.globl _read
-	.globl _write
 ;--------------------------------------------------------
 ; special function registers
 ;--------------------------------------------------------
@@ -455,14 +454,14 @@ _ctoa_c_1_1:
 	.ds 2
 _ctoa_d_1_1:
 	.ds 1
+_atob_c_1_1:
+	.ds 1
+_atob_d_1_1:
+	.ds 1
 ;--------------------------------------------------------
 ; external initialized ram data
 ;--------------------------------------------------------
 	.area XISEG   (XDATA)
-_write::
-	.ds 2
-_read::
-	.ds 2
 	.area HOME    (CODE)
 	.area GSINIT0 (CODE)
 	.area GSINIT1 (CODE)
@@ -1865,12 +1864,7 @@ _ctoa:
 	inc	dptr
 	mov	a,r2
 	movx	@dptr,a
-;	atoh_f.c:130: char d=0x30;
-;	genAssign
-	mov	dptr,#_ctoa_d_1_1
-	mov	a,#0x30
-	movx	@dptr,a
-;	atoh_f.c:131: for(i=0;i<16;i++)
+;	atoh_f.c:131: if(c<10)
 ;	genAssign
 	mov	dptr,#_ctoa_c_1_1
 	movx	a,@dptr
@@ -1878,12 +1872,114 @@ _ctoa:
 	inc	dptr
 	movx	a,@dptr
 	mov	r3,a
+;	genCmpLt
+;	genCmp
+	clr	c
+	mov	a,r2
+	subb	a,#0x0A
+	mov	a,r3
+	xrl	a,#0x80
+	subb	a,#0x80
+;	genIfxJump
+;	Peephole 108.a	removed ljmp by inverse jump logic
+	jnc	00118$
+;	Peephole 300	removed redundant label 00130$
+;	atoh_f.c:133: d=0x30;
 ;	genAssign
-	mov	r4,#0x30
+	mov	dptr,#_ctoa_d_1_1
+	mov	a,#0x30
+	movx	@dptr,a
+;	atoh_f.c:134: for(i=0;i<10;i++)
 ;	genAssign
-	mov	r5,#0x00
-	mov	r6,#0x00
+	mov	ar4,r2
+	mov	ar5,r3
+;	genAssign
+	mov	r6,#0x30
+;	genAssign
+	mov	r7,#0x00
+	mov	r0,#0x00
 00104$:
+;	genCmpLt
+;	genCmp
+	clr	c
+	mov	a,r7
+	subb	a,#0x0A
+	mov	a,r0
+	xrl	a,#0x80
+	subb	a,#0x80
+;	genIfxJump
+;	Peephole 108.a	removed ljmp by inverse jump logic
+	jnc	00120$
+;	Peephole 300	removed redundant label 00131$
+;	atoh_f.c:136: if(c==i)
+;	genCmpEq
+;	gencjneshort
+	mov	a,r4
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 197.b	optimized misc jump sequence
+	cjne	a,ar7,00102$
+	mov	a,r5
+	cjne	a,ar0,00102$
+;	Peephole 200.b	removed redundant sjmp
+;	Peephole 300	removed redundant label 00132$
+;	Peephole 300	removed redundant label 00133$
+;	atoh_f.c:138: return d;
+;	genAssign
+	mov	dptr,#_ctoa_d_1_1
+	movx	a,@dptr
+;	genRet
+	mov	r1,a
+;	Peephole 244.c	loading dpl from a instead of r1
+	mov	dpl,a
+;	atoh_f.c:139: break;
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 251.b	replaced sjmp to ret with ret
+	ret
+00102$:
+;	atoh_f.c:141: else{d++;}
+;	genPlus
+;     genPlusIncr
+	inc	r6
+;	genAssign
+	mov	dptr,#_ctoa_d_1_1
+	mov	a,r6
+	movx	@dptr,a
+;	atoh_f.c:134: for(i=0;i<10;i++)
+;	genPlus
+;     genPlusIncr
+;	tail increment optimized (range 10)
+	inc	r7
+	cjne	r7,#0x00,00104$
+	inc	r0
+;	Peephole 112.b	changed ljmp to sjmp
+	sjmp	00104$
+00118$:
+;	atoh_f.c:144: else if(c<16)
+;	genCmpLt
+;	genCmp
+	clr	c
+	mov	a,r2
+	subb	a,#0x10
+	mov	a,r3
+	xrl	a,#0x80
+	subb	a,#0x80
+;	genIfxJump
+;	Peephole 108.a	removed ljmp by inverse jump logic
+	jnc	00120$
+;	Peephole 300	removed redundant label 00134$
+;	atoh_f.c:146: d=0x41;
+;	genAssign
+	mov	dptr,#_ctoa_d_1_1
+	mov	a,#0x41
+	movx	@dptr,a
+;	atoh_f.c:147: for(i=10;i<16;i++)
+;	genAssign
+;	genAssign
+	mov	r4,#0x41
+;	genAssign
+	mov	r5,#0x0A
+	mov	r6,#0x00
+00111$:
 ;	genCmpLt
 ;	genCmp
 	clr	c
@@ -1894,21 +1990,21 @@ _ctoa:
 	subb	a,#0x80
 ;	genIfxJump
 ;	Peephole 108.a	removed ljmp by inverse jump logic
-	jnc	00108$
-;	Peephole 300	removed redundant label 00113$
-;	atoh_f.c:133: if(c==i)
+	jnc	00120$
+;	Peephole 300	removed redundant label 00135$
+;	atoh_f.c:149: if(c==i)
 ;	genCmpEq
 ;	gencjneshort
 	mov	a,r2
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 197.b	optimized misc jump sequence
-	cjne	a,ar5,00102$
+	cjne	a,ar5,00109$
 	mov	a,r3
-	cjne	a,ar6,00102$
+	cjne	a,ar6,00109$
 ;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00114$
-;	Peephole 300	removed redundant label 00115$
-;	atoh_f.c:135: return d;
+;	Peephole 300	removed redundant label 00136$
+;	Peephole 300	removed redundant label 00137$
+;	atoh_f.c:151: return d;
 ;	genAssign
 	mov	dptr,#_ctoa_d_1_1
 	movx	a,@dptr
@@ -1916,12 +2012,12 @@ _ctoa:
 	mov	r7,a
 ;	Peephole 244.c	loading dpl from a instead of r7
 	mov	dpl,a
-;	atoh_f.c:136: break;
+;	atoh_f.c:152: break;
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 251.b	replaced sjmp to ret with ret
 	ret
-00102$:
-;	atoh_f.c:138: else{d++;}
+00109$:
+;	atoh_f.c:154: else{d++;}
 ;	genPlus
 ;     genPlusIncr
 	inc	r4
@@ -1929,21 +2025,111 @@ _ctoa:
 	mov	dptr,#_ctoa_d_1_1
 	mov	a,r4
 	movx	@dptr,a
-;	atoh_f.c:131: for(i=0;i<16;i++)
+;	atoh_f.c:147: for(i=10;i<16;i++)
 ;	genPlus
 ;     genPlusIncr
 ;	tail increment optimized (range 10)
 	inc	r5
-	cjne	r5,#0x00,00104$
+	cjne	r5,#0x00,00111$
 	inc	r6
 ;	Peephole 112.b	changed ljmp to sjmp
-	sjmp	00104$
-00108$:
+	sjmp	00111$
+00120$:
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'atob'
+;------------------------------------------------------------
+;c                         Allocated with name '_atob_c_1_1'
+;i                         Allocated with name '_atob_i_1_1'
+;d                         Allocated with name '_atob_d_1_1'
+;------------------------------------------------------------
+;	atoh_f.c:164: unsigned char atob(unsigned char c)
+;	-----------------------------------------
+;	 function atob
+;	-----------------------------------------
+_atob:
+;	genReceive
+	mov	a,dpl
+	mov	dptr,#_atob_c_1_1
+	movx	@dptr,a
+;	atoh_f.c:167: unsigned char d=0;
+;	genAssign
+	mov	dptr,#_atob_d_1_1
+;	Peephole 181	changed mov to clr
+	clr	a
+	movx	@dptr,a
+;	atoh_f.c:169: for(i=0;i<8;i++)
+;	genAssign
+	mov	r2,#0x08
+	mov	r3,#0x00
+00103$:
+;	atoh_f.c:171: d= d<<1;
+;	genAssign
+	mov	dptr,#_atob_d_1_1
+	movx	a,@dptr
+;	genLeftShift
+;	genLeftShiftLiteral
+;	genlshOne
+;	Peephole 105	removed redundant mov
+;	genAssign
+;	Peephole 204	removed redundant mov
+	add	a,acc
+	mov	r4,a
+	mov	dptr,#_atob_d_1_1
+;	Peephole 100	removed redundant mov
+	movx	@dptr,a
+;	atoh_f.c:172: d=d | (c%(2));
+;	genAssign
+	mov	dptr,#_atob_c_1_1
+	movx	a,@dptr
+	mov	r4,a
+;	genAnd
+	mov	a,#0x01
+	anl	a,r4
+	mov	r5,a
+;	genAssign
+;	genOr
+	mov	dptr,#_atob_d_1_1
+	movx	a,@dptr
+	mov	r6,a
+;	Peephole 248.a	optimized or to xdata
+	orl	a,r5
+	movx	@dptr,a
+;	atoh_f.c:174: c=c/2;
+;	genRightShift
+;	genRightShiftLiteral
+;	genrshOne
+	mov	a,r4
+	clr	c
+	rrc	a
+;	genAssign
+	mov	r4,a
+	mov	dptr,#_atob_c_1_1
+;	Peephole 100	removed redundant mov
+	movx	@dptr,a
+;	genMinus
+;	genMinusDec
+	dec	r2
+	cjne	r2,#0xff,00109$
+	dec	r3
+00109$:
+;	atoh_f.c:169: for(i=0;i<8;i++)
+;	genIfx
+	mov	a,r2
+	orl	a,r3
+;	genIfxJump
+;	Peephole 108.b	removed ljmp by inverse jump logic
+	jnz	00103$
+;	Peephole 300	removed redundant label 00110$
+;	atoh_f.c:177: return d;
+;	genAssign
+	mov	dptr,#_atob_d_1_1
+	movx	a,@dptr
+;	genRet
+;	Peephole 234.a	loading dpl directly from a(ccumulator), r2 not set
+	mov	dpl,a
+;	Peephole 300	removed redundant label 00104$
 	ret
 	.area CSEG    (CODE)
 	.area CONST   (CODE)
 	.area XINIT   (CODE)
-__xinit__write:
-	.byte #0x00,#0xA0
-__xinit__read:
-	.byte #0x00,#0xC0

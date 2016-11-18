@@ -2,12 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="Lab4" />
+		<Option title="LAb4_sup" />
 		<Option pch_mode="2" />
 		<Option compiler="sdcc" />
 		<Build>
 			<Target title="Release">
-				<Option output="bin/Release/Lab4.ihx" prefix_auto="1" extension_auto="0" />
+				<Option output="bin/Release/LAb4_sup.ihx" prefix_auto="1" extension_auto="0" />
 				<Option working_dir="" />
 				<Option object_output="obj/Release/" />
 				<Option type="5" />
@@ -41,6 +41,14 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="atoh_f.h" />
+		<Unit filename="clock.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="clock.h" />
+		<Unit filename="data_dump.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="data_dump.h" />
 		<Unit filename="delay.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -53,6 +61,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="i2c.h" />
+		<Unit filename="io_exp.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="io_exp.h" />
 		<Unit filename="lcd.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -68,6 +80,7 @@
 			<code_completion />
 			<envvars />
 			<debugger />
+			<lib_finder disable_auto="1" />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

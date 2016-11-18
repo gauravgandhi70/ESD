@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.6.0 #4309 (Jul 28 2006)
-; This file generated Fri Nov 11 03:34:05 2016
+; This file generated Wed Nov 16 12:57:34 2016
 ;--------------------------------------------------------
 	.module uart
 	.optsdcc -mmcs51 --model-large
@@ -532,7 +532,14 @@ _getchar:
 	jbc	_RI,00108$
 	sjmp	00101$
 00108$:
-;	uart.c:27: return SBUF;
+;	uart.c:27: WDTPRG |=0x07;WDTRST = 0x01E;WDTRST = 0x0E1;
+;	genOr
+	orl	_WDTPRG,#0x07
+;	genAssign
+	mov	_WDTRST,#0x1E
+;	genAssign
+	mov	_WDTRST,#0xE1
+;	uart.c:28: return SBUF;
 ;	genAssign
 	mov	r2,_SBUF
 ;	genRet
@@ -543,33 +550,33 @@ _getchar:
 ;Allocation info for local variables in function 'uart_init'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	uart.c:32: void uart_init()												// UART initialized
+;	uart.c:33: void uart_init()												// UART initialized
 ;	-----------------------------------------
 ;	 function uart_init
 ;	-----------------------------------------
 _uart_init:
-;	uart.c:34: T2CON=0;
+;	uart.c:35: T2CON=0;
 ;	genAssign
 	mov	_T2CON,#0x00
-;	uart.c:35: BDRCON=0;
+;	uart.c:36: BDRCON=0;
 ;	genAssign
 	mov	_BDRCON,#0x00
-;	uart.c:36: PCON |= 0x00;
+;	uart.c:37: PCON |= 0x80;
+;	genOr
+	orl	_PCON,#0x80
+;	uart.c:38: TH1  =  0xFF;												// Timer 1 is used in mode 2 auto reload mode
 ;	genAssign
-	mov	_PCON,_PCON
-;	uart.c:37: TH1  =  0xFD;												// Timer 1 is used in mode 2 auto reload mode
-;	genAssign
-	mov	_TH1,#0xFD
-;	uart.c:38: TL1  =  0X00;												// Setting baud rate to 9600 by loading FF into TH1
+	mov	_TH1,#0xFF
+;	uart.c:39: TL1  =  0X00;												// Setting baud rate to 9600 by loading FF into TH1
 ;	genAssign
 	mov	_TL1,#0x00
-;	uart.c:39: TCON |= 0x40;
+;	uart.c:40: TCON |= 0x40;
 ;	genOr
 	orl	_TCON,#0x40
-;	uart.c:40: SCON |= 0x52;
+;	uart.c:41: SCON |= 0x52;
 ;	genOr
 	orl	_SCON,#0x52
-;	uart.c:41: TMOD = 0x20;												// Start timer
+;	uart.c:42: TMOD = 0x20;												// Start timer
 ;	genAssign
 	mov	_TMOD,#0x20
 ;	Peephole 300	removed redundant label 00101$

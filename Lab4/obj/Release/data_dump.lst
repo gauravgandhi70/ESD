@@ -1,0 +1,1621 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : FreeWare ANSI-C Compiler
+                              3 ; Version 2.6.0 #4309 (Jul 28 2006)
+                              4 ; This file generated Wed Nov 16 16:14:44 2016
+                              5 ;--------------------------------------------------------
+                              6 	.module data_dump
+                              7 	.optsdcc -mmcs51 --model-large
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _P5_7
+                             13 	.globl _P5_6
+                             14 	.globl _P5_5
+                             15 	.globl _P5_4
+                             16 	.globl _P5_3
+                             17 	.globl _P5_2
+                             18 	.globl _P5_1
+                             19 	.globl _P5_0
+                             20 	.globl _P4_7
+                             21 	.globl _P4_6
+                             22 	.globl _P4_5
+                             23 	.globl _P4_4
+                             24 	.globl _P4_3
+                             25 	.globl _P4_2
+                             26 	.globl _P4_1
+                             27 	.globl _P4_0
+                             28 	.globl _PX0L
+                             29 	.globl _PT0L
+                             30 	.globl _PX1L
+                             31 	.globl _PT1L
+                             32 	.globl _PLS
+                             33 	.globl _PT2L
+                             34 	.globl _PPCL
+                             35 	.globl _EC
+                             36 	.globl _CCF0
+                             37 	.globl _CCF1
+                             38 	.globl _CCF2
+                             39 	.globl _CCF3
+                             40 	.globl _CCF4
+                             41 	.globl _CR
+                             42 	.globl _CF
+                             43 	.globl _TF2
+                             44 	.globl _EXF2
+                             45 	.globl _RCLK
+                             46 	.globl _TCLK
+                             47 	.globl _EXEN2
+                             48 	.globl _TR2
+                             49 	.globl _C_T2
+                             50 	.globl _CP_RL2
+                             51 	.globl _T2CON_7
+                             52 	.globl _T2CON_6
+                             53 	.globl _T2CON_5
+                             54 	.globl _T2CON_4
+                             55 	.globl _T2CON_3
+                             56 	.globl _T2CON_2
+                             57 	.globl _T2CON_1
+                             58 	.globl _T2CON_0
+                             59 	.globl _PT2
+                             60 	.globl _ET2
+                             61 	.globl _CY
+                             62 	.globl _AC
+                             63 	.globl _F0
+                             64 	.globl _RS1
+                             65 	.globl _RS0
+                             66 	.globl _OV
+                             67 	.globl _F1
+                             68 	.globl _P
+                             69 	.globl _PS
+                             70 	.globl _PT1
+                             71 	.globl _PX1
+                             72 	.globl _PT0
+                             73 	.globl _PX0
+                             74 	.globl _RD
+                             75 	.globl _WR
+                             76 	.globl _T1
+                             77 	.globl _T0
+                             78 	.globl _INT1
+                             79 	.globl _INT0
+                             80 	.globl _TXD
+                             81 	.globl _RXD
+                             82 	.globl _P3_7
+                             83 	.globl _P3_6
+                             84 	.globl _P3_5
+                             85 	.globl _P3_4
+                             86 	.globl _P3_3
+                             87 	.globl _P3_2
+                             88 	.globl _P3_1
+                             89 	.globl _P3_0
+                             90 	.globl _EA
+                             91 	.globl _ES
+                             92 	.globl _ET1
+                             93 	.globl _EX1
+                             94 	.globl _ET0
+                             95 	.globl _EX0
+                             96 	.globl _P2_7
+                             97 	.globl _P2_6
+                             98 	.globl _P2_5
+                             99 	.globl _P2_4
+                            100 	.globl _P2_3
+                            101 	.globl _P2_2
+                            102 	.globl _P2_1
+                            103 	.globl _P2_0
+                            104 	.globl _SM0
+                            105 	.globl _SM1
+                            106 	.globl _SM2
+                            107 	.globl _REN
+                            108 	.globl _TB8
+                            109 	.globl _RB8
+                            110 	.globl _TI
+                            111 	.globl _RI
+                            112 	.globl _P1_7
+                            113 	.globl _P1_6
+                            114 	.globl _P1_5
+                            115 	.globl _P1_4
+                            116 	.globl _P1_3
+                            117 	.globl _P1_2
+                            118 	.globl _P1_1
+                            119 	.globl _P1_0
+                            120 	.globl _TF1
+                            121 	.globl _TR1
+                            122 	.globl _TF0
+                            123 	.globl _TR0
+                            124 	.globl _IE1
+                            125 	.globl _IT1
+                            126 	.globl _IE0
+                            127 	.globl _IT0
+                            128 	.globl _P0_7
+                            129 	.globl _P0_6
+                            130 	.globl _P0_5
+                            131 	.globl _P0_4
+                            132 	.globl _P0_3
+                            133 	.globl _P0_2
+                            134 	.globl _P0_1
+                            135 	.globl _P0_0
+                            136 	.globl _EECON
+                            137 	.globl _KBF
+                            138 	.globl _KBE
+                            139 	.globl _KBLS
+                            140 	.globl _BRL
+                            141 	.globl _BDRCON
+                            142 	.globl _T2MOD
+                            143 	.globl _SPDAT
+                            144 	.globl _SPSTA
+                            145 	.globl _SPCON
+                            146 	.globl _SADEN
+                            147 	.globl _SADDR
+                            148 	.globl _WDTPRG
+                            149 	.globl _WDTRST
+                            150 	.globl _P5
+                            151 	.globl _P4
+                            152 	.globl _IPH1
+                            153 	.globl _IPL1
+                            154 	.globl _IPH0
+                            155 	.globl _IPL0
+                            156 	.globl _IEN1
+                            157 	.globl _IEN0
+                            158 	.globl _CMOD
+                            159 	.globl _CL
+                            160 	.globl _CH
+                            161 	.globl _CCON
+                            162 	.globl _CCAPM4
+                            163 	.globl _CCAPM3
+                            164 	.globl _CCAPM2
+                            165 	.globl _CCAPM1
+                            166 	.globl _CCAPM0
+                            167 	.globl _CCAP4L
+                            168 	.globl _CCAP3L
+                            169 	.globl _CCAP2L
+                            170 	.globl _CCAP1L
+                            171 	.globl _CCAP0L
+                            172 	.globl _CCAP4H
+                            173 	.globl _CCAP3H
+                            174 	.globl _CCAP2H
+                            175 	.globl _CCAP1H
+                            176 	.globl _CCAP0H
+                            177 	.globl _CKCKON1
+                            178 	.globl _CKCKON0
+                            179 	.globl _CKRL
+                            180 	.globl _AUXR1
+                            181 	.globl _AUXR
+                            182 	.globl _TH2
+                            183 	.globl _TL2
+                            184 	.globl _RCAP2H
+                            185 	.globl _RCAP2L
+                            186 	.globl _T2CON
+                            187 	.globl _B
+                            188 	.globl _ACC
+                            189 	.globl _PSW
+                            190 	.globl _IP
+                            191 	.globl _P3
+                            192 	.globl _IE
+                            193 	.globl _P2
+                            194 	.globl _SBUF
+                            195 	.globl _SCON
+                            196 	.globl _P1
+                            197 	.globl _TH1
+                            198 	.globl _TH0
+                            199 	.globl _TL1
+                            200 	.globl _TL0
+                            201 	.globl _TMOD
+                            202 	.globl _TCON
+                            203 	.globl _PCON
+                            204 	.globl _DPH
+                            205 	.globl _DPL
+                            206 	.globl _SP
+                            207 	.globl _P0
+                            208 	.globl _mi
+                            209 	.globl _sec
+                            210 	.globl _ms
+                            211 	.globl _DDRAM_dump
+                            212 	.globl _CGRAM_dump
+                            213 	.globl _hex_dump
+                            214 ;--------------------------------------------------------
+                            215 ; special function registers
+                            216 ;--------------------------------------------------------
+                            217 	.area RSEG    (DATA)
+                    0080    218 _P0	=	0x0080
+                    0081    219 _SP	=	0x0081
+                    0082    220 _DPL	=	0x0082
+                    0083    221 _DPH	=	0x0083
+                    0087    222 _PCON	=	0x0087
+                    0088    223 _TCON	=	0x0088
+                    0089    224 _TMOD	=	0x0089
+                    008A    225 _TL0	=	0x008a
+                    008B    226 _TL1	=	0x008b
+                    008C    227 _TH0	=	0x008c
+                    008D    228 _TH1	=	0x008d
+                    0090    229 _P1	=	0x0090
+                    0098    230 _SCON	=	0x0098
+                    0099    231 _SBUF	=	0x0099
+                    00A0    232 _P2	=	0x00a0
+                    00A8    233 _IE	=	0x00a8
+                    00B0    234 _P3	=	0x00b0
+                    00B8    235 _IP	=	0x00b8
+                    00D0    236 _PSW	=	0x00d0
+                    00E0    237 _ACC	=	0x00e0
+                    00F0    238 _B	=	0x00f0
+                    00C8    239 _T2CON	=	0x00c8
+                    00CA    240 _RCAP2L	=	0x00ca
+                    00CB    241 _RCAP2H	=	0x00cb
+                    00CC    242 _TL2	=	0x00cc
+                    00CD    243 _TH2	=	0x00cd
+                    008E    244 _AUXR	=	0x008e
+                    00A2    245 _AUXR1	=	0x00a2
+                    0097    246 _CKRL	=	0x0097
+                    008F    247 _CKCKON0	=	0x008f
+                    008F    248 _CKCKON1	=	0x008f
+                    00FA    249 _CCAP0H	=	0x00fa
+                    00FB    250 _CCAP1H	=	0x00fb
+                    00FC    251 _CCAP2H	=	0x00fc
+                    00FD    252 _CCAP3H	=	0x00fd
+                    00FE    253 _CCAP4H	=	0x00fe
+                    00EA    254 _CCAP0L	=	0x00ea
+                    00EB    255 _CCAP1L	=	0x00eb
+                    00EC    256 _CCAP2L	=	0x00ec
+                    00ED    257 _CCAP3L	=	0x00ed
+                    00EE    258 _CCAP4L	=	0x00ee
+                    00DA    259 _CCAPM0	=	0x00da
+                    00DB    260 _CCAPM1	=	0x00db
+                    00DC    261 _CCAPM2	=	0x00dc
+                    00DD    262 _CCAPM3	=	0x00dd
+                    00DE    263 _CCAPM4	=	0x00de
+                    00D8    264 _CCON	=	0x00d8
+                    00F9    265 _CH	=	0x00f9
+                    00E9    266 _CL	=	0x00e9
+                    00D9    267 _CMOD	=	0x00d9
+                    00A8    268 _IEN0	=	0x00a8
+                    00B1    269 _IEN1	=	0x00b1
+                    00B8    270 _IPL0	=	0x00b8
+                    00B7    271 _IPH0	=	0x00b7
+                    00B2    272 _IPL1	=	0x00b2
+                    00B3    273 _IPH1	=	0x00b3
+                    00C0    274 _P4	=	0x00c0
+                    00D8    275 _P5	=	0x00d8
+                    00A6    276 _WDTRST	=	0x00a6
+                    00A7    277 _WDTPRG	=	0x00a7
+                    00A9    278 _SADDR	=	0x00a9
+                    00B9    279 _SADEN	=	0x00b9
+                    00C3    280 _SPCON	=	0x00c3
+                    00C4    281 _SPSTA	=	0x00c4
+                    00C5    282 _SPDAT	=	0x00c5
+                    00C9    283 _T2MOD	=	0x00c9
+                    009B    284 _BDRCON	=	0x009b
+                    009A    285 _BRL	=	0x009a
+                    009C    286 _KBLS	=	0x009c
+                    009D    287 _KBE	=	0x009d
+                    009E    288 _KBF	=	0x009e
+                    00D2    289 _EECON	=	0x00d2
+                            290 ;--------------------------------------------------------
+                            291 ; special function bits
+                            292 ;--------------------------------------------------------
+                            293 	.area RSEG    (DATA)
+                    0080    294 _P0_0	=	0x0080
+                    0081    295 _P0_1	=	0x0081
+                    0082    296 _P0_2	=	0x0082
+                    0083    297 _P0_3	=	0x0083
+                    0084    298 _P0_4	=	0x0084
+                    0085    299 _P0_5	=	0x0085
+                    0086    300 _P0_6	=	0x0086
+                    0087    301 _P0_7	=	0x0087
+                    0088    302 _IT0	=	0x0088
+                    0089    303 _IE0	=	0x0089
+                    008A    304 _IT1	=	0x008a
+                    008B    305 _IE1	=	0x008b
+                    008C    306 _TR0	=	0x008c
+                    008D    307 _TF0	=	0x008d
+                    008E    308 _TR1	=	0x008e
+                    008F    309 _TF1	=	0x008f
+                    0090    310 _P1_0	=	0x0090
+                    0091    311 _P1_1	=	0x0091
+                    0092    312 _P1_2	=	0x0092
+                    0093    313 _P1_3	=	0x0093
+                    0094    314 _P1_4	=	0x0094
+                    0095    315 _P1_5	=	0x0095
+                    0096    316 _P1_6	=	0x0096
+                    0097    317 _P1_7	=	0x0097
+                    0098    318 _RI	=	0x0098
+                    0099    319 _TI	=	0x0099
+                    009A    320 _RB8	=	0x009a
+                    009B    321 _TB8	=	0x009b
+                    009C    322 _REN	=	0x009c
+                    009D    323 _SM2	=	0x009d
+                    009E    324 _SM1	=	0x009e
+                    009F    325 _SM0	=	0x009f
+                    00A0    326 _P2_0	=	0x00a0
+                    00A1    327 _P2_1	=	0x00a1
+                    00A2    328 _P2_2	=	0x00a2
+                    00A3    329 _P2_3	=	0x00a3
+                    00A4    330 _P2_4	=	0x00a4
+                    00A5    331 _P2_5	=	0x00a5
+                    00A6    332 _P2_6	=	0x00a6
+                    00A7    333 _P2_7	=	0x00a7
+                    00A8    334 _EX0	=	0x00a8
+                    00A9    335 _ET0	=	0x00a9
+                    00AA    336 _EX1	=	0x00aa
+                    00AB    337 _ET1	=	0x00ab
+                    00AC    338 _ES	=	0x00ac
+                    00AF    339 _EA	=	0x00af
+                    00B0    340 _P3_0	=	0x00b0
+                    00B1    341 _P3_1	=	0x00b1
+                    00B2    342 _P3_2	=	0x00b2
+                    00B3    343 _P3_3	=	0x00b3
+                    00B4    344 _P3_4	=	0x00b4
+                    00B5    345 _P3_5	=	0x00b5
+                    00B6    346 _P3_6	=	0x00b6
+                    00B7    347 _P3_7	=	0x00b7
+                    00B0    348 _RXD	=	0x00b0
+                    00B1    349 _TXD	=	0x00b1
+                    00B2    350 _INT0	=	0x00b2
+                    00B3    351 _INT1	=	0x00b3
+                    00B4    352 _T0	=	0x00b4
+                    00B5    353 _T1	=	0x00b5
+                    00B6    354 _WR	=	0x00b6
+                    00B7    355 _RD	=	0x00b7
+                    00B8    356 _PX0	=	0x00b8
+                    00B9    357 _PT0	=	0x00b9
+                    00BA    358 _PX1	=	0x00ba
+                    00BB    359 _PT1	=	0x00bb
+                    00BC    360 _PS	=	0x00bc
+                    00D0    361 _P	=	0x00d0
+                    00D1    362 _F1	=	0x00d1
+                    00D2    363 _OV	=	0x00d2
+                    00D3    364 _RS0	=	0x00d3
+                    00D4    365 _RS1	=	0x00d4
+                    00D5    366 _F0	=	0x00d5
+                    00D6    367 _AC	=	0x00d6
+                    00D7    368 _CY	=	0x00d7
+                    00AD    369 _ET2	=	0x00ad
+                    00BD    370 _PT2	=	0x00bd
+                    00C8    371 _T2CON_0	=	0x00c8
+                    00C9    372 _T2CON_1	=	0x00c9
+                    00CA    373 _T2CON_2	=	0x00ca
+                    00CB    374 _T2CON_3	=	0x00cb
+                    00CC    375 _T2CON_4	=	0x00cc
+                    00CD    376 _T2CON_5	=	0x00cd
+                    00CE    377 _T2CON_6	=	0x00ce
+                    00CF    378 _T2CON_7	=	0x00cf
+                    00C8    379 _CP_RL2	=	0x00c8
+                    00C9    380 _C_T2	=	0x00c9
+                    00CA    381 _TR2	=	0x00ca
+                    00CB    382 _EXEN2	=	0x00cb
+                    00CC    383 _TCLK	=	0x00cc
+                    00CD    384 _RCLK	=	0x00cd
+                    00CE    385 _EXF2	=	0x00ce
+                    00CF    386 _TF2	=	0x00cf
+                    00DF    387 _CF	=	0x00df
+                    00DE    388 _CR	=	0x00de
+                    00DC    389 _CCF4	=	0x00dc
+                    00DB    390 _CCF3	=	0x00db
+                    00DA    391 _CCF2	=	0x00da
+                    00D9    392 _CCF1	=	0x00d9
+                    00D8    393 _CCF0	=	0x00d8
+                    00AE    394 _EC	=	0x00ae
+                    00BE    395 _PPCL	=	0x00be
+                    00BD    396 _PT2L	=	0x00bd
+                    00BC    397 _PLS	=	0x00bc
+                    00BB    398 _PT1L	=	0x00bb
+                    00BA    399 _PX1L	=	0x00ba
+                    00B9    400 _PT0L	=	0x00b9
+                    00B8    401 _PX0L	=	0x00b8
+                    00C0    402 _P4_0	=	0x00c0
+                    00C1    403 _P4_1	=	0x00c1
+                    00C2    404 _P4_2	=	0x00c2
+                    00C3    405 _P4_3	=	0x00c3
+                    00C4    406 _P4_4	=	0x00c4
+                    00C5    407 _P4_5	=	0x00c5
+                    00C6    408 _P4_6	=	0x00c6
+                    00C7    409 _P4_7	=	0x00c7
+                    00D8    410 _P5_0	=	0x00d8
+                    00D9    411 _P5_1	=	0x00d9
+                    00DA    412 _P5_2	=	0x00da
+                    00DB    413 _P5_3	=	0x00db
+                    00DC    414 _P5_4	=	0x00dc
+                    00DD    415 _P5_5	=	0x00dd
+                    00DE    416 _P5_6	=	0x00de
+                    00DF    417 _P5_7	=	0x00df
+                            418 ;--------------------------------------------------------
+                            419 ; overlayable register banks
+                            420 ;--------------------------------------------------------
+                            421 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                     422 	.ds 8
+                            423 ;--------------------------------------------------------
+                            424 ; internal ram data
+                            425 ;--------------------------------------------------------
+                            426 	.area DSEG    (DATA)
+   0000                     427 _hex_dump_sloc0_1_0:
+   0000                     428 	.ds 2
+                            429 ;--------------------------------------------------------
+                            430 ; overlayable items in internal ram 
+                            431 ;--------------------------------------------------------
+                            432 	.area OSEG    (OVR,DATA)
+                            433 ;--------------------------------------------------------
+                            434 ; indirectly addressable internal ram data
+                            435 ;--------------------------------------------------------
+                            436 	.area ISEG    (DATA)
+                            437 ;--------------------------------------------------------
+                            438 ; bit data
+                            439 ;--------------------------------------------------------
+                            440 	.area BSEG    (BIT)
+                            441 ;--------------------------------------------------------
+                            442 ; paged external ram data
+                            443 ;--------------------------------------------------------
+                            444 	.area PSEG    (PAG,XDATA)
+                            445 ;--------------------------------------------------------
+                            446 ; external ram data
+                            447 ;--------------------------------------------------------
+                            448 	.area XSEG    (XDATA)
+   0000                     449 _ms::
+   0000                     450 	.ds 1
+   0001                     451 _sec::
+   0001                     452 	.ds 1
+   0002                     453 _mi::
+   0002                     454 	.ds 1
+   0003                     455 _hex_dump_b_1_1:
+   0003                     456 	.ds 5
+   0008                     457 _hex_dump_d_1_1:
+   0008                     458 	.ds 5
+   000D                     459 _hex_dump_r_1_1:
+   000D                     460 	.ds 16
+   001D                     461 _hex_dump_st_addr_1_1:
+   001D                     462 	.ds 2
+   001F                     463 _hex_dump_flag_1_1:
+   001F                     464 	.ds 2
+   0021                     465 _hex_dump_j_1_1:
+   0021                     466 	.ds 2
+                            467 ;--------------------------------------------------------
+                            468 ; external initialized ram data
+                            469 ;--------------------------------------------------------
+                            470 	.area XISEG   (XDATA)
+                            471 	.area HOME    (CODE)
+                            472 	.area GSINIT0 (CODE)
+                            473 	.area GSINIT1 (CODE)
+                            474 	.area GSINIT2 (CODE)
+                            475 	.area GSINIT3 (CODE)
+                            476 	.area GSINIT4 (CODE)
+                            477 	.area GSINIT5 (CODE)
+                            478 	.area GSINIT  (CODE)
+                            479 	.area GSFINAL (CODE)
+                            480 	.area CSEG    (CODE)
+                            481 ;--------------------------------------------------------
+                            482 ; global & static initialisations
+                            483 ;--------------------------------------------------------
+                            484 	.area HOME    (CODE)
+                            485 	.area GSINIT  (CODE)
+                            486 	.area GSFINAL (CODE)
+                            487 	.area GSINIT  (CODE)
+                            488 ;--------------------------------------------------------
+                            489 ; Home
+                            490 ;--------------------------------------------------------
+                            491 	.area HOME    (CODE)
+                            492 	.area CSEG    (CODE)
+                            493 ;--------------------------------------------------------
+                            494 ; code
+                            495 ;--------------------------------------------------------
+                            496 	.area CSEG    (CODE)
+                            497 ;------------------------------------------------------------
+                            498 ;Allocation info for local variables in function 'DDRAM_dump'
+                            499 ;------------------------------------------------------------
+                            500 ;temp                      Allocated with name '_DDRAM_dump_temp_1_1'
+                            501 ;i                         Allocated with name '_DDRAM_dump_i_1_1'
+                            502 ;------------------------------------------------------------
+                            503 ;	data_dump.c:22: void DDRAM_dump() __critical
+                            504 ;	-----------------------------------------
+                            505 ;	 function DDRAM_dump
+                            506 ;	-----------------------------------------
+   0000                     507 _DDRAM_dump:
+                    0002    508 	ar2 = 0x02
+                    0003    509 	ar3 = 0x03
+                    0004    510 	ar4 = 0x04
+                    0005    511 	ar5 = 0x05
+                    0006    512 	ar6 = 0x06
+                    0007    513 	ar7 = 0x07
+                    0000    514 	ar0 = 0x00
+                    0001    515 	ar1 = 0x01
+   0000 D3                  516 	setb	c
+   0001 10 AF 01            517 	jbc	ea,00123$
+   0004 C3                  518 	clr	c
+   0005                     519 00123$:
+   0005 C0 D0               520 	push	psw
+                            521 ;	data_dump.c:26: lcdputcmd(0x80);        // 0x80 command is passed to the LCD to select DDRAM and Setting its address as 00
+                            522 ;	genCall
+   0007 75 82 80            523 	mov	dpl,#0x80
+   000A 12s00r00            524 	lcall	_lcdputcmd
+                            525 ;	data_dump.c:27: printf_tiny("\n\r\t\tAscii Representation\n\r");
+                            526 ;	genIpush
+   000D 74r00               527 	mov	a,#__str_0
+   000F C0 E0               528 	push	acc
+   0011 74s00               529 	mov	a,#(__str_0 >> 8)
+   0013 C0 E0               530 	push	acc
+                            531 ;	genCall
+   0015 12s00r00            532 	lcall	_printf_tiny
+   0018 15 81               533 	dec	sp
+   001A 15 81               534 	dec	sp
+                            535 ;	data_dump.c:28: for(i=0;i<64;i++)       // Reading contents of the DDRAM
+                            536 ;	genAssign
+   001C 7A 00               537 	mov	r2,#0x00
+                            538 ;	genAssign
+   001E 7B 00               539 	mov	r3,#0x00
+   0020 7C 00               540 	mov	r4,#0x00
+   0022                     541 00105$:
+                            542 ;	genCmpLt
+                            543 ;	genCmp
+   0022 C3                  544 	clr	c
+   0023 EB                  545 	mov	a,r3
+   0024 94 40               546 	subb	a,#0x40
+   0026 EC                  547 	mov	a,r4
+   0027 64 80               548 	xrl	a,#0x80
+   0029 94 80               549 	subb	a,#0x80
+                            550 ;	genIfxJump
+   002B 40 03               551 	jc	00124$
+   002D 02s00rB2            552 	ljmp	00108$
+   0030                     553 00124$:
+                            554 ;	data_dump.c:30: if(i%16==0)         // After every 16 characters , go to new line of the terminal
+                            555 ;	genAssign
+   0030 90s00r00            556 	mov	dptr,#__modsint_PARM_2
+   0033 74 10               557 	mov	a,#0x10
+   0035 F0                  558 	movx	@dptr,a
+   0036 E4                  559 	clr	a
+   0037 A3                  560 	inc	dptr
+   0038 F0                  561 	movx	@dptr,a
+                            562 ;	genCall
+   0039 8B 82               563 	mov	dpl,r3
+   003B 8C 83               564 	mov	dph,r4
+   003D C0 02               565 	push	ar2
+   003F C0 03               566 	push	ar3
+   0041 C0 04               567 	push	ar4
+   0043 12s00r00            568 	lcall	__modsint
+   0046 E5 82               569 	mov	a,dpl
+   0048 85 83 F0            570 	mov	b,dph
+   004B D0 04               571 	pop	ar4
+   004D D0 03               572 	pop	ar3
+   004F D0 02               573 	pop	ar2
+                            574 ;	genIfx
+   0051 45 F0               575 	orl	a,b
+                            576 ;	genIfxJump
+                            577 ;	Peephole 108.b	removed ljmp by inverse jump logic
+   0053 70 33               578 	jnz	00102$
+                            579 ;	Peephole 300	removed redundant label 00125$
+                            580 ;	data_dump.c:32: temp++;
+                            581 ;	genPlus
+                            582 ;     genPlusIncr
+   0055 0A                  583 	inc	r2
+                            584 ;	data_dump.c:33: printf_tiny("\n\r\t\t");
+                            585 ;	genIpush
+   0056 C0 02               586 	push	ar2
+   0058 C0 03               587 	push	ar3
+   005A C0 04               588 	push	ar4
+   005C 74r1B               589 	mov	a,#__str_1
+   005E C0 E0               590 	push	acc
+   0060 74s00               591 	mov	a,#(__str_1 >> 8)
+   0062 C0 E0               592 	push	acc
+                            593 ;	genCall
+   0064 12s00r00            594 	lcall	_printf_tiny
+   0067 15 81               595 	dec	sp
+   0069 15 81               596 	dec	sp
+   006B D0 04               597 	pop	ar4
+   006D D0 03               598 	pop	ar3
+   006F D0 02               599 	pop	ar2
+                            600 ;	data_dump.c:34: lcdgotoxy(temp,1);
+                            601 ;	genAssign
+   0071 90s00r00            602 	mov	dptr,#_lcdgotoxy_PARM_2
+   0074 74 01               603 	mov	a,#0x01
+   0076 F0                  604 	movx	@dptr,a
+                            605 ;	genCall
+   0077 8A 82               606 	mov	dpl,r2
+   0079 C0 02               607 	push	ar2
+   007B C0 03               608 	push	ar3
+   007D C0 04               609 	push	ar4
+   007F 12s00r00            610 	lcall	_lcdgotoxy
+   0082 D0 04               611 	pop	ar4
+   0084 D0 03               612 	pop	ar3
+   0086 D0 02               613 	pop	ar2
+   0088                     614 00102$:
+                            615 ;	data_dump.c:38: putchar(lcdread());     // Read character from the DDRAM and peint it to the terminal
+                            616 ;	genCall
+   0088 C0 02               617 	push	ar2
+   008A C0 03               618 	push	ar3
+   008C C0 04               619 	push	ar4
+   008E 12s00r00            620 	lcall	_lcdread
+   0091 AD 82               621 	mov	r5,dpl
+   0093 D0 04               622 	pop	ar4
+   0095 D0 03               623 	pop	ar3
+   0097 D0 02               624 	pop	ar2
+                            625 ;	genCall
+   0099 8D 82               626 	mov	dpl,r5
+   009B C0 02               627 	push	ar2
+   009D C0 03               628 	push	ar3
+   009F C0 04               629 	push	ar4
+   00A1 12s00r00            630 	lcall	_putchar
+   00A4 D0 04               631 	pop	ar4
+   00A6 D0 03               632 	pop	ar3
+   00A8 D0 02               633 	pop	ar2
+                            634 ;	data_dump.c:28: for(i=0;i<64;i++)       // Reading contents of the DDRAM
+                            635 ;	genPlus
+                            636 ;     genPlusIncr
+   00AA 0B                  637 	inc	r3
+   00AB BB 00 01            638 	cjne	r3,#0x00,00126$
+   00AE 0C                  639 	inc	r4
+   00AF                     640 00126$:
+   00AF 02s00r22            641 	ljmp	00105$
+   00B2                     642 00108$:
+                            643 ;	data_dump.c:43: lcdgotoxy(1,1);
+                            644 ;	genAssign
+   00B2 90s00r00            645 	mov	dptr,#_lcdgotoxy_PARM_2
+   00B5 74 01               646 	mov	a,#0x01
+   00B7 F0                  647 	movx	@dptr,a
+                            648 ;	genCall
+   00B8 75 82 01            649 	mov	dpl,#0x01
+   00BB 12s00r00            650 	lcall	_lcdgotoxy
+                            651 ;	data_dump.c:44: printf_tiny("\n\r\t\tHex Representation\n\r");
+                            652 ;	genIpush
+   00BE 74r20               653 	mov	a,#__str_2
+   00C0 C0 E0               654 	push	acc
+   00C2 74s00               655 	mov	a,#(__str_2 >> 8)
+   00C4 C0 E0               656 	push	acc
+                            657 ;	genCall
+   00C6 12s00r00            658 	lcall	_printf_tiny
+   00C9 15 81               659 	dec	sp
+   00CB 15 81               660 	dec	sp
+                            661 ;	data_dump.c:45: for(i=0;i<80;i++)
+                            662 ;	genAssign
+   00CD 7A 00               663 	mov	r2,#0x00
+   00CF 7B 00               664 	mov	r3,#0x00
+   00D1                     665 00109$:
+                            666 ;	genCmpLt
+                            667 ;	genCmp
+   00D1 C3                  668 	clr	c
+   00D2 EA                  669 	mov	a,r2
+   00D3 94 50               670 	subb	a,#0x50
+   00D5 EB                  671 	mov	a,r3
+   00D6 64 80               672 	xrl	a,#0x80
+   00D8 94 80               673 	subb	a,#0x80
+                            674 ;	genIfxJump
+                            675 ;	Peephole 108.a	removed ljmp by inverse jump logic
+   00DA 50 75               676 	jnc	00113$
+                            677 ;	Peephole 300	removed redundant label 00127$
+                            678 ;	data_dump.c:47: if(i%16==0)
+                            679 ;	genAssign
+   00DC 90s00r00            680 	mov	dptr,#__modsint_PARM_2
+   00DF 74 10               681 	mov	a,#0x10
+   00E1 F0                  682 	movx	@dptr,a
+   00E2 E4                  683 	clr	a
+   00E3 A3                  684 	inc	dptr
+   00E4 F0                  685 	movx	@dptr,a
+                            686 ;	genCall
+   00E5 8A 82               687 	mov	dpl,r2
+   00E7 8B 83               688 	mov	dph,r3
+   00E9 C0 02               689 	push	ar2
+   00EB C0 03               690 	push	ar3
+   00ED 12s00r00            691 	lcall	__modsint
+   00F0 E5 82               692 	mov	a,dpl
+   00F2 85 83 F0            693 	mov	b,dph
+   00F5 D0 03               694 	pop	ar3
+   00F7 D0 02               695 	pop	ar2
+                            696 ;	genIfx
+   00F9 45 F0               697 	orl	a,b
+                            698 ;	genIfxJump
+                            699 ;	Peephole 108.b	removed ljmp by inverse jump logic
+   00FB 70 1D               700 	jnz	00104$
+                            701 ;	Peephole 300	removed redundant label 00128$
+                            702 ;	data_dump.c:49: printf_tiny("\n\n\r0x%x",i);
+                            703 ;	genIpush
+   00FD C0 02               704 	push	ar2
+   00FF C0 03               705 	push	ar3
+   0101 C0 02               706 	push	ar2
+   0103 C0 03               707 	push	ar3
+                            708 ;	genIpush
+   0105 74r39               709 	mov	a,#__str_3
+   0107 C0 E0               710 	push	acc
+   0109 74s00               711 	mov	a,#(__str_3 >> 8)
+   010B C0 E0               712 	push	acc
+                            713 ;	genCall
+   010D 12s00r00            714 	lcall	_printf_tiny
+   0110 E5 81               715 	mov	a,sp
+   0112 24 FC               716 	add	a,#0xfc
+   0114 F5 81               717 	mov	sp,a
+   0116 D0 03               718 	pop	ar3
+   0118 D0 02               719 	pop	ar2
+   011A                     720 00104$:
+                            721 ;	data_dump.c:53: printf_tiny("\t %x",lcdread());
+                            722 ;	genCall
+   011A C0 02               723 	push	ar2
+   011C C0 03               724 	push	ar3
+   011E 12s00r00            725 	lcall	_lcdread
+   0121 AC 82               726 	mov	r4,dpl
+   0123 D0 03               727 	pop	ar3
+   0125 D0 02               728 	pop	ar2
+                            729 ;	genCast
+   0127 EC                  730 	mov	a,r4
+   0128 33                  731 	rlc	a
+   0129 95 E0               732 	subb	a,acc
+   012B FD                  733 	mov	r5,a
+                            734 ;	genIpush
+   012C C0 02               735 	push	ar2
+   012E C0 03               736 	push	ar3
+   0130 C0 04               737 	push	ar4
+   0132 C0 05               738 	push	ar5
+                            739 ;	genIpush
+   0134 74r41               740 	mov	a,#__str_4
+   0136 C0 E0               741 	push	acc
+   0138 74s00               742 	mov	a,#(__str_4 >> 8)
+   013A C0 E0               743 	push	acc
+                            744 ;	genCall
+   013C 12s00r00            745 	lcall	_printf_tiny
+   013F E5 81               746 	mov	a,sp
+   0141 24 FC               747 	add	a,#0xfc
+   0143 F5 81               748 	mov	sp,a
+   0145 D0 03               749 	pop	ar3
+   0147 D0 02               750 	pop	ar2
+                            751 ;	data_dump.c:45: for(i=0;i<80;i++)
+                            752 ;	genPlus
+                            753 ;     genPlusIncr
+   0149 0A                  754 	inc	r2
+   014A BA 00 01            755 	cjne	r2,#0x00,00129$
+   014D 0B                  756 	inc	r3
+   014E                     757 00129$:
+   014E 02s00rD1            758 	ljmp	00109$
+   0151                     759 00113$:
+   0151 D0 D0               760 	pop	psw
+   0153 92 AF               761 	mov	ea,c
+   0155 22                  762 	ret
+                            763 ;------------------------------------------------------------
+                            764 ;Allocation info for local variables in function 'CGRAM_dump'
+                            765 ;------------------------------------------------------------
+                            766 ;temp                      Allocated with name '_CGRAM_dump_temp_1_1'
+                            767 ;i                         Allocated with name '_CGRAM_dump_i_1_1'
+                            768 ;------------------------------------------------------------
+                            769 ;	data_dump.c:61: void CGRAM_dump() __critical
+                            770 ;	-----------------------------------------
+                            771 ;	 function CGRAM_dump
+                            772 ;	-----------------------------------------
+   0156                     773 _CGRAM_dump:
+   0156 D3                  774 	setb	c
+   0157 10 AF 01            775 	jbc	ea,00113$
+   015A C3                  776 	clr	c
+   015B                     777 00113$:
+   015B C0 D0               778 	push	psw
+                            779 ;	data_dump.c:66: putchar('\n');
+                            780 ;	genCall
+   015D 75 82 0A            781 	mov	dpl,#0x0A
+   0160 12s00r00            782 	lcall	_putchar
+                            783 ;	data_dump.c:67: lcdputcmd(0x40);        // 0x40 is Passed to select CGRAM and setting its address as 00
+                            784 ;	genCall
+   0163 75 82 40            785 	mov	dpl,#0x40
+   0166 12s00r00            786 	lcall	_lcdputcmd
+                            787 ;	data_dump.c:68: for(i=0;i<64;i++)       // 64 bytes of CGRAM are read
+                            788 ;	genAssign
+   0169 7A 00               789 	mov	r2,#0x00
+   016B 7B 00               790 	mov	r3,#0x00
+   016D                     791 00103$:
+                            792 ;	genCmpLt
+                            793 ;	genCmp
+   016D C3                  794 	clr	c
+   016E EA                  795 	mov	a,r2
+   016F 94 40               796 	subb	a,#0x40
+   0171 EB                  797 	mov	a,r3
+   0172 64 80               798 	xrl	a,#0x80
+   0174 94 80               799 	subb	a,#0x80
+                            800 ;	genIfxJump
+   0176 40 03               801 	jc	00114$
+   0178 02s01rFF            802 	ljmp	00107$
+   017B                     803 00114$:
+                            804 ;	data_dump.c:70: if(i%8==0)
+                            805 ;	genAssign
+   017B 90s00r00            806 	mov	dptr,#__modsint_PARM_2
+   017E 74 08               807 	mov	a,#0x08
+   0180 F0                  808 	movx	@dptr,a
+   0181 E4                  809 	clr	a
+   0182 A3                  810 	inc	dptr
+   0183 F0                  811 	movx	@dptr,a
+                            812 ;	genCall
+   0184 8A 82               813 	mov	dpl,r2
+   0186 8B 83               814 	mov	dph,r3
+   0188 C0 02               815 	push	ar2
+   018A C0 03               816 	push	ar3
+   018C 12s00r00            817 	lcall	__modsint
+   018F E5 82               818 	mov	a,dpl
+   0191 85 83 F0            819 	mov	b,dph
+   0194 D0 03               820 	pop	ar3
+   0196 D0 02               821 	pop	ar2
+                            822 ;	genIfx
+   0198 45 F0               823 	orl	a,b
+                            824 ;	genIfxJump
+                            825 ;	Peephole 108.b	removed ljmp by inverse jump logic
+   019A 70 1D               826 	jnz	00102$
+                            827 ;	Peephole 300	removed redundant label 00115$
+                            828 ;	data_dump.c:72: printf_tiny("\n\n\r0x%x",i);
+                            829 ;	genIpush
+   019C C0 02               830 	push	ar2
+   019E C0 03               831 	push	ar3
+   01A0 C0 02               832 	push	ar2
+   01A2 C0 03               833 	push	ar3
+                            834 ;	genIpush
+   01A4 74r39               835 	mov	a,#__str_3
+   01A6 C0 E0               836 	push	acc
+   01A8 74s00               837 	mov	a,#(__str_3 >> 8)
+   01AA C0 E0               838 	push	acc
+                            839 ;	genCall
+   01AC 12s00r00            840 	lcall	_printf_tiny
+   01AF E5 81               841 	mov	a,sp
+   01B1 24 FC               842 	add	a,#0xfc
+   01B3 F5 81               843 	mov	sp,a
+   01B5 D0 03               844 	pop	ar3
+   01B7 D0 02               845 	pop	ar2
+   01B9                     846 00102$:
+                            847 ;	data_dump.c:74: temp = lcdread();   // Reading data from the LCD
+                            848 ;	genCall
+   01B9 C0 02               849 	push	ar2
+   01BB C0 03               850 	push	ar3
+   01BD 12s00r00            851 	lcall	_lcdread
+   01C0 AC 82               852 	mov	r4,dpl
+   01C2 D0 03               853 	pop	ar3
+   01C4 D0 02               854 	pop	ar2
+                            855 ;	data_dump.c:75: putchar('\t');
+                            856 ;	genCall
+   01C6 75 82 09            857 	mov	dpl,#0x09
+   01C9 C0 02               858 	push	ar2
+   01CB C0 03               859 	push	ar3
+   01CD C0 04               860 	push	ar4
+   01CF 12s00r00            861 	lcall	_putchar
+   01D2 D0 04               862 	pop	ar4
+   01D4 D0 03               863 	pop	ar3
+   01D6 D0 02               864 	pop	ar2
+                            865 ;	data_dump.c:76: printf_tiny("%x",temp);      // Displaying Data on the terminal
+                            866 ;	genAssign
+                            867 ;	genCast
+   01D8 7D 00               868 	mov	r5,#0x00
+                            869 ;	genIpush
+   01DA C0 02               870 	push	ar2
+   01DC C0 03               871 	push	ar3
+   01DE C0 04               872 	push	ar4
+   01E0 C0 05               873 	push	ar5
+                            874 ;	genIpush
+   01E2 74r46               875 	mov	a,#__str_5
+   01E4 C0 E0               876 	push	acc
+   01E6 74s00               877 	mov	a,#(__str_5 >> 8)
+   01E8 C0 E0               878 	push	acc
+                            879 ;	genCall
+   01EA 12s00r00            880 	lcall	_printf_tiny
+   01ED E5 81               881 	mov	a,sp
+   01EF 24 FC               882 	add	a,#0xfc
+   01F1 F5 81               883 	mov	sp,a
+   01F3 D0 03               884 	pop	ar3
+   01F5 D0 02               885 	pop	ar2
+                            886 ;	data_dump.c:68: for(i=0;i<64;i++)       // 64 bytes of CGRAM are read
+                            887 ;	genPlus
+                            888 ;     genPlusIncr
+   01F7 0A                  889 	inc	r2
+   01F8 BA 00 01            890 	cjne	r2,#0x00,00116$
+   01FB 0B                  891 	inc	r3
+   01FC                     892 00116$:
+   01FC 02s01r6D            893 	ljmp	00103$
+   01FF                     894 00107$:
+   01FF D0 D0               895 	pop	psw
+   0201 92 AF               896 	mov	ea,c
+   0203 22                  897 	ret
+                            898 ;------------------------------------------------------------
+                            899 ;Allocation info for local variables in function 'hex_dump'
+                            900 ;------------------------------------------------------------
+                            901 ;sloc0                     Allocated with name '_hex_dump_sloc0_1_0'
+                            902 ;b                         Allocated with name '_hex_dump_b_1_1'
+                            903 ;d                         Allocated with name '_hex_dump_d_1_1'
+                            904 ;r                         Allocated with name '_hex_dump_r_1_1'
+                            905 ;st_addr                   Allocated with name '_hex_dump_st_addr_1_1'
+                            906 ;st_page                   Allocated with name '_hex_dump_st_page_1_1'
+                            907 ;end_addr                  Allocated with name '_hex_dump_end_addr_1_1'
+                            908 ;flag                      Allocated with name '_hex_dump_flag_1_1'
+                            909 ;i                         Allocated with name '_hex_dump_i_1_1'
+                            910 ;aaa                       Allocated with name '_hex_dump_aaa_1_1'
+                            911 ;j                         Allocated with name '_hex_dump_j_1_1'
+                            912 ;bytes                     Allocated with name '_hex_dump_bytes_1_1'
+                            913 ;------------------------------------------------------------
+                            914 ;	data_dump.c:90: void hex_dump()
+                            915 ;	-----------------------------------------
+                            916 ;	 function hex_dump
+                            917 ;	-----------------------------------------
+   0204                     918 _hex_dump:
+                            919 ;	data_dump.c:95: unsigned int st_addr,st_page, end_addr,flag=0,i,aaa,j=0;
+                            920 ;	genAssign
+   0204 90s00r21            921 	mov	dptr,#_hex_dump_j_1_1
+   0207 E4                  922 	clr	a
+   0208 F0                  923 	movx	@dptr,a
+   0209 A3                  924 	inc	dptr
+   020A F0                  925 	movx	@dptr,a
+                            926 ;	data_dump.c:98: do{
+   020B                     927 00115$:
+                            928 ;	data_dump.c:100: printf_tiny("\n\n\r Enter Start Address in Hex in HHH format between 000 to 7FF: ");
+                            929 ;	genIpush
+   020B 74r49               930 	mov	a,#__str_6
+   020D C0 E0               931 	push	acc
+   020F 74s00               932 	mov	a,#(__str_6 >> 8)
+   0211 C0 E0               933 	push	acc
+                            934 ;	genCall
+   0213 12s00r00            935 	lcall	_printf_tiny
+   0216 15 81               936 	dec	sp
+   0218 15 81               937 	dec	sp
+                            938 ;	data_dump.c:101: do{
+   021A                     939 00104$:
+                            940 ;	data_dump.c:102: flag=0;
+                            941 ;	genAssign
+   021A 90s00r1F            942 	mov	dptr,#_hex_dump_flag_1_1
+   021D E4                  943 	clr	a
+   021E F0                  944 	movx	@dptr,a
+   021F A3                  945 	inc	dptr
+   0220 F0                  946 	movx	@dptr,a
+                            947 ;	data_dump.c:103: gets(b);                // Get data from the user    //Conver that data into hex
+                            948 ;	genCall
+                            949 ;	Peephole 182.a	used 16 bit load of DPTR
+   0221 90s00r03            950 	mov	dptr,#_hex_dump_b_1_1
+   0224 75 F0 00            951 	mov	b,#0x00
+   0227 12s00r00            952 	lcall	_gets
+                            953 ;	data_dump.c:104: st_addr=atoh(b);
+                            954 ;	genCall
+                            955 ;	Peephole 182.a	used 16 bit load of DPTR
+   022A 90s00r03            956 	mov	dptr,#_hex_dump_b_1_1
+   022D 75 F0 00            957 	mov	b,#0x00
+   0230 12s00r00            958 	lcall	_atoh
+   0233 AA 82               959 	mov	r2,dpl
+   0235 AB 83               960 	mov	r3,dph
+                            961 ;	genAssign
+   0237 90s00r1D            962 	mov	dptr,#_hex_dump_st_addr_1_1
+   023A EA                  963 	mov	a,r2
+   023B F0                  964 	movx	@dptr,a
+   023C A3                  965 	inc	dptr
+   023D EB                  966 	mov	a,r3
+   023E F0                  967 	movx	@dptr,a
+                            968 ;	data_dump.c:105: if(st_addr<2048)        // Check if the address is in valid range
+                            969 ;	genAssign
+   023F 8A 04               970 	mov	ar4,r2
+   0241 8B 05               971 	mov	ar5,r3
+                            972 ;	genCmpLt
+                            973 ;	genCmp
+                            974 ;	genIfxJump
+                            975 ;	Peephole 108.a	removed ljmp by inverse jump logic
+                            976 ;	Peephole 132.e	optimized genCmpLt by inverse logic (carry differs)
+   0243 74 F8               977 	mov	a,#0x100 - 0x08
+   0245 2D                  978 	add	a,r5
+   0246 40 0B               979 	jc	00102$
+                            980 ;	Peephole 300	removed redundant label 00140$
+                            981 ;	data_dump.c:107: flag=1;
+                            982 ;	genAssign
+   0248 90s00r1F            983 	mov	dptr,#_hex_dump_flag_1_1
+   024B 74 01               984 	mov	a,#0x01
+   024D F0                  985 	movx	@dptr,a
+   024E E4                  986 	clr	a
+   024F A3                  987 	inc	dptr
+   0250 F0                  988 	movx	@dptr,a
+                            989 ;	Peephole 112.b	changed ljmp to sjmp
+   0251 80 17               990 	sjmp	00105$
+   0253                     991 00102$:
+                            992 ;	data_dump.c:112: printf_tiny("\n\n\r *-ERROR-*\t Please Enter valid start Address betweem 000 and 7FF: ");
+                            993 ;	genIpush
+   0253 C0 02               994 	push	ar2
+   0255 C0 03               995 	push	ar3
+   0257 74r8B               996 	mov	a,#__str_7
+   0259 C0 E0               997 	push	acc
+   025B 74s00               998 	mov	a,#(__str_7 >> 8)
+   025D C0 E0               999 	push	acc
+                           1000 ;	genCall
+   025F 12s00r00           1001 	lcall	_printf_tiny
+   0262 15 81              1002 	dec	sp
+   0264 15 81              1003 	dec	sp
+   0266 D0 03              1004 	pop	ar3
+   0268 D0 02              1005 	pop	ar2
+   026A                    1006 00105$:
+                           1007 ;	data_dump.c:114: }while(flag==0);
+                           1008 ;	genAssign
+   026A 90s00r1F           1009 	mov	dptr,#_hex_dump_flag_1_1
+   026D E0                 1010 	movx	a,@dptr
+   026E FC                 1011 	mov	r4,a
+   026F A3                 1012 	inc	dptr
+   0270 E0                 1013 	movx	a,@dptr
+                           1014 ;	genIfx
+   0271 FD                 1015 	mov	r5,a
+                           1016 ;	Peephole 135	removed redundant mov
+   0272 4C                 1017 	orl	a,r4
+                           1018 ;	genIfxJump
+                           1019 ;	Peephole 108.c	removed ljmp by inverse jump logic
+   0273 60 A5              1020 	jz	00104$
+                           1021 ;	Peephole 300	removed redundant label 00141$
+                           1022 ;	data_dump.c:118: printf_tiny("\n\n\r Enter End Address in Hex in HHH format between 000 to 7FF: ");
+                           1023 ;	genIpush
+   0275 C0 02              1024 	push	ar2
+   0277 C0 03              1025 	push	ar3
+   0279 74rD1              1026 	mov	a,#__str_8
+   027B C0 E0              1027 	push	acc
+   027D 74s00              1028 	mov	a,#(__str_8 >> 8)
+   027F C0 E0              1029 	push	acc
+                           1030 ;	genCall
+   0281 12s00r00           1031 	lcall	_printf_tiny
+   0284 15 81              1032 	dec	sp
+   0286 15 81              1033 	dec	sp
+   0288 D0 03              1034 	pop	ar3
+   028A D0 02              1035 	pop	ar2
+                           1036 ;	data_dump.c:119: do{
+   028C                    1037 00110$:
+                           1038 ;	data_dump.c:120: flag=0;
+                           1039 ;	genAssign
+   028C 90s00r1F           1040 	mov	dptr,#_hex_dump_flag_1_1
+   028F E4                 1041 	clr	a
+   0290 F0                 1042 	movx	@dptr,a
+   0291 A3                 1043 	inc	dptr
+   0292 F0                 1044 	movx	@dptr,a
+                           1045 ;	data_dump.c:121: gets(d);            // Get data from the user    //Conver that data into hex
+                           1046 ;	genCall
+                           1047 ;	Peephole 182.a	used 16 bit load of DPTR
+   0293 90s00r08           1048 	mov	dptr,#_hex_dump_d_1_1
+   0296 75 F0 00           1049 	mov	b,#0x00
+   0299 C0 02              1050 	push	ar2
+   029B C0 03              1051 	push	ar3
+   029D 12s00r00           1052 	lcall	_gets
+   02A0 D0 03              1053 	pop	ar3
+   02A2 D0 02              1054 	pop	ar2
+                           1055 ;	data_dump.c:122: end_addr=atoh(d);   // Check if the address is in valid range
+                           1056 ;	genCall
+                           1057 ;	Peephole 182.a	used 16 bit load of DPTR
+   02A4 90s00r08           1058 	mov	dptr,#_hex_dump_d_1_1
+   02A7 75 F0 00           1059 	mov	b,#0x00
+   02AA C0 02              1060 	push	ar2
+   02AC C0 03              1061 	push	ar3
+   02AE 12s00r00           1062 	lcall	_atoh
+   02B1 AC 82              1063 	mov	r4,dpl
+   02B3 AD 83              1064 	mov	r5,dph
+   02B5 D0 03              1065 	pop	ar3
+   02B7 D0 02              1066 	pop	ar2
+                           1067 ;	data_dump.c:123: if(end_addr<2048)
+                           1068 ;	genAssign
+   02B9 8C 06              1069 	mov	ar6,r4
+   02BB 8D 07              1070 	mov	ar7,r5
+                           1071 ;	genCmpLt
+                           1072 ;	genCmp
+                           1073 ;	genIfxJump
+                           1074 ;	Peephole 108.a	removed ljmp by inverse jump logic
+                           1075 ;	Peephole 132.e	optimized genCmpLt by inverse logic (carry differs)
+   02BD 74 F8              1076 	mov	a,#0x100 - 0x08
+   02BF 2F                 1077 	add	a,r7
+   02C0 40 0B              1078 	jc	00108$
+                           1079 ;	Peephole 300	removed redundant label 00142$
+                           1080 ;	data_dump.c:125: flag=1;
+                           1081 ;	genAssign
+   02C2 90s00r1F           1082 	mov	dptr,#_hex_dump_flag_1_1
+   02C5 74 01              1083 	mov	a,#0x01
+   02C7 F0                 1084 	movx	@dptr,a
+   02C8 E4                 1085 	clr	a
+   02C9 A3                 1086 	inc	dptr
+   02CA F0                 1087 	movx	@dptr,a
+                           1088 ;	Peephole 112.b	changed ljmp to sjmp
+   02CB 80 1F              1089 	sjmp	00111$
+   02CD                    1090 00108$:
+                           1091 ;	data_dump.c:130: printf_tiny("\n\n\r *-ERROR-*\t Please Enter valid end Address betweem 000 and 7FF: ");
+                           1092 ;	genIpush
+   02CD C0 02              1093 	push	ar2
+   02CF C0 03              1094 	push	ar3
+   02D1 C0 04              1095 	push	ar4
+   02D3 C0 05              1096 	push	ar5
+   02D5 74r11              1097 	mov	a,#__str_9
+   02D7 C0 E0              1098 	push	acc
+   02D9 74s01              1099 	mov	a,#(__str_9 >> 8)
+   02DB C0 E0              1100 	push	acc
+                           1101 ;	genCall
+   02DD 12s00r00           1102 	lcall	_printf_tiny
+   02E0 15 81              1103 	dec	sp
+   02E2 15 81              1104 	dec	sp
+   02E4 D0 05              1105 	pop	ar5
+   02E6 D0 04              1106 	pop	ar4
+   02E8 D0 03              1107 	pop	ar3
+   02EA D0 02              1108 	pop	ar2
+   02EC                    1109 00111$:
+                           1110 ;	data_dump.c:132: }while(flag==0);
+                           1111 ;	genAssign
+   02EC 90s00r1F           1112 	mov	dptr,#_hex_dump_flag_1_1
+   02EF E0                 1113 	movx	a,@dptr
+   02F0 FE                 1114 	mov	r6,a
+   02F1 A3                 1115 	inc	dptr
+   02F2 E0                 1116 	movx	a,@dptr
+                           1117 ;	genIfx
+   02F3 FF                 1118 	mov	r7,a
+                           1119 ;	Peephole 135	removed redundant mov
+   02F4 4E                 1120 	orl	a,r6
+                           1121 ;	genIfxJump
+                           1122 ;	Peephole 108.c	removed ljmp by inverse jump logic
+   02F5 60 95              1123 	jz	00110$
+                           1124 ;	Peephole 300	removed redundant label 00143$
+                           1125 ;	data_dump.c:133: bytes = end_addr - st_addr;         // Calculate total number of bytes to read
+                           1126 ;	genMinus
+   02F7 EC                 1127 	mov	a,r4
+   02F8 C3                 1128 	clr	c
+                           1129 ;	Peephole 236.l	used r2 instead of ar2
+   02F9 9A                 1130 	subb	a,r2
+   02FA FC                 1131 	mov	r4,a
+   02FB ED                 1132 	mov	a,r5
+                           1133 ;	Peephole 236.l	used r3 instead of ar3
+   02FC 9B                 1134 	subb	a,r3
+   02FD FD                 1135 	mov	r5,a
+                           1136 ;	data_dump.c:134: printf_tiny("\n\r\tTotal Bytes: %d\n\r",bytes+1);
+                           1137 ;	genPlus
+                           1138 ;     genPlusIncr
+   02FE 74 01              1139 	mov	a,#0x01
+                           1140 ;	Peephole 236.a	used r4 instead of ar4
+   0300 2C                 1141 	add	a,r4
+   0301 FE                 1142 	mov	r6,a
+                           1143 ;	Peephole 181	changed mov to clr
+   0302 E4                 1144 	clr	a
+                           1145 ;	Peephole 236.b	used r5 instead of ar5
+   0303 3D                 1146 	addc	a,r5
+   0304 FF                 1147 	mov	r7,a
+                           1148 ;	genIpush
+   0305 C0 02              1149 	push	ar2
+   0307 C0 03              1150 	push	ar3
+   0309 C0 04              1151 	push	ar4
+   030B C0 05              1152 	push	ar5
+   030D C0 06              1153 	push	ar6
+   030F C0 07              1154 	push	ar7
+                           1155 ;	genIpush
+   0311 74r55              1156 	mov	a,#__str_10
+   0313 C0 E0              1157 	push	acc
+   0315 74s01              1158 	mov	a,#(__str_10 >> 8)
+   0317 C0 E0              1159 	push	acc
+                           1160 ;	genCall
+   0319 12s00r00           1161 	lcall	_printf_tiny
+   031C E5 81              1162 	mov	a,sp
+   031E 24 FC              1163 	add	a,#0xfc
+   0320 F5 81              1164 	mov	sp,a
+   0322 D0 05              1165 	pop	ar5
+   0324 D0 04              1166 	pop	ar4
+   0326 D0 03              1167 	pop	ar3
+   0328 D0 02              1168 	pop	ar2
+                           1169 ;	data_dump.c:136: if(bytes<0){printf_tiny("\n\r -ERROR- End address smaller than the start address\n\r Enter Valid address range\n\r");}
+                           1170 ;	genAssign
+   032A 8C 06              1171 	mov	ar6,r4
+   032C 8D 07              1172 	mov	ar7,r5
+                           1173 ;	genCmpLt
+                           1174 ;	genCmp
+   032E EF                 1175 	mov	a,r7
+                           1176 ;	genIfxJump
+                           1177 ;	Peephole 108.d	removed ljmp by inverse jump logic
+   032F 30 E7 1F           1178 	jnb	acc.7,00116$
+                           1179 ;	Peephole 300	removed redundant label 00144$
+                           1180 ;	genIpush
+   0332 C0 02              1181 	push	ar2
+   0334 C0 03              1182 	push	ar3
+   0336 C0 04              1183 	push	ar4
+   0338 C0 05              1184 	push	ar5
+   033A 74r6A              1185 	mov	a,#__str_11
+   033C C0 E0              1186 	push	acc
+   033E 74s01              1187 	mov	a,#(__str_11 >> 8)
+   0340 C0 E0              1188 	push	acc
+                           1189 ;	genCall
+   0342 12s00r00           1190 	lcall	_printf_tiny
+   0345 15 81              1191 	dec	sp
+   0347 15 81              1192 	dec	sp
+   0349 D0 05              1193 	pop	ar5
+   034B D0 04              1194 	pop	ar4
+   034D D0 03              1195 	pop	ar3
+   034F D0 02              1196 	pop	ar2
+   0351                    1197 00116$:
+                           1198 ;	data_dump.c:137: }while(bytes<0);
+                           1199 ;	genAssign
+   0351 8C 06              1200 	mov	ar6,r4
+   0353 8D 07              1201 	mov	ar7,r5
+                           1202 ;	genCmpLt
+                           1203 ;	genCmp
+   0355 EF                 1204 	mov	a,r7
+                           1205 ;	genIfxJump
+   0356 30 E7 03           1206 	jnb	acc.7,00145$
+   0359 02s02r0B           1207 	ljmp	00115$
+   035C                    1208 00145$:
+                           1209 ;	data_dump.c:141: for(i=0;i<=bytes;i++)               // Loop for number of bytes
+                           1210 ;	genAssign
+                           1211 ;	genAssign
+                           1212 ;	genAssign
+   035C 7E 00              1213 	mov	r6,#0x00
+   035E 7F 00              1214 	mov	r7,#0x00
+   0360                    1215 00121$:
+                           1216 ;	genCmpGt
+                           1217 ;	genCmp
+   0360 C3                 1218 	clr	c
+   0361 EC                 1219 	mov	a,r4
+   0362 9E                 1220 	subb	a,r6
+   0363 ED                 1221 	mov	a,r5
+   0364 9F                 1222 	subb	a,r7
+                           1223 ;	genIfxJump
+   0365 50 01              1224 	jnc	00146$
+                           1225 ;	Peephole 251.a	replaced ljmp to ret with ret
+   0367 22                 1226 	ret
+   0368                    1227 00146$:
+                           1228 ;	data_dump.c:143: if(i%16==0)
+                           1229 ;	genAnd
+   0368 EE                 1230 	mov	a,r6
+   0369 54 0F              1231 	anl	a,#0x0F
+                           1232 ;	Peephole 160.c	removed sjmp by inverse jump logic
+   036B 60 03              1233 	jz	00148$
+                           1234 ;	Peephole 300	removed redundant label 00147$
+   036D 02s04r10           1235 	ljmp	00119$
+   0370                    1236 00148$:
+                           1237 ;	data_dump.c:146: printf_tiny("\n\n\r%x:\t",aaa);
+                           1238 ;	genIpush
+   0370 C0 04              1239 	push	ar4
+   0372 C0 05              1240 	push	ar5
+                           1241 ;	genIpush
+   0374 C0 02              1242 	push	ar2
+   0376 C0 03              1243 	push	ar3
+   0378 C0 04              1244 	push	ar4
+   037A C0 05              1245 	push	ar5
+   037C C0 06              1246 	push	ar6
+   037E C0 07              1247 	push	ar7
+   0380 C0 02              1248 	push	ar2
+   0382 C0 03              1249 	push	ar3
+                           1250 ;	genIpush
+   0384 74rBE              1251 	mov	a,#__str_12
+   0386 C0 E0              1252 	push	acc
+   0388 74s01              1253 	mov	a,#(__str_12 >> 8)
+   038A C0 E0              1254 	push	acc
+                           1255 ;	genCall
+   038C 12s00r00           1256 	lcall	_printf_tiny
+   038F E5 81              1257 	mov	a,sp
+   0391 24 FC              1258 	add	a,#0xfc
+   0393 F5 81              1259 	mov	sp,a
+   0395 D0 07              1260 	pop	ar7
+   0397 D0 06              1261 	pop	ar6
+   0399 D0 05              1262 	pop	ar5
+   039B D0 04              1263 	pop	ar4
+   039D D0 03              1264 	pop	ar3
+   039F D0 02              1265 	pop	ar2
+                           1266 ;	data_dump.c:147: aaa+=16;
+                           1267 ;	genPlus
+                           1268 ;     genPlusIncr
+   03A1 74 10              1269 	mov	a,#0x10
+                           1270 ;	Peephole 236.a	used r2 instead of ar2
+   03A3 2A                 1271 	add	a,r2
+   03A4 FA                 1272 	mov	r2,a
+                           1273 ;	Peephole 181	changed mov to clr
+   03A5 E4                 1274 	clr	a
+                           1275 ;	Peephole 236.b	used r3 instead of ar3
+   03A6 3B                 1276 	addc	a,r3
+   03A7 FB                 1277 	mov	r3,a
+                           1278 ;	data_dump.c:148: j=0;
+                           1279 ;	genAssign
+   03A8 90s00r21           1280 	mov	dptr,#_hex_dump_j_1_1
+   03AB E4                 1281 	clr	a
+   03AC F0                 1282 	movx	@dptr,a
+   03AD A3                 1283 	inc	dptr
+   03AE F0                 1284 	movx	@dptr,a
+                           1285 ;	data_dump.c:149: st_page=st_addr/256;       // Calculate the page blobk number
+                           1286 ;	genAssign
+   03AF 90s00r1D           1287 	mov	dptr,#_hex_dump_st_addr_1_1
+   03B2 E0                 1288 	movx	a,@dptr
+   03B3 F8                 1289 	mov	r0,a
+   03B4 A3                 1290 	inc	dptr
+   03B5 E0                 1291 	movx	a,@dptr
+   03B6 F9                 1292 	mov	r1,a
+                           1293 ;	genRightShift
+                           1294 ;	genRightShiftLiteral
+                           1295 ;	genrshTwo
+   03B7 89*00              1296 	mov	_hex_dump_sloc0_1_0,r1
+   03B9 75*01 00           1297 	mov	(_hex_dump_sloc0_1_0 + 1),#0x00
+                           1298 ;	data_dump.c:150: seq_read(st_addr-st_page*256,st_page,16,r);     // Sequantial read is used to read 16 bytes of data is single go
+                           1299 ;	genCast
+   03BC 88 04              1300 	mov	ar4,r0
+                           1301 ;	genCast
+   03BE 90s00r00           1302 	mov	dptr,#_seq_read_PARM_2
+   03C1 E5*00              1303 	mov	a,_hex_dump_sloc0_1_0
+   03C3 F0                 1304 	movx	@dptr,a
+                           1305 ;	genAssign
+   03C4 90s00r00           1306 	mov	dptr,#_seq_read_PARM_3
+   03C7 74 10              1307 	mov	a,#0x10
+   03C9 F0                 1308 	movx	@dptr,a
+   03CA E4                 1309 	clr	a
+   03CB A3                 1310 	inc	dptr
+   03CC F0                 1311 	movx	@dptr,a
+                           1312 ;	genAssign
+   03CD 90s00r00           1313 	mov	dptr,#_seq_read_PARM_4
+   03D0 74r0D              1314 	mov	a,#_hex_dump_r_1_1
+   03D2 F0                 1315 	movx	@dptr,a
+   03D3 A3                 1316 	inc	dptr
+   03D4 74s00              1317 	mov	a,#(_hex_dump_r_1_1 >> 8)
+   03D6 F0                 1318 	movx	@dptr,a
+   03D7 A3                 1319 	inc	dptr
+                           1320 ;	Peephole 181	changed mov to clr
+   03D8 E4                 1321 	clr	a
+   03D9 F0                 1322 	movx	@dptr,a
+                           1323 ;	genCall
+   03DA 8C 82              1324 	mov	dpl,r4
+   03DC C0 02              1325 	push	ar2
+   03DE C0 03              1326 	push	ar3
+   03E0 C0 04              1327 	push	ar4
+   03E2 C0 05              1328 	push	ar5
+   03E4 C0 06              1329 	push	ar6
+   03E6 C0 07              1330 	push	ar7
+   03E8 C0 00              1331 	push	ar0
+   03EA C0 01              1332 	push	ar1
+   03EC 12s00r00           1333 	lcall	_seq_read
+   03EF D0 01              1334 	pop	ar1
+   03F1 D0 00              1335 	pop	ar0
+   03F3 D0 07              1336 	pop	ar7
+   03F5 D0 06              1337 	pop	ar6
+   03F7 D0 05              1338 	pop	ar5
+   03F9 D0 04              1339 	pop	ar4
+   03FB D0 03              1340 	pop	ar3
+   03FD D0 02              1341 	pop	ar2
+                           1342 ;	data_dump.c:151: st_addr++;
+                           1343 ;	genPlus
+   03FF 90s00r1D           1344 	mov	dptr,#_hex_dump_st_addr_1_1
+                           1345 ;     genPlusIncr
+   0402 74 01              1346 	mov	a,#0x01
+                           1347 ;	Peephole 236.a	used r0 instead of ar0
+   0404 28                 1348 	add	a,r0
+   0405 F0                 1349 	movx	@dptr,a
+                           1350 ;	Peephole 181	changed mov to clr
+   0406 E4                 1351 	clr	a
+                           1352 ;	Peephole 236.b	used r1 instead of ar1
+   0407 39                 1353 	addc	a,r1
+   0408 A3                 1354 	inc	dptr
+   0409 F0                 1355 	movx	@dptr,a
+                           1356 ;	genIpop
+   040A D0 05              1357 	pop	ar5
+   040C D0 04              1358 	pop	ar4
+                           1359 ;	Peephole 112.b	changed ljmp to sjmp
+   040E 80 13              1360 	sjmp	00120$
+   0410                    1361 00119$:
+                           1362 ;	data_dump.c:158: st_addr++;
+                           1363 ;	genAssign
+   0410 90s00r1D           1364 	mov	dptr,#_hex_dump_st_addr_1_1
+   0413 E0                 1365 	movx	a,@dptr
+   0414 F8                 1366 	mov	r0,a
+   0415 A3                 1367 	inc	dptr
+   0416 E0                 1368 	movx	a,@dptr
+   0417 F9                 1369 	mov	r1,a
+                           1370 ;	genPlus
+   0418 90s00r1D           1371 	mov	dptr,#_hex_dump_st_addr_1_1
+                           1372 ;     genPlusIncr
+   041B 74 01              1373 	mov	a,#0x01
+                           1374 ;	Peephole 236.a	used r0 instead of ar0
+   041D 28                 1375 	add	a,r0
+   041E F0                 1376 	movx	@dptr,a
+                           1377 ;	Peephole 181	changed mov to clr
+   041F E4                 1378 	clr	a
+                           1379 ;	Peephole 236.b	used r1 instead of ar1
+   0420 39                 1380 	addc	a,r1
+   0421 A3                 1381 	inc	dptr
+   0422 F0                 1382 	movx	@dptr,a
+   0423                    1383 00120$:
+                           1384 ;	data_dump.c:161: printf_tiny("%x\t",r[j]);
+                           1385 ;	genIpush
+   0423 C0 04              1386 	push	ar4
+   0425 C0 05              1387 	push	ar5
+                           1388 ;	genAssign
+   0427 90s00r21           1389 	mov	dptr,#_hex_dump_j_1_1
+   042A E0                 1390 	movx	a,@dptr
+   042B F8                 1391 	mov	r0,a
+   042C A3                 1392 	inc	dptr
+   042D E0                 1393 	movx	a,@dptr
+   042E F9                 1394 	mov	r1,a
+                           1395 ;	genPlus
+                           1396 ;	Peephole 236.g	used r0 instead of ar0
+   042F E8                 1397 	mov	a,r0
+   0430 24r0D              1398 	add	a,#_hex_dump_r_1_1
+   0432 F5 82              1399 	mov	dpl,a
+                           1400 ;	Peephole 236.g	used r1 instead of ar1
+   0434 E9                 1401 	mov	a,r1
+   0435 34s00              1402 	addc	a,#(_hex_dump_r_1_1 >> 8)
+   0437 F5 83              1403 	mov	dph,a
+                           1404 ;	genPointerGet
+                           1405 ;	genFarPointerGet
+   0439 E0                 1406 	movx	a,@dptr
+   043A FC                 1407 	mov	r4,a
+                           1408 ;	genCast
+   043B 7D 00              1409 	mov	r5,#0x00
+                           1410 ;	genIpush
+   043D C0 02              1411 	push	ar2
+   043F C0 03              1412 	push	ar3
+   0441 C0 04              1413 	push	ar4
+   0443 C0 05              1414 	push	ar5
+   0445 C0 06              1415 	push	ar6
+   0447 C0 07              1416 	push	ar7
+   0449 C0 00              1417 	push	ar0
+   044B C0 01              1418 	push	ar1
+   044D C0 04              1419 	push	ar4
+   044F C0 05              1420 	push	ar5
+                           1421 ;	genIpush
+   0451 74rC6              1422 	mov	a,#__str_13
+   0453 C0 E0              1423 	push	acc
+   0455 74s01              1424 	mov	a,#(__str_13 >> 8)
+   0457 C0 E0              1425 	push	acc
+                           1426 ;	genCall
+   0459 12s00r00           1427 	lcall	_printf_tiny
+   045C E5 81              1428 	mov	a,sp
+   045E 24 FC              1429 	add	a,#0xfc
+   0460 F5 81              1430 	mov	sp,a
+   0462 D0 01              1431 	pop	ar1
+   0464 D0 00              1432 	pop	ar0
+   0466 D0 07              1433 	pop	ar7
+   0468 D0 06              1434 	pop	ar6
+   046A D0 05              1435 	pop	ar5
+   046C D0 04              1436 	pop	ar4
+   046E D0 03              1437 	pop	ar3
+   0470 D0 02              1438 	pop	ar2
+                           1439 ;	data_dump.c:162: j++;
+                           1440 ;	genPlus
+   0472 90s00r21           1441 	mov	dptr,#_hex_dump_j_1_1
+                           1442 ;     genPlusIncr
+   0475 74 01              1443 	mov	a,#0x01
+                           1444 ;	Peephole 236.a	used r0 instead of ar0
+   0477 28                 1445 	add	a,r0
+   0478 F0                 1446 	movx	@dptr,a
+                           1447 ;	Peephole 181	changed mov to clr
+   0479 E4                 1448 	clr	a
+                           1449 ;	Peephole 236.b	used r1 instead of ar1
+   047A 39                 1450 	addc	a,r1
+   047B A3                 1451 	inc	dptr
+   047C F0                 1452 	movx	@dptr,a
+                           1453 ;	data_dump.c:141: for(i=0;i<=bytes;i++)               // Loop for number of bytes
+                           1454 ;	genPlus
+                           1455 ;     genPlusIncr
+   047D 0E                 1456 	inc	r6
+   047E BE 00 01           1457 	cjne	r6,#0x00,00149$
+   0481 0F                 1458 	inc	r7
+   0482                    1459 00149$:
+                           1460 ;	genIpop
+   0482 D0 05              1461 	pop	ar5
+   0484 D0 04              1462 	pop	ar4
+   0486 02s03r60           1463 	ljmp	00121$
+                           1464 ;	Peephole 259.b	removed redundant label 00125$ and ret
+                           1465 ;
+                           1466 	.area CSEG    (CODE)
+                           1467 	.area CONST   (CODE)
+   0000                    1468 __str_0:
+   0000 0A                 1469 	.db 0x0A
+   0001 0D                 1470 	.db 0x0D
+   0002 09                 1471 	.db 0x09
+   0003 09                 1472 	.db 0x09
+   0004 41 73 63 69 69 20  1473 	.ascii "Ascii Representation"
+        52 65 70 72 65 73
+        65 6E 74 61 74 69
+        6F 6E
+   0018 0A                 1474 	.db 0x0A
+   0019 0D                 1475 	.db 0x0D
+   001A 00                 1476 	.db 0x00
+   001B                    1477 __str_1:
+   001B 0A                 1478 	.db 0x0A
+   001C 0D                 1479 	.db 0x0D
+   001D 09                 1480 	.db 0x09
+   001E 09                 1481 	.db 0x09
+   001F 00                 1482 	.db 0x00
+   0020                    1483 __str_2:
+   0020 0A                 1484 	.db 0x0A
+   0021 0D                 1485 	.db 0x0D
+   0022 09                 1486 	.db 0x09
+   0023 09                 1487 	.db 0x09
+   0024 48 65 78 20 52 65  1488 	.ascii "Hex Representation"
+        70 72 65 73 65 6E
+        74 61 74 69 6F 6E
+   0036 0A                 1489 	.db 0x0A
+   0037 0D                 1490 	.db 0x0D
+   0038 00                 1491 	.db 0x00
+   0039                    1492 __str_3:
+   0039 0A                 1493 	.db 0x0A
+   003A 0A                 1494 	.db 0x0A
+   003B 0D                 1495 	.db 0x0D
+   003C 30 78 25 78        1496 	.ascii "0x%x"
+   0040 00                 1497 	.db 0x00
+   0041                    1498 __str_4:
+   0041 09                 1499 	.db 0x09
+   0042 20 25 78           1500 	.ascii " %x"
+   0045 00                 1501 	.db 0x00
+   0046                    1502 __str_5:
+   0046 25 78              1503 	.ascii "%x"
+   0048 00                 1504 	.db 0x00
+   0049                    1505 __str_6:
+   0049 0A                 1506 	.db 0x0A
+   004A 0A                 1507 	.db 0x0A
+   004B 0D                 1508 	.db 0x0D
+   004C 20 45 6E 74 65 72  1509 	.ascii " Enter Start Address in Hex in HHH format between 000 to "
+        20 53 74 61 72 74
+        20 41 64 64 72 65
+        73 73 20 69 6E 20
+        48 65 78 20 69 6E
+        20 48 48 48 20 66
+        6F 72 6D 61 74 20
+        62 65 74 77 65 65
+        6E 20 30 30 30 20
+        74 6F 20
+   0085 37 46 46 3A 20     1510 	.ascii "7FF: "
+   008A 00                 1511 	.db 0x00
+   008B                    1512 __str_7:
+   008B 0A                 1513 	.db 0x0A
+   008C 0A                 1514 	.db 0x0A
+   008D 0D                 1515 	.db 0x0D
+   008E 20 2A 2D 45 52 52  1516 	.ascii " *-ERROR-*"
+        4F 52 2D 2A
+   0098 09                 1517 	.db 0x09
+   0099 20 50 6C 65 61 73  1518 	.ascii " Please Enter valid start Address betweem 000 "
+        65 20 45 6E 74 65
+        72 20 76 61 6C 69
+        64 20 73 74 61 72
+        74 20 41 64 64 72
+        65 73 73 20 62 65
+        74 77 65 65 6D 20
+        30 30 30 20
+   00C7 61 6E 64 20 37 46  1519 	.ascii "and 7FF: "
+        46 3A 20
+   00D0 00                 1520 	.db 0x00
+   00D1                    1521 __str_8:
+   00D1 0A                 1522 	.db 0x0A
+   00D2 0A                 1523 	.db 0x0A
+   00D3 0D                 1524 	.db 0x0D
+   00D4 20 45 6E 74 65 72  1525 	.ascii " Enter End Address in Hex in HHH format between 000 to 7F"
+        20 45 6E 64 20 41
+        64 64 72 65 73 73
+        20 69 6E 20 48 65
+        78 20 69 6E 20 48
+        48 48 20 66 6F 72
+        6D 61 74 20 62 65
+        74 77 65 65 6E 20
+        30 30 30 20 74 6F
+        20 37 46
+   010D 46 3A 20           1526 	.ascii "F: "
+   0110 00                 1527 	.db 0x00
+   0111                    1528 __str_9:
+   0111 0A                 1529 	.db 0x0A
+   0112 0A                 1530 	.db 0x0A
+   0113 0D                 1531 	.db 0x0D
+   0114 20 2A 2D 45 52 52  1532 	.ascii " *-ERROR-*"
+        4F 52 2D 2A
+   011E 09                 1533 	.db 0x09
+   011F 20 50 6C 65 61 73  1534 	.ascii " Please Enter valid end Address betweem 000 an"
+        65 20 45 6E 74 65
+        72 20 76 61 6C 69
+        64 20 65 6E 64 20
+        41 64 64 72 65 73
+        73 20 62 65 74 77
+        65 65 6D 20 30 30
+        30 20 61 6E
+   014D 64 20 37 46 46 3A  1535 	.ascii "d 7FF: "
+        20
+   0154 00                 1536 	.db 0x00
+   0155                    1537 __str_10:
+   0155 0A                 1538 	.db 0x0A
+   0156 0D                 1539 	.db 0x0D
+   0157 09                 1540 	.db 0x09
+   0158 54 6F 74 61 6C 20  1541 	.ascii "Total Bytes: %d"
+        42 79 74 65 73 3A
+        20 25 64
+   0167 0A                 1542 	.db 0x0A
+   0168 0D                 1543 	.db 0x0D
+   0169 00                 1544 	.db 0x00
+   016A                    1545 __str_11:
+   016A 0A                 1546 	.db 0x0A
+   016B 0D                 1547 	.db 0x0D
+   016C 20 2D 45 52 52 4F  1548 	.ascii " -ERROR- End address smaller than the start address"
+        52 2D 20 45 6E 64
+        20 61 64 64 72 65
+        73 73 20 73 6D 61
+        6C 6C 65 72 20 74
+        68 61 6E 20 74 68
+        65 20 73 74 61 72
+        74 20 61 64 64 72
+        65 73 73
+   019F 0A                 1549 	.db 0x0A
+   01A0 0D                 1550 	.db 0x0D
+   01A1 20 45 6E 74 65     1551 	.ascii " Ente"
+   01A6 72 20 56 61 6C 69  1552 	.ascii "r Valid address range"
+        64 20 61 64 64 72
+        65 73 73 20 72 61
+        6E 67 65
+   01BB 0A                 1553 	.db 0x0A
+   01BC 0D                 1554 	.db 0x0D
+   01BD 00                 1555 	.db 0x00
+   01BE                    1556 __str_12:
+   01BE 0A                 1557 	.db 0x0A
+   01BF 0A                 1558 	.db 0x0A
+   01C0 0D                 1559 	.db 0x0D
+   01C1 25 78 3A           1560 	.ascii "%x:"
+   01C4 09                 1561 	.db 0x09
+   01C5 00                 1562 	.db 0x00
+   01C6                    1563 __str_13:
+   01C6 25 78              1564 	.ascii "%x"
+   01C8 09                 1565 	.db 0x09
+   01C9 00                 1566 	.db 0x00
+                           1567 	.area XINIT   (CODE)

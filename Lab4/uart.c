@@ -24,6 +24,7 @@ char getchar ()													// getchar function is used to recieve a single char
 {																// Terminal																// wait for tx to be ready and send data and clear TI flag
     while (!RI);
 	RI = 0;
+	WDTPRG |=0x07;WDTRST = 0x01E;WDTRST = 0x0E1;
 	return SBUF;
 }
 
@@ -33,8 +34,8 @@ void uart_init()												// UART initialized
 {
     T2CON=0;
     BDRCON=0;
-    PCON |= 0x00;
-    TH1  =  0xFD;												// Timer 1 is used in mode 2 auto reload mode
+    PCON |= 0x80;
+    TH1  =  0xFF;												// Timer 1 is used in mode 2 auto reload mode
     TL1  =  0X00;												// Setting baud rate to 9600 by loading FF into TH1
     TCON |= 0x40;
     SCON |= 0x52;

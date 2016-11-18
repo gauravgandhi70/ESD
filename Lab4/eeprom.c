@@ -122,7 +122,23 @@ unsigned char EEPROM_ReadByte(unsigned char eeprom_Address,unsigned char Page_Nu
 }
 
 
+void eereset()
+{
 
+   	unsigned char i,dat=0x80;
+    I2C_Start();               // Start i2c communication
+	for(i=0;i<9;i++)
+	 {
+		P1_2 = dat & 0x80;    // Send Bit by Bit on SDA line
+		I2C_Clock();      	 // Generate Clock at SCL
+	  }
+
+    I2C_Start();               // Start i2c communication
+
+    I2C_Stop();           	   // Stop i2c communication after Writing the data
+
+	delay_ms(5);               // Write operation takes max 5ms, refer At2404 datasheet
+}
 
 
 

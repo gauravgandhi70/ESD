@@ -127,8 +127,11 @@ int atoh_data(char *c)
 
 char ctoa(int c)
 { int i;
-    char d=0x30;
-    for(i=0;i<16;i++)
+    char d;
+    if(c<10)
+    {
+        d=0x30;
+        for(i=0;i<10;i++)
         {
             if(c==i)
             {
@@ -137,7 +140,39 @@ char ctoa(int c)
             }
             else{d++;}
         }
+    }
+    else if(c<16)
+    {
+        d=0x41;
+        for(i=10;i<16;i++)
+        {
+            if(c==i)
+            {
+                return d;
+                break;
+            }
+            else{d++;}
+        }
+    }
 
 
 }
 
+
+
+
+unsigned char atob(unsigned char c)
+{
+    int i;
+    unsigned char d=0;
+
+    for(i=0;i<8;i++)
+    {
+        d= d<<1;
+        d=d | (c%(2));
+
+        c=c/2;
+    }
+
+    return d;
+}

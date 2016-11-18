@@ -202,7 +202,7 @@ A _CODE size 0 flags 0 addr 0
 A RSEG size 0 flags 0 addr 0
 A REG_BANK_0 size 8 flags 4 addr 0
 A DSEG size 0 flags 0 addr 0
-A OSEG size 0 flags 4 addr 50006174
+A OSEG size 0 flags 4 addr 50002936
 A ISEG size 0 flags 0 addr 0
 A BSEG size 0 flags 80 addr 0
 A PSEG size 0 flags 50 addr 0
@@ -217,9 +217,9 @@ A GSINIT4 size 0 flags 20 addr 0
 A GSINIT5 size 0 flags 20 addr 0
 A GSINIT size 0 flags 20 addr 0
 A GSFINAL size 0 flags 20 addr 0
-A CSEG size 35 flags 20 addr 0
+A CSEG size 3E flags 20 addr 0
 S _putchar Def0000
-S _uart_init Def001C
+S _uart_init Def0025
 S _getchar Def0012
 A CONST size 0 flags 20 addr 0
 A XINIT size 0 flags 20 addr 0
@@ -245,11 +245,11 @@ T 00 12 10 98 02 80 FB
 R 00 00 00 13
 T 00 17
 R 00 00 00 13
-T 00 17 AA 99 8A 82 22
+T 00 17 43 A7 07 75 A6 1E 75 A6 E1 AA 99 8A 82 22
 R 00 00 00 13
-T 00 1C
+T 00 25
 R 00 00 00 13
-T 00 1C 75 C8 00 75 9B 00 85 87 87 75 8D FD 75 8B
+T 00 25 75 C8 00 75 9B 00 43 87 80 75 8D FF 75 8B
 R 00 00 00 13
-T 00 2A 00 43 88 40 43 98 52 75 89 20 22
+T 00 33 00 43 88 40 43 98 52 75 89 20 22
 R 00 00 00 13

@@ -1,0 +1,126 @@
+# depslib dependency file v1.0
+1479281588 source:c:\users\admin\documents\lab4_sup\atoh_f.c
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+	<stdio.h>
+	<stdlib.h>
+	"lcd.h"
+	"i2c.h"
+	"eeprom.h"
+	"delay.h"
+	"uart.h"
+
+1479338084 c:\users\admin\documents\lab4_sup\lcd.h
+	<stdint.h>
+
+1478845869 c:\users\admin\documents\lab4_sup\i2c.h
+
+1479025468 c:\users\admin\documents\lab4_sup\eeprom.h
+
+1477783478 c:\users\admin\documents\lab4_sup\delay.h
+
+1478820874 c:\users\admin\documents\lab4_sup\uart.h
+
+1478860253 source:c:\users\admin\documents\lab4_sup\delay.c
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+
+1479026328 source:c:\users\admin\documents\lab4_sup\eeprom.c
+	<at89c51ed2.h>
+	"i2c.h"
+	"eeprom.h"
+	"delay.h"
+
+1478910457 source:c:\users\admin\documents\lab4_sup\i2c.c
+	<at89c51ed2.h>
+	<mcs51/8051.h>
+	"delay.h"
+	"i2c.h"
+
+1479338084 source:c:\users\admin\documents\lab4_sup\lcd.c
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+	<stdio.h>
+	<stdlib.h>
+	"lcd.h"
+	"i2c.h"
+	"eeprom.h"
+	"delay.h"
+	"uart.h"
+	"atoh_f.h"
+	"clock.h"
+	"data_dump.h"
+	"io_exp.h"
+
+1479338084 c:\users\admin\documents\lab4_sup\atoh_f.h
+
+1479338462 source:c:\users\admin\documents\lab4_sup\main.c
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+	<stdio.h>
+	<stdlib.h>
+	"lcd.h"
+	"i2c.h"
+	"eeprom.h"
+	"delay.h"
+	"uart.h"
+	"atoh_f.h"
+	"clock.h"
+	"data_dump.h"
+	"io_exp.h"
+
+1479326254 source:c:\users\admin\documents\lab4_sup\uart.c
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+	"delay.h"
+	"uart.h"
+
+1479325538 source:c:\users\admin\documents\lab4_sup\clock.c
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+	<stdio.h>
+	<stdlib.h>
+	"lcd.h"
+	"i2c.h"
+	"eeprom.h"
+	"delay.h"
+	"uart.h"
+	"atoh_f.h"
+	"clock.h"
+
+1478989843 c:\users\admin\documents\lab4_sup\clock.h
+
+1479240799 source:c:\users\admin\documents\lab4_sup\data_dump.c
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+	<stdio.h>
+	<stdlib.h>
+	"lcd.h"
+	"i2c.h"
+	"eeprom.h"
+	"delay.h"
+	"uart.h"
+	"atoh_f.h"
+	"clock.h"
+	"data_dump.h"
+
+1479027759 c:\users\admin\documents\lab4_sup\data_dump.h
+
+1479340196 source:c:\users\admin\documents\lab4_sup\io_exp.c
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"lcd.h"
+	"i2c.h"
+	"eeprom.h"
+	"delay.h"
+	"uart.h"
+	"atoh_f.h"
+	"clock.h"
+	"data_dump.h"
+	"io_exp.h"
+
+1479284440 c:\users\admin\documents\lab4_sup\io_exp.h
+
