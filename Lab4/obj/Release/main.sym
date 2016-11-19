@@ -453,7 +453,8 @@ Symbol Table
     _countdown_alarm_PARM_4                                        **** GX
     _countdown_alarm_PARM_5                                        **** GX
     _delay_ms                                                      **** GX
- 14 _ext_zero                                                      1274 GR
+    _eereset                                                       **** GX
+ 14 _ext_zero                                                      0FED GR
   A _flag                                                          0000 GR
     _getchar                                                       **** GX
     _gets                                                          **** GX
@@ -495,7 +496,7 @@ Symbol Table
     _putchar                                                       **** GX
   9 _sec                                                           0001 GR
     _timer_init                                                    **** GX
- 14 _timer_isr                                                     0FEF GR
+ 14 _timer_isr                                                     1067 GR
   3 _timer_isr_sloc0_1_0                                           0004 R
   3 _timer_isr_sloc1_1_0                                           0006 R
   A _timers                                                        0001 GR
@@ -701,6 +702,6 @@ Area Table
   11 GSINIT5                                                                            size    0   flags 20
   12 GSINIT                                                                             size    0   flags 20
   13 GSFINAL                                                                            size    3   flags 20
-  14 CSEG                                                                               size 12EE   flags 20
+  14 CSEG                                                                               size 12EC   flags 20
   15 CONST                                                                              size  ABF   flags 20
   16 XINIT                                                                              size    3   flags 20

@@ -641,7 +641,7 @@
    0F81 8D 83               641 	mov	dph,r5
    0F83 8E F0               642 	mov	b,r6
    0F85 E9                  643 	mov	a,r1
-   0F86 12 2E B2            644 	lcall	__gptrput
+   0F86 12 2E B0            644 	lcall	__gptrput
    0F89 A3                  645 	inc	dptr
    0F8A AC 82               646 	mov	r4,dpl
    0F8C AD 83               647 	mov	r5,dph
@@ -701,7 +701,7 @@
    0FCF 8B 83               701 	mov	dph,r3
    0FD1 8F F0               702 	mov	b,r7
    0FD3 EC                  703 	mov	a,r4
-   0FD4 12 2E B2            704 	lcall	__gptrput
+   0FD4 12 2E B0            704 	lcall	__gptrput
                             705 ;	eeprom.c:52: I2C_NoAck();
                             706 ;	genCall
    0FD7 12 11 7F            707 	lcall	_I2C_NoAck

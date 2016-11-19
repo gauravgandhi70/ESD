@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.6.0 #4309 (Jul 28 2006)
-                              4 ; This file generated Wed Nov 16 16:14:44 2016
+                              4 ; This file generated Thu Nov 17 23:50:29 2016
                               5 ;--------------------------------------------------------
                               6 	.module clock
                               7 	.optsdcc -mmcs51 --model-large
@@ -505,7 +505,7 @@
                             505 ;Allocation info for local variables in function 'timer_init'
                             506 ;------------------------------------------------------------
                             507 ;------------------------------------------------------------
-                            508 ;	clock.c:14: void timer_init()
+                            508 ;	clock.c:30: void timer_init()
                             509 ;	-----------------------------------------
                             510 ;	 function timer_init
                             511 ;	-----------------------------------------
@@ -518,22 +518,22 @@
                     0007    518 	ar7 = 0x07
                     0000    519 	ar0 = 0x00
                     0001    520 	ar1 = 0x01
-                            521 ;	clock.c:16: TMOD |= 0x01;
+                            521 ;	clock.c:32: TMOD |= 0x01;
                             522 ;	genOr
    0000 43 89 01            523 	orl	_TMOD,#0x01
-                            524 ;	clock.c:17: TH0 =   0x90;
+                            524 ;	clock.c:33: TH0 =   0x90;
                             525 ;	genAssign
    0003 75 8C 90            526 	mov	_TH0,#0x90
-                            527 ;	clock.c:18: TL0 =   0x00;
+                            527 ;	clock.c:34: TL0 =   0x00;
                             528 ;	genAssign
    0006 75 8A 00            529 	mov	_TL0,#0x00
-                            530 ;	clock.c:19: IPL0 =0x02;
+                            530 ;	clock.c:35: IPL0 =0x02;
                             531 ;	genAssign
    0009 75 B8 02            532 	mov	_IPL0,#0x02
-                            533 ;	clock.c:20: IE  |= 0x83;
+                            533 ;	clock.c:36: IE  |= 0x83;
                             534 ;	genOr
    000C 43 A8 83            535 	orl	_IE,#0x83
-                            536 ;	clock.c:21: TCON |= 0x11;
+                            536 ;	clock.c:37: TCON |= 0x11;
                             537 ;	genOr
    000F 43 88 11            538 	orl	_TCON,#0x11
                             539 ;	Peephole 300	removed redundant label 00101$
@@ -542,12 +542,12 @@
                             542 ;Allocation info for local variables in function 'clock_reset'
                             543 ;------------------------------------------------------------
                             544 ;------------------------------------------------------------
-                            545 ;	clock.c:24: void clock_reset()
+                            545 ;	clock.c:50: void clock_reset()
                             546 ;	-----------------------------------------
                             547 ;	 function clock_reset
                             548 ;	-----------------------------------------
    0013                     549 _clock_reset:
-                            550 ;	clock.c:26: ms=0;sec=0;mi=0;
+                            550 ;	clock.c:52: ms=0;sec=0;mi=0;
                             551 ;	genAssign
    0013 90s00r00            552 	mov	dptr,#_ms
                             553 ;	Peephole 181	changed mov to clr
@@ -571,7 +571,7 @@
                             571 ;c                         Allocated with name '_clock_control_c_1_1'
                             572 ;t                         Allocated with name '_clock_control_t_1_1'
                             573 ;------------------------------------------------------------
-                            574 ;	clock.c:28: void clock_control() __critical
+                            574 ;	clock.c:67: void clock_control() __critical
                             575 ;	-----------------------------------------
                             576 ;	 function clock_control
                             577 ;	-----------------------------------------
@@ -581,16 +581,16 @@
    0025 C3                  581 	clr	c
    0026                     582 00112$:
    0026 C0 D0               583 	push	psw
-                            584 ;	clock.c:33: WDTPRG |=0x07;
+                            584 ;	clock.c:72: WDTPRG |=0x07;
                             585 ;	genOr
    0028 43 A7 07            586 	orl	_WDTPRG,#0x07
-                            587 ;	clock.c:34: WDTRST = 0x01E;
+                            587 ;	clock.c:73: WDTRST = 0x01E;
                             588 ;	genAssign
    002B 75 A6 1E            589 	mov	_WDTRST,#0x1E
-                            590 ;	clock.c:35: WDTRST = 0x0E1;
+                            590 ;	clock.c:74: WDTRST = 0x0E1;
                             591 ;	genAssign
    002E 75 A6 E1            592 	mov	_WDTRST,#0xE1
-                            593 ;	clock.c:36: ms++;
+                            593 ;	clock.c:75: ms++;
                             594 ;	genAssign
    0031 90s00r00            595 	mov	dptr,#_ms
    0034 E0                  596 	movx	a,@dptr
@@ -602,7 +602,7 @@
                             602 ;	Peephole 236.a	used r2 instead of ar2
    003B 2A                  603 	add	a,r2
    003C F0                  604 	movx	@dptr,a
-                            605 ;	clock.c:37: if(ms==10){ms=0;sec++;}
+                            605 ;	clock.c:76: if(ms==10){ms=0;sec++;}
                             606 ;	genAssign
    003D 90s00r00            607 	mov	dptr,#_ms
    0040 E0                  608 	movx	a,@dptr
@@ -632,7 +632,7 @@
    0054 2A                  632 	add	a,r2
    0055 F0                  633 	movx	@dptr,a
    0056                     634 00102$:
-                            635 ;	clock.c:38: c[0]=ctoa(ms);
+                            635 ;	clock.c:77: c[0]=ctoa(ms);
                             636 ;	genAssign
    0056 90s00r00            637 	mov	dptr,#_ms
    0059 E0                  638 	movx	a,@dptr
@@ -652,7 +652,7 @@
    0068 90s00r03            652 	mov	dptr,#_clock_control_c_1_1
    006B EA                  653 	mov	a,r2
    006C F0                  654 	movx	@dptr,a
-                            655 ;	clock.c:39: lcdgotoxy(4,16);
+                            655 ;	clock.c:78: lcdgotoxy(4,16);
                             656 ;	genAssign
    006D 90s00r00            657 	mov	dptr,#_lcdgotoxy_PARM_2
    0070 74 10               658 	mov	a,#0x10
@@ -660,7 +660,7 @@
                             660 ;	genCall
    0073 75 82 04            661 	mov	dpl,#0x04
    0076 12s00r00            662 	lcall	_lcdgotoxy
-                            663 ;	clock.c:40: lcdputch(c[0]);
+                            663 ;	clock.c:79: lcdputch(c[0]);
                             664 ;	genPointerGet
                             665 ;	genFarPointerGet
    0079 90s00r03            666 	mov	dptr,#_clock_control_c_1_1
@@ -670,7 +670,7 @@
                             670 ;	Peephole 244.c	loading dpl from a instead of r2
    007E F5 82               671 	mov	dpl,a
    0080 12s00r00            672 	lcall	_lcdputch
-                            673 ;	clock.c:42: if(sec==60){sec=0;mi++;}
+                            673 ;	clock.c:81: if(sec==60){sec=0;mi++;}
                             674 ;	genAssign
    0083 90s00r01            675 	mov	dptr,#_sec
    0086 E0                  676 	movx	a,@dptr
@@ -700,7 +700,7 @@
    009A 2A                  700 	add	a,r2
    009B F0                  701 	movx	@dptr,a
    009C                     702 00104$:
-                            703 ;	clock.c:43: t=sec/10;
+                            703 ;	clock.c:82: t=sec/10;
                             704 ;	genAssign
    009C 90s00r01            705 	mov	dptr,#_sec
    009F E0                  706 	movx	a,@dptr
@@ -731,7 +731,7 @@
    00BF A3                  731 	inc	dptr
    00C0 EB                  732 	mov	a,r3
    00C1 F0                  733 	movx	@dptr,a
-                            734 ;	clock.c:44: c[0]=ctoa(t);
+                            734 ;	clock.c:83: c[0]=ctoa(t);
                             735 ;	genCall
    00C2 8A 82               736 	mov	dpl,r2
    00C4 8B 83               737 	mov	dph,r3
@@ -742,7 +742,7 @@
    00CB 90s00r03            742 	mov	dptr,#_clock_control_c_1_1
    00CE EA                  743 	mov	a,r2
    00CF F0                  744 	movx	@dptr,a
-                            745 ;	clock.c:45: t=sec-(t*10);
+                            745 ;	clock.c:84: t=sec-(t*10);
                             746 ;	genAssign
    00D0 90s00r01            747 	mov	dptr,#_sec
    00D3 E0                  748 	movx	a,@dptr
@@ -788,7 +788,7 @@
    0105 9D                  788 	subb	a,r5
    0106 A3                  789 	inc	dptr
    0107 F0                  790 	movx	@dptr,a
-                            791 ;	clock.c:46: c[1]=ctoa(t);
+                            791 ;	clock.c:85: c[1]=ctoa(t);
                             792 ;	genAssign
    0108 90s00r07            793 	mov	dptr,#_clock_control_t_1_1
    010B E0                  794 	movx	a,@dptr
@@ -806,14 +806,14 @@
    0119 90s00r04            806 	mov	dptr,#(_clock_control_c_1_1 + 0x0001)
    011C EA                  807 	mov	a,r2
    011D F0                  808 	movx	@dptr,a
-                            809 ;	clock.c:47: c[2]='\0';
+                            809 ;	clock.c:86: c[2]='\0';
                             810 ;	genPointerSet
                             811 ;     genFarPointerSet
    011E 90s00r05            812 	mov	dptr,#(_clock_control_c_1_1 + 0x0002)
                             813 ;	Peephole 181	changed mov to clr
    0121 E4                  814 	clr	a
    0122 F0                  815 	movx	@dptr,a
-                            816 ;	clock.c:48: lcdgotoxy(4,13);
+                            816 ;	clock.c:87: lcdgotoxy(4,13);
                             817 ;	genAssign
    0123 90s00r00            818 	mov	dptr,#_lcdgotoxy_PARM_2
    0126 74 0D               819 	mov	a,#0x0D
@@ -821,13 +821,13 @@
                             821 ;	genCall
    0129 75 82 04            822 	mov	dpl,#0x04
    012C 12s00r00            823 	lcall	_lcdgotoxy
-                            824 ;	clock.c:49: lcdputstr(c);
+                            824 ;	clock.c:88: lcdputstr(c);
                             825 ;	genCall
                             826 ;	Peephole 182.a	used 16 bit load of DPTR
    012F 90s00r03            827 	mov	dptr,#_clock_control_c_1_1
    0132 75 F0 00            828 	mov	b,#0x00
    0135 12s00r00            829 	lcall	_lcdputstr
-                            830 ;	clock.c:52: if(mi==60){mi=0;}
+                            830 ;	clock.c:91: if(mi==60){mi=0;}
                             831 ;	genAssign
    0138 90s00r02            832 	mov	dptr,#_mi
    013B E0                  833 	movx	a,@dptr
@@ -846,7 +846,7 @@
    0143 E4                  846 	clr	a
    0144 F0                  847 	movx	@dptr,a
    0145                     848 00106$:
-                            849 ;	clock.c:53: t=mi/10;
+                            849 ;	clock.c:92: t=mi/10;
                             850 ;	genAssign
    0145 90s00r02            851 	mov	dptr,#_mi
    0148 E0                  852 	movx	a,@dptr
@@ -877,7 +877,7 @@
    0168 A3                  877 	inc	dptr
    0169 EB                  878 	mov	a,r3
    016A F0                  879 	movx	@dptr,a
-                            880 ;	clock.c:54: c[0]=ctoa(t);
+                            880 ;	clock.c:93: c[0]=ctoa(t);
                             881 ;	genCall
    016B 8A 82               882 	mov	dpl,r2
    016D 8B 83               883 	mov	dph,r3
@@ -888,7 +888,7 @@
    0174 90s00r03            888 	mov	dptr,#_clock_control_c_1_1
    0177 EA                  889 	mov	a,r2
    0178 F0                  890 	movx	@dptr,a
-                            891 ;	clock.c:55: t=mi-(t*10);
+                            891 ;	clock.c:94: t=mi-(t*10);
                             892 ;	genAssign
    0179 90s00r02            893 	mov	dptr,#_mi
    017C E0                  894 	movx	a,@dptr
@@ -934,7 +934,7 @@
    01AE 9D                  934 	subb	a,r5
    01AF A3                  935 	inc	dptr
    01B0 F0                  936 	movx	@dptr,a
-                            937 ;	clock.c:56: c[1]=ctoa(t);
+                            937 ;	clock.c:95: c[1]=ctoa(t);
                             938 ;	genAssign
    01B1 90s00r07            939 	mov	dptr,#_clock_control_t_1_1
    01B4 E0                  940 	movx	a,@dptr
@@ -952,14 +952,14 @@
    01C2 90s00r04            952 	mov	dptr,#(_clock_control_c_1_1 + 0x0001)
    01C5 EA                  953 	mov	a,r2
    01C6 F0                  954 	movx	@dptr,a
-                            955 ;	clock.c:57: c[2]='\0';
+                            955 ;	clock.c:96: c[2]='\0';
                             956 ;	genPointerSet
                             957 ;     genFarPointerSet
    01C7 90s00r05            958 	mov	dptr,#(_clock_control_c_1_1 + 0x0002)
                             959 ;	Peephole 181	changed mov to clr
    01CA E4                  960 	clr	a
    01CB F0                  961 	movx	@dptr,a
-                            962 ;	clock.c:58: lcdgotoxy(4,10);
+                            962 ;	clock.c:97: lcdgotoxy(4,10);
                             963 ;	genAssign
    01CC 90s00r00            964 	mov	dptr,#_lcdgotoxy_PARM_2
    01CF 74 0A               965 	mov	a,#0x0A
@@ -967,7 +967,7 @@
                             967 ;	genCall
    01D2 75 82 04            968 	mov	dpl,#0x04
    01D5 12s00r00            969 	lcall	_lcdgotoxy
-                            970 ;	clock.c:59: lcdputstr(c);
+                            970 ;	clock.c:98: lcdputstr(c);
                             971 ;	genCall
                             972 ;	Peephole 182.a	used 16 bit load of DPTR
    01D8 90s00r03            973 	mov	dptr,#_clock_control_c_1_1
@@ -988,7 +988,7 @@
                             988 ;c                         Allocated with name '_countdown_alarm_c_1_1'
                             989 ;t                         Allocated with name '_countdown_alarm_t_1_1'
                             990 ;------------------------------------------------------------
-                            991 ;	clock.c:63: void countdown_alarm(unsigned int nm,unsigned int nse,unsigned int nmi,char cn,int num) __critical
+                            991 ;	clock.c:110: void countdown_alarm(unsigned int nm,unsigned int nse,unsigned int nmi,char cn,int num) __critical
                             992 ;	-----------------------------------------
                             993 ;	 function countdown_alarm
                             994 ;	-----------------------------------------
@@ -1006,7 +1006,7 @@
    01F5 A3                 1006 	inc	dptr
    01F6 EA                 1007 	mov	a,r2
    01F7 F0                 1008 	movx	@dptr,a
-                           1009 ;	clock.c:68: c[0]=ctoa(nm);
+                           1009 ;	clock.c:115: c[0]=ctoa(nm);
                            1010 ;	genAssign
    01F8 90s00r10           1011 	mov	dptr,#_countdown_alarm_nm_1_1
    01FB E0                 1012 	movx	a,@dptr
@@ -1024,7 +1024,7 @@
    0209 90s00r12           1024 	mov	dptr,#_countdown_alarm_c_1_1
    020C EA                 1025 	mov	a,r2
    020D F0                 1026 	movx	@dptr,a
-                           1027 ;	clock.c:69: lcdgotoxy(num+1,16);
+                           1027 ;	clock.c:116: lcdgotoxy(num+1,16);
                            1028 ;	genAssign
    020E 90s00r0E           1029 	mov	dptr,#_countdown_alarm_PARM_5
    0211 E0                 1030 	movx	a,@dptr
@@ -1050,7 +1050,7 @@
    0226 12s00r00           1050 	lcall	_lcdgotoxy
    0229 D0 03              1051 	pop	ar3
    022B D0 02              1052 	pop	ar2
-                           1053 ;	clock.c:70: lcdputch(c[0]);
+                           1053 ;	clock.c:117: lcdputch(c[0]);
                            1054 ;	genPointerGet
                            1055 ;	genFarPointerGet
    022D 90s00r12           1056 	mov	dptr,#_countdown_alarm_c_1_1
@@ -1064,7 +1064,7 @@
    0238 12s00r00           1064 	lcall	_lcdputch
    023B D0 03              1065 	pop	ar3
    023D D0 02              1066 	pop	ar2
-                           1067 ;	clock.c:73: t=nse/10;
+                           1067 ;	clock.c:120: t=nse/10;
                            1068 ;	genAssign
    023F 90s00r09           1069 	mov	dptr,#_countdown_alarm_PARM_2
    0242 E0                 1070 	movx	a,@dptr
@@ -1079,7 +1079,7 @@
    024D E4                 1079 	clr	a
    024E A3                 1080 	inc	dptr
    024F F0                 1081 	movx	@dptr,a
-                           1082 ;	clock.c:74: c[0]=ctoa(t);
+                           1082 ;	clock.c:121: c[0]=ctoa(t);
                            1083 ;	genCall
    0250 8C 82              1084 	mov	dpl,r4
    0252 8D 83              1085 	mov	dph,r5
@@ -1116,7 +1116,7 @@
    028C 90s00r12           1116 	mov	dptr,#_countdown_alarm_c_1_1
    028F E8                 1117 	mov	a,r0
    0290 F0                 1118 	movx	@dptr,a
-                           1119 ;	clock.c:75: t=nse-(t*10);
+                           1119 ;	clock.c:122: t=nse-(t*10);
                            1120 ;	genAssign
                            1121 ;	genAssign
    0291 90s00r00           1122 	mov	dptr,#__mulint_PARM_2
@@ -1149,7 +1149,7 @@
                            1149 ;	Peephole 236.l	used r7 instead of ar7
    02BA 9F                 1150 	subb	a,r7
    02BB FD                 1151 	mov	r5,a
-                           1152 ;	clock.c:76: c[1]=ctoa(t);
+                           1152 ;	clock.c:123: c[1]=ctoa(t);
                            1153 ;	genCall
    02BC 8C 82              1154 	mov	dpl,r4
    02BE 8D 83              1155 	mov	dph,r5
@@ -1164,14 +1164,14 @@
    02CD 90s00r13           1164 	mov	dptr,#(_countdown_alarm_c_1_1 + 0x0001)
    02D0 EC                 1165 	mov	a,r4
    02D1 F0                 1166 	movx	@dptr,a
-                           1167 ;	clock.c:77: c[2]='\0';
+                           1167 ;	clock.c:124: c[2]='\0';
                            1168 ;	genPointerSet
                            1169 ;     genFarPointerSet
    02D2 90s00r14           1170 	mov	dptr,#(_countdown_alarm_c_1_1 + 0x0002)
                            1171 ;	Peephole 181	changed mov to clr
    02D5 E4                 1172 	clr	a
    02D6 F0                 1173 	movx	@dptr,a
-                           1174 ;	clock.c:78: lcdgotoxy(num+1,13);
+                           1174 ;	clock.c:125: lcdgotoxy(num+1,13);
                            1175 ;	genAssign
    02D7 90s00r00           1176 	mov	dptr,#_lcdgotoxy_PARM_2
    02DA 74 0D              1177 	mov	a,#0x0D
@@ -1183,7 +1183,7 @@
    02E3 12s00r00           1183 	lcall	_lcdgotoxy
    02E6 D0 03              1184 	pop	ar3
    02E8 D0 02              1185 	pop	ar2
-                           1186 ;	clock.c:79: lcdputstr(c);
+                           1186 ;	clock.c:126: lcdputstr(c);
                            1187 ;	genCall
                            1188 ;	Peephole 182.a	used 16 bit load of DPTR
    02EA 90s00r12           1189 	mov	dptr,#_countdown_alarm_c_1_1
@@ -1193,7 +1193,7 @@
    02F4 12s00r00           1193 	lcall	_lcdputstr
    02F7 D0 03              1194 	pop	ar3
    02F9 D0 02              1195 	pop	ar2
-                           1196 ;	clock.c:83: t=nmi/10;
+                           1196 ;	clock.c:130: t=nmi/10;
                            1197 ;	genAssign
    02FB 90s00r0B           1198 	mov	dptr,#_countdown_alarm_PARM_3
    02FE E0                 1199 	movx	a,@dptr
@@ -1208,7 +1208,7 @@
    0309 E4                 1208 	clr	a
    030A A3                 1209 	inc	dptr
    030B F0                 1210 	movx	@dptr,a
-                           1211 ;	clock.c:84: c[0]=ctoa(t);
+                           1211 ;	clock.c:131: c[0]=ctoa(t);
                            1212 ;	genCall
    030C 8C 82              1213 	mov	dpl,r4
    030E 8D 83              1214 	mov	dph,r5
@@ -1245,7 +1245,7 @@
    0348 90s00r12           1245 	mov	dptr,#_countdown_alarm_c_1_1
    034B E8                 1246 	mov	a,r0
    034C F0                 1247 	movx	@dptr,a
-                           1248 ;	clock.c:85: t=nmi-(t*10);
+                           1248 ;	clock.c:132: t=nmi-(t*10);
                            1249 ;	genAssign
                            1250 ;	genAssign
    034D 90s00r00           1251 	mov	dptr,#__mulint_PARM_2
@@ -1278,7 +1278,7 @@
                            1278 ;	Peephole 236.l	used r7 instead of ar7
    0376 9F                 1279 	subb	a,r7
    0377 FD                 1280 	mov	r5,a
-                           1281 ;	clock.c:86: c[1]=ctoa(t);
+                           1281 ;	clock.c:133: c[1]=ctoa(t);
                            1282 ;	genCall
    0378 8C 82              1283 	mov	dpl,r4
    037A 8D 83              1284 	mov	dph,r5
@@ -1293,14 +1293,14 @@
    0389 90s00r13           1293 	mov	dptr,#(_countdown_alarm_c_1_1 + 0x0001)
    038C EC                 1294 	mov	a,r4
    038D F0                 1295 	movx	@dptr,a
-                           1296 ;	clock.c:87: c[2]='\0';
+                           1296 ;	clock.c:134: c[2]='\0';
                            1297 ;	genPointerSet
                            1298 ;     genFarPointerSet
    038E 90s00r14           1299 	mov	dptr,#(_countdown_alarm_c_1_1 + 0x0002)
                            1300 ;	Peephole 181	changed mov to clr
    0391 E4                 1301 	clr	a
    0392 F0                 1302 	movx	@dptr,a
-                           1303 ;	clock.c:88: lcdgotoxy(num+1,10);
+                           1303 ;	clock.c:135: lcdgotoxy(num+1,10);
                            1304 ;	genAssign
    0393 90s00r00           1305 	mov	dptr,#_lcdgotoxy_PARM_2
    0396 74 0A              1306 	mov	a,#0x0A
@@ -1310,7 +1310,7 @@
    039B C0 02              1310 	push	ar2
    039D 12s00r00           1311 	lcall	_lcdgotoxy
    03A0 D0 02              1312 	pop	ar2
-                           1313 ;	clock.c:89: lcdputstr(c);
+                           1313 ;	clock.c:136: lcdputstr(c);
                            1314 ;	genCall
                            1315 ;	Peephole 182.a	used 16 bit load of DPTR
    03A2 90s00r12           1316 	mov	dptr,#_countdown_alarm_c_1_1
@@ -1318,7 +1318,7 @@
    03A8 C0 02              1318 	push	ar2
    03AA 12s00r00           1319 	lcall	_lcdputstr
    03AD D0 02              1320 	pop	ar2
-                           1321 ;	clock.c:90: if(cn==0)
+                           1321 ;	clock.c:137: if(cn==0)
                            1322 ;	genAssign
    03AF 90s00r0D           1323 	mov	dptr,#_countdown_alarm_PARM_4
    03B2 E0                 1324 	movx	a,@dptr
@@ -1329,7 +1329,7 @@
                            1329 ;	Peephole 108.b	removed ljmp by inverse jump logic
    03B4 70 15              1330 	jnz	00103$
                            1331 ;	Peephole 300	removed redundant label 00107$
-                           1332 ;	clock.c:93: lcdgotoxy(num+1,1);
+                           1332 ;	clock.c:140: lcdgotoxy(num+1,1);
                            1333 ;	genPlus
                            1334 ;     genPlusIncr
    03B6 0A                 1335 	inc	r2
@@ -1340,7 +1340,7 @@
                            1340 ;	genCall
    03BD 8A 82              1341 	mov	dpl,r2
    03BF 12s00r00           1342 	lcall	_lcdgotoxy
-                           1343 ;	clock.c:94: lcdputstr("*Alarm*  ");
+                           1343 ;	clock.c:141: lcdputstr("*Alarm*  ");
                            1344 ;	genCall
                            1345 ;	Peephole 182.a	used 16 bit load of DPTR
    03C2 90s00r00           1346 	mov	dptr,#__str_0

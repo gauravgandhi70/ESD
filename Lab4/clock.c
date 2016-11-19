@@ -1,3 +1,9 @@
+/*---------------------------------------------------------------------------------------*
+                                Function for Displaying Clock on LCD using 8051
+Filename: clock.c
+Controller: AT89c51RC2
+Author: Gaurav Gandhi
+ ----------------------------------------------------------------------------------------*/
 #include <mcs51/8051.h>
 #include<at89c51ed2.h>
 #include<stdio.h>
@@ -11,6 +17,16 @@
 #include"clock.h"
 
 
+
+/*---------------------------------------------------------------------------------------
+                   void timer_init()
+ ----------------------------------------------------------------------------------------
+ * I/P Arguments: None
+ * Return value	: none
+
+ * description:Timer 0 interrupt is used for generating Clocks. Priority is set high for the timer 0 interrupt
+----------------------------------------------------------------------------------------*/
+
 void timer_init()
 {
     TMOD |= 0x01;
@@ -21,10 +37,33 @@ void timer_init()
     TCON |= 0x11;
 }
 
+
+/*---------------------------------------------------------------------------------------
+                   void clock_reset()
+ ----------------------------------------------------------------------------------------
+ * I/P Arguments: None
+ * Return value	: none
+
+ * description:The global variables containing the state of the clock are set to zero to reset the clock
+----------------------------------------------------------------------------------------*/
+
 void clock_reset()
 {
      ms=0;sec=0;mi=0;
 }
+
+
+/*---------------------------------------------------------------------------------------
+                  void clock_control() __critical
+ ----------------------------------------------------------------------------------------
+ * I/P Arguments: None
+ * Return value	: none
+
+ * description:  This function is used to display current time on the LCD. This function is called from the
+ interrupts. when millisec reaxhes 10 it increaents the sec count. when sec reaches 60 it increaents the min count.
+ Specific location for each character is specified everytime to avoid writing on wrong locations on the LCD
+ ctoa function is used for the conversion of the numbers into ascii values to diplay on LCD
+----------------------------------------------------------------------------------------*/
 void clock_control() __critical
 {
 
@@ -60,6 +99,14 @@ void clock_control() __critical
 
 }
 
+
+/*---------------------------------------------------------------------------------------
+                  void countdown_alarm(unsigned int nm,unsigned int nse,unsigned int nmi,char cn,int num) __critical
+ ----------------------------------------------------------------------------------------
+ * I/P Arguments: Countdown timer number, its current status in the form of min,sec and millisec,
+ * Return value	: none
+ * description:  This function is used for  displaying of the coundown timimng
+----------------------------------------------------------------------------------------*/
 void countdown_alarm(unsigned int nm,unsigned int nse,unsigned int nmi,char cn,int num) __critical
 {
     char c[4];

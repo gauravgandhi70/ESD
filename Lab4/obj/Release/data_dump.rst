@@ -524,12 +524,12 @@
    09D2 12 14 68            524 	lcall	_lcdputcmd
                             525 ;	data_dump.c:27: printf_tiny("\n\r\t\tAscii Representation\n\r");
                             526 ;	genIpush
-   09D5 74 96               527 	mov	a,#__str_0
+   09D5 74 94               527 	mov	a,#__str_0
    09D7 C0 E0               528 	push	acc
    09D9 74 41               529 	mov	a,#(__str_0 >> 8)
    09DB C0 E0               530 	push	acc
                             531 ;	genCall
-   09DD 12 2E CB            532 	lcall	_printf_tiny
+   09DD 12 2E C9            532 	lcall	_printf_tiny
    09E0 15 81               533 	dec	sp
    09E2 15 81               534 	dec	sp
                             535 ;	data_dump.c:28: for(i=0;i<64;i++)       // Reading contents of the DDRAM
@@ -565,7 +565,7 @@
    0A05 C0 02               565 	push	ar2
    0A07 C0 03               566 	push	ar3
    0A09 C0 04               567 	push	ar4
-   0A0B 12 31 05            568 	lcall	__modsint
+   0A0B 12 31 03            568 	lcall	__modsint
    0A0E E5 82               569 	mov	a,dpl
    0A10 85 83 F0            570 	mov	b,dph
    0A13 D0 04               571 	pop	ar4
@@ -586,12 +586,12 @@
    0A1E C0 02               586 	push	ar2
    0A20 C0 03               587 	push	ar3
    0A22 C0 04               588 	push	ar4
-   0A24 74 B1               589 	mov	a,#__str_1
+   0A24 74 AF               589 	mov	a,#__str_1
    0A26 C0 E0               590 	push	acc
    0A28 74 41               591 	mov	a,#(__str_1 >> 8)
    0A2A C0 E0               592 	push	acc
                             593 ;	genCall
-   0A2C 12 2E CB            594 	lcall	_printf_tiny
+   0A2C 12 2E C9            594 	lcall	_printf_tiny
    0A2F 15 81               595 	dec	sp
    0A31 15 81               596 	dec	sp
    0A33 D0 04               597 	pop	ar4
@@ -627,7 +627,7 @@
    0A63 C0 02               627 	push	ar2
    0A65 C0 03               628 	push	ar3
    0A67 C0 04               629 	push	ar4
-   0A69 12 2B 87            630 	lcall	_putchar
+   0A69 12 2B 85            630 	lcall	_putchar
    0A6C D0 04               631 	pop	ar4
    0A6E D0 03               632 	pop	ar3
    0A70 D0 02               633 	pop	ar2
@@ -650,12 +650,12 @@
    0A83 12 15 36            650 	lcall	_lcdgotoxy
                             651 ;	data_dump.c:44: printf_tiny("\n\r\t\tHex Representation\n\r");
                             652 ;	genIpush
-   0A86 74 B6               653 	mov	a,#__str_2
+   0A86 74 B4               653 	mov	a,#__str_2
    0A88 C0 E0               654 	push	acc
    0A8A 74 41               655 	mov	a,#(__str_2 >> 8)
    0A8C C0 E0               656 	push	acc
                             657 ;	genCall
-   0A8E 12 2E CB            658 	lcall	_printf_tiny
+   0A8E 12 2E C9            658 	lcall	_printf_tiny
    0A91 15 81               659 	dec	sp
    0A93 15 81               660 	dec	sp
                             661 ;	data_dump.c:45: for(i=0;i<80;i++)
@@ -688,7 +688,7 @@
    0AAF 8B 83               688 	mov	dph,r3
    0AB1 C0 02               689 	push	ar2
    0AB3 C0 03               690 	push	ar3
-   0AB5 12 31 05            691 	lcall	__modsint
+   0AB5 12 31 03            691 	lcall	__modsint
    0AB8 E5 82               692 	mov	a,dpl
    0ABA 85 83 F0            693 	mov	b,dph
    0ABD D0 03               694 	pop	ar3
@@ -706,12 +706,12 @@
    0AC9 C0 02               706 	push	ar2
    0ACB C0 03               707 	push	ar3
                             708 ;	genIpush
-   0ACD 74 CF               709 	mov	a,#__str_3
+   0ACD 74 CD               709 	mov	a,#__str_3
    0ACF C0 E0               710 	push	acc
    0AD1 74 41               711 	mov	a,#(__str_3 >> 8)
    0AD3 C0 E0               712 	push	acc
                             713 ;	genCall
-   0AD5 12 2E CB            714 	lcall	_printf_tiny
+   0AD5 12 2E C9            714 	lcall	_printf_tiny
    0AD8 E5 81               715 	mov	a,sp
    0ADA 24 FC               716 	add	a,#0xfc
    0ADC F5 81               717 	mov	sp,a
@@ -737,12 +737,12 @@
    0AF8 C0 04               737 	push	ar4
    0AFA C0 05               738 	push	ar5
                             739 ;	genIpush
-   0AFC 74 D7               740 	mov	a,#__str_4
+   0AFC 74 D5               740 	mov	a,#__str_4
    0AFE C0 E0               741 	push	acc
    0B00 74 41               742 	mov	a,#(__str_4 >> 8)
    0B02 C0 E0               743 	push	acc
                             744 ;	genCall
-   0B04 12 2E CB            745 	lcall	_printf_tiny
+   0B04 12 2E C9            745 	lcall	_printf_tiny
    0B07 E5 81               746 	mov	a,sp
    0B09 24 FC               747 	add	a,#0xfc
    0B0B F5 81               748 	mov	sp,a
@@ -779,7 +779,7 @@
                             779 ;	data_dump.c:66: putchar('\n');
                             780 ;	genCall
    0B25 75 82 0A            781 	mov	dpl,#0x0A
-   0B28 12 2B 87            782 	lcall	_putchar
+   0B28 12 2B 85            782 	lcall	_putchar
                             783 ;	data_dump.c:67: lcdputcmd(0x40);        // 0x40 is Passed to select CGRAM and setting its address as 00
                             784 ;	genCall
    0B2B 75 82 40            785 	mov	dpl,#0x40
@@ -814,7 +814,7 @@
    0B4E 8B 83               814 	mov	dph,r3
    0B50 C0 02               815 	push	ar2
    0B52 C0 03               816 	push	ar3
-   0B54 12 31 05            817 	lcall	__modsint
+   0B54 12 31 03            817 	lcall	__modsint
    0B57 E5 82               818 	mov	a,dpl
    0B59 85 83 F0            819 	mov	b,dph
    0B5C D0 03               820 	pop	ar3
@@ -832,12 +832,12 @@
    0B68 C0 02               832 	push	ar2
    0B6A C0 03               833 	push	ar3
                             834 ;	genIpush
-   0B6C 74 CF               835 	mov	a,#__str_3
+   0B6C 74 CD               835 	mov	a,#__str_3
    0B6E C0 E0               836 	push	acc
    0B70 74 41               837 	mov	a,#(__str_3 >> 8)
    0B72 C0 E0               838 	push	acc
                             839 ;	genCall
-   0B74 12 2E CB            840 	lcall	_printf_tiny
+   0B74 12 2E C9            840 	lcall	_printf_tiny
    0B77 E5 81               841 	mov	a,sp
    0B79 24 FC               842 	add	a,#0xfc
    0B7B F5 81               843 	mov	sp,a
@@ -858,7 +858,7 @@
    0B91 C0 02               858 	push	ar2
    0B93 C0 03               859 	push	ar3
    0B95 C0 04               860 	push	ar4
-   0B97 12 2B 87            861 	lcall	_putchar
+   0B97 12 2B 85            861 	lcall	_putchar
    0B9A D0 04               862 	pop	ar4
    0B9C D0 03               863 	pop	ar3
    0B9E D0 02               864 	pop	ar2
@@ -872,12 +872,12 @@
    0BA6 C0 04               872 	push	ar4
    0BA8 C0 05               873 	push	ar5
                             874 ;	genIpush
-   0BAA 74 DC               875 	mov	a,#__str_5
+   0BAA 74 DA               875 	mov	a,#__str_5
    0BAC C0 E0               876 	push	acc
    0BAE 74 41               877 	mov	a,#(__str_5 >> 8)
    0BB0 C0 E0               878 	push	acc
                             879 ;	genCall
-   0BB2 12 2E CB            880 	lcall	_printf_tiny
+   0BB2 12 2E C9            880 	lcall	_printf_tiny
    0BB5 E5 81               881 	mov	a,sp
    0BB7 24 FC               882 	add	a,#0xfc
    0BB9 F5 81               883 	mov	sp,a
@@ -927,12 +927,12 @@
    0BD3                     927 00115$:
                             928 ;	data_dump.c:100: printf_tiny("\n\n\r Enter Start Address in Hex in HHH format between 000 to 7FF: ");
                             929 ;	genIpush
-   0BD3 74 DF               930 	mov	a,#__str_6
+   0BD3 74 DD               930 	mov	a,#__str_6
    0BD5 C0 E0               931 	push	acc
    0BD7 74 41               932 	mov	a,#(__str_6 >> 8)
    0BD9 C0 E0               933 	push	acc
                             934 ;	genCall
-   0BDB 12 2E CB            935 	lcall	_printf_tiny
+   0BDB 12 2E C9            935 	lcall	_printf_tiny
    0BDE 15 81               936 	dec	sp
    0BE0 15 81               937 	dec	sp
                             938 ;	data_dump.c:101: do{
@@ -949,7 +949,7 @@
                             949 ;	Peephole 182.a	used 16 bit load of DPTR
    0BE9 90 00 28            950 	mov	dptr,#_hex_dump_b_1_1
    0BEC 75 F0 00            951 	mov	b,#0x00
-   0BEF 12 2D 9E            952 	lcall	_gets
+   0BEF 12 2D 9C            952 	lcall	_gets
                             953 ;	data_dump.c:104: st_addr=atoh(b);
                             954 ;	genCall
                             955 ;	Peephole 182.a	used 16 bit load of DPTR
@@ -993,12 +993,12 @@
                             993 ;	genIpush
    0C1B C0 02               994 	push	ar2
    0C1D C0 03               995 	push	ar3
-   0C1F 74 21               996 	mov	a,#__str_7
+   0C1F 74 1F               996 	mov	a,#__str_7
    0C21 C0 E0               997 	push	acc
    0C23 74 42               998 	mov	a,#(__str_7 >> 8)
    0C25 C0 E0               999 	push	acc
                            1000 ;	genCall
-   0C27 12 2E CB           1001 	lcall	_printf_tiny
+   0C27 12 2E C9           1001 	lcall	_printf_tiny
    0C2A 15 81              1002 	dec	sp
    0C2C 15 81              1003 	dec	sp
    0C2E D0 03              1004 	pop	ar3
@@ -1023,12 +1023,12 @@
                            1023 ;	genIpush
    0C3D C0 02              1024 	push	ar2
    0C3F C0 03              1025 	push	ar3
-   0C41 74 67              1026 	mov	a,#__str_8
+   0C41 74 65              1026 	mov	a,#__str_8
    0C43 C0 E0              1027 	push	acc
    0C45 74 42              1028 	mov	a,#(__str_8 >> 8)
    0C47 C0 E0              1029 	push	acc
                            1030 ;	genCall
-   0C49 12 2E CB           1031 	lcall	_printf_tiny
+   0C49 12 2E C9           1031 	lcall	_printf_tiny
    0C4C 15 81              1032 	dec	sp
    0C4E 15 81              1033 	dec	sp
    0C50 D0 03              1034 	pop	ar3
@@ -1049,7 +1049,7 @@
    0C5E 75 F0 00           1049 	mov	b,#0x00
    0C61 C0 02              1050 	push	ar2
    0C63 C0 03              1051 	push	ar3
-   0C65 12 2D 9E           1052 	lcall	_gets
+   0C65 12 2D 9C           1052 	lcall	_gets
    0C68 D0 03              1053 	pop	ar3
    0C6A D0 02              1054 	pop	ar2
                            1055 ;	data_dump.c:122: end_addr=atoh(d);   // Check if the address is in valid range
@@ -1094,12 +1094,12 @@
    0C97 C0 03              1094 	push	ar3
    0C99 C0 04              1095 	push	ar4
    0C9B C0 05              1096 	push	ar5
-   0C9D 74 A7              1097 	mov	a,#__str_9
+   0C9D 74 A5              1097 	mov	a,#__str_9
    0C9F C0 E0              1098 	push	acc
    0CA1 74 42              1099 	mov	a,#(__str_9 >> 8)
    0CA3 C0 E0              1100 	push	acc
                            1101 ;	genCall
-   0CA5 12 2E CB           1102 	lcall	_printf_tiny
+   0CA5 12 2E C9           1102 	lcall	_printf_tiny
    0CA8 15 81              1103 	dec	sp
    0CAA 15 81              1104 	dec	sp
    0CAC D0 05              1105 	pop	ar5
@@ -1153,12 +1153,12 @@
    0CD5 C0 06              1153 	push	ar6
    0CD7 C0 07              1154 	push	ar7
                            1155 ;	genIpush
-   0CD9 74 EB              1156 	mov	a,#__str_10
+   0CD9 74 E9              1156 	mov	a,#__str_10
    0CDB C0 E0              1157 	push	acc
    0CDD 74 42              1158 	mov	a,#(__str_10 >> 8)
    0CDF C0 E0              1159 	push	acc
                            1160 ;	genCall
-   0CE1 12 2E CB           1161 	lcall	_printf_tiny
+   0CE1 12 2E C9           1161 	lcall	_printf_tiny
    0CE4 E5 81              1162 	mov	a,sp
    0CE6 24 FC              1163 	add	a,#0xfc
    0CE8 F5 81              1164 	mov	sp,a
@@ -1182,12 +1182,12 @@
    0CFC C0 03              1182 	push	ar3
    0CFE C0 04              1183 	push	ar4
    0D00 C0 05              1184 	push	ar5
-   0D02 74 00              1185 	mov	a,#__str_11
+   0D02 74 FE              1185 	mov	a,#__str_11
    0D04 C0 E0              1186 	push	acc
-   0D06 74 43              1187 	mov	a,#(__str_11 >> 8)
+   0D06 74 42              1187 	mov	a,#(__str_11 >> 8)
    0D08 C0 E0              1188 	push	acc
                            1189 ;	genCall
-   0D0A 12 2E CB           1190 	lcall	_printf_tiny
+   0D0A 12 2E C9           1190 	lcall	_printf_tiny
    0D0D 15 81              1191 	dec	sp
    0D0F 15 81              1192 	dec	sp
    0D11 D0 05              1193 	pop	ar5
@@ -1248,12 +1248,12 @@
    0D48 C0 02              1248 	push	ar2
    0D4A C0 03              1249 	push	ar3
                            1250 ;	genIpush
-   0D4C 74 54              1251 	mov	a,#__str_12
+   0D4C 74 52              1251 	mov	a,#__str_12
    0D4E C0 E0              1252 	push	acc
    0D50 74 43              1253 	mov	a,#(__str_12 >> 8)
    0D52 C0 E0              1254 	push	acc
                            1255 ;	genCall
-   0D54 12 2E CB           1256 	lcall	_printf_tiny
+   0D54 12 2E C9           1256 	lcall	_printf_tiny
    0D57 E5 81              1257 	mov	a,sp
    0D59 24 FC              1258 	add	a,#0xfc
    0D5B F5 81              1259 	mov	sp,a
@@ -1419,12 +1419,12 @@
    0E15 C0 04              1419 	push	ar4
    0E17 C0 05              1420 	push	ar5
                            1421 ;	genIpush
-   0E19 74 5C              1422 	mov	a,#__str_13
+   0E19 74 5A              1422 	mov	a,#__str_13
    0E1B C0 E0              1423 	push	acc
    0E1D 74 43              1424 	mov	a,#(__str_13 >> 8)
    0E1F C0 E0              1425 	push	acc
                            1426 ;	genCall
-   0E21 12 2E CB           1427 	lcall	_printf_tiny
+   0E21 12 2E C9           1427 	lcall	_printf_tiny
    0E24 E5 81              1428 	mov	a,sp
    0E26 24 FC              1429 	add	a,#0xfc
    0E28 F5 81              1430 	mov	sp,a
@@ -1465,53 +1465,53 @@
                            1465 ;
                            1466 	.area CSEG    (CODE)
                            1467 	.area CONST   (CODE)
-   4196                    1468 __str_0:
-   4196 0A                 1469 	.db 0x0A
-   4197 0D                 1470 	.db 0x0D
-   4198 09                 1471 	.db 0x09
-   4199 09                 1472 	.db 0x09
-   419A 41 73 63 69 69 20  1473 	.ascii "Ascii Representation"
+   4194                    1468 __str_0:
+   4194 0A                 1469 	.db 0x0A
+   4195 0D                 1470 	.db 0x0D
+   4196 09                 1471 	.db 0x09
+   4197 09                 1472 	.db 0x09
+   4198 41 73 63 69 69 20  1473 	.ascii "Ascii Representation"
         52 65 70 72 65 73
         65 6E 74 61 74 69
         6F 6E
-   41AE 0A                 1474 	.db 0x0A
-   41AF 0D                 1475 	.db 0x0D
-   41B0 00                 1476 	.db 0x00
-   41B1                    1477 __str_1:
-   41B1 0A                 1478 	.db 0x0A
-   41B2 0D                 1479 	.db 0x0D
-   41B3 09                 1480 	.db 0x09
-   41B4 09                 1481 	.db 0x09
-   41B5 00                 1482 	.db 0x00
-   41B6                    1483 __str_2:
-   41B6 0A                 1484 	.db 0x0A
-   41B7 0D                 1485 	.db 0x0D
-   41B8 09                 1486 	.db 0x09
-   41B9 09                 1487 	.db 0x09
-   41BA 48 65 78 20 52 65  1488 	.ascii "Hex Representation"
+   41AC 0A                 1474 	.db 0x0A
+   41AD 0D                 1475 	.db 0x0D
+   41AE 00                 1476 	.db 0x00
+   41AF                    1477 __str_1:
+   41AF 0A                 1478 	.db 0x0A
+   41B0 0D                 1479 	.db 0x0D
+   41B1 09                 1480 	.db 0x09
+   41B2 09                 1481 	.db 0x09
+   41B3 00                 1482 	.db 0x00
+   41B4                    1483 __str_2:
+   41B4 0A                 1484 	.db 0x0A
+   41B5 0D                 1485 	.db 0x0D
+   41B6 09                 1486 	.db 0x09
+   41B7 09                 1487 	.db 0x09
+   41B8 48 65 78 20 52 65  1488 	.ascii "Hex Representation"
         70 72 65 73 65 6E
         74 61 74 69 6F 6E
-   41CC 0A                 1489 	.db 0x0A
-   41CD 0D                 1490 	.db 0x0D
-   41CE 00                 1491 	.db 0x00
-   41CF                    1492 __str_3:
-   41CF 0A                 1493 	.db 0x0A
-   41D0 0A                 1494 	.db 0x0A
-   41D1 0D                 1495 	.db 0x0D
-   41D2 30 78 25 78        1496 	.ascii "0x%x"
-   41D6 00                 1497 	.db 0x00
-   41D7                    1498 __str_4:
-   41D7 09                 1499 	.db 0x09
-   41D8 20 25 78           1500 	.ascii " %x"
-   41DB 00                 1501 	.db 0x00
-   41DC                    1502 __str_5:
-   41DC 25 78              1503 	.ascii "%x"
-   41DE 00                 1504 	.db 0x00
-   41DF                    1505 __str_6:
-   41DF 0A                 1506 	.db 0x0A
-   41E0 0A                 1507 	.db 0x0A
-   41E1 0D                 1508 	.db 0x0D
-   41E2 20 45 6E 74 65 72  1509 	.ascii " Enter Start Address in Hex in HHH format between 000 to "
+   41CA 0A                 1489 	.db 0x0A
+   41CB 0D                 1490 	.db 0x0D
+   41CC 00                 1491 	.db 0x00
+   41CD                    1492 __str_3:
+   41CD 0A                 1493 	.db 0x0A
+   41CE 0A                 1494 	.db 0x0A
+   41CF 0D                 1495 	.db 0x0D
+   41D0 30 78 25 78        1496 	.ascii "0x%x"
+   41D4 00                 1497 	.db 0x00
+   41D5                    1498 __str_4:
+   41D5 09                 1499 	.db 0x09
+   41D6 20 25 78           1500 	.ascii " %x"
+   41D9 00                 1501 	.db 0x00
+   41DA                    1502 __str_5:
+   41DA 25 78              1503 	.ascii "%x"
+   41DC 00                 1504 	.db 0x00
+   41DD                    1505 __str_6:
+   41DD 0A                 1506 	.db 0x0A
+   41DE 0A                 1507 	.db 0x0A
+   41DF 0D                 1508 	.db 0x0D
+   41E0 20 45 6E 74 65 72  1509 	.ascii " Enter Start Address in Hex in HHH format between 000 to "
         20 53 74 61 72 74
         20 41 64 64 72 65
         73 73 20 69 6E 20
@@ -1521,16 +1521,16 @@
         62 65 74 77 65 65
         6E 20 30 30 30 20
         74 6F 20
-   421B 37 46 46 3A 20     1510 	.ascii "7FF: "
-   4220 00                 1511 	.db 0x00
-   4221                    1512 __str_7:
-   4221 0A                 1513 	.db 0x0A
-   4222 0A                 1514 	.db 0x0A
-   4223 0D                 1515 	.db 0x0D
-   4224 20 2A 2D 45 52 52  1516 	.ascii " *-ERROR-*"
+   4219 37 46 46 3A 20     1510 	.ascii "7FF: "
+   421E 00                 1511 	.db 0x00
+   421F                    1512 __str_7:
+   421F 0A                 1513 	.db 0x0A
+   4220 0A                 1514 	.db 0x0A
+   4221 0D                 1515 	.db 0x0D
+   4222 20 2A 2D 45 52 52  1516 	.ascii " *-ERROR-*"
         4F 52 2D 2A
-   422E 09                 1517 	.db 0x09
-   422F 20 50 6C 65 61 73  1518 	.ascii " Please Enter valid start Address betweem 000 "
+   422C 09                 1517 	.db 0x09
+   422D 20 50 6C 65 61 73  1518 	.ascii " Please Enter valid start Address betweem 000 "
         65 20 45 6E 74 65
         72 20 76 61 6C 69
         64 20 73 74 61 72
@@ -1538,14 +1538,14 @@
         65 73 73 20 62 65
         74 77 65 65 6D 20
         30 30 30 20
-   425D 61 6E 64 20 37 46  1519 	.ascii "and 7FF: "
+   425B 61 6E 64 20 37 46  1519 	.ascii "and 7FF: "
         46 3A 20
-   4266 00                 1520 	.db 0x00
-   4267                    1521 __str_8:
-   4267 0A                 1522 	.db 0x0A
-   4268 0A                 1523 	.db 0x0A
-   4269 0D                 1524 	.db 0x0D
-   426A 20 45 6E 74 65 72  1525 	.ascii " Enter End Address in Hex in HHH format between 000 to 7F"
+   4264 00                 1520 	.db 0x00
+   4265                    1521 __str_8:
+   4265 0A                 1522 	.db 0x0A
+   4266 0A                 1523 	.db 0x0A
+   4267 0D                 1524 	.db 0x0D
+   4268 20 45 6E 74 65 72  1525 	.ascii " Enter End Address in Hex in HHH format between 000 to 7F"
         20 45 6E 64 20 41
         64 64 72 65 73 73
         20 69 6E 20 48 65
@@ -1555,16 +1555,16 @@
         74 77 65 65 6E 20
         30 30 30 20 74 6F
         20 37 46
-   42A3 46 3A 20           1526 	.ascii "F: "
-   42A6 00                 1527 	.db 0x00
-   42A7                    1528 __str_9:
-   42A7 0A                 1529 	.db 0x0A
-   42A8 0A                 1530 	.db 0x0A
-   42A9 0D                 1531 	.db 0x0D
-   42AA 20 2A 2D 45 52 52  1532 	.ascii " *-ERROR-*"
+   42A1 46 3A 20           1526 	.ascii "F: "
+   42A4 00                 1527 	.db 0x00
+   42A5                    1528 __str_9:
+   42A5 0A                 1529 	.db 0x0A
+   42A6 0A                 1530 	.db 0x0A
+   42A7 0D                 1531 	.db 0x0D
+   42A8 20 2A 2D 45 52 52  1532 	.ascii " *-ERROR-*"
         4F 52 2D 2A
-   42B4 09                 1533 	.db 0x09
-   42B5 20 50 6C 65 61 73  1534 	.ascii " Please Enter valid end Address betweem 000 an"
+   42B2 09                 1533 	.db 0x09
+   42B3 20 50 6C 65 61 73  1534 	.ascii " Please Enter valid end Address betweem 000 an"
         65 20 45 6E 74 65
         72 20 76 61 6C 69
         64 20 65 6E 64 20
@@ -1572,23 +1572,23 @@
         73 20 62 65 74 77
         65 65 6D 20 30 30
         30 20 61 6E
-   42E3 64 20 37 46 46 3A  1535 	.ascii "d 7FF: "
+   42E1 64 20 37 46 46 3A  1535 	.ascii "d 7FF: "
         20
-   42EA 00                 1536 	.db 0x00
-   42EB                    1537 __str_10:
-   42EB 0A                 1538 	.db 0x0A
-   42EC 0D                 1539 	.db 0x0D
-   42ED 09                 1540 	.db 0x09
-   42EE 54 6F 74 61 6C 20  1541 	.ascii "Total Bytes: %d"
+   42E8 00                 1536 	.db 0x00
+   42E9                    1537 __str_10:
+   42E9 0A                 1538 	.db 0x0A
+   42EA 0D                 1539 	.db 0x0D
+   42EB 09                 1540 	.db 0x09
+   42EC 54 6F 74 61 6C 20  1541 	.ascii "Total Bytes: %d"
         42 79 74 65 73 3A
         20 25 64
-   42FD 0A                 1542 	.db 0x0A
-   42FE 0D                 1543 	.db 0x0D
-   42FF 00                 1544 	.db 0x00
-   4300                    1545 __str_11:
-   4300 0A                 1546 	.db 0x0A
-   4301 0D                 1547 	.db 0x0D
-   4302 20 2D 45 52 52 4F  1548 	.ascii " -ERROR- End address smaller than the start address"
+   42FB 0A                 1542 	.db 0x0A
+   42FC 0D                 1543 	.db 0x0D
+   42FD 00                 1544 	.db 0x00
+   42FE                    1545 __str_11:
+   42FE 0A                 1546 	.db 0x0A
+   42FF 0D                 1547 	.db 0x0D
+   4300 20 2D 45 52 52 4F  1548 	.ascii " -ERROR- End address smaller than the start address"
         52 2D 20 45 6E 64
         20 61 64 64 72 65
         73 73 20 73 6D 61
@@ -1597,25 +1597,25 @@
         65 20 73 74 61 72
         74 20 61 64 64 72
         65 73 73
-   4335 0A                 1549 	.db 0x0A
-   4336 0D                 1550 	.db 0x0D
-   4337 20 45 6E 74 65     1551 	.ascii " Ente"
-   433C 72 20 56 61 6C 69  1552 	.ascii "r Valid address range"
+   4333 0A                 1549 	.db 0x0A
+   4334 0D                 1550 	.db 0x0D
+   4335 20 45 6E 74 65     1551 	.ascii " Ente"
+   433A 72 20 56 61 6C 69  1552 	.ascii "r Valid address range"
         64 20 61 64 64 72
         65 73 73 20 72 61
         6E 67 65
-   4351 0A                 1553 	.db 0x0A
-   4352 0D                 1554 	.db 0x0D
-   4353 00                 1555 	.db 0x00
-   4354                    1556 __str_12:
-   4354 0A                 1557 	.db 0x0A
-   4355 0A                 1558 	.db 0x0A
-   4356 0D                 1559 	.db 0x0D
-   4357 25 78 3A           1560 	.ascii "%x:"
-   435A 09                 1561 	.db 0x09
-   435B 00                 1562 	.db 0x00
-   435C                    1563 __str_13:
-   435C 25 78              1564 	.ascii "%x"
-   435E 09                 1565 	.db 0x09
-   435F 00                 1566 	.db 0x00
+   434F 0A                 1553 	.db 0x0A
+   4350 0D                 1554 	.db 0x0D
+   4351 00                 1555 	.db 0x00
+   4352                    1556 __str_12:
+   4352 0A                 1557 	.db 0x0A
+   4353 0A                 1558 	.db 0x0A
+   4354 0D                 1559 	.db 0x0D
+   4355 25 78 3A           1560 	.ascii "%x:"
+   4358 09                 1561 	.db 0x09
+   4359 00                 1562 	.db 0x00
+   435A                    1563 __str_13:
+   435A 25 78              1564 	.ascii "%x"
+   435C 09                 1565 	.db 0x09
+   435D 00                 1566 	.db 0x00
                            1567 	.area XINIT   (CODE)

@@ -37,7 +37,7 @@
 	"delay.h"
 	"i2c.h"
 
-1479338084 source:c:\users\admin\documents\lab4_sup\lcd.c
+1479448914 source:c:\users\admin\documents\lab4_sup\lcd.c
 	<mcs51/8051.h>
 	<at89c51ed2.h>
 	<stdio.h>
@@ -54,7 +54,7 @@
 
 1479338084 c:\users\admin\documents\lab4_sup\atoh_f.h
 
-1479338462 source:c:\users\admin\documents\lab4_sup\main.c
+1479451300 source:c:\users\admin\documents\lab4_sup\main.c
 	<mcs51/8051.h>
 	<at89c51ed2.h>
 	<stdio.h>
@@ -106,7 +106,7 @@
 
 1479027759 c:\users\admin\documents\lab4_sup\data_dump.h
 
-1479340196 source:c:\users\admin\documents\lab4_sup\io_exp.c
+1479451123 source:c:\users\admin\documents\lab4_sup\io_exp.c
 	<mcs51/8051.h>
 	<at89c51ed2.h>
 	<stdio.h>
@@ -122,5 +122,5 @@
 	"data_dump.h"
 	"io_exp.h"
 
-1479284440 c:\users\admin\documents\lab4_sup\io_exp.h
+1479448994 c:\users\admin\documents\lab4_sup\io_exp.h
 

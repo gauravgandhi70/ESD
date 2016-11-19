@@ -261,9 +261,9 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
      0127    l_XSEG
      0127    s_XISEG
      0E35    l_CONST
-     4122    l_CSEG
-     418C    s_CONST
-     4FC1    s_XINIT
+     4120    l_CSEG
+     418A    s_CONST
+     4FBF    s_XINIT
 
 Hexadecimal
 
@@ -481,7 +481,7 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CSEG                               006A   4122 =  16674. bytes (REL,CON,CODE)
+CSEG                               006A   4120 =  16672. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
@@ -530,74 +530,74 @@ CSEG                               006A   4122 =  16674. bytes (REL,CON,CODE)
   0C:1899    __sdcc_program_startup
   0C:189E    __sdcc_external_startup
   0C:18A8    _main
-  0C:2888    _timer_isr
-  0C:2B0D    _ext_zero
-  0C:2B87    _putchar
-  0C:2B99    _getchar
-  0C:2BAC    _uart_init
-  0C:2BC5    ___fssub
-  0C:2BD0    __divuint
-  0C:2C6B    _atoi
-  0C:2D9E    _gets
-  0C:2EB2    __gptrput
-  0C:2ECB    _printf_tiny
-  0C:2FD3    __mulint
-  0C:2FF3    _powf
-  0C:3105    __modsint
-  0C:3173    __moduint
-  0C:3221    ___fsadd
-  0C:3224    fsadd_direct_entry
-  0C:327A    ___uint2fs
-  0C:3286    ___fs2uint
-  0C:3291    fs_round_and_return
-  0C:32A9    fs_zerocheck_return
-  0C:32B2    fs_return_zero
-  0C:32BA    fs_direct_return
-  0C:32C8    fs_return_inf
-  0C:32D5    fs_return_nan
-  0C:32ED    _vprintf
-  0C:332C    _printf
-  0C:3445    __print_format
-  0C:3B78    fs_swap_a_b
-  0C:3B92    _strlen
-  0C:3BE5    __gptrget
-  0C:3C01    ___ulong2fs
-  0C:3C0A    ulong2fs_doit
-  0C:3C14    ___fsmul
-  0C:3CB7    fsgetargs
-  0C:3CE5    _logf
-  0C:3DA6    __fs_cordic_rshift_r765_unsigned
-  0C:3DE7    fs_rshift_a
-  0C:3E2A    fs_normalize_a
-  0C:3E53    ___fseq
-  0C:3E64    ___fsgt
-  0C:3E94    _expf
-  0C:4000    fs_lshift_a
-  0C:4017    fsgetarg
-  0C:4029    ___fs2ulong
-  0C:402B    fs2ulong_begin
-  0C:4050    fs_compare_uint32
-  0C:406E    fs_check_negative_zeros
-  0C:4099    _islower
-  0C:40B6    ___fsdiv
-  0C:4179    ___fs2uchar
-  0C:4181    ___uchar2fs
+  0C:2886    _ext_zero
+  0C:2900    _timer_isr
+  0C:2B85    _putchar
+  0C:2B97    _getchar
+  0C:2BAA    _uart_init
+  0C:2BC3    ___fssub
+  0C:2BCE    __divuint
+  0C:2C69    _atoi
+  0C:2D9C    _gets
+  0C:2EB0    __gptrput
+  0C:2EC9    _printf_tiny
+  0C:2FD1    __mulint
+  0C:2FF1    _powf
+  0C:3103    __modsint
+  0C:3171    __moduint
+  0C:321F    ___fsadd
+  0C:3222    fsadd_direct_entry
+  0C:3278    ___uint2fs
+  0C:3284    ___fs2uint
+  0C:328F    fs_round_and_return
+  0C:32A7    fs_zerocheck_return
+  0C:32B0    fs_return_zero
+  0C:32B8    fs_direct_return
+  0C:32C6    fs_return_inf
+  0C:32D3    fs_return_nan
+  0C:32EB    _vprintf
+  0C:332A    _printf
+  0C:3443    __print_format
+  0C:3B76    fs_swap_a_b
+  0C:3B90    _strlen
+  0C:3BE3    __gptrget
+  0C:3BFF    ___ulong2fs
+  0C:3C08    ulong2fs_doit
+  0C:3C12    ___fsmul
+  0C:3CB5    fsgetargs
+  0C:3CE3    _logf
+  0C:3DA4    __fs_cordic_rshift_r765_unsigned
+  0C:3DE5    fs_rshift_a
+  0C:3E28    fs_normalize_a
+  0C:3E51    ___fseq
+  0C:3E62    ___fsgt
+  0C:3E92    _expf
+  0C:3FFE    fs_lshift_a
+  0C:4015    fsgetarg
+  0C:4027    ___fs2ulong
+  0C:4029    fs2ulong_begin
+  0C:404E    fs_compare_uint32
+  0C:406C    fs_check_negative_zeros
+  0C:4097    _islower
+  0C:40B4    ___fsdiv
+  0C:4177    ___fs2uchar
+  0C:417F    ___uchar2fs
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CONST                              418C   0E35 =   3637. bytes (REL,CON,CODE)
+CONST                              418A   0E35 =   3637. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
-  0C:4F49    __fs_natural_log_table
+  0C:4F47    __fs_natural_log_table
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-XINIT                              4FC1   0003 =      3. bytes (REL,CON,CODE)
+XINIT                              4FBF   0003 =      3. bytes (REL,CON,CODE)
 ASxxxx Linker V01.70 + NoICE + SDCC Feb 1999,  page 1.
 
 Files Linked      [ module(s) ]

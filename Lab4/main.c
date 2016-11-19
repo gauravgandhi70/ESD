@@ -41,7 +41,7 @@ void main(void)
     int num=0,i,j,k;                                // Name is used to store Counter names
     unsigned int page,addr,flag=0,dat;
     unsigned char time=0,row_val[8],ccode,rd,disp[8];   // EEPROM Data is read inro rd, ccode is used for custom character creation
-
+                                                        // row_val[] is used to store HEX Value in custom character
     lcd_init();                                     // Initilaize LCD
     uart_init()	;                                   // Initilalize UART
     timer_init();                                   // Initialize the Timer
@@ -238,15 +238,15 @@ void main(void)
                     do
                     {
                     gets(c);
-                    num=atoh_data(c);// atoh_data converts ascii values to the HEX numbers
+                    num=atoh_data(c);// atoh_data function converts ascii values to the HEX numbers
 
                     if(num>31){printf_tiny("\n\n\r *-ERROR-*\n\r\t Enter a valid HEX number between 00 to 1F in HH format:\t");}
                     }while(num>31);
 
-                    row_val[i]=num;
+                    row_val[i]=num;         // Store data from user into row_val[] array
                     disp[i]=atob(num);
                     printf_tiny("\n\r\t\t      \t12345");
-                    for(j=0;j<=i;j++)
+                    for(j=0;j<=i;j++)          // This fop loop is used for displaying the contents of the ROW_val on the screen
                     {  printf_tiny("\n\r\t\tROW %d:\t",j);
                         for(k=3;k<8;k++)
                         {
@@ -257,12 +257,13 @@ void main(void)
                         }
                     }
                 }
-                lcdcreatechar(ccode,row_val);
+                lcdcreatechar(ccode,row_val);           // After getting all 7 values, new character  is storedin CGRAM
 
              }
 
+            // For '8' Command ; Custom character is Displayed on the LCD screen
             else if(store=='8')
-            {
+            {// Get the Character number from the user, store it in num ; If Wrong value is entered then give error
                 printf_tiny("\n\n\r\t Select Character code between 0 to 7 to display: \t");
                 do
                 {
@@ -281,14 +282,17 @@ void main(void)
             lcdputcmd(1);
 
         }
-             else if(store=='c')
-             {
-                 CGRAM_dump();
-             }
-            else if(store=='d')
-             {
-                 DDRAM_dump();
-             }
+        // Command c is to dump CGRAM Contents
+        else if(store=='c')
+        {
+            CGRAM_dump();
+        }
+        // Command d is to dump DDRAM Dump
+        else if(store=='d')
+        {
+             DDRAM_dump();
+        }
+
         if(store=='w' || store=='r' || store=='l')
         {
 
@@ -348,38 +352,40 @@ void main(void)
                 lcd_display(rd,b);
             }
           }
+
+          // Command h is to dump HEX Dump
           else if(store=='h')
            {
               hex_dump();
            }
-
+          // Command x is used to Reset the Counter of External IO expander
            else if(store=='x')
            {
                io_counter=0;
                io_cnt(io_counter);
            }
 
+            // Command x is used to Reset the Counter of External IO expander
            else if(store=='i')
            {
                 io_exp_dir();
 
            }
 
+            // Command s is used to print the Status of the IO expander to the terminal
             else if(store=='s')
            {
                 printf_tiny("\n\n\r\t Current Status of the IO_Expander pins is: 0x%x\n\n\r",IOEX_ReadByte());
 
            }
 
-            else if(store=='0')
-           {
-
-
-           }
+          // Command 9 is used to display the logo to the LCD screen
            else if(store=='9')
            {
                logo_creator();
            }
+
+           // Command y is used to give demo of the watchdog reset
            else if(store=='y')
            {
                printf_tiny("\n\n\n\rWatchdog RESET Demo");
@@ -388,6 +394,7 @@ void main(void)
 
            }
 
+            // Command m is used for printing the menu if user wants
             if(store=='m')
             {
             printf_tiny("\n\n\r\t\t\t\t\t******** Clock Control Commands ********\n\n\r\t1. Stop Clock \t\t\t\t\t\t2. Restart Clock \t\t\t3. Reset Clock\n\r\t4. Select Count-Down Timer and Value \t\t\t5. Timer Enable \t\t\t6. Timer Disable ");
@@ -400,6 +407,8 @@ void main(void)
             printf_tiny("\n\n\r\t Press 'm' to see the Menu again or Press Command Key:\t");
 
        }
+
+       // If clock is stopped the this routine is executed to avoid watchdog reset
        else if(EA==0)
         {
         WDTPRG |=0x07;
@@ -417,6 +426,38 @@ void main(void)
 
 
 
+
+/*---------------------------------------------------------------------------------------
+                  void ext_zero() interrupt 0
+ ----------------------------------------------------------------------------------------
+ * I/P Arguments: None
+ * Return value	: none
+
+ * description:Extaernal 0 interrupt is used for counting inputs from the io expander
+----------------------------------------------------------------------------------------*/
+void ext_zero() interrupt 0
+{
+
+    io_counter++;
+    if(io_counter==32)
+    {
+        io_counter=0;
+    }
+    if(io_counter%2==0){io_cnt(io_counter/2);}
+
+
+}
+
+
+
+/*---------------------------------------------------------------------------------------
+                  void timer_isr() interrupt 1
+ ----------------------------------------------------------------------------------------
+ * I/P Arguments: None
+ * Return value	: none
+
+ * description:Timer 0 interrupt is used for generating Clock with accuracy of the 100ms
+----------------------------------------------------------------------------------------*/
 void timer_isr() interrupt 1
 {
     int i;
@@ -468,20 +509,6 @@ void timer_isr() interrupt 1
         TL0 =   0x00;
     }
 
-
-
-}
-
-
-void ext_zero() interrupt 0
-{
-
-    io_counter++;
-    if(io_counter==32)
-    {
-        io_counter=0;
-    }
-    if(io_counter%2==0){io_cnt(io_counter/2);}
 
 
 }

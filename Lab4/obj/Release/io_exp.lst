@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.6.0 #4309 (Jul 28 2006)
-                              4 ; This file generated Wed Nov 16 16:49:56 2016
+                              4 ; This file generated Thu Nov 17 23:43:16 2016
                               5 ;--------------------------------------------------------
                               6 	.module io_exp
                               7 	.optsdcc -mmcs51 --model-large
@@ -496,7 +496,7 @@
                             496 ;------------------------------------------------------------
                             497 ;ioex_Data                 Allocated with name '_IOEX_WriteByte_ioex_Data_1_1'
                             498 ;------------------------------------------------------------
-                            499 ;	io_exp.c:17: void IOEX_WriteByte(unsigned char ioex_Data)
+                            499 ;	io_exp.c:34: void IOEX_WriteByte(unsigned char ioex_Data)
                             500 ;	-----------------------------------------
                             501 ;	 function IOEX_WriteByte
                             502 ;	-----------------------------------------
@@ -513,17 +513,17 @@
    0000 E5 82               513 	mov	a,dpl
    0002 90s00r03            514 	mov	dptr,#_IOEX_WriteByte_ioex_Data_1_1
    0005 F0                  515 	movx	@dptr,a
-                            516 ;	io_exp.c:20: I2C_Start();               // Start i2c communication
+                            516 ;	io_exp.c:37: I2C_Start();               // Start i2c communication
                             517 ;	genCall
    0006 12s00r00            518 	lcall	_I2C_Start
-                            519 ;	io_exp.c:21: I2C_Write(IOEX_ID);	   // connect to AT2404 by sending its ID on I2c Bus
+                            519 ;	io_exp.c:38: I2C_Write(IOEX_ID);	   // Select IO_expander as the SLAVE by sending its ID (01110000)
                             520 ;	genCall
    0009 75 82 70            521 	mov	dpl,#0x70
    000C 12s00r00            522 	lcall	_I2C_Write
-                            523 ;	io_exp.c:22: I2C_Ack();
+                            523 ;	io_exp.c:39: I2C_Ack();
                             524 ;	genCall
    000F 12s00r00            525 	lcall	_I2C_Ack
-                            526 ;	io_exp.c:24: I2C_Write(ioex_Data);    // Write the data at specified address
+                            526 ;	io_exp.c:41: I2C_Write(ioex_Data);    // Write the data at specified address
                             527 ;	genAssign
    0012 90s00r03            528 	mov	dptr,#_IOEX_WriteByte_ioex_Data_1_1
    0015 E0                  529 	movx	a,@dptr
@@ -532,13 +532,13 @@
                             532 ;	Peephole 244.c	loading dpl from a instead of r2
    0017 F5 82               533 	mov	dpl,a
    0019 12s00r00            534 	lcall	_I2C_Write
-                            535 ;	io_exp.c:25: I2C_Ack();
+                            535 ;	io_exp.c:42: I2C_Ack();
                             536 ;	genCall
    001C 12s00r00            537 	lcall	_I2C_Ack
-                            538 ;	io_exp.c:26: I2C_Stop();           	   // Stop i2c communication after Writing the data
+                            538 ;	io_exp.c:43: I2C_Stop();           	   // Stop i2c communication after Writing the data
                             539 ;	genCall
    001F 12s00r00            540 	lcall	_I2C_Stop
-                            541 ;	io_exp.c:27: delay_ms(5);               // Write operation takes max 5ms, refer At2404 datasheet
+                            541 ;	io_exp.c:44: delay_ms(5);               // Write operation takes max 5ms, refer At2404 datasheet
                             542 ;	genCall
                             543 ;	Peephole 182.b	used 16 bit load of dptr
    0022 90 00 05            544 	mov	dptr,#0x0005
@@ -550,43 +550,43 @@
                             550 ;------------------------------------------------------------
                             551 ;ioex_Data                 Allocated with name '_IOEX_ReadByte_ioex_Data_1_1'
                             552 ;------------------------------------------------------------
-                            553 ;	io_exp.c:31: unsigned char IOEX_ReadByte(void)
+                            553 ;	io_exp.c:61: unsigned char IOEX_ReadByte(void)
                             554 ;	-----------------------------------------
                             555 ;	 function IOEX_ReadByte
                             556 ;	-----------------------------------------
    0028                     557 _IOEX_ReadByte:
-                            558 ;	io_exp.c:35: I2C_Start();               // Start i2c communication
+                            558 ;	io_exp.c:65: I2C_Start();               // Start i2c communication
                             559 ;	genCall
    0028 12s00r00            560 	lcall	_I2C_Start
-                            561 ;	io_exp.c:36: I2C_Write(0x71);	   // connect to AT2404(write) by sending its ID on I2c Bus
+                            561 ;	io_exp.c:66: I2C_Write(0x71);	  // Select IO_expander as the SLAVE by sending its ID (01110000)
                             562 ;	genCall
    002B 75 82 71            563 	mov	dpl,#0x71
    002E 12s00r00            564 	lcall	_I2C_Write
-                            565 ;	io_exp.c:37: I2C_Ack();
+                            565 ;	io_exp.c:67: I2C_Ack();
                             566 ;	genCall
    0031 12s00r00            567 	lcall	_I2C_Ack
-                            568 ;	io_exp.c:39: ioex_Data = I2C_Read();  // Read the data from specified address
+                            568 ;	io_exp.c:69: ioex_Data = I2C_Read();  // Read the data from specified address
                             569 ;	genCall
    0034 12s00r00            570 	lcall	_I2C_Read
    0037 AA 82               571 	mov	r2,dpl
-                            572 ;	io_exp.c:40: I2C_Ack_seq();
+                            572 ;	io_exp.c:70: I2C_Ack_seq();
                             573 ;	genCall
    0039 C0 02               574 	push	ar2
    003B 12s00r00            575 	lcall	_I2C_Ack_seq
    003E D0 02               576 	pop	ar2
-                            577 ;	io_exp.c:41: I2C_Stop();		           // Stop i2c communication after Reading the data
+                            577 ;	io_exp.c:71: I2C_Stop();		           // Stop i2c communication after Reading the data
                             578 ;	genCall
    0040 C0 02               579 	push	ar2
    0042 12s00r00            580 	lcall	_I2C_Stop
    0045 D0 02               581 	pop	ar2
-                            582 ;	io_exp.c:42: delay_us(10);
+                            582 ;	io_exp.c:72: delay_us(10);
                             583 ;	genCall
                             584 ;	Peephole 182.b	used 16 bit load of dptr
    0047 90 00 0A            585 	mov	dptr,#0x000A
    004A C0 02               586 	push	ar2
    004C 12s00r00            587 	lcall	_delay_us
    004F D0 02               588 	pop	ar2
-                            589 ;	io_exp.c:43: return ioex_Data;          // Return the Read data
+                            589 ;	io_exp.c:73: return ioex_Data;          // Return the Read data
                             590 ;	genRet
    0051 8A 82               591 	mov	dpl,r2
                             592 ;	Peephole 300	removed redundant label 00101$
@@ -597,7 +597,7 @@
                             597 ;io_exp_counter            Allocated with name '_io_cnt_io_exp_counter_1_1'
                             598 ;c                         Allocated with name '_io_cnt_c_1_1'
                             599 ;------------------------------------------------------------
-                            600 ;	io_exp.c:48: void io_cnt(unsigned int io_exp_counter) __critical
+                            600 ;	io_exp.c:87: void io_cnt(unsigned int io_exp_counter) __critical
                             601 ;	-----------------------------------------
                             602 ;	 function io_cnt
                             603 ;	-----------------------------------------
@@ -615,7 +615,7 @@
    0063 A3                  615 	inc	dptr
    0064 EA                  616 	mov	a,r2
    0065 F0                  617 	movx	@dptr,a
-                            618 ;	io_exp.c:51: c=ctoa(io_exp_counter);
+                            618 ;	io_exp.c:90: c=ctoa(io_exp_counter);
                             619 ;	genAssign
    0066 90s00r04            620 	mov	dptr,#_io_cnt_io_exp_counter_1_1
    0069 E0                  621 	movx	a,@dptr
@@ -632,7 +632,7 @@
    0079 AC 82               632 	mov	r4,dpl
    007B D0 03               633 	pop	ar3
    007D D0 02               634 	pop	ar2
-                            635 ;	io_exp.c:52: lcdgotoxy(4,7);
+                            635 ;	io_exp.c:91: lcdgotoxy(4,7);
                             636 ;	genAssign
    007F 90s00r00            637 	mov	dptr,#_lcdgotoxy_PARM_2
    0082 74 07               638 	mov	a,#0x07
@@ -646,7 +646,7 @@
    0091 D0 04               646 	pop	ar4
    0093 D0 03               647 	pop	ar3
    0095 D0 02               648 	pop	ar2
-                            649 ;	io_exp.c:53: lcdputch(c);
+                            649 ;	io_exp.c:92: lcdputch(c);
                             650 ;	genCall
    0097 8C 82               651 	mov	dpl,r4
    0099 C0 02               652 	push	ar2
@@ -654,7 +654,7 @@
    009D 12s00r00            654 	lcall	_lcdputch
    00A0 D0 03               655 	pop	ar3
    00A2 D0 02               656 	pop	ar2
-                            657 ;	io_exp.c:54: io_exp_counter=io_exp_counter<<4;
+                            657 ;	io_exp.c:93: io_exp_counter=io_exp_counter<<4;
                             658 ;	genLeftShift
                             659 ;	genLeftShiftLiteral
                             660 ;	genlshTwo
@@ -677,7 +677,7 @@
    00B7 A3                  677 	inc	dptr
    00B8 EB                  678 	mov	a,r3
    00B9 F0                  679 	movx	@dptr,a
-                            680 ;	io_exp.c:55: io_exp_counter |= 0x0F;
+                            680 ;	io_exp.c:94: io_exp_counter |= 0x0F;
                             681 ;	genAssign
    00BA 90s00r04            682 	mov	dptr,#_io_cnt_io_exp_counter_1_1
    00BD E0                  683 	movx	a,@dptr
@@ -693,7 +693,7 @@
    00C9 A3                  693 	inc	dptr
    00CA EB                  694 	mov	a,r3
    00CB F0                  695 	movx	@dptr,a
-                            696 ;	io_exp.c:56: IOEX_WriteByte(io_exp_counter);
+                            696 ;	io_exp.c:95: IOEX_WriteByte(io_exp_counter);
                             697 ;	genAssign
    00CC 90s00r04            698 	mov	dptr,#_io_cnt_io_exp_counter_1_1
    00CF E0                  699 	movx	a,@dptr
@@ -718,12 +718,12 @@
                             718 ;pin                       Allocated with name '_io_exp_dir_pin_1_1'
                             719 ;dir                       Allocated with name '_io_exp_dir_dir_1_1'
                             720 ;------------------------------------------------------------
-                            721 ;	io_exp.c:61: void io_exp_dir(void)
+                            721 ;	io_exp.c:113: void io_exp_dir(void)
                             722 ;	-----------------------------------------
                             723 ;	 function io_exp_dir
                             724 ;	-----------------------------------------
    00DE                     725 _io_exp_dir:
-                            726 ;	io_exp.c:66: printf_tiny("\n\n\r\t Select pin number from 0 to 7: ");
+                            726 ;	io_exp.c:118: printf_tiny("\n\n\r\t Select pin number from 0 to 7: ");
                             727 ;	genIpush
    00DE 74r00               728 	mov	a,#__str_0
    00E0 C0 E0               729 	push	acc
@@ -733,15 +733,15 @@
    00E6 12s00r00            733 	lcall	_printf_tiny
    00E9 15 81               734 	dec	sp
    00EB 15 81               735 	dec	sp
-                            736 ;	io_exp.c:67: do
+                            736 ;	io_exp.c:119: do
    00ED                     737 00103$:
-                            738 ;	io_exp.c:69: gets(c);
+                            738 ;	io_exp.c:121: gets(c);
                             739 ;	genCall
                             740 ;	Peephole 182.a	used 16 bit load of DPTR
    00ED 90s00r06            741 	mov	dptr,#_io_exp_dir_c_1_1
    00F0 75 F0 00            742 	mov	b,#0x00
    00F3 12s00r00            743 	lcall	_gets
-                            744 ;	io_exp.c:70: pin=atoi(c);
+                            744 ;	io_exp.c:122: pin=atoi(c);
                             745 ;	genCall
                             746 ;	Peephole 182.a	used 16 bit load of DPTR
    00F6 90s00r06            747 	mov	dptr,#_io_exp_dir_c_1_1
@@ -749,7 +749,7 @@
    00FC 12s00r00            749 	lcall	_atoi
    00FF AA 82               750 	mov	r2,dpl
    0101 AB 83               751 	mov	r3,dph
-                            752 ;	io_exp.c:71: if(pin>7){printf_tiny("\n\n\r *-ERROR-*\n\r\t Enter a valid number between 0 to 7: ");}
+                            752 ;	io_exp.c:123: if(pin>7){printf_tiny("\n\n\r *-ERROR-*\n\r\t Enter a valid number between 0 to 7: ");}
                             753 ;	genAssign
    0103 8A 04               754 	mov	ar4,r2
    0105 8B 05               755 	mov	ar5,r3
@@ -779,7 +779,7 @@
    0122 D0 03               779 	pop	ar3
    0124 D0 02               780 	pop	ar2
    0126                     781 00104$:
-                            782 ;	io_exp.c:72: }while(pin>7);
+                            782 ;	io_exp.c:124: }while(pin>7);
                             783 ;	genAssign
    0126 8A 04               784 	mov	ar4,r2
    0128 8B 05               785 	mov	ar5,r3
@@ -796,7 +796,7 @@
                             796 ;	Peephole 160.a	removed sjmp by inverse jump logic
    0130 40 BB               797 	jc	00103$
                             798 ;	Peephole 300	removed redundant label 00124$
-                            799 ;	io_exp.c:74: printf_tiny("\n\n\r\t Select Direction of pin:  0.Output  1. Input\t");
+                            799 ;	io_exp.c:127: printf_tiny("\n\n\r\t Select Direction of pin:  0.Output  1. Input\t");
                             800 ;	genIpush
    0132 C0 02               801 	push	ar2
    0134 C0 03               802 	push	ar3
@@ -810,9 +810,9 @@
    0143 15 81               810 	dec	sp
    0145 D0 03               811 	pop	ar3
    0147 D0 02               812 	pop	ar2
-                            813 ;	io_exp.c:75: do
+                            813 ;	io_exp.c:128: do
    0149                     814 00108$:
-                            815 ;	io_exp.c:77: gets(c);
+                            815 ;	io_exp.c:130: gets(c);
                             816 ;	genCall
                             817 ;	Peephole 182.a	used 16 bit load of DPTR
    0149 90s00r06            818 	mov	dptr,#_io_exp_dir_c_1_1
@@ -822,7 +822,7 @@
    0153 12s00r00            822 	lcall	_gets
    0156 D0 03               823 	pop	ar3
    0158 D0 02               824 	pop	ar2
-                            825 ;	io_exp.c:78: dir=atoi(c);
+                            825 ;	io_exp.c:131: dir=atoi(c);
                             826 ;	genCall
                             827 ;	Peephole 182.a	used 16 bit load of DPTR
    015A 90s00r06            828 	mov	dptr,#_io_exp_dir_c_1_1
@@ -834,7 +834,7 @@
    0169 AD 83               834 	mov	r5,dph
    016B D0 03               835 	pop	ar3
    016D D0 02               836 	pop	ar2
-                            837 ;	io_exp.c:79: if(dir>1){printf_tiny("\n\n\r *-ERROR-*\n\r\t Enter a valid number between 0 or 1: ");}
+                            837 ;	io_exp.c:132: if(dir>1){printf_tiny("\n\n\r *-ERROR-*\n\r\t Enter a valid number between 0 or 1: ");}
                             838 ;	genAssign
    016F 8C 06               839 	mov	ar6,r4
    0171 8D 07               840 	mov	ar7,r5
@@ -868,7 +868,7 @@
    0196 D0 03               868 	pop	ar3
    0198 D0 02               869 	pop	ar2
    019A                     870 00109$:
-                            871 ;	io_exp.c:80: }while(dir>1);
+                            871 ;	io_exp.c:133: }while(dir>1);
                             872 ;	genAssign
    019A 8C 06               873 	mov	ar6,r4
    019C 8D 07               874 	mov	ar7,r5
@@ -885,7 +885,7 @@
                             885 ;	Peephole 160.a	removed sjmp by inverse jump logic
    01A4 40 A3               886 	jc	00108$
                             887 ;	Peephole 300	removed redundant label 00126$
-                            888 ;	io_exp.c:84: io_status = IOEX_ReadByte();
+                            888 ;	io_exp.c:137: io_status = IOEX_ReadByte();
                             889 ;	genCall
    01A6 C0 02               890 	push	ar2
    01A8 C0 03               891 	push	ar3
@@ -897,7 +897,7 @@
    01B6 D0 04               897 	pop	ar4
    01B8 D0 03               898 	pop	ar3
    01BA D0 02               899 	pop	ar2
-                            900 ;	io_exp.c:87: if(dir==0)
+                            900 ;	io_exp.c:141: if(dir==0)
                             901 ;	genIfx
    01BC EC                  902 	mov	a,r4
    01BD 4D                  903 	orl	a,r5
@@ -905,7 +905,7 @@
                             905 ;	Peephole 108.b	removed ljmp by inverse jump logic
    01BE 70 71               906 	jnz	00112$
                             907 ;	Peephole 300	removed redundant label 00127$
-                            908 ;	io_exp.c:89: dir = 255-powf(2, pin);
+                            908 ;	io_exp.c:143: dir = 255-powf(2, pin);
                             909 ;	genAssign
    01C0 8A 07               910 	mov	ar7,r2
    01C2 8B 00               911 	mov	ar0,r3
@@ -968,7 +968,7 @@
    0219 12s00r00            968 	lcall	___fs2uint
    021C AE 82               969 	mov	r6,dpl
    021E AF 83               970 	mov	r7,dph
-                            971 ;	io_exp.c:90: io_status &= dir;
+                            971 ;	io_exp.c:144: io_status &= dir;
                             972 ;	genCast
    0220 A8*00               973 	mov	r0,_io_exp_dir_sloc0_1_0
    0222 79 00               974 	mov	r1,#0x00
@@ -984,7 +984,7 @@
                             984 ;	Peephole 112.b	changed ljmp to sjmp
    022F 80 22               985 	sjmp	00113$
    0231                     986 00112$:
-                            987 ;	io_exp.c:95: dir = dir<<pin;
+                            987 ;	io_exp.c:149: dir = dir<<pin;
                             988 ;	genLeftShift
    0231 8A F0               989 	mov	b,r2
    0233 05 F0               990 	inc	b
@@ -1001,7 +1001,7 @@
    0240 FB                 1001 	mov	r3,a
    0241                    1002 00129$:
    0241 D5 F0 F7           1003 	djnz	b,00128$
-                           1004 ;	io_exp.c:96: io_status |= dir;
+                           1004 ;	io_exp.c:150: io_status |= dir;
                            1005 ;	genCast
    0244 AE*00              1006 	mov	r6,_io_exp_dir_sloc0_1_0
    0246 7C 00              1007 	mov	r4,#0x00
@@ -1015,7 +1015,7 @@
    0251 EA                 1015 	mov	a,r2
    0252 F0                 1016 	movx	@dptr,a
    0253                    1017 00113$:
-                           1018 ;	io_exp.c:100: IOEX_WriteByte(io_status);
+                           1018 ;	io_exp.c:154: IOEX_WriteByte(io_status);
                            1019 ;	genAssign
    0253 90s00r09           1020 	mov	dptr,#_io_exp_dir_io_status_1_1
    0256 E0                 1021 	movx	a,@dptr
@@ -1024,7 +1024,7 @@
                            1024 ;	Peephole 244.c	loading dpl from a instead of r2
    0258 F5 82              1025 	mov	dpl,a
    025A 12s00r00           1026 	lcall	_IOEX_WriteByte
-                           1027 ;	io_exp.c:102: delay_us(5);
+                           1027 ;	io_exp.c:156: delay_us(5);
                            1028 ;	genCall
                            1029 ;	Peephole 182.b	used 16 bit load of dptr
    025D 90 00 05           1030 	mov	dptr,#0x0005

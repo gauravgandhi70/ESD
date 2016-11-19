@@ -548,7 +548,7 @@
    008E 8D 82               548 	mov	dpl,r5
    0090 8E 83               549 	mov	dph,r6
    0092 8F F0               550 	mov	b,r7
-   0094 12 3B E5            551 	lcall	__gptrget
+   0094 12 3B E3            551 	lcall	__gptrget
                             552 ;	genCmpEq
                             553 ;	gencjneshort
                             554 ;	Peephole 112.b	changed ljmp to sjmp
@@ -569,7 +569,7 @@
    009E 8A 82               569 	mov	dpl,r2
    00A0 8B 83               570 	mov	dph,r3
    00A2 8C F0               571 	mov	b,r4
-   00A4 12 3B E5            572 	lcall	__gptrget
+   00A4 12 3B E3            572 	lcall	__gptrget
                             573 ;	genCmpLt
                             574 ;	genCmp
    00A7 FD                  575 	mov	r5,a
@@ -663,7 +663,7 @@
    00F1 8A 82               663 	mov	dpl,r2
    00F3 8B 83               664 	mov	dph,r3
    00F5 8C F0               665 	mov	b,r4
-   00F7 12 3B E5            666 	lcall	__gptrget
+   00F7 12 3B E3            666 	lcall	__gptrget
                             667 ;	genCmpLt
                             668 ;	genCmp
    00FA FD                  669 	mov	r5,a
@@ -772,7 +772,7 @@
    0155 8A 82               772 	mov	dpl,r2
    0157 8B 83               773 	mov	dph,r3
    0159 8C F0               774 	mov	b,r4
-   015B 12 3B E5            775 	lcall	__gptrget
+   015B 12 3B E3            775 	lcall	__gptrget
                             776 ;	genCmpLt
                             777 ;	genCmp
    015E FD                  778 	mov	r5,a
@@ -881,7 +881,7 @@
    01B9 8A 82               881 	mov	dpl,r2
    01BB 8B 83               882 	mov	dph,r3
    01BD 8C F0               883 	mov	b,r4
-   01BF 12 3B E5            884 	lcall	__gptrget
+   01BF 12 3B E3            884 	lcall	__gptrget
                             885 ;	genCmpLt
                             886 ;	genCmp
    01C2 FD                  887 	mov	r5,a
@@ -998,7 +998,7 @@
    0220 8A 82               998 	mov	dpl,r2
    0222 8B 83               999 	mov	dph,r3
    0224 8C F0              1000 	mov	b,r4
-   0226 12 3B E5           1001 	lcall	__gptrget
+   0226 12 3B E3           1001 	lcall	__gptrget
                            1002 ;	genCmpLt
                            1003 ;	genCmp
    0229 FA                 1004 	mov	r2,a
@@ -1075,7 +1075,7 @@
    0269 8A 82              1075 	mov	dpl,r2
    026B 8B 83              1076 	mov	dph,r3
    026D 8C F0              1077 	mov	b,r4
-   026F 12 3B E5           1078 	lcall	__gptrget
+   026F 12 3B E3           1078 	lcall	__gptrget
                            1079 ;	genCmpLt
                            1080 ;	genCmp
    0272 FA                 1081 	mov	r2,a
@@ -1153,7 +1153,7 @@
    02B1 8A 82              1153 	mov	dpl,r2
    02B3 8B 83              1154 	mov	dph,r3
    02B5 8C F0              1155 	mov	b,r4
-   02B7 12 3B E5           1156 	lcall	__gptrget
+   02B7 12 3B E3           1156 	lcall	__gptrget
                            1157 ;	genCmpLt
                            1158 ;	genCmp
    02BA FA                 1159 	mov	r2,a
@@ -1288,7 +1288,7 @@
    0322 8D 82              1288 	mov	dpl,r5
    0324 8E 83              1289 	mov	dph,r6
    0326 8F F0              1290 	mov	b,r7
-   0328 12 3B E5           1291 	lcall	__gptrget
+   0328 12 3B E3           1291 	lcall	__gptrget
                            1292 ;	genCmpEq
                            1293 ;	gencjneshort
                            1294 ;	Peephole 112.b	changed ljmp to sjmp
@@ -1309,7 +1309,7 @@
    0332 8A 82              1309 	mov	dpl,r2
    0334 8B 83              1310 	mov	dph,r3
    0336 8C F0              1311 	mov	b,r4
-   0338 12 3B E5           1312 	lcall	__gptrget
+   0338 12 3B E3           1312 	lcall	__gptrget
                            1313 ;	genCmpLt
                            1314 ;	genCmp
    033B FD                 1315 	mov	r5,a
@@ -1405,7 +1405,7 @@
    038C 8A 82              1405 	mov	dpl,r2
    038E 8B 83              1406 	mov	dph,r3
    0390 8C F0              1407 	mov	b,r4
-   0392 12 3B E5           1408 	lcall	__gptrget
+   0392 12 3B E3           1408 	lcall	__gptrget
                            1409 ;	genCmpLt
                            1410 ;	genCmp
    0395 FD                 1411 	mov	r5,a
@@ -1502,7 +1502,7 @@
    03E5 8A 82              1502 	mov	dpl,r2
    03E7 8B 83              1503 	mov	dph,r3
    03E9 8C F0              1504 	mov	b,r4
-   03EB 12 3B E5           1505 	lcall	__gptrget
+   03EB 12 3B E3           1505 	lcall	__gptrget
                            1506 ;	genCmpLt
                            1507 ;	genCmp
    03EE FD                 1508 	mov	r5,a
@@ -1606,7 +1606,7 @@
    0442 8A 82              1606 	mov	dpl,r2
    0444 8B 83              1607 	mov	dph,r3
    0446 8C F0              1608 	mov	b,r4
-   0448 12 3B E5           1609 	lcall	__gptrget
+   0448 12 3B E3           1609 	lcall	__gptrget
                            1610 ;	genCmpLt
                            1611 ;	genCmp
    044B FA                 1612 	mov	r2,a
@@ -1683,7 +1683,7 @@
    048B 8A 82              1683 	mov	dpl,r2
    048D 8B 83              1684 	mov	dph,r3
    048F 8C F0              1685 	mov	b,r4
-   0491 12 3B E5           1686 	lcall	__gptrget
+   0491 12 3B E3           1686 	lcall	__gptrget
                            1687 ;	genCmpLt
                            1688 ;	genCmp
    0494 FA                 1689 	mov	r2,a
@@ -1761,7 +1761,7 @@
    04D3 8A 82              1761 	mov	dpl,r2
    04D5 8B 83              1762 	mov	dph,r3
    04D7 8C F0              1763 	mov	b,r4
-   04D9 12 3B E5           1764 	lcall	__gptrget
+   04D9 12 3B E3           1764 	lcall	__gptrget
                            1765 ;	genCmpLt
                            1766 ;	genCmp
    04DC FA                 1767 	mov	r2,a

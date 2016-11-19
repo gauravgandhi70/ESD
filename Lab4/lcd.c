@@ -16,7 +16,10 @@ Author: Gaurav Gandhi
 #include"atoh_f.h"
 #include"clock.h"
 #include"data_dump.h"
-#include"io_exp.h"/*-----------------------------------------------------------------------------------------
+#include"io_exp.h"
+
+
+/*-----------------------------------------------------------------------------------------
                                 void lcd_init()
  ------------------------------------------------------------------------------------------
  * I/P Arguments: none
@@ -204,18 +207,30 @@ void lcdgotoxy(unsigned char row, unsigned char column)
 }
 
 
+
+/*-----------------------------------------------------------------------------------------
+                                void lcd_display(unsigned char rd, char *a)
+ ------------------------------------------------------------------------------------------
+ * I/P Arguments: The data to display on the LCD and its address in the EEPROM
+ * Return value	: none
+
+ * description: This function is used for displaying data of the EEPROM on THE LCD on a particular row specified by
+ the user in AAA:DD format
+-----------------------------------------------------------------------------------------*/
+
 void lcd_display(unsigned char rd, char *a)
 {
     char d[5],c[5];
     unsigned int row,flag=0,b;
     b=rd/16;
-    c[0]=ctoa(b);
+    c[0]=ctoa(b);               // The ascii value of rd is converted onto hex value using ctoa function
     b=rd-(b*16);
     c[1]=ctoa(b);
     c[2]='\0';
 
-    //printf_tiny("\n%c",c);
+
     printf_tiny("\n\n\r Enter Row number between 0 to 3: ");
+     // Select the Row between 0 to 3, store it in row; IF user enters wrong value then Give ERROR
             do{
                 flag=0;
                 gets(d);
@@ -231,6 +246,7 @@ void lcd_display(unsigned char rd, char *a)
                 }
             }while(flag==0);
 
+            // Display the Address and the Data on the LCD specified by the user
             lcdgotoxy(row+1,1);
             lcdputstr(a);
             lcdputch(':');
@@ -238,22 +254,45 @@ void lcd_display(unsigned char rd, char *a)
 
 }
 
+
+/*-----------------------------------------------------------------------------------------
+            void lcdcreatechar(unsigned char ccode,unsigned char *row_vals)
+ ------------------------------------------------------------------------------------------
+ * I/P Arguments: The number of custom character and data to stored in the CGRAM for that custom character
+ * Return value	: none
+
+ * description: This function takes the custom character number and the array to store in the CGRAM.
+ So the data is stored in CGRAM at the location specified by the ccode
+-----------------------------------------------------------------------------------------*/
+
+
 void lcdcreatechar(unsigned char ccode,unsigned char *row_vals) __critical
 {
     char c;
     ccode=(ccode<<3);
-    c=ccode|0x40;
-    lcdputcmd(c);
+    c=ccode|0x40;                   // Custom character number is masked with 0x40 to set the CGRAM address as specified by the
+    lcdputcmd(c);                   // User and then sent to the LCD to set that CGRAM address
 
     for(c=0;c<8;c++)
     {
-        lcdputch(*(row_vals+c));
+        lcdputch(*(row_vals+c));       // Data is loaded into the CGRAM location to create custom character
     }
 
 
 
 }
 
+
+/*-----------------------------------------------------------------------------------------
+                    void logo_creator() __critical
+ ------------------------------------------------------------------------------------------
+ * I/P Arguments: None
+ * Return value	: none
+
+ * description: This is a demo function to display Cu Boulder LOGO on the LCD.
+ CGRAM is preloaded with the characters and then lcd_dis_cus function is called with various
+ custom characters and its location for displaying CU logo
+-----------------------------------------------------------------------------------------*/
 
 void logo_creator() __critical
 {
@@ -289,13 +328,25 @@ void logo_creator() __critical
            lcd_dis_cus(5,1,3);
 
 }
+
+
+/*-----------------------------------------------------------------------------------------
+            void lcd_dis_cus(unsigned char ccode,unsigned char row,unsigned char col)
+ ------------------------------------------------------------------------------------------
+ * I/P Arguments: Custom character number to display, row and column number of the LCD
+ * Return value	: none
+
+ * description: This function is used for displaying newly created custom characters on
+ the LCD on the desired location. Also watchdog is serviced in this function
+-----------------------------------------------------------------------------------------*/
+
 void lcd_dis_cus(unsigned char ccode,unsigned char row,unsigned char col) __critical
 {
 
     WDTPRG |=0x07;
-    WDTRST = 0x01E;
+    WDTRST = 0x01E;         // Watchdog resetting
     WDTRST = 0x0E1;
-    lcdgotoxy(row,col);
+    lcdgotoxy(row,col);     // Dsiplay Custom character on the LCD
     lcdputch(ccode);
 
 

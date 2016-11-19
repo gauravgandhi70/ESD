@@ -7,6 +7,6 @@ void io_cnt(unsigned int io_exp_counter);
 void io_exp_dir(void);
 
 
-#define IOEX_ID 0x70
+#define IOEX_ID 0x70                // ID of the IO Expander is 01110000
 
 #endif // _LCDH_
