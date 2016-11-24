@@ -14,17 +14,25 @@ Author: Gaurav Gandhi
 #include"delay.h"
 #include"uart.h"
 
+/*-----------------------------------------------------------------------------------------
+               int atoh(char *c)
+ ------------------------------------------------------------------------------------------
+ * I/P Arguments: string of input ascii values for conversion
+ * Return value	: converted hex value
 
+ * description:This function is used for converting the 3 digit character string into hex integer
+
+-----------------------------------------------------------------------------------------*/
 int atoh(char *c)
 {
     int result=0,i=0;
 
-    if(*(c+3) != '\0')
+    if(*(c+3) != '\0')                  // Checking if recieved string is 3 digit number
     {
         return 2100;
     }
 
-    if(*(c)>=48 && *(c)<=55 )
+    if(*(c)>=48 && *(c)<=55 )           // multiply digit at 100th place by 256
     {
         result = (*c-48)*256;
         c++;
@@ -32,7 +40,7 @@ int atoh(char *c)
     else{return 2103;}
 
 
-    if(*(c)>=48 && *(c)<=57 )
+    if(*(c)>=48 && *(c)<=57 )           // Multiply 10th place digit by 16
     {
         result += (*c-48)*16;
         c++;
@@ -47,7 +55,7 @@ int atoh(char *c)
         result += (*c - 55)*16;
         c++;
     }
-    else
+    else                                // If the chracter is not in the range then return error
     {
         return 2101;
     }
@@ -68,13 +76,23 @@ int atoh(char *c)
     }
     else
     {
-        return 2102;
+        return 2102;                        // If the unit place digit is not valid then return error
     }
 
     return result;
 }
 
 
+
+/*-----------------------------------------------------------------------------------------
+               int atoh_data(char *c)
+ ------------------------------------------------------------------------------------------
+ * I/P Arguments: string of input ascii values for conversion
+ * Return value	: converted hex value
+
+ * description: This function is same as atoh but it operates only 2 digit numbers.
+ that is data range between 00 to FF
+-----------------------------------------------------------------------------------------*/
 int atoh_data(char *c)
 {
     int result=0,i=0;
@@ -125,6 +143,19 @@ int atoh_data(char *c)
     return result;
 }
 
+
+
+
+/*-----------------------------------------------------------------------------------------
+               char ctoa(int c)
+ ------------------------------------------------------------------------------------------
+ * I/P Arguments: Number Character to be converted into ascii value
+ * Return value	: converted ascii value
+
+ * description:This function is used for converting numbers from 0 to F into its respective ascii values for displaying
+                on the LCD
+
+-----------------------------------------------------------------------------------------*/
 char ctoa(int c)
 { int i;
     char d;

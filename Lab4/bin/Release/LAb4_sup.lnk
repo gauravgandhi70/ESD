@@ -20,6 +20,7 @@ obj\Release\i2c.rel
 obj\Release\io_exp.rel
 obj\Release\lcd.rel
 obj\Release\main.rel
+obj\Release\profile.rel
 obj\Release\uart.rel
 
 -e

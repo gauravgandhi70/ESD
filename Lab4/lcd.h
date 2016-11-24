@@ -6,7 +6,7 @@
 #include<stdint.h>
 
 void lcd_init(void);
-void lcdbusywait(void);
+char lcdbusywait(void);
 void lcdputch(char c);
 void lcdgotoaddr(unsigned char addr);
 void lcdputstr(char *str);

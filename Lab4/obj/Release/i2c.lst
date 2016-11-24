@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.6.0 #4309 (Jul 28 2006)
-                              4 ; This file generated Tue Nov 15 08:41:24 2016
+                              4 ; This file generated Thu Nov 24 04:22:13 2016
                               5 ;--------------------------------------------------------
                               6 	.module i2c
                               7 	.optsdcc -mmcs51 --model-large
@@ -764,7 +764,7 @@
                             764 ;------------------------------------------------------------
                             765 ;dat                       Allocated with name '_I2C_Ack_dat_1_1'
                             766 ;------------------------------------------------------------
-                            767 ;	i2c.c:224: void I2C_Ack()
+                            767 ;	i2c.c:224: char I2C_Ack()
                             768 ;	-----------------------------------------
                             769 ;	 function I2C_Ack
                             770 ;	-----------------------------------------
@@ -772,63 +772,68 @@
                             772 ;	i2c.c:227: P1_2 = 1;
                             773 ;	genAssign
    00C0 D2 92               774 	setb	_P1_2
-                            775 ;	i2c.c:231: P1_1 = 1;			// Pull SCL High
+                            775 ;	i2c.c:232: P1_1 = 1;			// Pull SCL High
                             776 ;	genAssign
    00C2 D2 91               777 	setb	_P1_1
-                            778 ;	i2c.c:232: delay_us(1);
+                            778 ;	i2c.c:233: delay_us(1);
                             779 ;	genCall
                             780 ;	Peephole 182.b	used 16 bit load of dptr
    00C4 90 00 01            781 	mov	dptr,#0x0001
    00C7 12s00r00            782 	lcall	_delay_us
-                            783 ;	i2c.c:234: dat = P1_2;
-                            784 ;	genDummyRead
-   00CA A2 92               785 	mov	c,_P1_2
-                            786 ;	i2c.c:236: P1_1 = 0;
-                            787 ;	genAssign
-   00CC C2 91               788 	clr	_P1_1
-                            789 ;	i2c.c:237: if(dat==0){;}
-                            790 ;	Peephole 300	removed redundant label 00101$
-   00CE 22                  791 	ret
-                            792 ;------------------------------------------------------------
-                            793 ;Allocation info for local variables in function 'I2C_Ack_seq'
-                            794 ;------------------------------------------------------------
-                            795 ;------------------------------------------------------------
-                            796 ;	i2c.c:242: void I2C_Ack_seq()
-                            797 ;	-----------------------------------------
-                            798 ;	 function I2C_Ack_seq
-                            799 ;	-----------------------------------------
-   00CF                     800 _I2C_Ack_seq:
-                            801 ;	i2c.c:244: P1_2 = 0;		//Pull SDA low to indicate Positive ACK
-                            802 ;	genAssign
-   00CF C2 92               803 	clr	_P1_2
-                            804 ;	i2c.c:245: I2C_Clock();	//Generate the Clock
-                            805 ;	genCall
-   00D1 12s00r00            806 	lcall	_I2C_Clock
-                            807 ;	i2c.c:246: P1_2 = 1;		// Pull SDA back to High(IDLE state)
-                            808 ;	genAssign
-   00D4 D2 92               809 	setb	_P1_2
-                            810 ;	Peephole 300	removed redundant label 00101$
-   00D6 22                  811 	ret
-                            812 ;------------------------------------------------------------
-                            813 ;Allocation info for local variables in function 'I2C_NoAck'
-                            814 ;------------------------------------------------------------
-                            815 ;------------------------------------------------------------
-                            816 ;	i2c.c:261: void I2C_NoAck()
-                            817 ;	-----------------------------------------
-                            818 ;	 function I2C_NoAck
-                            819 ;	-----------------------------------------
-   00D7                     820 _I2C_NoAck:
-                            821 ;	i2c.c:263: P1_2 = 1;		//Pull SDA high to indicate Negative/NO ACK
-                            822 ;	genAssign
-   00D7 D2 92               823 	setb	_P1_2
-                            824 ;	i2c.c:264: I2C_Clock();	    // Generate the Clock
-                            825 ;	genCall
-   00D9 12s00r00            826 	lcall	_I2C_Clock
-                            827 ;	i2c.c:265: P1_1 = 1;		// Set SCL */
-                            828 ;	genAssign
-   00DC D2 91               829 	setb	_P1_1
-                            830 ;	Peephole 300	removed redundant label 00101$
-   00DE 22                  831 	ret
-                            832 	.area CSEG    (CODE)
-                            833 	.area CONST   (CODE)
-                            834 	.area XINIT   (CODE)
+                            783 ;	i2c.c:235: dat = P1_2;
+                            784 ;	genAssign
+   00CA E4                  785 	clr	a
+   00CB A2 92               786 	mov	c,_P1_2
+   00CD 33                  787 	rlc	a
+   00CE FA                  788 	mov	r2,a
+                            789 ;	i2c.c:237: P1_1 = 0;
+                            790 ;	genAssign
+   00CF C2 91               791 	clr	_P1_1
+                            792 ;	i2c.c:239: return dat;         // Return Ack status
+                            793 ;	genRet
+   00D1 8A 82               794 	mov	dpl,r2
+                            795 ;	Peephole 300	removed redundant label 00101$
+   00D3 22                  796 	ret
+                            797 ;------------------------------------------------------------
+                            798 ;Allocation info for local variables in function 'I2C_Ack_seq'
+                            799 ;------------------------------------------------------------
+                            800 ;------------------------------------------------------------
+                            801 ;	i2c.c:245: void I2C_Ack_seq()
+                            802 ;	-----------------------------------------
+                            803 ;	 function I2C_Ack_seq
+                            804 ;	-----------------------------------------
+   00D4                     805 _I2C_Ack_seq:
+                            806 ;	i2c.c:247: P1_2 = 0;		//Pull SDA low to indicate Positive ACK
+                            807 ;	genAssign
+   00D4 C2 92               808 	clr	_P1_2
+                            809 ;	i2c.c:248: I2C_Clock();	//Generate the Clock
+                            810 ;	genCall
+   00D6 12s00r00            811 	lcall	_I2C_Clock
+                            812 ;	i2c.c:249: P1_2 = 1;		// Pull SDA back to High(IDLE state)
+                            813 ;	genAssign
+   00D9 D2 92               814 	setb	_P1_2
+                            815 ;	Peephole 300	removed redundant label 00101$
+   00DB 22                  816 	ret
+                            817 ;------------------------------------------------------------
+                            818 ;Allocation info for local variables in function 'I2C_NoAck'
+                            819 ;------------------------------------------------------------
+                            820 ;------------------------------------------------------------
+                            821 ;	i2c.c:264: void I2C_NoAck()
+                            822 ;	-----------------------------------------
+                            823 ;	 function I2C_NoAck
+                            824 ;	-----------------------------------------
+   00DC                     825 _I2C_NoAck:
+                            826 ;	i2c.c:266: P1_2 = 1;		//Pull SDA high to indicate Negative/NO ACK
+                            827 ;	genAssign
+   00DC D2 92               828 	setb	_P1_2
+                            829 ;	i2c.c:267: I2C_Clock();	    // Generate the Clock
+                            830 ;	genCall
+   00DE 12s00r00            831 	lcall	_I2C_Clock
+                            832 ;	i2c.c:268: P1_1 = 1;		// Set SCL */
+                            833 ;	genAssign
+   00E1 D2 91               834 	setb	_P1_1
+                            835 ;	Peephole 300	removed redundant label 00101$
+   00E3 22                  836 	ret
+                            837 	.area CSEG    (CODE)
+                            838 	.area CONST   (CODE)
+                            839 	.area XINIT   (CODE)

@@ -69,32 +69,30 @@ void clock_control() __critical
 
     char c[4];
     int t=0;
-    WDTPRG |=0x07;
-    WDTRST = 0x01E;
-    WDTRST = 0x0E1;
+
         ms++;
         if(ms==10){ms=0;sec++;}
-        c[0]=ctoa(ms);
-        lcdgotoxy(4,16);
+        c[0]=ctoa(ms);                          // Convdert the character into ascii value to print on the LCD
+        lcdgotoxy(4,16);                        // Specifybthe location every time before print
         lcdputch(c[0]);
 
         if(sec==60){sec=0;mi++;}
         t=sec/10;
-        c[0]=ctoa(t);
+        c[0]=ctoa(t);                           // Convdert the number into ascii value to print on the LCD
         t=sec-(t*10);
         c[1]=ctoa(t);
         c[2]='\0';
-        lcdgotoxy(4,13);
+        lcdgotoxy(4,13);                        // Specifybthe location every time before print
         lcdputstr(c);
 
 
         if(mi==60){mi=0;}
         t=mi/10;
-        c[0]=ctoa(t);
+        c[0]=ctoa(t);                           // Convdert the number into ascii value to print on the LCD
         t=mi-(t*10);
         c[1]=ctoa(t);
         c[2]='\0';
-        lcdgotoxy(4,10);
+        lcdgotoxy(4,10);                         // Specifybthe location every time before print
         lcdputstr(c);
 
 }
@@ -105,20 +103,21 @@ void clock_control() __critical
  ----------------------------------------------------------------------------------------
  * I/P Arguments: Countdown timer number, its current status in the form of min,sec and millisec,
  * Return value	: none
- * description:  This function is used for  displaying of the coundown timimng
+ * description:  This function is used for  displaying of the coundown timimng. Depending on the counter status its vlaues are
+ decreamented. If the counter reaches zero then cn is set to zero in the interrupt and then Alarm is displayed on the LCD screen
 ----------------------------------------------------------------------------------------*/
 void countdown_alarm(unsigned int nm,unsigned int nse,unsigned int nmi,char cn,int num) __critical
 {
     char c[4];
     int t=0;
 
-        c[0]=ctoa(nm);
+        c[0]=ctoa(nm);                          // Convdert the number into ascii value to print on the LCD
         lcdgotoxy(num+1,16);
         lcdputch(c[0]);
 
 
         t=nse/10;
-        c[0]=ctoa(t);
+        c[0]=ctoa(t);                           // Convdert the number into ascii value to print on the LCD
         t=nse-(t*10);
         c[1]=ctoa(t);
         c[2]='\0';
@@ -128,13 +127,13 @@ void countdown_alarm(unsigned int nm,unsigned int nse,unsigned int nmi,char cn,i
 
 
         t=nmi/10;
-        c[0]=ctoa(t);
+        c[0]=ctoa(t);                           // Convdert the number into ascii value to print on the LCD
         t=nmi-(t*10);
         c[1]=ctoa(t);
         c[2]='\0';
         lcdgotoxy(num+1,10);
         lcdputstr(c);
-        if(cn==0)
+        if(cn==0)                               // If countdown timer reaches zero then Display Alarm on the LCD screen
         {
 
             lcdgotoxy(num+1,1);

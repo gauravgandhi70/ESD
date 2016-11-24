@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.6.0 #4309 (Jul 28 2006)
-; This file generated Thu Nov 17 23:43:17 2016
+; This file generated Thu Nov 24 04:54:17 2016
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mmcs51 --model-large
@@ -556,7 +556,7 @@ __sdcc_program_startup:
 ;Allocation info for local variables in function '_sdcc_external_startup'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:29: _sdcc_external_startup()
+;	main.c:31: _sdcc_external_startup()
 ;	-----------------------------------------
 ;	 function _sdcc_external_startup
 ;	-----------------------------------------
@@ -569,13 +569,13 @@ __sdcc_external_startup:
 	ar7 = 0x07
 	ar0 = 0x00
 	ar1 = 0x01
-;	main.c:31: AUXR |= 0x0C;
+;	main.c:33: AUXR |= 0x0C;
 ;	genOr
 	orl	_AUXR,#0x0C
-;	main.c:32: CKCKON0 = 0xFB;
+;	main.c:34: CKCKON0 = 0xFB;
 ;	genAssign
 	mov	_CKCKON0,#0xFB
-;	main.c:33: return 0;
+;	main.c:35: return 0;
 ;	genRet
 ;	Peephole 182.b	used 16 bit load of dptr
 	mov	dptr,#0x0000
@@ -605,12 +605,12 @@ __sdcc_external_startup:
 ;rd                        Allocated with name '_main_rd_1_1'
 ;disp                      Allocated with name '_main_disp_1_1'
 ;------------------------------------------------------------
-;	main.c:38: void main(void)
+;	main.c:40: void main(void)
 ;	-----------------------------------------
 ;	 function main
 ;	-----------------------------------------
 _main:
-;	main.c:40: char store,c[4],d[5],name[3]="012",b[5];        // c,d,b are used for taking input from the user
+;	main.c:42: char store,c[4],d[5],name[3]="012",b[5];        // c,d,b are used for taking input from the user
 ;	genPointerSet
 ;     genFarPointerSet
 	mov	dptr,#_main_name_1_1
@@ -626,22 +626,22 @@ _main:
 	mov	dptr,#(_main_name_1_1 + 0x0002)
 	mov	a,#0x32
 	movx	@dptr,a
-;	main.c:45: lcd_init();                                     // Initilaize LCD
+;	main.c:47: lcd_init();                                     // Initilaize LCD
 ;	genCall
 	lcall	_lcd_init
-;	main.c:46: uart_init()	;                                   // Initilalize UART
+;	main.c:48: uart_init()	;                                   // Initilalize UART
 ;	genCall
 	lcall	_uart_init
-;	main.c:47: timer_init();                                   // Initialize the Timer
+;	main.c:49: timer_init();                                   // Initialize the Timer
 ;	genCall
 	lcall	_timer_init
-;	main.c:50: P1_0=0;
+;	main.c:52: P1_0=0;
 ;	genAssign
 	clr	_P1_0
-;	main.c:51: eereset();                                      // EEPROM is reset at every powerup
+;	main.c:53: eereset();                                      // EEPROM is reset at every powerup
 ;	genCall
 	lcall	_eereset
-;	main.c:54: lcdgotoxy(4,1);
+;	main.c:56: lcdgotoxy(4,1);
 ;	genAssign
 	mov	dptr,#_lcdgotoxy_PARM_2
 	mov	a,#0x01
@@ -649,13 +649,13 @@ _main:
 ;	genCall
 	mov	dpl,#0x04
 	lcall	_lcdgotoxy
-;	main.c:55: lcdputstr("Count-0");
+;	main.c:57: lcdputstr("Count-0");
 ;	genCall
 ;	Peephole 182.a	used 16 bit load of DPTR
 	mov	dptr,#__str_1
 	mov	b,#0x80
 	lcall	_lcdputstr
-;	main.c:57: lcdgotoxy(4,15);
+;	main.c:59: lcdgotoxy(4,15);
 ;	genAssign
 	mov	dptr,#_lcdgotoxy_PARM_2
 	mov	a,#0x0F
@@ -663,11 +663,11 @@ _main:
 ;	genCall
 	mov	dpl,#0x04
 	lcall	_lcdgotoxy
-;	main.c:58: lcdputch('.');
+;	main.c:60: lcdputch('.');
 ;	genCall
 	mov	dpl,#0x2E
 	lcall	_lcdputch
-;	main.c:59: lcdgotoxy(4,12);
+;	main.c:61: lcdgotoxy(4,12);
 ;	genAssign
 	mov	dptr,#_lcdgotoxy_PARM_2
 	mov	a,#0x0C
@@ -675,19 +675,19 @@ _main:
 ;	genCall
 	mov	dpl,#0x04
 	lcall	_lcdgotoxy
-;	main.c:60: lcdputch(':');
+;	main.c:62: lcdputch(':');
 ;	genCall
 	mov	dpl,#0x3A
 	lcall	_lcdputch
-;	main.c:61: IOEX_WriteByte(0x01);
+;	main.c:63: IOEX_WriteByte(0x01);
 ;	genCall
 	mov	dpl,#0x01
 	lcall	_IOEX_WriteByte
-;	main.c:64: for(i=0;i<3;i++)
+;	main.c:66: for(i=0;i<3;i++)
 ;	genAssign
 	mov	r2,#0x00
 	mov	r3,#0x00
-00291$:
+00294$:
 ;	genCmpLt
 ;	genCmp
 	clr	c
@@ -697,13 +697,13 @@ _main:
 	xrl	a,#0x80
 	subb	a,#0x80
 ;	genIfxJump
-	jc	00408$
-	ljmp	00294$
-00408$:
-;	main.c:66: EA=0;
+	jc	00412$
+	ljmp	00297$
+00412$:
+;	main.c:68: EA=0;
 ;	genAssign
 	clr	_EA
-;	main.c:67: countdown_alarm(0,0,0,2,i);     // Display Initial Status of the C/D timer as 0.0.0
+;	main.c:69: countdown_alarm(0,0,0,2,i);     // Display Initial Status of the C/D timer as 0.0.0
 ;	genAssign
 	mov	dptr,#_countdown_alarm_PARM_2
 	clr	a
@@ -735,7 +735,7 @@ _main:
 	lcall	_countdown_alarm
 	pop	ar3
 	pop	ar2
-;	main.c:68: lcdgotoxy(i+1,1);
+;	main.c:70: lcdgotoxy(i+1,1);
 ;	genCast
 	mov	ar4,r2
 ;	genPlus
@@ -754,7 +754,7 @@ _main:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	main.c:69: lcdputstr("Timer");
+;	main.c:71: lcdputstr("Timer");
 ;	genCall
 ;	Peephole 182.a	used 16 bit load of DPTR
 	mov	dptr,#__str_2
@@ -766,7 +766,7 @@ _main:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	main.c:70: lcdputch(name[i]);
+;	main.c:72: lcdputch(name[i]);
 ;	genPlus
 ;	Peephole 236.g	used r2 instead of ar2
 	mov	a,r2
@@ -790,7 +790,7 @@ _main:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	main.c:71: lcdputstr("-D");
+;	main.c:73: lcdputstr("-D");
 ;	genCall
 ;	Peephole 182.a	used 16 bit load of DPTR
 	mov	dptr,#__str_3
@@ -802,7 +802,7 @@ _main:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	main.c:72: lcdgotoxy(i+1,12);
+;	main.c:74: lcdgotoxy(i+1,12);
 ;	genAssign
 	mov	dptr,#_lcdgotoxy_PARM_2
 	mov	a,#0x0C
@@ -816,7 +816,7 @@ _main:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	main.c:73: lcdputch(':');
+;	main.c:75: lcdputch(':');
 ;	genCall
 	mov	dpl,#0x3A
 	push	ar2
@@ -826,7 +826,7 @@ _main:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	main.c:74: lcdgotoxy(i+1,15);
+;	main.c:76: lcdgotoxy(i+1,15);
 ;	genAssign
 	mov	dptr,#_lcdgotoxy_PARM_2
 	mov	a,#0x0F
@@ -838,7 +838,7 @@ _main:
 	lcall	_lcdgotoxy
 	pop	ar3
 	pop	ar2
-;	main.c:75: lcdputch('.');
+;	main.c:77: lcdputch('.');
 ;	genCall
 	mov	dpl,#0x2E
 	push	ar2
@@ -846,19 +846,19 @@ _main:
 	lcall	_lcdputch
 	pop	ar3
 	pop	ar2
-;	main.c:78: EA=1;
+;	main.c:80: EA=1;
 ;	genAssign
 	setb	_EA
-;	main.c:64: for(i=0;i<3;i++)
+;	main.c:66: for(i=0;i<3;i++)
 ;	genPlus
 ;     genPlusIncr
 	inc	r2
-	cjne	r2,#0x00,00409$
+	cjne	r2,#0x00,00413$
 	inc	r3
-00409$:
-	ljmp	00291$
-00294$:
-;	main.c:82: printf_tiny("\n\n\r\t\t\t\t\t******** Clock Control Commands ********\n\n\r\t1. Stop Clock \t\t\t\t\t\t2. Restart Clock \t\t\t3. Reset Clock\n\r\t4. Select Count-Down Timer and Value \t\t\t5. Timer Enable \t\t\t6. Timer Disable ");
+00413$:
+	ljmp	00294$
+00297$:
+;	main.c:84: printf_tiny("\n\n\r\t\t\t\t\t******** Clock Control Commands ********\n\n\r\t1. Stop Clock \t\t\t\t\t\t2. Restart Clock \t\t\t3. Reset Clock\n\r\t4. Select Count-Down Timer and Value \t\t\t5. Timer Enable \t\t\t6. Timer Disable ");
 ;	genIpush
 	mov	a,#__str_4
 	push	acc
@@ -868,7 +868,7 @@ _main:
 	lcall	_printf_tiny
 	dec	sp
 	dec	sp
-;	main.c:83: printf_tiny("\n\n\n\r\t\t\t\t\t******** LCD Commands ********\n\n\r\t7. Create Custom Character\t\t\t8. Display Custom Character\t\t\t'c'. CGRAM Dump\t\t\t'd'. DDRAM Dump\n\r\t'l'.EEPROM Content on LCD Display\t\t'q'. Clear LCD Display");
+;	main.c:85: printf_tiny("\n\n\n\r\t\t\t\t\t******** LCD Commands ********\n\n\r\t7. Create Custom Character\t\t\t8. Display Custom Character\t\t\t'c'. CGRAM Dump\t\t\t'd'. DDRAM Dump\n\r\t'l'.EEPROM Content on LCD Display\t\t'q'. Clear LCD Display");
 ;	genIpush
 	mov	a,#__str_5
 	push	acc
@@ -878,7 +878,7 @@ _main:
 	lcall	_printf_tiny
 	dec	sp
 	dec	sp
-;	main.c:84: printf_tiny("\n\n\n\r\t\t\t\t\t******** IO Expander Control Commands ********\n\n\r\t'x'. Reset Counter\t\t\t\t'i'. Configure IO Pins\t\t\t\t's'. Status of IO_Expander");
+;	main.c:86: printf_tiny("\n\n\n\r\t\t\t\t\t******** IO Expander Control Commands ********\n\n\r\t'x'. Reset Counter\t\t\t\t'i'. Configure IO Pins\t\t\t\t's'. Status of IO_Expander");
 ;	genIpush
 	mov	a,#__str_6
 	push	acc
@@ -888,7 +888,7 @@ _main:
 	lcall	_printf_tiny
 	dec	sp
 	dec	sp
-;	main.c:85: printf_tiny("\n\n\n\r\t\t\t\t\t******** EEPROM Control Commands ******** \n\n\r\t'w'. EEPROM Write \t\t\t'r'. EEPROM Read \t\t\t\t'h'. HEX Dump\t\n\r\t");
+;	main.c:87: printf_tiny("\n\n\n\r\t\t\t\t\t******** EEPROM Control Commands ******** \n\n\r\t'w'. EEPROM Write \t\t\t'r'. EEPROM Read \t\t\t\t'h'. HEX Dump\t\n\r\t");
 ;	genIpush
 	mov	a,#__str_7
 	push	acc
@@ -898,7 +898,7 @@ _main:
 	lcall	_printf_tiny
 	dec	sp
 	dec	sp
-;	main.c:86: printf_tiny("\n\n\r\t\t\t\t\t******** Demo Commands ******** \n\n\r\t'y'. Watchdog Demo \t\t\t'9'. LOGO Creation Demo ");
+;	main.c:88: printf_tiny("\n\n\r\t\t\t\t\t******** Demo Commands ******** \n\n\r\t'y'. Watchdog Demo \t\t\t'9'. LOGO Creation Demo \t\t\t't'EEPROM Time Measure\n\r\t'b'. EEPROM Block Fill ");
 ;	genIpush
 	mov	a,#__str_8
 	push	acc
@@ -908,40 +908,40 @@ _main:
 	lcall	_printf_tiny
 	dec	sp
 	dec	sp
-;	main.c:87: while(1)
-00289$:
+;	main.c:89: while(1)
+00292$:
 ;	genIfx
 ;	genIfxJump
-	jb	_RI,00410$
-	ljmp	00286$
-00410$:
-;	main.c:93: store=getchar();
+;	Peephole 108.d	removed ljmp by inverse jump logic
+	jnb	_RI,00292$
+;	Peephole 300	removed redundant label 00414$
+;	main.c:95: store=getchar();
 ;	genCall
 	lcall	_getchar
-;	main.c:94: putchar(store);
+;	main.c:96: putchar(store);
 ;	genCall
 	mov  r2,dpl
 ;	Peephole 177.a	removed redundant mov
 	push	ar2
 	lcall	_putchar
 	pop	ar2
-;	main.c:95: if(store=='1'){printf_tiny("\n\n\r\t\t ******  Stop Clock  *****"); }
+;	main.c:97: if(store=='1'){printf_tiny("\n\n\r\t\t ******  Stop Clock  *****"); }
 ;	genCmpEq
 ;	gencjne
 ;	gencjneshort
 ;	Peephole 241.d	optimized compare
 	clr	a
-	cjne	r2,#0x31,00411$
+	cjne	r2,#0x31,00415$
 	inc	a
-00411$:
-;	Peephole 300	removed redundant label 00412$
+00415$:
+;	Peephole 300	removed redundant label 00416$
 ;	genIfx
 	mov	r3,a
 ;	Peephole 105	removed redundant mov
 ;	genIfxJump
 ;	Peephole 108.c	removed ljmp by inverse jump logic
 	jz	00163$
-;	Peephole 300	removed redundant label 00413$
+;	Peephole 300	removed redundant label 00417$
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -957,15 +957,15 @@ _main:
 	pop	ar2
 	ljmp	00164$
 00163$:
-;	main.c:96: else if(store=='2' && timers<2){printf_tiny("\n\n\r\t\t ******  Restart Clock  ******"); }
+;	main.c:98: else if(store=='2' && timers<2){printf_tiny("\n\n\r\t\t ******  Restart Clock  ******"); }
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 198.b	optimized misc jump sequence
 	cjne	r2,#0x32,00159$
 ;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00414$
-;	Peephole 300	removed redundant label 00415$
+;	Peephole 300	removed redundant label 00418$
+;	Peephole 300	removed redundant label 00419$
 ;	genAssign
 	mov	dptr,#_timers
 	movx	a,@dptr
@@ -983,7 +983,7 @@ _main:
 ;	genIfxJump
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00159$
-;	Peephole 300	removed redundant label 00416$
+;	Peephole 300	removed redundant label 00420$
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -999,15 +999,15 @@ _main:
 	pop	ar2
 	ljmp	00164$
 00159$:
-;	main.c:97: else if(store=='3' && timers<2){printf_tiny("\n\n\r\t\t ******  Reset Clock  ******"); }
+;	main.c:99: else if(store=='3' && timers<2){printf_tiny("\n\n\r\t\t ******  Reset Clock  ******"); }
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 198.b	optimized misc jump sequence
 	cjne	r2,#0x33,00155$
 ;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00417$
-;	Peephole 300	removed redundant label 00418$
+;	Peephole 300	removed redundant label 00421$
+;	Peephole 300	removed redundant label 00422$
 ;	genAssign
 	mov	dptr,#_timers
 	movx	a,@dptr
@@ -1025,7 +1025,7 @@ _main:
 ;	genIfxJump
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00155$
-;	Peephole 300	removed redundant label 00419$
+;	Peephole 300	removed redundant label 00423$
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -1041,15 +1041,15 @@ _main:
 	pop	ar2
 	ljmp	00164$
 00155$:
-;	main.c:98: else if(store=='4'&& timers<2){printf_tiny("\n\n\r\t\t ******  Load Counter Value ******"); }
+;	main.c:100: else if(store=='4'&& timers<2){printf_tiny("\n\n\r\t\t ******  Load Counter Value ******"); }
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 198.b	optimized misc jump sequence
 	cjne	r2,#0x34,00151$
 ;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00420$
-;	Peephole 300	removed redundant label 00421$
+;	Peephole 300	removed redundant label 00424$
+;	Peephole 300	removed redundant label 00425$
 ;	genAssign
 	mov	dptr,#_timers
 	movx	a,@dptr
@@ -1067,7 +1067,7 @@ _main:
 ;	genIfxJump
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00151$
-;	Peephole 300	removed redundant label 00422$
+;	Peephole 300	removed redundant label 00426$
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -1083,15 +1083,15 @@ _main:
 	pop	ar2
 	ljmp	00164$
 00151$:
-;	main.c:99: else if(store=='5' && timers<2){printf_tiny("\n\n\r\t\t ******  Timer Enable  ******"); }
+;	main.c:101: else if(store=='5' && timers<2){printf_tiny("\n\n\r\t\t ******  Timer Enable  ******"); }
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 198.b	optimized misc jump sequence
 	cjne	r2,#0x35,00147$
 ;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00423$
-;	Peephole 300	removed redundant label 00424$
+;	Peephole 300	removed redundant label 00427$
+;	Peephole 300	removed redundant label 00428$
 ;	genAssign
 	mov	dptr,#_timers
 	movx	a,@dptr
@@ -1109,7 +1109,7 @@ _main:
 ;	genIfxJump
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00147$
-;	Peephole 300	removed redundant label 00425$
+;	Peephole 300	removed redundant label 00429$
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -1125,15 +1125,15 @@ _main:
 	pop	ar2
 	ljmp	00164$
 00147$:
-;	main.c:100: else if(store=='6' && timers<2){printf_tiny("\n\n\r\t\t ******  Timer Disable  ******"); }
+;	main.c:102: else if(store=='6' && timers<2){printf_tiny("\n\n\r\t\t ******  Timer Disable  ******"); }
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 198.b	optimized misc jump sequence
 	cjne	r2,#0x36,00143$
 ;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00426$
-;	Peephole 300	removed redundant label 00427$
+;	Peephole 300	removed redundant label 00430$
+;	Peephole 300	removed redundant label 00431$
 ;	genAssign
 	mov	dptr,#_timers
 	movx	a,@dptr
@@ -1151,7 +1151,7 @@ _main:
 ;	genIfxJump
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00143$
-;	Peephole 300	removed redundant label 00428$
+;	Peephole 300	removed redundant label 00432$
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -1167,15 +1167,15 @@ _main:
 	pop	ar2
 	ljmp	00164$
 00143$:
-;	main.c:101: else if(store=='7' && timers<2){printf_tiny("\n\n\r\t\t ******  Custom Character  ******"); }
+;	main.c:103: else if(store=='7' && timers<2){printf_tiny("\n\n\r\t\t ******  Custom Character  ******"); }
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 198.b	optimized misc jump sequence
 	cjne	r2,#0x37,00139$
 ;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00429$
-;	Peephole 300	removed redundant label 00430$
+;	Peephole 300	removed redundant label 00433$
+;	Peephole 300	removed redundant label 00434$
 ;	genAssign
 	mov	dptr,#_timers
 	movx	a,@dptr
@@ -1193,7 +1193,7 @@ _main:
 ;	genIfxJump
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00139$
-;	Peephole 300	removed redundant label 00431$
+;	Peephole 300	removed redundant label 00435$
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -1209,15 +1209,15 @@ _main:
 	pop	ar2
 	ljmp	00164$
 00139$:
-;	main.c:102: else if(store=='x' && timers<2){printf_tiny("\n\n\r\t\t ******  Reset Counter  ******"); }
+;	main.c:104: else if(store=='x' && timers<2){printf_tiny("\n\n\r\t\t ******  Reset Counter  ******"); }
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 198.b	optimized misc jump sequence
 	cjne	r2,#0x78,00135$
 ;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00432$
-;	Peephole 300	removed redundant label 00433$
+;	Peephole 300	removed redundant label 00436$
+;	Peephole 300	removed redundant label 00437$
 ;	genAssign
 	mov	dptr,#_timers
 	movx	a,@dptr
@@ -1235,7 +1235,7 @@ _main:
 ;	genIfxJump
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00135$
-;	Peephole 300	removed redundant label 00434$
+;	Peephole 300	removed redundant label 00438$
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -1251,15 +1251,15 @@ _main:
 	pop	ar2
 	ljmp	00164$
 00135$:
-;	main.c:103: else if(store=='i' && timers<2){printf_tiny("\n\n\r\t\t ******  Configure IO Pins  ******"); }
+;	main.c:105: else if(store=='i' && timers<2){printf_tiny("\n\n\r\t\t ******  Configure IO Pins  ******"); }
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 198.b	optimized misc jump sequence
 	cjne	r2,#0x69,00131$
 ;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00435$
-;	Peephole 300	removed redundant label 00436$
+;	Peephole 300	removed redundant label 00439$
+;	Peephole 300	removed redundant label 00440$
 ;	genAssign
 	mov	dptr,#_timers
 	movx	a,@dptr
@@ -1277,7 +1277,7 @@ _main:
 ;	genIfxJump
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00131$
-;	Peephole 300	removed redundant label 00437$
+;	Peephole 300	removed redundant label 00441$
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -1293,15 +1293,15 @@ _main:
 	pop	ar2
 	ljmp	00164$
 00131$:
-;	main.c:104: else if(store=='s' && timers<2){printf_tiny("\n\n\r\t\t ******  Status of IO Expander  ******"); }
+;	main.c:106: else if(store=='s' && timers<2){printf_tiny("\n\n\r\t\t ******  Status of IO Expander  ******"); }
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 198.b	optimized misc jump sequence
 	cjne	r2,#0x73,00127$
 ;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00438$
-;	Peephole 300	removed redundant label 00439$
+;	Peephole 300	removed redundant label 00442$
+;	Peephole 300	removed redundant label 00443$
 ;	genAssign
 	mov	dptr,#_timers
 	movx	a,@dptr
@@ -1319,7 +1319,7 @@ _main:
 ;	genIfxJump
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00127$
-;	Peephole 300	removed redundant label 00440$
+;	Peephole 300	removed redundant label 00444$
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -1335,15 +1335,15 @@ _main:
 	pop	ar2
 	ljmp	00164$
 00127$:
-;	main.c:105: else if(store=='w' && timers<2){printf_tiny("\n\n\r\t\t ******  EEPROM Write  ******"); }
+;	main.c:107: else if(store=='w' && timers<2){printf_tiny("\n\n\r\t\t ******  EEPROM Write  ******"); }
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 198.b	optimized misc jump sequence
 	cjne	r2,#0x77,00123$
 ;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00441$
-;	Peephole 300	removed redundant label 00442$
+;	Peephole 300	removed redundant label 00445$
+;	Peephole 300	removed redundant label 00446$
 ;	genAssign
 	mov	dptr,#_timers
 	movx	a,@dptr
@@ -1361,7 +1361,7 @@ _main:
 ;	genIfxJump
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00123$
-;	Peephole 300	removed redundant label 00443$
+;	Peephole 300	removed redundant label 00447$
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -1377,15 +1377,15 @@ _main:
 	pop	ar2
 	ljmp	00164$
 00123$:
-;	main.c:106: else if(store=='r' && timers<2){printf_tiny("\n\n\r\t\t ******  EEPROM Read  ******"); }
+;	main.c:108: else if(store=='r' && timers<2){printf_tiny("\n\n\r\t\t ******  EEPROM Read  ******"); }
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 198.b	optimized misc jump sequence
 	cjne	r2,#0x72,00119$
 ;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00444$
-;	Peephole 300	removed redundant label 00445$
+;	Peephole 300	removed redundant label 00448$
+;	Peephole 300	removed redundant label 00449$
 ;	genAssign
 	mov	dptr,#_timers
 	movx	a,@dptr
@@ -1403,7 +1403,7 @@ _main:
 ;	genIfxJump
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00119$
-;	Peephole 300	removed redundant label 00446$
+;	Peephole 300	removed redundant label 00450$
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -1419,15 +1419,15 @@ _main:
 	pop	ar2
 	ljmp	00164$
 00119$:
-;	main.c:107: else if(store=='c' && timers<2){printf_tiny("\n\n\r\t\t ******  CGRAM Dump  ******"); }
+;	main.c:109: else if(store=='c' && timers<2){printf_tiny("\n\n\r\t\t ******  CGRAM Dump  ******"); }
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 198.b	optimized misc jump sequence
 	cjne	r2,#0x63,00115$
 ;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00447$
-;	Peephole 300	removed redundant label 00448$
+;	Peephole 300	removed redundant label 00451$
+;	Peephole 300	removed redundant label 00452$
 ;	genAssign
 	mov	dptr,#_timers
 	movx	a,@dptr
@@ -1445,7 +1445,7 @@ _main:
 ;	genIfxJump
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00115$
-;	Peephole 300	removed redundant label 00449$
+;	Peephole 300	removed redundant label 00453$
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -1461,15 +1461,15 @@ _main:
 	pop	ar2
 	ljmp	00164$
 00115$:
-;	main.c:108: else if(store=='d' && timers<2){printf_tiny("\n\n\r\t\t ******  DDRAM Dump  ******"); }
+;	main.c:110: else if(store=='d' && timers<2){printf_tiny("\n\n\r\t\t ******  DDRAM Dump  ******"); }
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 198.b	optimized misc jump sequence
 	cjne	r2,#0x64,00111$
 ;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00450$
-;	Peephole 300	removed redundant label 00451$
+;	Peephole 300	removed redundant label 00454$
+;	Peephole 300	removed redundant label 00455$
 ;	genAssign
 	mov	dptr,#_timers
 	movx	a,@dptr
@@ -1487,7 +1487,7 @@ _main:
 ;	genIfxJump
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00111$
-;	Peephole 300	removed redundant label 00452$
+;	Peephole 300	removed redundant label 00456$
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -1504,15 +1504,15 @@ _main:
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00164$
 00111$:
-;	main.c:109: else if(store=='h' && timers<2){printf_tiny("\n\n\r\t\t ******  Hex Dump  ******"); }
+;	main.c:111: else if(store=='h' && timers<2){printf_tiny("\n\n\r\t\t ******  Hex Dump  ******"); }
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 198.b	optimized misc jump sequence
 	cjne	r2,#0x68,00107$
 ;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00453$
-;	Peephole 300	removed redundant label 00454$
+;	Peephole 300	removed redundant label 00457$
+;	Peephole 300	removed redundant label 00458$
 ;	genAssign
 	mov	dptr,#_timers
 	movx	a,@dptr
@@ -1530,7 +1530,7 @@ _main:
 ;	genIfxJump
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00107$
-;	Peephole 300	removed redundant label 00455$
+;	Peephole 300	removed redundant label 00459$
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -1547,15 +1547,15 @@ _main:
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00164$
 00107$:
-;	main.c:110: else if(store=='l'){printf_tiny("\n\n\r\t\t ******  LCD DISPLAY  ******"); }
+;	main.c:112: else if(store=='l'){printf_tiny("\n\n\r\t\t ******  LCD DISPLAY  ******"); }
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 198.b	optimized misc jump sequence
 	cjne	r2,#0x6C,00104$
 ;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00456$
-;	Peephole 300	removed redundant label 00457$
+;	Peephole 300	removed redundant label 00460$
+;	Peephole 300	removed redundant label 00461$
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -1572,15 +1572,15 @@ _main:
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00164$
 00104$:
-;	main.c:111: else if(store=='q'){printf_tiny("\n\n\r\t\t ******  Clear LCD  ******"); }
+;	main.c:113: else if(store=='q'){printf_tiny("\n\n\r\t\t ******  Clear LCD  ******"); }
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 198.b	optimized misc jump sequence
 	cjne	r2,#0x71,00164$
 ;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00458$
-;	Peephole 300	removed redundant label 00459$
+;	Peephole 300	removed redundant label 00462$
+;	Peephole 300	removed redundant label 00463$
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -1595,55 +1595,46 @@ _main:
 	pop	ar3
 	pop	ar2
 00164$:
-;	main.c:116: if(store=='1')
+;	main.c:118: if(store=='1')
 ;	genIfx
 	mov	a,r3
 ;	genIfxJump
 ;	Peephole 108.c	removed ljmp by inverse jump logic
 	jz	00234$
-;	Peephole 300	removed redundant label 00460$
-;	main.c:118: EA=0;
+;	Peephole 300	removed redundant label 00464$
+;	main.c:120: EA=0;
 ;	genAssign
 	clr	_EA
 	ljmp	00235$
 00234$:
-;	main.c:122: else if(store=='2' && EA==0)
+;	main.c:124: else if(store=='2' && EA==0)
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 198.b	optimized misc jump sequence
 	cjne	r2,#0x32,00230$
 ;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00461$
-;	Peephole 300	removed redundant label 00462$
+;	Peephole 300	removed redundant label 00465$
+;	Peephole 300	removed redundant label 00466$
 ;	genIfx
 ;	genIfxJump
 ;	Peephole 108.e	removed ljmp by inverse jump logic
 	jb	_EA,00230$
-;	Peephole 300	removed redundant label 00463$
-;	main.c:124: EA=1;
+;	Peephole 300	removed redundant label 00467$
+;	main.c:126: EA=1;
 ;	genAssign
 	setb	_EA
 	ljmp	00235$
 00230$:
-;	main.c:128: else if(store=='3')
+;	main.c:130: else if(store=='3')
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 198.b	optimized misc jump sequence
 	cjne	r2,#0x33,00227$
 ;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00464$
-;	Peephole 300	removed redundant label 00465$
-;	main.c:130: WDTPRG |=0x07;
-;	genOr
-	orl	_WDTPRG,#0x07
-;	main.c:131: WDTRST = 0x01E;
-;	genAssign
-	mov	_WDTRST,#0x1E
-;	main.c:132: WDTRST = 0x0E1;
-;	genAssign
-	mov	_WDTRST,#0xE1
+;	Peephole 300	removed redundant label 00468$
+;	Peephole 300	removed redundant label 00469$
 ;	main.c:133: clock_reset();
 ;	genCall
 	push	ar2
@@ -1654,11 +1645,11 @@ _main:
 ;	main.c:137: else if(store=='4')
 ;	genCmpEq
 ;	gencjneshort
-	cjne	r2,#0x34,00466$
-	sjmp	00467$
-00466$:
+	cjne	r2,#0x34,00470$
+	sjmp	00471$
+00470$:
 	ljmp	00224$
-00467$:
+00471$:
 ;	main.c:139: printf_tiny("\n\n\r\t Select timer number between 0 to 2: \t");
 ;	genIpush
 	push	ar2
@@ -1710,7 +1701,7 @@ _main:
 ;	genIfxJump
 ;	Peephole 108.c	removed ljmp by inverse jump logic
 	jz	00168$
-;	Peephole 300	removed redundant label 00468$
+;	Peephole 300	removed redundant label 00472$
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -1735,7 +1726,7 @@ _main:
 ;	genIfxJump
 ;	Peephole 108.b	removed ljmp by inverse jump logic
 	jnz	00167$
-;	Peephole 300	removed redundant label 00469$
+;	Peephole 300	removed redundant label 00473$
 ;	main.c:150: printf_tiny("\n\n\rEnter minutes for timer %d between 0 to 59: \t",num);
 ;	genIpush
 	push	ar2
@@ -1859,7 +1850,7 @@ _main:
 ;	genIfxJump
 ;	Peephole 108.c	removed ljmp by inverse jump logic
 	jz	00173$
-;	Peephole 300	removed redundant label 00470$
+;	Peephole 300	removed redundant label 00474$
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -1906,9 +1897,9 @@ _main:
 	clr	a
 	subb	a,r0
 ;	genIfxJump
-	jnc	00471$
+	jnc	00475$
 	ljmp	00172$
-00471$:
+00475$:
 ;	main.c:159: printf_tiny("\n\n\rEnter seconds for timer %d between 1 to 59: \t",num);
 ;	genIpush
 	push	ar2
@@ -2035,7 +2026,7 @@ _main:
 ;	genIfxJump
 ;	Peephole 108.c	removed ljmp by inverse jump logic
 	jz	00178$
-;	Peephole 300	removed redundant label 00472$
+;	Peephole 300	removed redundant label 00476$
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -2075,9 +2066,9 @@ _main:
 	clr	a
 	subb	a,r0
 ;	genIfxJump
-	jnc	00473$
+	jnc	00477$
 	ljmp	00177$
-00473$:
+00477$:
 ;	main.c:169: printf_tiny("\n\n\rEnter milisec for timer %d between 0 to 9: \t",num);
 ;	genIpush
 	push	ar2
@@ -2204,7 +2195,7 @@ _main:
 ;	genIfxJump
 ;	Peephole 108.c	removed ljmp by inverse jump logic
 	jz	00183$
-;	Peephole 300	removed redundant label 00474$
+;	Peephole 300	removed redundant label 00478$
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -2244,9 +2235,9 @@ _main:
 	clr	a
 	subb	a,r0
 ;	genIfxJump
-	jnc	00475$
+	jnc	00479$
 	ljmp	00182$
-00475$:
+00479$:
 ;	main.c:178: countdown_alarm(nms[num],nsec[num],nmi[num],2,num);
 ;	genIpush
 	push	ar2
@@ -2320,11 +2311,11 @@ _main:
 ;	main.c:182: else if(store=='5')
 ;	genCmpEq
 ;	gencjneshort
-	cjne	r2,#0x35,00476$
-	sjmp	00477$
-00476$:
+	cjne	r2,#0x35,00480$
+	sjmp	00481$
+00480$:
 	ljmp	00221$
-00477$:
+00481$:
 ;	main.c:185: printf_tiny("\n\n\r\tWhich timer to enable between 0 to 2:\t");
 ;	genIpush
 	push	ar2
@@ -2447,11 +2438,11 @@ _main:
 ;	main.c:199: else if(store=='6')
 ;	genCmpEq
 ;	gencjneshort
-	cjne	r2,#0x36,00478$
-	sjmp	00479$
-00478$:
+	cjne	r2,#0x36,00482$
+	sjmp	00483$
+00482$:
 	ljmp	00218$
-00479$:
+00483$:
 ;	main.c:202: printf_tiny("\n\n\rWhich timer to Disable between 0 to 2:\t");
 ;	genIpush
 	push	ar2
@@ -2628,11 +2619,11 @@ _main:
 ;	main.c:221: else if(store=='7')
 ;	genCmpEq
 ;	gencjneshort
-	cjne	r2,#0x37,00480$
-	sjmp	00481$
-00480$:
+	cjne	r2,#0x37,00484$
+	sjmp	00485$
+00484$:
 	ljmp	00215$
-00481$:
+00485$:
 ;	main.c:223: printf_tiny("\n\n\r\t Select Character code between 0 to 7: \t");
 ;	genIpush
 	push	ar2
@@ -2684,7 +2675,7 @@ _main:
 ;	genIfxJump
 ;	Peephole 108.c	removed ljmp by inverse jump logic
 	jz	00188$
-;	Peephole 300	removed redundant label 00482$
+;	Peephole 300	removed redundant label 00486$
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -2709,7 +2700,7 @@ _main:
 ;	genIfxJump
 ;	Peephole 108.b	removed ljmp by inverse jump logic
 	jnz	00187$
-;	Peephole 300	removed redundant label 00483$
+;	Peephole 300	removed redundant label 00487$
 ;	main.c:231: ccode=num;
 ;	genCast
 ;	main.c:234: printf_tiny("\n\n\r\t Enter pixel map in HEX in HH format from 00 to 1F: \t");
@@ -2730,7 +2721,7 @@ _main:
 ;	genAssign
 	mov	r4,#0x00
 	mov	r5,#0x00
-00303$:
+00306$:
 ;	genCmpLt
 ;	genCmp
 	clr	c
@@ -2740,9 +2731,9 @@ _main:
 	xrl	a,#0x80
 	subb	a,#0x80
 ;	genIfxJump
-	jc	00484$
-	ljmp	00306$
-00484$:
+	jc	00488$
+	ljmp	00309$
+00488$:
 ;	main.c:237: printf_tiny("\n\r\t Data in row number %d: \t",i);
 ;	genIpush
 	push	ar2
@@ -2816,7 +2807,7 @@ _main:
 ;	genIfxJump
 ;	Peephole 108.c	removed ljmp by inverse jump logic
 	jz	00193$
-;	Peephole 300	removed redundant label 00485$
+;	Peephole 300	removed redundant label 00489$
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -2845,9 +2836,9 @@ _main:
 ;	genIfx
 	mov	a,r0
 ;	genIfxJump
-	jz	00486$
+	jz	00490$
 	ljmp	00192$
-00486$:
+00490$:
 ;	main.c:246: row_val[i]=num;         // Store data from user into row_val[] array
 ;	genPlus
 ;	Peephole 236.g	used r4 instead of ar4
@@ -2920,7 +2911,7 @@ _main:
 ;	genAssign
 	mov	r0,#0x00
 	mov	r1,#0x00
-00299$:
+00302$:
 ;	genCmpGt
 ;	genCmp
 	clr	c
@@ -2932,9 +2923,9 @@ _main:
 	xrl	b,#0x80
 	subb	a,b
 ;	genIfxJump
-	jnc	00487$
-	ljmp	00305$
-00487$:
+	jnc	00491$
+	ljmp	00308$
+00491$:
 ;	main.c:250: {  printf_tiny("\n\r\t\tROW %d:\t",j);
 ;	genIpush
 	push	ar2
@@ -2975,7 +2966,7 @@ _main:
 	mov	_main_sloc0_1_0,#0x03
 	clr	a
 	mov	(_main_sloc0_1_0 + 1),a
-00295$:
+00298$:
 ;	genCmpLt
 ;	genCmp
 	clr	c
@@ -2985,9 +2976,9 @@ _main:
 	xrl	a,#0x80
 	subb	a,#0x80
 ;	genIfxJump
-	jc	00488$
-	ljmp	00301$
-00488$:
+	jc	00492$
+	ljmp	00304$
+00492$:
 ;	main.c:253: if((disp[j]>>k)&1)
 ;	genIpush
 	push	ar3
@@ -3001,12 +2992,12 @@ _main:
 	mov	b,_main_sloc0_1_0
 	inc	b
 	mov	a,r3
-	sjmp	00490$
-00489$:
+	sjmp	00494$
+00493$:
 	clr	c
 	rrc	a
-00490$:
-	djnz	b,00489$
+00494$:
+	djnz	b,00493$
 ;	genAnd
 	anl	a,#0x01
 ;	genIpop
@@ -3015,7 +3006,7 @@ _main:
 ;	genIfxJump
 ;	Peephole 108.c	removed ljmp by inverse jump logic
 	jz	00196$
-;	Peephole 300	removed redundant label 00491$
+;	Peephole 300	removed redundant label 00495$
 ;	main.c:254: {printf("%c",0xFF);}
 ;	genIpush
 	push	ar2
@@ -3052,7 +3043,7 @@ _main:
 	pop	ar3
 	pop	ar2
 ;	Peephole 112.b	changed ljmp to sjmp
-	sjmp	00297$
+	sjmp	00300$
 00196$:
 ;	main.c:256: {printf("%c",'_');}
 ;	genIpush
@@ -3089,26 +3080,26 @@ _main:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-00297$:
+00300$:
 ;	main.c:251: for(k=3;k<8;k++)
 ;	genPlus
 ;     genPlusIncr
 	inc	_main_sloc0_1_0
 	clr	a
-	cjne	a,_main_sloc0_1_0,00492$
+	cjne	a,_main_sloc0_1_0,00496$
 	inc	(_main_sloc0_1_0 + 1)
-00492$:
-	ljmp	00295$
-00301$:
+00496$:
+	ljmp	00298$
+00304$:
 ;	main.c:249: for(j=0;j<=i;j++)          // This fop loop is used for displaying the contents of the ROW_val on the screen
 ;	genPlus
 ;     genPlusIncr
 	inc	r0
-	cjne	r0,#0x00,00493$
+	cjne	r0,#0x00,00497$
 	inc	r1
-00493$:
-	ljmp	00299$
-00305$:
+00497$:
+	ljmp	00302$
+00308$:
 ;	main.c:235: for(i=0;i<8;i++)
 ;	genPlus
 ;     genPlusIncr
@@ -3121,8 +3112,8 @@ _main:
 ;	Peephole 236.b	used r7 instead of ar7
 	addc	a,r7
 	mov	r5,a
-	ljmp	00303$
-00306$:
+	ljmp	00306$
+00309$:
 ;	main.c:260: lcdcreatechar(ccode,row_val);           // After getting all 7 values, new character  is storedin CGRAM
 ;	genCast
 	mov	dptr,#_lcdcreatechar_PARM_2
@@ -3144,11 +3135,11 @@ _main:
 ;	main.c:265: else if(store=='8')
 ;	genCmpEq
 ;	gencjneshort
-	cjne	r2,#0x38,00494$
-	sjmp	00495$
-00494$:
+	cjne	r2,#0x38,00498$
+	sjmp	00499$
+00498$:
 	ljmp	00212$
-00495$:
+00499$:
 ;	main.c:267: printf_tiny("\n\n\r\t Select Character code between 0 to 7 to display: \t");
 ;	genIpush
 	push	ar2
@@ -3200,7 +3191,7 @@ _main:
 ;	genIfxJump
 ;	Peephole 108.c	removed ljmp by inverse jump logic
 	jz	00201$
-;	Peephole 300	removed redundant label 00496$
+;	Peephole 300	removed redundant label 00500$
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -3225,7 +3216,7 @@ _main:
 ;	genIfxJump
 ;	Peephole 108.b	removed ljmp by inverse jump logic
 	jnz	00200$
-;	Peephole 300	removed redundant label 00497$
+;	Peephole 300	removed redundant label 00501$
 ;	main.c:274: ccode=num;
 ;	genCast
 ;	main.c:275: lcd_dis_cus(ccode,2,3);
@@ -3252,8 +3243,8 @@ _main:
 ;	Peephole 198.b	optimized misc jump sequence
 	cjne	r2,#0x71,00209$
 ;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00498$
-;	Peephole 300	removed redundant label 00499$
+;	Peephole 300	removed redundant label 00502$
+;	Peephole 300	removed redundant label 00503$
 ;	main.c:282: lcdputcmd(1);
 ;	genCall
 	mov	dpl,#0x01
@@ -3270,8 +3261,8 @@ _main:
 ;	Peephole 198.b	optimized misc jump sequence
 	cjne	r2,#0x63,00206$
 ;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00500$
-;	Peephole 300	removed redundant label 00501$
+;	Peephole 300	removed redundant label 00504$
+;	Peephole 300	removed redundant label 00505$
 ;	main.c:288: CGRAM_dump();
 ;	genCall
 	push	ar2
@@ -3287,8 +3278,8 @@ _main:
 ;	Peephole 198.b	optimized misc jump sequence
 	cjne	r2,#0x64,00235$
 ;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00502$
-;	Peephole 300	removed redundant label 00503$
+;	Peephole 300	removed redundant label 00506$
+;	Peephole 300	removed redundant label 00507$
 ;	main.c:293: DDRAM_dump();
 ;	genCall
 	push	ar2
@@ -3301,31 +3292,31 @@ _main:
 ;	gencjneshort
 ;	Peephole 241.d	optimized compare
 	clr	a
-	cjne	r2,#0x77,00504$
+	cjne	r2,#0x77,00508$
 	inc	a
-00504$:
-;	Peephole 300	removed redundant label 00505$
+00508$:
+;	Peephole 300	removed redundant label 00509$
 ;	genIfx
 	mov	r3,a
 ;	Peephole 105	removed redundant mov
 ;	genIfxJump
 ;	Peephole 108.b	removed ljmp by inverse jump logic
-	jnz	00276$
-;	Peephole 300	removed redundant label 00506$
+	jnz	00282$
+;	Peephole 300	removed redundant label 00510$
 ;	genCmpEq
 ;	gencjneshort
-	cjne	r2,#0x72,00507$
+	cjne	r2,#0x72,00511$
 ;	Peephole 112.b	changed ljmp to sjmp
-	sjmp	00276$
-00507$:
+	sjmp	00282$
+00511$:
 ;	genCmpEq
 ;	gencjneshort
-	cjne	r2,#0x6C,00508$
-	sjmp	00509$
-00508$:
-	ljmp	00277$
-00509$:
-00276$:
+	cjne	r2,#0x6C,00512$
+	sjmp	00513$
+00512$:
+	ljmp	00283$
+00513$:
+00282$:
 ;	main.c:299: printf_tiny("\n\n\r Enter Address in Hex in HHH format between 000 to 7FF: ");  // Promt user to input address in the specified range
 ;	genIpush
 	push	ar2
@@ -3383,7 +3374,7 @@ _main:
 	mov	a,#0x100 - 0x08
 	add	a,r7
 	jc	00237$
-;	Peephole 300	removed redundant label 00510$
+;	Peephole 300	removed redundant label 00514$
 ;	main.c:308: flag=1;
 ;	genAssign
 	mov	dptr,#_main_flag_1_1
@@ -3428,7 +3419,7 @@ _main:
 ;	genIfxJump
 ;	Peephole 108.c	removed ljmp by inverse jump logic
 	jz	00239$
-;	Peephole 300	removed redundant label 00511$
+;	Peephole 300	removed redundant label 00515$
 ;	main.c:317: page=addr/256;          // Calculate PAage block from the address
 ;	genAssign
 	mov	ar6,r4
@@ -3442,9 +3433,9 @@ _main:
 ;	genIfx
 	mov	a,r3
 ;	genIfxJump
-	jnz	00512$
+	jnz	00516$
 	ljmp	00254$
-00512$:
+00516$:
 ;	main.c:323: printf_tiny("\n\n\r Enter Data in Hex in HH format between 00 to FF: ");
 ;	genIpush
 	push	ar2
@@ -3512,7 +3503,7 @@ _main:
 	mov	a,#0x100 - 0x01
 	add	a,r6
 	jc	00243$
-;	Peephole 300	removed redundant label 00513$
+;	Peephole 300	removed redundant label 00517$
 ;	main.c:330: flag=1;
 ;	genAssign
 	mov	dptr,#_main_flag_1_1
@@ -3557,9 +3548,9 @@ _main:
 ;	Peephole 135	removed redundant mov
 	orl	a,r1
 ;	genIfxJump
-	jnz	00514$
+	jnz	00518$
 	ljmp	00245$
-00514$:
+00518$:
 ;	main.c:339: EEPROM_WriteByte((addr-page*256),dat,page);     // Write byte to the specified address
 ;	genAssign
 	mov	ar6,r4
@@ -3581,7 +3572,7 @@ _main:
 	push	ar2
 	lcall	_EEPROM_WriteByte
 	pop	ar2
-	ljmp	00278$
+	ljmp	00284$
 00254$:
 ;	main.c:342: else if(store=='r')
 ;	genCmpEq
@@ -3590,8 +3581,8 @@ _main:
 ;	Peephole 198.b	optimized misc jump sequence
 	cjne	r2,#0x72,00251$
 ;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00515$
-;	Peephole 300	removed redundant label 00516$
+;	Peephole 300	removed redundant label 00519$
+;	Peephole 300	removed redundant label 00520$
 ;	main.c:346: rd=EEPROM_ReadByte((addr-page*256),page);
 ;	genAssign
 	mov	ar3,r4
@@ -3632,16 +3623,16 @@ _main:
 	add	a,#0xfa
 	mov	sp,a
 	pop	ar2
-	ljmp	00278$
+	ljmp	00284$
 00251$:
 ;	main.c:349: else if(store=='l')
 ;	genCmpEq
 ;	gencjneshort
-	cjne	r2,#0x6C,00517$
-	sjmp	00518$
-00517$:
-	ljmp	00278$
-00518$:
+	cjne	r2,#0x6C,00521$
+	sjmp	00522$
+00521$:
+	ljmp	00284$
+00522$:
 ;	main.c:351: rd=EEPROM_ReadByte((addr-page*256),page);
 ;	genAssign
 ;	genCast
@@ -3671,33 +3662,33 @@ _main:
 	push	ar2
 	lcall	_lcd_display
 	pop	ar2
-	ljmp	00278$
-00277$:
+	ljmp	00284$
+00283$:
 ;	main.c:357: else if(store=='h')
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 198.b	optimized misc jump sequence
-	cjne	r2,#0x68,00274$
+	cjne	r2,#0x68,00280$
 ;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00519$
-;	Peephole 300	removed redundant label 00520$
+;	Peephole 300	removed redundant label 00523$
+;	Peephole 300	removed redundant label 00524$
 ;	main.c:359: hex_dump();
 ;	genCall
 	push	ar2
 	lcall	_hex_dump
 	pop	ar2
-	ljmp	00278$
-00274$:
+	ljmp	00284$
+00280$:
 ;	main.c:362: else if(store=='x')
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 198.b	optimized misc jump sequence
-	cjne	r2,#0x78,00271$
+	cjne	r2,#0x78,00277$
 ;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00521$
-;	Peephole 300	removed redundant label 00522$
+;	Peephole 300	removed redundant label 00525$
+;	Peephole 300	removed redundant label 00526$
 ;	main.c:364: io_counter=0;
 ;	genAssign
 	mov	dptr,#_io_counter
@@ -3712,35 +3703,33 @@ _main:
 	push	ar2
 	lcall	_io_cnt
 	pop	ar2
-;	Peephole 112.b	changed ljmp to sjmp
-	sjmp	00278$
-00271$:
+	ljmp	00284$
+00277$:
 ;	main.c:369: else if(store=='i')
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 198.b	optimized misc jump sequence
-	cjne	r2,#0x69,00268$
+	cjne	r2,#0x69,00274$
 ;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00523$
-;	Peephole 300	removed redundant label 00524$
+;	Peephole 300	removed redundant label 00527$
+;	Peephole 300	removed redundant label 00528$
 ;	main.c:371: io_exp_dir();
 ;	genCall
 	push	ar2
 	lcall	_io_exp_dir
 	pop	ar2
-;	Peephole 112.b	changed ljmp to sjmp
-	sjmp	00278$
-00268$:
+	ljmp	00284$
+00274$:
 ;	main.c:376: else if(store=='s')
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 198.b	optimized misc jump sequence
-	cjne	r2,#0x73,00265$
+	cjne	r2,#0x73,00271$
 ;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00525$
-;	Peephole 300	removed redundant label 00526$
+;	Peephole 300	removed redundant label 00529$
+;	Peephole 300	removed redundant label 00530$
 ;	main.c:378: printf_tiny("\n\n\r\t Current Status of the IO_Expander pins is: 0x%x\n\n\r",IOEX_ReadByte());
 ;	genCall
 	push	ar2
@@ -3765,34 +3754,34 @@ _main:
 	mov	sp,a
 	pop	ar2
 ;	Peephole 112.b	changed ljmp to sjmp
-	sjmp	00278$
-00265$:
+	sjmp	00284$
+00271$:
 ;	main.c:383: else if(store=='9')
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 198.b	optimized misc jump sequence
-	cjne	r2,#0x39,00262$
+	cjne	r2,#0x39,00268$
 ;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00527$
-;	Peephole 300	removed redundant label 00528$
+;	Peephole 300	removed redundant label 00531$
+;	Peephole 300	removed redundant label 00532$
 ;	main.c:385: logo_creator();
 ;	genCall
 	push	ar2
 	lcall	_logo_creator
 	pop	ar2
 ;	Peephole 112.b	changed ljmp to sjmp
-	sjmp	00278$
-00262$:
+	sjmp	00284$
+00268$:
 ;	main.c:389: else if(store=='y')
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 198.b	optimized misc jump sequence
-	cjne	r2,#0x79,00278$
+	cjne	r2,#0x79,00265$
 ;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00529$
-;	Peephole 300	removed redundant label 00530$
+;	Peephole 300	removed redundant label 00533$
+;	Peephole 300	removed redundant label 00534$
 ;	main.c:391: printf_tiny("\n\n\n\rWatchdog RESET Demo");
 ;	genIpush
 	mov	a,#__str_53
@@ -3810,17 +3799,49 @@ _main:
 00257$:
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00257$
-00278$:
-;	main.c:398: if(store=='m')
+00265$:
+;	main.c:397: else if(store=='t')
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 198.b	optimized misc jump sequence
-	cjne	r2,#0x6D,00282$
+	cjne	r2,#0x74,00262$
 ;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00531$
-;	Peephole 300	removed redundant label 00532$
-;	main.c:400: printf_tiny("\n\n\r\t\t\t\t\t******** Clock Control Commands ********\n\n\r\t1. Stop Clock \t\t\t\t\t\t2. Restart Clock \t\t\t3. Reset Clock\n\r\t4. Select Count-Down Timer and Value \t\t\t5. Timer Enable \t\t\t6. Timer Disable ");
+;	Peephole 300	removed redundant label 00535$
+;	Peephole 300	removed redundant label 00536$
+;	main.c:400: eeprom_profile();
+;	genCall
+	push	ar2
+	lcall	_eeprom_profile
+	pop	ar2
+;	Peephole 112.b	changed ljmp to sjmp
+	sjmp	00284$
+00262$:
+;	main.c:405: else if(store=='b')
+;	genCmpEq
+;	gencjneshort
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 198.b	optimized misc jump sequence
+	cjne	r2,#0x62,00284$
+;	Peephole 200.b	removed redundant sjmp
+;	Peephole 300	removed redundant label 00537$
+;	Peephole 300	removed redundant label 00538$
+;	main.c:407: eeprom_block_fill();
+;	genCall
+	push	ar2
+	lcall	_eeprom_block_fill
+	pop	ar2
+00284$:
+;	main.c:412: if(store=='m')
+;	genCmpEq
+;	gencjneshort
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 198.b	optimized misc jump sequence
+	cjne	r2,#0x6D,00288$
+;	Peephole 200.b	removed redundant sjmp
+;	Peephole 300	removed redundant label 00539$
+;	Peephole 300	removed redundant label 00540$
+;	main.c:414: printf_tiny("\n\n\r\t\t\t\t\t******** Clock Control Commands ********\n\n\r\t1. Stop Clock \t\t\t\t\t\t2. Restart Clock \t\t\t3. Reset Clock\n\r\t4. Select Count-Down Timer and Value \t\t\t5. Timer Enable \t\t\t6. Timer Disable ");
 ;	genIpush
 	mov	a,#__str_4
 	push	acc
@@ -3830,7 +3851,7 @@ _main:
 	lcall	_printf_tiny
 	dec	sp
 	dec	sp
-;	main.c:401: printf_tiny("\n\n\n\r\t\t\t\t\t******** LCD Commands ********\n\n\r\t7. Create Custom Character\t\t\t8. Display Custom Character\t\t\t'c'. CGRAM Dump\t\t\t'd'. DDRAM Dump\n\r\t'l'. LCD Display\t\t\t\t'q'. Clear LCD Display");
+;	main.c:415: printf_tiny("\n\n\n\r\t\t\t\t\t******** LCD Commands ********\n\n\r\t7. Create Custom Character\t\t\t8. Display Custom Character\t\t\t'c'. CGRAM Dump\t\t\t'd'. DDRAM Dump\n\r\t'l'. LCD Display\t\t\t\t'q'. Clear LCD Display");
 ;	genIpush
 	mov	a,#__str_54
 	push	acc
@@ -3840,7 +3861,7 @@ _main:
 	lcall	_printf_tiny
 	dec	sp
 	dec	sp
-;	main.c:402: printf_tiny("\n\n\n\r\t\t\t\t\t******** IO Expander Control Commands ********\n\n\r\t'x'. Reset Counter\t\t\t\t'i'. Configure IO Pins\t\t\t\t's'. Status of IO_Expander");
+;	main.c:416: printf_tiny("\n\n\n\r\t\t\t\t\t******** IO Expander Control Commands ********\n\n\r\t'x'. Reset Counter\t\t\t\t'i'. Configure IO Pins\t\t\t\t's'. Status of IO_Expander");
 ;	genIpush
 	mov	a,#__str_6
 	push	acc
@@ -3850,7 +3871,7 @@ _main:
 	lcall	_printf_tiny
 	dec	sp
 	dec	sp
-;	main.c:403: printf_tiny("\n\n\n\r\t\t\t\t\t******** EEPROM Control Commands ******** \n\n\r\t'w'. EEPROM Write \t\t\t'r'. EEPROM Read \t\t\t\t'h'. HEX Dump\t\n\r\t");
+;	main.c:417: printf_tiny("\n\n\n\r\t\t\t\t\t******** EEPROM Control Commands ******** \n\n\r\t'w'. EEPROM Write \t\t\t'r'. EEPROM Read \t\t\t\t'h'. HEX Dump\t\n\r\t");
 ;	genIpush
 	mov	a,#__str_7
 	push	acc
@@ -3860,7 +3881,7 @@ _main:
 	lcall	_printf_tiny
 	dec	sp
 	dec	sp
-;	main.c:404: printf_tiny("\n\n\r\t\t\t\t\t******** Demo Commands ******** \n\n\r\t'y'. Watchdog Demo \t\t\t'9'. LOGO Creation Demo ");
+;	main.c:418: printf_tiny("\n\n\r\t\t\t\t\t******** Demo Commands ******** \n\n\r\t'y'. Watchdog Demo \t\t\t'9'. LOGO Creation Demo \t\t\t't'EEPROM Time Measure\n\r\t'b'. EEPROM Block Fill ");
 ;	genIpush
 	mov	a,#__str_8
 	push	acc
@@ -3870,8 +3891,8 @@ _main:
 	lcall	_printf_tiny
 	dec	sp
 	dec	sp
-00282$:
-;	main.c:407: printf_tiny("\n\n\r\t Press 'm' to see the Menu again or Press Command Key:\t");
+00288$:
+;	main.c:421: printf_tiny("\n\n\r\t Press 'm' to see the Menu again or Press Command Key:\t");
 ;	genIpush
 	mov	a,#__str_55
 	push	acc
@@ -3881,30 +3902,14 @@ _main:
 	lcall	_printf_tiny
 	dec	sp
 	dec	sp
-	ljmp	00289$
-00286$:
-;	genIfx
-;	genIfxJump
-	jnb	_EA,00533$
-	ljmp	00289$
-00533$:
-;	main.c:414: WDTPRG |=0x07;
-;	genOr
-	orl	_WDTPRG,#0x07
-;	main.c:415: WDTRST = 0x01E;
-;	genAssign
-	mov	_WDTRST,#0x1E
-;	main.c:416: WDTRST = 0x0E1;
-;	genAssign
-	mov	_WDTRST,#0xE1
-	ljmp	00289$
-;	Peephole 259.b	removed redundant label 00307$ and ret
+	ljmp	00292$
+;	Peephole 259.b	removed redundant label 00310$ and ret
 ;
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'ext_zero'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:438: void ext_zero() interrupt 0
+;	main.c:447: void ext_zero() interrupt 0
 ;	-----------------------------------------
 ;	 function ext_zero
 ;	-----------------------------------------
@@ -3923,7 +3928,7 @@ _ext_zero:
 	push	(0+1)
 	push	psw
 	mov	psw,#0x00
-;	main.c:441: io_counter++;
+;	main.c:450: io_counter++;               // Increament the counter after every button press
 ;	genAssign
 	mov	dptr,#_io_counter
 	movx	a,@dptr
@@ -3944,7 +3949,7 @@ _ext_zero:
 	addc	a,r3
 	inc	dptr
 	movx	@dptr,a
-;	main.c:442: if(io_counter==32)
+;	main.c:451: if(io_counter==16)          // After 16 counts reet the counter to 0;
 ;	genAssign
 	mov	dptr,#_io_counter
 	movx	a,@dptr
@@ -3956,12 +3961,12 @@ _ext_zero:
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 198.a	optimized misc jump sequence
-	cjne	r2,#0x20,00102$
+	cjne	r2,#0x10,00102$
 	cjne	r3,#0x00,00102$
 ;	Peephole 200.b	removed redundant sjmp
 ;	Peephole 300	removed redundant label 00109$
 ;	Peephole 300	removed redundant label 00110$
-;	main.c:444: io_counter=0;
+;	main.c:453: io_counter=0;
 ;	genAssign
 	mov	dptr,#_io_counter
 	clr	a
@@ -3969,7 +3974,7 @@ _ext_zero:
 	inc	dptr
 	movx	@dptr,a
 00102$:
-;	main.c:446: if(io_counter%2==0){io_cnt(io_counter/2);}
+;	main.c:455: if(io_counter%2==0){io_cnt(io_counter/2);}
 ;	genAssign
 	mov	dptr,#_io_counter
 	movx	a,@dptr
@@ -4019,7 +4024,7 @@ _ext_zero:
 ;sloc1                     Allocated with name '_timer_isr_sloc1_1_0'
 ;i                         Allocated with name '_timer_isr_i_1_1'
 ;------------------------------------------------------------
-;	main.c:461: void timer_isr() interrupt 1
+;	main.c:470: void timer_isr() interrupt 1
 ;	-----------------------------------------
 ;	 function timer_isr
 ;	-----------------------------------------
@@ -4038,7 +4043,7 @@ _timer_isr:
 	push	(0+1)
 	push	psw
 	mov	psw,#0x00
-;	main.c:464: flag++;
+;	main.c:473: flag++;
 ;	genAssign
 	mov	dptr,#_flag
 	movx	a,@dptr
@@ -4050,7 +4055,7 @@ _timer_isr:
 ;	Peephole 236.a	used r2 instead of ar2
 	add	a,r2
 	movx	@dptr,a
-;	main.c:465: timers=cnt[0]+cnt[1]+cnt[2];
+;	main.c:474: timers=cnt[0]+cnt[1]+cnt[2];            // Calculate how many counters are running curently
 ;	genPointerGet
 ;	genFarPointerGet
 	mov	dptr,#_cnt
@@ -4105,7 +4110,7 @@ _timer_isr:
 	addc	a,r3
 	inc	dptr
 	movx	@dptr,a
-;	main.c:467: if(flag==2)
+;	main.c:476: if(flag==2)                             // Interrupt occurs every 50 ms , so for 100ms accuracy flag is compared with 2
 ;	genAssign
 	mov	dptr,#_flag
 	movx	a,@dptr
@@ -4117,16 +4122,16 @@ _timer_isr:
 00149$:
 	ljmp	00118$
 00150$:
-;	main.c:470: clock_control();
+;	main.c:479: clock_control();                    // Clock control for displaying clock
 ;	genCall
 	lcall	_clock_control
-;	main.c:471: flag=0;
+;	main.c:480: flag=0;
 ;	genAssign
 	mov	dptr,#_flag
 ;	Peephole 181	changed mov to clr
 	clr	a
 	movx	@dptr,a
-;	main.c:473: for(i=0;i<3;i++)
+;	main.c:482: for(i=0;i<3;i++)
 ;	genAssign
 	mov	r2,#0x00
 	mov	r3,#0x00
@@ -4143,7 +4148,7 @@ _timer_isr:
 	jc	00151$
 	ljmp	00118$
 00151$:
-;	main.c:476: if(cnt[i]==1)
+;	main.c:485: if(cnt[i]==1)                              // Checking status of 3 counters, IF they are enabed then start decrementing the counter
 ;	genPlus
 ;	Peephole 236.g	used r2 instead of ar2
 	mov	a,r2
@@ -4164,7 +4169,7 @@ _timer_isr:
 00152$:
 	ljmp	00130$
 00153$:
-;	main.c:479: if(nms[i]==0)
+;	main.c:488: if(nms[i]==0)                           // decreament millisec from 10 to 0
 ;	genLeftShift
 ;	genLeftShiftLiteral
 ;	genlshTwo
@@ -4200,7 +4205,7 @@ _timer_isr:
 ;	Peephole 108.b	removed ljmp by inverse jump logic
 	jnz	00105$
 ;	Peephole 300	removed redundant label 00154$
-;	main.c:481: nms[i]=9;
+;	main.c:490: nms[i]=9;
 ;	genPointerSet
 ;     genFarPointerSet
 	mov	dpl,r6
@@ -4211,7 +4216,7 @@ _timer_isr:
 ;	Peephole 181	changed mov to clr
 	clr	a
 	movx	@dptr,a
-;	main.c:482: if(nsec[i]>0){nsec[i]--;}else{nsec[i]=0;}
+;	main.c:491: if(nsec[i]>0){nsec[i]--;}else{nsec[i]=0;}
 ;	genPlus
 ;	Peephole 236.g	used r4 instead of ar4
 	mov	a,r4
@@ -4266,7 +4271,7 @@ _timer_isr:
 ;	Peephole 101	removed redundant mov
 	movx	@dptr,a
 00105$:
-;	main.c:484: if(nsec[i]==00)
+;	main.c:493: if(nsec[i]==00)
 ;	genPlus
 ;	Peephole 236.g	used r4 instead of ar4
 	mov	a,r4
@@ -4292,7 +4297,7 @@ _timer_isr:
 ;	Peephole 108.b	removed ljmp by inverse jump logic
 	jnz	00110$
 ;	Peephole 300	removed redundant label 00157$
-;	main.c:486: nsec[i]=59;
+;	main.c:495: nsec[i]=59;                            // decreament sec from 59 to 0
 ;	genPointerSet
 ;     genFarPointerSet
 	mov	dpl,r6
@@ -4303,7 +4308,7 @@ _timer_isr:
 ;	Peephole 181	changed mov to clr
 	clr	a
 	movx	@dptr,a
-;	main.c:487: if(nmi[i]>0){nmi[i]--;}
+;	main.c:496: if(nmi[i]>0){nmi[i]--;}
 ;	genPlus
 ;	Peephole 236.g	used r4 instead of ar4
 	mov	a,r4
@@ -4355,7 +4360,7 @@ _timer_isr:
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00110$
 00107$:
-;	main.c:488: else{nmi[i]=0;nms[i]=0; nsec[i]=0;}
+;	main.c:497: else{nmi[i]=0;nms[i]=0; nsec[i]=0;}
 ;	genPointerSet
 ;     genFarPointerSet
 	mov	dpl,r0
@@ -4394,7 +4399,7 @@ _timer_isr:
 ;	Peephole 101	removed redundant mov
 	movx	@dptr,a
 00110$:
-;	main.c:490: if(nmi[i]==0 &&nms[i]==0 && nsec[i]==0)
+;	main.c:499: if(nmi[i]==0 &&nms[i]==0 && nsec[i]==0)      // If all of them reaches to zero then disble the counter and display the alarm
 ;	genPlus
 ;	Peephole 236.g	used r4 instead of ar4
 	mov	a,r4
@@ -4464,7 +4469,7 @@ _timer_isr:
 ;	Peephole 108.b	removed ljmp by inverse jump logic
 	jnz	00112$
 ;	Peephole 300	removed redundant label 00161$
-;	main.c:492: cnt[i]=0;
+;	main.c:501: cnt[i]=0;
 ;	genPlus
 ;	Peephole 236.g	used r2 instead of ar2
 	mov	a,r2
@@ -4480,7 +4485,7 @@ _timer_isr:
 	clr	a
 	movx	@dptr,a
 00112$:
-;	main.c:494: countdown_alarm(nms[i],nsec[i],nmi[i],cnt[i],i);
+;	main.c:503: countdown_alarm(nms[i],nsec[i],nmi[i],cnt[i],i);
 ;	genPlus
 ;	Peephole 236.g	used r4 instead of ar4
 	mov	a,r4
@@ -4579,7 +4584,7 @@ _timer_isr:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	main.c:496: nms[i]--;
+;	main.c:505: nms[i]--;
 ;	genPlus
 ;	Peephole 236.g	used r4 instead of ar4
 	mov	a,r4
@@ -4614,7 +4619,7 @@ _timer_isr:
 	mov	a,r7
 	movx	@dptr,a
 00130$:
-;	main.c:473: for(i=0;i<3;i++)
+;	main.c:482: for(i=0;i<3;i++)
 ;	genPlus
 ;     genPlusIncr
 	inc	r2
@@ -4623,7 +4628,7 @@ _timer_isr:
 00163$:
 	ljmp	00128$
 00118$:
-;	main.c:502: if(timers==3)
+;	main.c:511: if(timers==3)                                   // Dynamically adjust the timing of the interrupt by keeping track of how many timers are active currently
 ;	genAssign
 	mov	dptr,#_timers
 	movx	a,@dptr
@@ -4640,7 +4645,7 @@ _timer_isr:
 ;	Peephole 200.b	removed redundant sjmp
 ;	Peephole 300	removed redundant label 00164$
 ;	Peephole 300	removed redundant label 00165$
-;	main.c:503: {TH0 =   0xBF; TL0 =   0x75;}
+;	main.c:512: {TH0 =   0xBF; TL0 =   0x75;}
 ;	genAssign
 	mov	_TH0,#0xBF
 ;	genAssign
@@ -4648,7 +4653,7 @@ _timer_isr:
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00132$
 00126$:
-;	main.c:504: else if(timers==2){TH0 =   0xB5; TL0 =   0x00;}
+;	main.c:513: else if(timers==2){TH0 =   0xB5; TL0 =   0x00;}
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
@@ -4665,7 +4670,7 @@ _timer_isr:
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00132$
 00123$:
-;	main.c:505: else if(timers==1){TH0 =   0x90;  TL0 =   0x00;}
+;	main.c:514: else if(timers==1){TH0 =   0x90;  TL0 =   0x00;}
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
@@ -4682,10 +4687,10 @@ _timer_isr:
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00132$
 00120$:
-;	main.c:508: TH0 =   0x6F;
+;	main.c:517: TH0 =   0x6F;
 ;	genAssign
 	mov	_TH0,#0x6F
-;	main.c:509: TL0 =   0x00;
+;	main.c:518: TL0 =   0x00;
 ;	genAssign
 	mov	_TL0,#0x00
 00132$:
@@ -4874,6 +4879,15 @@ __str_8:
 	.db 0x09
 	.db 0x09
 	.ascii "'9'. LOGO Creation Demo "
+	.db 0x09
+	.db 0x09
+	.db 0x09
+	.ascii "'t'EEPROM Time Measure"
+	.db 0x0A
+	.db 0x0D
+	.db 0x09
+	.ascii "'b"
+	.ascii "'. EEPROM Block Fill "
 	.db 0x00
 __str_9:
 	.db 0x0A

@@ -19,6 +19,8 @@ Git Link:   https://github.com/gauravgandhi70/ESD/tree/master/Lab4*/
 #include"clock.h"
 #include"data_dump.h"
 #include"io_exp.h"
+#include"profile.h"
+
 
 
 // Ue of Global Variables for the Timer interrupt for the clock
@@ -83,7 +85,7 @@ void main(void)
    printf_tiny("\n\n\n\r\t\t\t\t\t******** LCD Commands ********\n\n\r\t7. Create Custom Character\t\t\t8. Display Custom Character\t\t\t'c'. CGRAM Dump\t\t\t'd'. DDRAM Dump\n\r\t'l'.EEPROM Content on LCD Display\t\t'q'. Clear LCD Display");
    printf_tiny("\n\n\n\r\t\t\t\t\t******** IO Expander Control Commands ********\n\n\r\t'x'. Reset Counter\t\t\t\t'i'. Configure IO Pins\t\t\t\t's'. Status of IO_Expander");
    printf_tiny("\n\n\n\r\t\t\t\t\t******** EEPROM Control Commands ******** \n\n\r\t'w'. EEPROM Write \t\t\t'r'. EEPROM Read \t\t\t\t'h'. HEX Dump\t\n\r\t");
-   printf_tiny("\n\n\r\t\t\t\t\t******** Demo Commands ******** \n\n\r\t'y'. Watchdog Demo \t\t\t'9'. LOGO Creation Demo ");
+    printf_tiny("\n\n\r\t\t\t\t\t******** Demo Commands ******** \n\n\r\t'y'. Watchdog Demo \t\t\t'9'. LOGO Creation Demo \t\t\t't'EEPROM Time Measure\n\r\t'b'. EEPROM Block Fill ");
     while(1)
     {
         // If any character is recieved then ACT on it
@@ -127,9 +129,7 @@ void main(void)
             // For '3' Command ; Reset the Clock to 0.0.0, Reset the atchdog timer also for avoiding RESET
             else if(store=='3')
             {
-                WDTPRG |=0x07;
-                WDTRST = 0x01E;
-                WDTRST = 0x0E1;
+
                clock_reset();
             }
 
@@ -394,6 +394,20 @@ void main(void)
 
            }
 
+           else if(store=='t')
+           {
+
+                eeprom_profile();
+
+           }
+
+
+           else if(store=='b')
+           {
+                eeprom_block_fill();
+           }
+
+
             // Command m is used for printing the menu if user wants
             if(store=='m')
             {
@@ -401,7 +415,7 @@ void main(void)
             printf_tiny("\n\n\n\r\t\t\t\t\t******** LCD Commands ********\n\n\r\t7. Create Custom Character\t\t\t8. Display Custom Character\t\t\t'c'. CGRAM Dump\t\t\t'd'. DDRAM Dump\n\r\t'l'. LCD Display\t\t\t\t'q'. Clear LCD Display");
             printf_tiny("\n\n\n\r\t\t\t\t\t******** IO Expander Control Commands ********\n\n\r\t'x'. Reset Counter\t\t\t\t'i'. Configure IO Pins\t\t\t\t's'. Status of IO_Expander");
             printf_tiny("\n\n\n\r\t\t\t\t\t******** EEPROM Control Commands ******** \n\n\r\t'w'. EEPROM Write \t\t\t'r'. EEPROM Read \t\t\t\t'h'. HEX Dump\t\n\r\t");
-            printf_tiny("\n\n\r\t\t\t\t\t******** Demo Commands ******** \n\n\r\t'y'. Watchdog Demo \t\t\t'9'. LOGO Creation Demo ");
+            printf_tiny("\n\n\r\t\t\t\t\t******** Demo Commands ******** \n\n\r\t'y'. Watchdog Demo \t\t\t'9'. LOGO Creation Demo \t\t\t't'EEPROM Time Measure\n\r\t'b'. EEPROM Block Fill ");
             }
 
             printf_tiny("\n\n\r\t Press 'm' to see the Menu again or Press Command Key:\t");
@@ -409,12 +423,7 @@ void main(void)
        }
 
        // If clock is stopped the this routine is executed to avoid watchdog reset
-       else if(EA==0)
-        {
-        WDTPRG |=0x07;
-        WDTRST = 0x01E;
-        WDTRST = 0x0E1;
-        }
+
 
     }
 
@@ -438,8 +447,8 @@ void main(void)
 void ext_zero() interrupt 0
 {
 
-    io_counter++;
-    if(io_counter==32)
+    io_counter++;               // Increament the counter after every button press
+    if(io_counter==16)          // After 16 counts reet the counter to 0;
     {
         io_counter=0;
     }
@@ -462,32 +471,32 @@ void timer_isr() interrupt 1
 {
     int i;
     flag++;
-    timers=cnt[0]+cnt[1]+cnt[2];
+    timers=cnt[0]+cnt[1]+cnt[2];            // Calculate how many counters are running curently
 
-    if(flag==2)
+    if(flag==2)                             // Interrupt occurs every 50 ms , so for 100ms accuracy flag is compared with 2
     {
 
-        clock_control();
+        clock_control();                    // Clock control for displaying clock
         flag=0;
 
         for(i=0;i<3;i++)
         {
 
-        if(cnt[i]==1)
+        if(cnt[i]==1)                              // Checking status of 3 counters, IF they are enabed then start decrementing the counter
         {
 
-            if(nms[i]==0)
+            if(nms[i]==0)                           // decreament millisec from 10 to 0
             {
                 nms[i]=9;
                 if(nsec[i]>0){nsec[i]--;}else{nsec[i]=0;}
             }
             if(nsec[i]==00)
             {
-                nsec[i]=59;
+                nsec[i]=59;                            // decreament sec from 59 to 0
                 if(nmi[i]>0){nmi[i]--;}
                 else{nmi[i]=0;nms[i]=0; nsec[i]=0;}
             }
-            if(nmi[i]==0 &&nms[i]==0 && nsec[i]==0)
+            if(nmi[i]==0 &&nms[i]==0 && nsec[i]==0)      // If all of them reaches to zero then disble the counter and display the alarm
             {
                 cnt[i]=0;
             }
@@ -499,7 +508,7 @@ void timer_isr() interrupt 1
         }
     }
 
-    if(timers==3)
+    if(timers==3)                                   // Dynamically adjust the timing of the interrupt by keeping track of how many timers are active currently
     {TH0 =   0xBF; TL0 =   0x75;}
     else if(timers==2){TH0 =   0xB5; TL0 =   0x00;}
     else if(timers==1){TH0 =   0x90;  TL0 =   0x00;}

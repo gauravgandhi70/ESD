@@ -384,60 +384,60 @@ Symbol Table
  14 __sdcc_program_startup                                         0000 GR
   5 __start__stack                                                 0000 GR
  15 __str_1                                                        0000 R
- 15 __str_10                                                       0303 R
- 15 __str_11                                                       0327 R
- 15 __str_12                                                       0349 R
- 15 __str_13                                                       0371 R
- 15 __str_14                                                       0394 R
- 15 __str_15                                                       03B8 R
- 15 __str_16                                                       03DF R
- 15 __str_17                                                       0403 R
- 15 __str_18                                                       042B R
- 15 __str_19                                                       0457 R
+ 15 __str_10                                                       0336 R
+ 15 __str_11                                                       035A R
+ 15 __str_12                                                       037C R
+ 15 __str_13                                                       03A4 R
+ 15 __str_14                                                       03C7 R
+ 15 __str_15                                                       03EB R
+ 15 __str_16                                                       0412 R
+ 15 __str_17                                                       0436 R
+ 15 __str_18                                                       045E R
+ 15 __str_19                                                       048A R
  15 __str_2                                                        0008 R
- 15 __str_20                                                       047A R
- 15 __str_21                                                       049C R
- 15 __str_22                                                       04BD R
- 15 __str_23                                                       04DE R
- 15 __str_24                                                       04FD R
- 15 __str_25                                                       051F R
- 15 __str_26                                                       053F R
- 15 __str_27                                                       056A R
- 15 __str_28                                                       059F R
- 15 __str_29                                                       05D0 R
+ 15 __str_20                                                       04AD R
+ 15 __str_21                                                       04CF R
+ 15 __str_22                                                       04F0 R
+ 15 __str_23                                                       0511 R
+ 15 __str_24                                                       0530 R
+ 15 __str_25                                                       0552 R
+ 15 __str_26                                                       0572 R
+ 15 __str_27                                                       059D R
+ 15 __str_28                                                       05D2 R
+ 15 __str_29                                                       0603 R
  15 __str_3                                                        000E R
- 15 __str_30                                                       0606 R
- 15 __str_31                                                       0637 R
- 15 __str_32                                                       0667 R
- 15 __str_33                                                       069C R
- 15 __str_34                                                       06C7 R
- 15 __str_35                                                       06CA R
- 15 __str_36                                                       06F5 R
- 15 __str_37                                                       06FE R
- 15 __str_38                                                       0712 R
- 15 __str_39                                                       073F R
+ 15 __str_30                                                       0639 R
+ 15 __str_31                                                       066A R
+ 15 __str_32                                                       069A R
+ 15 __str_33                                                       06CF R
+ 15 __str_34                                                       06FA R
+ 15 __str_35                                                       06FD R
+ 15 __str_36                                                       0728 R
+ 15 __str_37                                                       0731 R
+ 15 __str_38                                                       0745 R
+ 15 __str_39                                                       0772 R
  15 __str_4                                                        0011 R
- 15 __str_40                                                       0774 R
- 15 __str_41                                                       07AE R
- 15 __str_42                                                       07CB R
- 15 __str_43                                                       0815 R
- 15 __str_44                                                       0826 R
- 15 __str_45                                                       0833 R
- 15 __str_46                                                       0836 R
- 15 __str_47                                                       086E R
- 15 __str_48                                                       08AA R
- 15 __str_49                                                       08EA R
+ 15 __str_40                                                       07A7 R
+ 15 __str_41                                                       07E1 R
+ 15 __str_42                                                       07FE R
+ 15 __str_43                                                       0848 R
+ 15 __str_44                                                       0859 R
+ 15 __str_45                                                       0866 R
+ 15 __str_46                                                       0869 R
+ 15 __str_47                                                       08A1 R
+ 15 __str_48                                                       08DD R
+ 15 __str_49                                                       091D R
  15 __str_5                                                        00CB R
- 15 __str_50                                                       0920 R
- 15 __str_51                                                       096E R
- 15 __str_52                                                       097E R
- 15 __str_53                                                       09B6 R
- 15 __str_54                                                       09CE R
- 15 __str_55                                                       0A83 R
+ 15 __str_50                                                       0953 R
+ 15 __str_51                                                       09A1 R
+ 15 __str_52                                                       09B1 R
+ 15 __str_53                                                       09E9 R
+ 15 __str_54                                                       0A01 R
+ 15 __str_55                                                       0AB6 R
  15 __str_6                                                        018F R
  15 __str_7                                                        0215 R
  15 __str_8                                                        0288 R
- 15 __str_9                                                        02E3 R
+ 15 __str_9                                                        0316 R
  16 __xinit__flag                                                  0000 R
  16 __xinit__timers                                                0001 R
     _atob                                                          **** GX
@@ -453,8 +453,10 @@ Symbol Table
     _countdown_alarm_PARM_4                                        **** GX
     _countdown_alarm_PARM_5                                        **** GX
     _delay_ms                                                      **** GX
+    _eeprom_block_fill                                             **** GX
+    _eeprom_profile                                                **** GX
     _eereset                                                       **** GX
- 14 _ext_zero                                                      0FED GR
+ 14 _ext_zero                                                      0FE7 GR
   A _flag                                                          0000 GR
     _getchar                                                       **** GX
     _gets                                                          **** GX
@@ -496,7 +498,7 @@ Symbol Table
     _putchar                                                       **** GX
   9 _sec                                                           0001 GR
     _timer_init                                                    **** GX
- 14 _timer_isr                                                     1067 GR
+ 14 _timer_isr                                                     1061 GR
   3 _timer_isr_sloc0_1_0                                           0004 R
   3 _timer_isr_sloc1_1_0                                           0006 R
   A _timers                                                        0001 GR
@@ -702,6 +704,6 @@ Area Table
   11 GSINIT5                                                                            size    0   flags 20
   12 GSINIT                                                                             size    0   flags 20
   13 GSFINAL                                                                            size    3   flags 20
-  14 CSEG                                                                               size 12EC   flags 20
-  15 CONST                                                                              size  ABF   flags 20
+  14 CSEG                                                                               size 12E6   flags 20
+  15 CONST                                                                              size  AF2   flags 20
   16 XINIT                                                                              size    3   flags 20

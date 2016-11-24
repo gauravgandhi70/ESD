@@ -25,7 +25,8 @@ void delay_ms(unsigned int ms)
         while(ms!=0)
 		 {
 	        delay_us(112);	 //delay_us is called to generate 1ms delay
-			 ms--;
+            ms--;
+
 			}
 
    }

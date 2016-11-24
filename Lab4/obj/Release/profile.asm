@@ -1,9 +1,9 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.6.0 #4309 (Jul 28 2006)
-; This file generated Sun Nov 20 00:51:32 2016
+; This file generated Thu Nov 24 04:45:34 2016
 ;--------------------------------------------------------
-	.module uart
+	.module profile
 	.optsdcc -mmcs51 --model-large
 	
 ;--------------------------------------------------------
@@ -205,9 +205,10 @@
 	.globl _DPL
 	.globl _SP
 	.globl _P0
-	.globl _putchar
-	.globl _getchar
-	.globl _uart_init
+	.globl _mi
+	.globl _sec
+	.globl _ms
+	.globl _eeprom_profile
 ;--------------------------------------------------------
 ; special function registers
 ;--------------------------------------------------------
@@ -441,8 +442,16 @@ _P5_7	=	0x00df
 ; external ram data
 ;--------------------------------------------------------
 	.area XSEG    (XDATA)
-_putchar_c_1_1:
+_ms::
 	.ds 1
+_sec::
+	.ds 1
+_mi::
+	.ds 1
+_eeprom_profile_d_1_1:
+	.ds 16
+_eeprom_profile_c_1_1:
+	.ds 4
 ;--------------------------------------------------------
 ; external initialized ram data
 ;--------------------------------------------------------
@@ -474,15 +483,18 @@ _putchar_c_1_1:
 ;--------------------------------------------------------
 	.area CSEG    (CODE)
 ;------------------------------------------------------------
-;Allocation info for local variables in function 'putchar'
+;Allocation info for local variables in function 'eeprom_profile'
 ;------------------------------------------------------------
-;c                         Allocated with name '_putchar_c_1_1'
+;i                         Allocated with name '_eeprom_profile_i_1_1'
+;d                         Allocated with name '_eeprom_profile_d_1_1'
+;c                         Allocated with name '_eeprom_profile_c_1_1'
+;num                       Allocated with name '_eeprom_profile_num_1_1'
 ;------------------------------------------------------------
-;	uart.c:14: void putchar(char c)											// Putchar function is used to send a single character to the
+;	profile.c:27: void eeprom_profile()
 ;	-----------------------------------------
-;	 function putchar
+;	 function eeprom_profile
 ;	-----------------------------------------
-_putchar:
+_eeprom_profile:
 	ar2 = 0x02
 	ar3 = 0x03
 	ar4 = 0x04
@@ -491,89 +503,303 @@ _putchar:
 	ar7 = 0x07
 	ar0 = 0x00
 	ar1 = 0x01
-;	genReceive
-	mov	a,dpl
-	mov	dptr,#_putchar_c_1_1
+;	profile.c:30: char d[16]="ABCDEFGHIJKLMNOP",c[4];
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#_eeprom_profile_d_1_1
+	mov	a,#0x41
 	movx	@dptr,a
-;	uart.c:16: while (TI==0);												// wait for tx to be ready and send data and clear TI flag
-00101$:
-;	genIfx
-;	genIfxJump
-;	Peephole 108.d	removed ljmp by inverse jump logic
-	jnb	_TI,00101$
-;	Peephole 300	removed redundant label 00108$
-;	uart.c:17: SBUF = c;
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#(_eeprom_profile_d_1_1 + 0x0001)
+	mov	a,#0x42
+	movx	@dptr,a
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#(_eeprom_profile_d_1_1 + 0x0002)
+	mov	a,#0x43
+	movx	@dptr,a
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#(_eeprom_profile_d_1_1 + 0x0003)
+	mov	a,#0x44
+	movx	@dptr,a
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#(_eeprom_profile_d_1_1 + 0x0004)
+	mov	a,#0x45
+	movx	@dptr,a
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#(_eeprom_profile_d_1_1 + 0x0005)
+	mov	a,#0x46
+	movx	@dptr,a
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#(_eeprom_profile_d_1_1 + 0x0006)
+	mov	a,#0x47
+	movx	@dptr,a
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#(_eeprom_profile_d_1_1 + 0x0007)
+	mov	a,#0x48
+	movx	@dptr,a
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#(_eeprom_profile_d_1_1 + 0x0008)
+	mov	a,#0x49
+	movx	@dptr,a
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#(_eeprom_profile_d_1_1 + 0x0009)
+	mov	a,#0x4A
+	movx	@dptr,a
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#(_eeprom_profile_d_1_1 + 0x000a)
+	mov	a,#0x4B
+	movx	@dptr,a
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#(_eeprom_profile_d_1_1 + 0x000b)
+	mov	a,#0x4C
+	movx	@dptr,a
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#(_eeprom_profile_d_1_1 + 0x000c)
+	mov	a,#0x4D
+	movx	@dptr,a
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#(_eeprom_profile_d_1_1 + 0x000d)
+	mov	a,#0x4E
+	movx	@dptr,a
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#(_eeprom_profile_d_1_1 + 0x000e)
+	mov	a,#0x4F
+	movx	@dptr,a
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#(_eeprom_profile_d_1_1 + 0x000f)
+	mov	a,#0x50
+	movx	@dptr,a
+;	profile.c:32: printf_tiny("\n\n\rTiming profiling of the EEPROM, \n\rP1_4 for byte write\n\rP1_5 for page write\n\n\r");
+;	genIpush
+	mov	a,#__str_1
+	push	acc
+	mov	a,#(__str_1 >> 8)
+	push	acc
+;	genCall
+	lcall	_printf_tiny
+	dec	sp
+	dec	sp
+;	profile.c:37: P1_4 = !(P1_4);
+;	genNot
+	cpl	_P1_4
+;	profile.c:38: for(i=0;i<1000;i++)
 ;	genAssign
-	mov	dptr,#_putchar_c_1_1
-	movx	a,@dptr
-	mov	_SBUF,a
-;	uart.c:18: TI = 0;
+	mov	r2,#0x00
+	mov	r3,#0x00
 ;	genAssign
-	clr	_TI
-;	Peephole 300	removed redundant label 00104$
-	ret
-;------------------------------------------------------------
-;Allocation info for local variables in function 'getchar'
-;------------------------------------------------------------
-;------------------------------------------------------------
-;	uart.c:23: char getchar ()													// getchar function is used to recieve a single character from the
-;	-----------------------------------------
-;	 function getchar
-;	-----------------------------------------
-_getchar:
-;	uart.c:25: while (!RI);
-00101$:
-;	genIfx
-;	genIfxJump
-;	Peephole 108.d	removed ljmp by inverse jump logic
-;	uart.c:26: RI = 0;
+	mov	r4,#0xE8
+	mov	r5,#0x03
+00103$:
+;	profile.c:40: EEPROM_WriteByte((num-(num/256)*256),0xAA,num/256);             // Writing 1000 bytes using byte write
+;	genCast
+	mov	ar6,r2
 ;	genAssign
-;	Peephole 250.a	using atomic test and clear
-	jbc	_RI,00108$
-	sjmp	00101$
-00108$:
-;	uart.c:28: return SBUF;
-;	genAssign
-	mov	r2,_SBUF
-;	genRet
+	mov	dptr,#__divsint_PARM_2
+;	Peephole 181	changed mov to clr
+	clr	a
+	movx	@dptr,a
+	inc	dptr
+	mov	a,#0x01
+	movx	@dptr,a
+;	genCall
 	mov	dpl,r2
-;	Peephole 300	removed redundant label 00104$
-	ret
-;------------------------------------------------------------
-;Allocation info for local variables in function 'uart_init'
-;------------------------------------------------------------
-;------------------------------------------------------------
-;	uart.c:33: void uart_init()												// UART initialized
-;	-----------------------------------------
-;	 function uart_init
-;	-----------------------------------------
-_uart_init:
-;	uart.c:35: T2CON=0;
+	mov	dph,r3
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	push	ar6
+	lcall	__divsint
+	mov	r7,dpl
+	mov	r0,dph
+	pop	ar6
+	pop	ar5
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	genCast
 ;	genAssign
-	mov	_T2CON,#0x00
-;	uart.c:36: BDRCON=0;
+	mov	dptr,#_EEPROM_WriteByte_PARM_2
+	mov	a,#0xAA
+	movx	@dptr,a
 ;	genAssign
-	mov	_BDRCON,#0x00
-;	uart.c:37: PCON |= 0x80;
-;	genOr
-	orl	_PCON,#0x80
-;	uart.c:38: TH1  =  0xFF;												// Timer 1 is used in mode 2 auto reload mode
+	mov	dptr,#_EEPROM_WriteByte_PARM_3
+	mov	a,r7
+	movx	@dptr,a
+;	genCall
+	mov	dpl,r6
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	lcall	_EEPROM_WriteByte
+	pop	ar5
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	profile.c:41: num++;
+;	genPlus
+;     genPlusIncr
+	inc	r2
+	cjne	r2,#0x00,00115$
+	inc	r3
+00115$:
+;	genMinus
+;	genMinusDec
+	dec	r4
+	cjne	r4,#0xff,00116$
+	dec	r5
+00116$:
+;	profile.c:38: for(i=0;i<1000;i++)
+;	genIfx
+	mov	a,r4
+	orl	a,r5
+;	genIfxJump
+;	Peephole 108.b	removed ljmp by inverse jump logic
+	jnz	00103$
+;	Peephole 300	removed redundant label 00117$
+;	profile.c:44: P1_4 = !(P1_4);
+;	genNot
+	cpl	_P1_4
+;	profile.c:46: delay_ms(5);
+;	genCall
+;	Peephole 182.b	used 16 bit load of dptr
+	mov	dptr,#0x0005
+	push	ar2
+	push	ar3
+	lcall	_delay_ms
+	pop	ar3
+	pop	ar2
+;	profile.c:48: P1_5 = !(P1_5);
+;	genNot
+	cpl	_P1_5
+;	profile.c:49: for(i=0;i<62;i++)                                                   // 1000/16 = 62
 ;	genAssign
-	mov	_TH1,#0xFF
-;	uart.c:39: TL1  =  0X00;												// Setting baud rate to 9600 by loading FF into TH1
 ;	genAssign
-	mov	_TL1,#0x00
-;	uart.c:40: TCON |= 0x40;
-;	genOr
-	orl	_TCON,#0x40
-;	uart.c:41: SCON |= 0x52;
-;	genOr
-	orl	_SCON,#0x52
-;	uart.c:42: TMOD = 0x20;												// Start timer
+	mov	r4,#0x3E
+	mov	r5,#0x00
+00106$:
+;	profile.c:51: page_write((num-(num/256)*256),num/256,d,16);                        // Writing 1000 bytes using page write
+;	genCast
+	mov	ar6,r2
 ;	genAssign
-	mov	_TMOD,#0x20
-;	Peephole 300	removed redundant label 00101$
+	mov	dptr,#__divsint_PARM_2
+;	Peephole 181	changed mov to clr
+	clr	a
+	movx	@dptr,a
+	inc	dptr
+	mov	a,#0x01
+	movx	@dptr,a
+;	genCall
+	mov	dpl,r2
+	mov	dph,r3
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	push	ar6
+	lcall	__divsint
+	mov	r7,dpl
+	mov	r0,dph
+	pop	ar6
+	pop	ar5
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	genCast
+	mov	dptr,#_page_write_PARM_2
+	mov	a,r7
+	movx	@dptr,a
+;	genCast
+	mov	dptr,#_page_write_PARM_3
+	mov	a,#_eeprom_profile_d_1_1
+	movx	@dptr,a
+	inc	dptr
+	mov	a,#(_eeprom_profile_d_1_1 >> 8)
+	movx	@dptr,a
+	inc	dptr
+	mov	a,#0x0
+	movx	@dptr,a
+;	genAssign
+	mov	dptr,#_page_write_PARM_4
+	mov	a,#0x10
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+;	genCall
+	mov	dpl,r6
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	lcall	_page_write
+	pop	ar5
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	profile.c:52: num+=16;
+;	genPlus
+;     genPlusIncr
+	mov	a,#0x10
+;	Peephole 236.a	used r2 instead of ar2
+	add	a,r2
+	mov	r2,a
+;	Peephole 181	changed mov to clr
+	clr	a
+;	Peephole 236.b	used r3 instead of ar3
+	addc	a,r3
+	mov	r3,a
+;	genMinus
+;	genMinusDec
+	dec	r4
+	cjne	r4,#0xff,00118$
+	dec	r5
+00118$:
+;	profile.c:49: for(i=0;i<62;i++)                                                   // 1000/16 = 62
+;	genIfx
+	mov	a,r4
+	orl	a,r5
+;	genIfxJump
+;	Peephole 108.b	removed ljmp by inverse jump logic
+	jnz	00106$
+;	Peephole 300	removed redundant label 00119$
+;	profile.c:54: P1_5 = !(P1_5);
+;	genNot
+	cpl	_P1_5
+;	Peephole 300	removed redundant label 00107$
 	ret
 	.area CSEG    (CODE)
 	.area CONST   (CODE)
+__str_1:
+	.db 0x0A
+	.db 0x0A
+	.db 0x0D
+	.ascii "Timing profiling of the EEPROM, "
+	.db 0x0A
+	.db 0x0D
+	.ascii "P1_4 for byte write"
+	.db 0x0A
+	.db 0x0D
+	.ascii "P1"
+	.ascii "_5 for page write"
+	.db 0x0A
+	.db 0x0A
+	.db 0x0D
+	.db 0x00
 	.area XINIT   (CODE)

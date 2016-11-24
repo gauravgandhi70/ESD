@@ -24,7 +24,7 @@ char getchar ()													// getchar function is used to recieve a single char
 {																// Terminal																// wait for tx to be ready and send data and clear TI flag
     while (!RI);
 	RI = 0;
-	WDTPRG |=0x07;WDTRST = 0x01E;WDTRST = 0x0E1;
+
 	return SBUF;
 }
 

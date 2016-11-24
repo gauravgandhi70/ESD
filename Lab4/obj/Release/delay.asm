@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.6.0 #4309 (Jul 28 2006)
-; This file generated Tue Nov 15 08:41:24 2016
+; This file generated Sun Nov 20 00:57:56 2016
 ;--------------------------------------------------------
 	.module delay
 	.optsdcc -mmcs51 --model-large
@@ -619,7 +619,7 @@ _delay_ms:
 ;------------------------------------------------------------
 ;sec                       Allocated with name '_delay_sec_sec_1_1'
 ;------------------------------------------------------------
-;	delay.c:39: void delay_sec(unsigned char sec)
+;	delay.c:40: void delay_sec(unsigned char sec)
 ;	-----------------------------------------
 ;	 function delay_sec
 ;	-----------------------------------------
@@ -628,7 +628,7 @@ _delay_sec:
 	mov	a,dpl
 	mov	dptr,#_delay_sec_sec_1_1
 	movx	@dptr,a
-;	delay.c:43: while(sec!=0)
+;	delay.c:44: while(sec!=0)
 ;	genAssign
 	mov	dptr,#_delay_sec_sec_1_1
 	movx	a,@dptr
@@ -640,14 +640,14 @@ _delay_sec:
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00108$
 00109$:
-;	delay.c:45: delay_ms(1000);	//delay_ms is called to generate 1sec delay
+;	delay.c:46: delay_ms(1000);	//delay_ms is called to generate 1sec delay
 ;	genCall
 ;	Peephole 182.b	used 16 bit load of dptr
 	mov	dptr,#0x03E8
 	push	ar2
 	lcall	_delay_ms
 	pop	ar2
-;	delay.c:46: sec--;
+;	delay.c:47: sec--;
 ;	genMinus
 ;	genMinusDec
 	dec	r2

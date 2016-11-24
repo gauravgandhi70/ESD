@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.6.0 #4309 (Jul 28 2006)
-                              4 ; This file generated Wed Nov 16 16:14:44 2016
+                              4 ; This file generated Thu Nov 24 14:58:23 2016
                               5 ;--------------------------------------------------------
                               6 	.module atoh_f
                               7 	.optsdcc -mmcs51 --model-large
@@ -495,7 +495,7 @@
                             495 ;result                    Allocated with name '_atoh_result_1_1'
                             496 ;i                         Allocated with name '_atoh_i_1_1'
                             497 ;------------------------------------------------------------
-                            498 ;	atoh_f.c:18: int atoh(char *c)
+                            498 ;	atoh_f.c:26: int atoh(char *c)
                             499 ;	-----------------------------------------
                             500 ;	 function atoh
                             501 ;	-----------------------------------------
@@ -520,7 +520,7 @@
    0077 A3                  520 	inc	dptr
    0078 EA                  521 	mov	a,r2
    0079 F0                  522 	movx	@dptr,a
-                            523 ;	atoh_f.c:22: if(*(c+3) != '\0')
+                            523 ;	atoh_f.c:30: if(*(c+3) != '\0')                  // Checking if recieved string is 3 digit number
                             524 ;	genAssign
    007A 90 00 00            525 	mov	dptr,#_atoh_c_1_1
    007D E0                  526 	movx	a,@dptr
@@ -548,7 +548,7 @@
    008E 8D 82               548 	mov	dpl,r5
    0090 8E 83               549 	mov	dph,r6
    0092 8F F0               550 	mov	b,r7
-   0094 12 3B E3            551 	lcall	__gptrget
+   0094 12 43 46            551 	lcall	__gptrget
                             552 ;	genCmpEq
                             553 ;	gencjneshort
                             554 ;	Peephole 112.b	changed ljmp to sjmp
@@ -556,20 +556,20 @@
                             556 ;	Peephole 115.b	jump optimization
    0098 60 04               557 	jz	00102$
                             558 ;	Peephole 300	removed redundant label 00148$
-                            559 ;	atoh_f.c:24: return 2100;
+                            559 ;	atoh_f.c:32: return 2100;
                             560 ;	genRet
                             561 ;	Peephole 182.b	used 16 bit load of dptr
    009A 90 08 34            562 	mov	dptr,#0x0834
                             563 ;	Peephole 251.a	replaced ljmp to ret with ret
    009D 22                  564 	ret
    009E                     565 00102$:
-                            566 ;	atoh_f.c:27: if(*(c)>=48 && *(c)<=55 )
+                            566 ;	atoh_f.c:35: if(*(c)>=48 && *(c)<=55 )           // multiply digit at 100th place by 256
                             567 ;	genPointerGet
                             568 ;	genGenPointerGet
    009E 8A 82               569 	mov	dpl,r2
    00A0 8B 83               570 	mov	dph,r3
    00A2 8C F0               571 	mov	b,r4
-   00A4 12 3B E3            572 	lcall	__gptrget
+   00A4 12 43 46            572 	lcall	__gptrget
                             573 ;	genCmpLt
                             574 ;	genCmp
    00A7 FD                  575 	mov	r5,a
@@ -595,7 +595,7 @@
                             595 ;	Peephole 160.a	removed sjmp by inverse jump logic
    00B8 40 28               596 	jc	00104$
                             597 ;	Peephole 300	removed redundant label 00150$
-                            598 ;	atoh_f.c:29: result = (*c-48)*256;
+                            598 ;	atoh_f.c:37: result = (*c-48)*256;
                             599 ;	genCast
    00BA ED                  600 	mov	a,r5
    00BB 33                  601 	rlc	a
@@ -620,7 +620,7 @@
    00CF A3                  620 	inc	dptr
    00D0 EE                  621 	mov	a,r6
    00D1 F0                  622 	movx	@dptr,a
-                            623 ;	atoh_f.c:30: c++;
+                            623 ;	atoh_f.c:38: c++;
                             624 ;	genPlus
    00D2 90 00 00            625 	mov	dptr,#_atoh_c_1_1
                             626 ;     genPlusIncr
@@ -640,14 +640,14 @@
                             640 ;	Peephole 112.b	changed ljmp to sjmp
    00E0 80 04               641 	sjmp	00105$
    00E2                     642 00104$:
-                            643 ;	atoh_f.c:32: else{return 2103;}
+                            643 ;	atoh_f.c:40: else{return 2103;}
                             644 ;	genRet
                             645 ;	Peephole 182.b	used 16 bit load of dptr
    00E2 90 08 37            646 	mov	dptr,#0x0837
                             647 ;	Peephole 251.a	replaced ljmp to ret with ret
    00E5 22                  648 	ret
    00E6                     649 00105$:
-                            650 ;	atoh_f.c:35: if(*(c)>=48 && *(c)<=57 )
+                            650 ;	atoh_f.c:43: if(*(c)>=48 && *(c)<=57 )           // Multiply 10th place digit by 16
                             651 ;	genAssign
    00E6 90 00 00            652 	mov	dptr,#_atoh_c_1_1
    00E9 E0                  653 	movx	a,@dptr
@@ -663,7 +663,7 @@
    00F1 8A 82               663 	mov	dpl,r2
    00F3 8B 83               664 	mov	dph,r3
    00F5 8C F0               665 	mov	b,r4
-   00F7 12 3B E3            666 	lcall	__gptrget
+   00F7 12 43 46            666 	lcall	__gptrget
                             667 ;	genCmpLt
                             668 ;	genCmp
    00FA FD                  669 	mov	r5,a
@@ -689,7 +689,7 @@
                             689 ;	Peephole 160.a	removed sjmp by inverse jump logic
    010B 40 3D               690 	jc	00116$
                             691 ;	Peephole 300	removed redundant label 00152$
-                            692 ;	atoh_f.c:37: result += (*c-48)*16;
+                            692 ;	atoh_f.c:45: result += (*c-48)*16;
                             693 ;	genCast
    010D ED                  694 	mov	a,r5
    010E 33                  695 	rlc	a
@@ -737,7 +737,7 @@
    0136 38                  737 	addc	a,r0
    0137 A3                  738 	inc	dptr
    0138 F0                  739 	movx	@dptr,a
-                            740 ;	atoh_f.c:38: c++;
+                            740 ;	atoh_f.c:46: c++;
                             741 ;	genPlus
    0139 90 00 00            742 	mov	dptr,#_atoh_c_1_1
                             743 ;     genPlusIncr
@@ -756,7 +756,7 @@
    0146 F0                  756 	movx	@dptr,a
    0147 02 02 15            757 	ljmp	00117$
    014A                     758 00116$:
-                            759 ;	atoh_f.c:40: else if(*(c)>=97 && *(c)<=102)
+                            759 ;	atoh_f.c:48: else if(*(c)>=97 && *(c)<=102)
                             760 ;	genAssign
    014A 90 00 00            761 	mov	dptr,#_atoh_c_1_1
    014D E0                  762 	movx	a,@dptr
@@ -772,7 +772,7 @@
    0155 8A 82               772 	mov	dpl,r2
    0157 8B 83               773 	mov	dph,r3
    0159 8C F0               774 	mov	b,r4
-   015B 12 3B E3            775 	lcall	__gptrget
+   015B 12 43 46            775 	lcall	__gptrget
                             776 ;	genCmpLt
                             777 ;	genCmp
    015E FD                  778 	mov	r5,a
@@ -798,7 +798,7 @@
                             798 ;	Peephole 160.a	removed sjmp by inverse jump logic
    016F 40 3D               799 	jc	00112$
                             800 ;	Peephole 300	removed redundant label 00154$
-                            801 ;	atoh_f.c:42: result += (*c - 87)*16;
+                            801 ;	atoh_f.c:50: result += (*c - 87)*16;
                             802 ;	genCast
    0171 ED                  803 	mov	a,r5
    0172 33                  804 	rlc	a
@@ -846,7 +846,7 @@
    019A 38                  846 	addc	a,r0
    019B A3                  847 	inc	dptr
    019C F0                  848 	movx	@dptr,a
-                            849 ;	atoh_f.c:43: c++;
+                            849 ;	atoh_f.c:51: c++;
                             850 ;	genPlus
    019D 90 00 00            851 	mov	dptr,#_atoh_c_1_1
                             852 ;     genPlusIncr
@@ -865,7 +865,7 @@
    01AA F0                  865 	movx	@dptr,a
    01AB 02 02 15            866 	ljmp	00117$
    01AE                     867 00112$:
-                            868 ;	atoh_f.c:45: else if(*(c)>=65 && *(c)<=70)
+                            868 ;	atoh_f.c:53: else if(*(c)>=65 && *(c)<=70)
                             869 ;	genAssign
    01AE 90 00 00            870 	mov	dptr,#_atoh_c_1_1
    01B1 E0                  871 	movx	a,@dptr
@@ -881,7 +881,7 @@
    01B9 8A 82               881 	mov	dpl,r2
    01BB 8B 83               882 	mov	dph,r3
    01BD 8C F0               883 	mov	b,r4
-   01BF 12 3B E3            884 	lcall	__gptrget
+   01BF 12 43 46            884 	lcall	__gptrget
                             885 ;	genCmpLt
                             886 ;	genCmp
    01C2 FD                  887 	mov	r5,a
@@ -907,7 +907,7 @@
                             907 ;	Peephole 160.a	removed sjmp by inverse jump logic
    01D3 40 3C               908 	jc	00108$
                             909 ;	Peephole 300	removed redundant label 00156$
-                            910 ;	atoh_f.c:47: result += (*c - 55)*16;
+                            910 ;	atoh_f.c:55: result += (*c - 55)*16;
                             911 ;	genCast
    01D5 ED                  912 	mov	a,r5
    01D6 33                  913 	rlc	a
@@ -955,7 +955,7 @@
    01FE 38                  955 	addc	a,r0
    01FF A3                  956 	inc	dptr
    0200 F0                  957 	movx	@dptr,a
-                            958 ;	atoh_f.c:48: c++;
+                            958 ;	atoh_f.c:56: c++;
                             959 ;	genPlus
    0201 90 00 00            960 	mov	dptr,#_atoh_c_1_1
                             961 ;     genPlusIncr
@@ -975,14 +975,14 @@
                             975 ;	Peephole 112.b	changed ljmp to sjmp
    020F 80 04               976 	sjmp	00117$
    0211                     977 00108$:
-                            978 ;	atoh_f.c:52: return 2101;
+                            978 ;	atoh_f.c:60: return 2101;
                             979 ;	genRet
                             980 ;	Peephole 182.b	used 16 bit load of dptr
    0211 90 08 35            981 	mov	dptr,#0x0835
                             982 ;	Peephole 251.a	replaced ljmp to ret with ret
    0214 22                  983 	ret
    0215                     984 00117$:
-                            985 ;	atoh_f.c:57: if(*(c)>=48 && *(c)<=57)
+                            985 ;	atoh_f.c:65: if(*(c)>=48 && *(c)<=57)
                             986 ;	genAssign
    0215 90 00 00            987 	mov	dptr,#_atoh_c_1_1
    0218 E0                  988 	movx	a,@dptr
@@ -998,7 +998,7 @@
    0220 8A 82               998 	mov	dpl,r2
    0222 8B 83               999 	mov	dph,r3
    0224 8C F0              1000 	mov	b,r4
-   0226 12 3B E3           1001 	lcall	__gptrget
+   0226 12 43 46           1001 	lcall	__gptrget
                            1002 ;	genCmpLt
                            1003 ;	genCmp
    0229 FA                 1004 	mov	r2,a
@@ -1024,7 +1024,7 @@
                            1024 ;	Peephole 160.a	removed sjmp by inverse jump logic
    023A 40 22              1025 	jc	00128$
                            1026 ;	Peephole 300	removed redundant label 00158$
-                           1027 ;	atoh_f.c:59: result += (*c - 48);
+                           1027 ;	atoh_f.c:67: result += (*c - 48);
                            1028 ;	genCast
    023C EA                 1029 	mov	a,r2
    023D 33                 1030 	rlc	a
@@ -1059,7 +1059,7 @@
    025A F0                 1059 	movx	@dptr,a
    025B 02 02 F2           1060 	ljmp	00129$
    025E                    1061 00128$:
-                           1062 ;	atoh_f.c:61: else if(*(c)>=97 && *(c)<=102)
+                           1062 ;	atoh_f.c:69: else if(*(c)>=97 && *(c)<=102)
                            1063 ;	genAssign
    025E 90 00 00           1064 	mov	dptr,#_atoh_c_1_1
    0261 E0                 1065 	movx	a,@dptr
@@ -1075,7 +1075,7 @@
    0269 8A 82              1075 	mov	dpl,r2
    026B 8B 83              1076 	mov	dph,r3
    026D 8C F0              1077 	mov	b,r4
-   026F 12 3B E3           1078 	lcall	__gptrget
+   026F 12 43 46           1078 	lcall	__gptrget
                            1079 ;	genCmpLt
                            1080 ;	genCmp
    0272 FA                 1081 	mov	r2,a
@@ -1101,7 +1101,7 @@
                            1101 ;	Peephole 160.a	removed sjmp by inverse jump logic
    0283 40 21              1102 	jc	00124$
                            1103 ;	Peephole 300	removed redundant label 00160$
-                           1104 ;	atoh_f.c:63: result += (*c - 87);
+                           1104 ;	atoh_f.c:71: result += (*c - 87);
                            1105 ;	genCast
    0285 EA                 1106 	mov	a,r2
    0286 33                 1107 	rlc	a
@@ -1137,7 +1137,7 @@
                            1137 ;	Peephole 112.b	changed ljmp to sjmp
    02A4 80 4C              1138 	sjmp	00129$
    02A6                    1139 00124$:
-                           1140 ;	atoh_f.c:65: else if(*(c)>=65 && *(c)<=70)
+                           1140 ;	atoh_f.c:73: else if(*(c)>=65 && *(c)<=70)
                            1141 ;	genAssign
    02A6 90 00 00           1142 	mov	dptr,#_atoh_c_1_1
    02A9 E0                 1143 	movx	a,@dptr
@@ -1153,7 +1153,7 @@
    02B1 8A 82              1153 	mov	dpl,r2
    02B3 8B 83              1154 	mov	dph,r3
    02B5 8C F0              1155 	mov	b,r4
-   02B7 12 3B E3           1156 	lcall	__gptrget
+   02B7 12 43 46           1156 	lcall	__gptrget
                            1157 ;	genCmpLt
                            1158 ;	genCmp
    02BA FA                 1159 	mov	r2,a
@@ -1179,7 +1179,7 @@
                            1179 ;	Peephole 160.a	removed sjmp by inverse jump logic
    02CB 40 21              1180 	jc	00120$
                            1181 ;	Peephole 300	removed redundant label 00162$
-                           1182 ;	atoh_f.c:67: result += (*c - 55);
+                           1182 ;	atoh_f.c:75: result += (*c - 55);
                            1183 ;	genCast
    02CD EA                 1184 	mov	a,r2
    02CE 33                 1185 	rlc	a
@@ -1215,7 +1215,7 @@
                            1215 ;	Peephole 112.b	changed ljmp to sjmp
    02EC 80 04              1216 	sjmp	00129$
    02EE                    1217 00120$:
-                           1218 ;	atoh_f.c:71: return 2102;
+                           1218 ;	atoh_f.c:79: return 2102;                        // If the unit place digit is not valid then return error
                            1219 ;	genRet
                            1220 ;	Peephole 182.b	used 16 bit load of dptr
    02EE 90 08 36           1221 	mov	dptr,#0x0836
@@ -1223,7 +1223,7 @@
                            1223 ;	Peephole 251.b	replaced sjmp to ret with ret
    02F1 22                 1224 	ret
    02F2                    1225 00129$:
-                           1226 ;	atoh_f.c:74: return result;
+                           1226 ;	atoh_f.c:82: return result;
                            1227 ;	genAssign
    02F2 90 00 03           1228 	mov	dptr,#_atoh_result_1_1
    02F5 E0                 1229 	movx	a,@dptr
@@ -1243,7 +1243,7 @@
                            1243 ;result                    Allocated with name '_atoh_data_result_1_1'
                            1244 ;i                         Allocated with name '_atoh_data_i_1_1'
                            1245 ;------------------------------------------------------------
-                           1246 ;	atoh_f.c:78: int atoh_data(char *c)
+                           1246 ;	atoh_f.c:96: int atoh_data(char *c)
                            1247 ;	-----------------------------------------
                            1248 ;	 function atoh_data
                            1249 ;	-----------------------------------------
@@ -1260,7 +1260,7 @@
    030B A3                 1260 	inc	dptr
    030C EA                 1261 	mov	a,r2
    030D F0                 1262 	movx	@dptr,a
-                           1263 ;	atoh_f.c:82: if(*(c+2) != '\0')
+                           1263 ;	atoh_f.c:100: if(*(c+2) != '\0')
                            1264 ;	genAssign
    030E 90 00 05           1265 	mov	dptr,#_atoh_data_c_1_1
    0311 E0                 1266 	movx	a,@dptr
@@ -1288,7 +1288,7 @@
    0322 8D 82              1288 	mov	dpl,r5
    0324 8E 83              1289 	mov	dph,r6
    0326 8F F0              1290 	mov	b,r7
-   0328 12 3B E3           1291 	lcall	__gptrget
+   0328 12 43 46           1291 	lcall	__gptrget
                            1292 ;	genCmpEq
                            1293 ;	gencjneshort
                            1294 ;	Peephole 112.b	changed ljmp to sjmp
@@ -1296,20 +1296,20 @@
                            1296 ;	Peephole 115.b	jump optimization
    032C 60 04              1297 	jz	00102$
                            1298 ;	Peephole 300	removed redundant label 00142$
-                           1299 ;	atoh_f.c:84: return 258;
+                           1299 ;	atoh_f.c:102: return 258;
                            1300 ;	genRet
                            1301 ;	Peephole 182.b	used 16 bit load of dptr
    032E 90 01 02           1302 	mov	dptr,#0x0102
                            1303 ;	Peephole 251.a	replaced ljmp to ret with ret
    0331 22                 1304 	ret
    0332                    1305 00102$:
-                           1306 ;	atoh_f.c:87: if(*(c)>=48 && *(c)<=57 )
+                           1306 ;	atoh_f.c:105: if(*(c)>=48 && *(c)<=57 )
                            1307 ;	genPointerGet
                            1308 ;	genGenPointerGet
    0332 8A 82              1309 	mov	dpl,r2
    0334 8B 83              1310 	mov	dph,r3
    0336 8C F0              1311 	mov	b,r4
-   0338 12 3B E3           1312 	lcall	__gptrget
+   0338 12 43 46           1312 	lcall	__gptrget
                            1313 ;	genCmpLt
                            1314 ;	genCmp
    033B FD                 1315 	mov	r5,a
@@ -1335,7 +1335,7 @@
                            1335 ;	Peephole 160.a	removed sjmp by inverse jump logic
    034C 40 33              1336 	jc	00112$
                            1337 ;	Peephole 300	removed redundant label 00144$
-                           1338 ;	atoh_f.c:89: result = (*c-48)*16;
+                           1338 ;	atoh_f.c:107: result = (*c-48)*16;
                            1339 ;	genCast
    034E ED                 1340 	mov	a,r5
    034F 33                 1341 	rlc	a
@@ -1370,7 +1370,7 @@
    036D A3                 1370 	inc	dptr
    036E EE                 1371 	mov	a,r6
    036F F0                 1372 	movx	@dptr,a
-                           1373 ;	atoh_f.c:90: c++;
+                           1373 ;	atoh_f.c:108: c++;
                            1374 ;	genPlus
    0370 90 00 05           1375 	mov	dptr,#_atoh_data_c_1_1
                            1376 ;     genPlusIncr
@@ -1389,7 +1389,7 @@
    037D F0                 1389 	movx	@dptr,a
    037E 02 04 37           1390 	ljmp	00113$
    0381                    1391 00112$:
-                           1392 ;	atoh_f.c:92: else if(*(c)>=97 && *(c)<=102)
+                           1392 ;	atoh_f.c:110: else if(*(c)>=97 && *(c)<=102)
                            1393 ;	genAssign
    0381 90 00 05           1394 	mov	dptr,#_atoh_data_c_1_1
    0384 E0                 1395 	movx	a,@dptr
@@ -1405,7 +1405,7 @@
    038C 8A 82              1405 	mov	dpl,r2
    038E 8B 83              1406 	mov	dph,r3
    0390 8C F0              1407 	mov	b,r4
-   0392 12 3B E3           1408 	lcall	__gptrget
+   0392 12 43 46           1408 	lcall	__gptrget
                            1409 ;	genCmpLt
                            1410 ;	genCmp
    0395 FD                 1411 	mov	r5,a
@@ -1431,7 +1431,7 @@
                            1431 ;	Peephole 160.a	removed sjmp by inverse jump logic
    03A6 40 32              1432 	jc	00108$
                            1433 ;	Peephole 300	removed redundant label 00146$
-                           1434 ;	atoh_f.c:94: result = (*c - 87)*16;
+                           1434 ;	atoh_f.c:112: result = (*c - 87)*16;
                            1435 ;	genCast
    03A8 ED                 1436 	mov	a,r5
    03A9 33                 1437 	rlc	a
@@ -1466,7 +1466,7 @@
    03C7 A3                 1466 	inc	dptr
    03C8 EE                 1467 	mov	a,r6
    03C9 F0                 1468 	movx	@dptr,a
-                           1469 ;	atoh_f.c:95: c++;
+                           1469 ;	atoh_f.c:113: c++;
                            1470 ;	genPlus
    03CA 90 00 05           1471 	mov	dptr,#_atoh_data_c_1_1
                            1472 ;     genPlusIncr
@@ -1486,7 +1486,7 @@
                            1486 ;	Peephole 112.b	changed ljmp to sjmp
    03D8 80 5D              1487 	sjmp	00113$
    03DA                    1488 00108$:
-                           1489 ;	atoh_f.c:97: else if(*(c)>=65 && *(c)<=70)
+                           1489 ;	atoh_f.c:115: else if(*(c)>=65 && *(c)<=70)
                            1490 ;	genAssign
    03DA 90 00 05           1491 	mov	dptr,#_atoh_data_c_1_1
    03DD E0                 1492 	movx	a,@dptr
@@ -1502,7 +1502,7 @@
    03E5 8A 82              1502 	mov	dpl,r2
    03E7 8B 83              1503 	mov	dph,r3
    03E9 8C F0              1504 	mov	b,r4
-   03EB 12 3B E3           1505 	lcall	__gptrget
+   03EB 12 43 46           1505 	lcall	__gptrget
                            1506 ;	genCmpLt
                            1507 ;	genCmp
    03EE FD                 1508 	mov	r5,a
@@ -1528,7 +1528,7 @@
                            1528 ;	Peephole 160.a	removed sjmp by inverse jump logic
    03FF 40 32              1529 	jc	00104$
                            1530 ;	Peephole 300	removed redundant label 00148$
-                           1531 ;	atoh_f.c:99: result = (*c - 55)*16;
+                           1531 ;	atoh_f.c:117: result = (*c - 55)*16;
                            1532 ;	genCast
    0401 ED                 1533 	mov	a,r5
    0402 33                 1534 	rlc	a
@@ -1563,7 +1563,7 @@
    0420 A3                 1563 	inc	dptr
    0421 EE                 1564 	mov	a,r6
    0422 F0                 1565 	movx	@dptr,a
-                           1566 ;	atoh_f.c:100: c++;
+                           1566 ;	atoh_f.c:118: c++;
                            1567 ;	genPlus
    0423 90 00 05           1568 	mov	dptr,#_atoh_data_c_1_1
                            1569 ;     genPlusIncr
@@ -1583,14 +1583,14 @@
                            1583 ;	Peephole 112.b	changed ljmp to sjmp
    0431 80 04              1584 	sjmp	00113$
    0433                    1585 00104$:
-                           1586 ;	atoh_f.c:104: return 257;
+                           1586 ;	atoh_f.c:122: return 257;
                            1587 ;	genRet
                            1588 ;	Peephole 182.b	used 16 bit load of dptr
    0433 90 01 01           1589 	mov	dptr,#0x0101
                            1590 ;	Peephole 251.a	replaced ljmp to ret with ret
    0436 22                 1591 	ret
    0437                    1592 00113$:
-                           1593 ;	atoh_f.c:109: if(*(c)>=48 && *(c)<=57)
+                           1593 ;	atoh_f.c:127: if(*(c)>=48 && *(c)<=57)
                            1594 ;	genAssign
    0437 90 00 05           1595 	mov	dptr,#_atoh_data_c_1_1
    043A E0                 1596 	movx	a,@dptr
@@ -1606,7 +1606,7 @@
    0442 8A 82              1606 	mov	dpl,r2
    0444 8B 83              1607 	mov	dph,r3
    0446 8C F0              1608 	mov	b,r4
-   0448 12 3B E3           1609 	lcall	__gptrget
+   0448 12 43 46           1609 	lcall	__gptrget
                            1610 ;	genCmpLt
                            1611 ;	genCmp
    044B FA                 1612 	mov	r2,a
@@ -1632,7 +1632,7 @@
                            1632 ;	Peephole 160.a	removed sjmp by inverse jump logic
    045C 40 22              1633 	jc	00124$
                            1634 ;	Peephole 300	removed redundant label 00150$
-                           1635 ;	atoh_f.c:111: result += (*c - 48);
+                           1635 ;	atoh_f.c:129: result += (*c - 48);
                            1636 ;	genCast
    045E EA                 1637 	mov	a,r2
    045F 33                 1638 	rlc	a
@@ -1667,7 +1667,7 @@
    047C F0                 1667 	movx	@dptr,a
    047D 02 05 14           1668 	ljmp	00125$
    0480                    1669 00124$:
-                           1670 ;	atoh_f.c:113: else if(*(c)>=97 && *(c)<=102)
+                           1670 ;	atoh_f.c:131: else if(*(c)>=97 && *(c)<=102)
                            1671 ;	genAssign
    0480 90 00 05           1672 	mov	dptr,#_atoh_data_c_1_1
    0483 E0                 1673 	movx	a,@dptr
@@ -1683,7 +1683,7 @@
    048B 8A 82              1683 	mov	dpl,r2
    048D 8B 83              1684 	mov	dph,r3
    048F 8C F0              1685 	mov	b,r4
-   0491 12 3B E3           1686 	lcall	__gptrget
+   0491 12 43 46           1686 	lcall	__gptrget
                            1687 ;	genCmpLt
                            1688 ;	genCmp
    0494 FA                 1689 	mov	r2,a
@@ -1709,7 +1709,7 @@
                            1709 ;	Peephole 160.a	removed sjmp by inverse jump logic
    04A5 40 21              1710 	jc	00120$
                            1711 ;	Peephole 300	removed redundant label 00152$
-                           1712 ;	atoh_f.c:115: result += (*c - 87);
+                           1712 ;	atoh_f.c:133: result += (*c - 87);
                            1713 ;	genCast
    04A7 EA                 1714 	mov	a,r2
    04A8 33                 1715 	rlc	a
@@ -1745,7 +1745,7 @@
                            1745 ;	Peephole 112.b	changed ljmp to sjmp
    04C6 80 4C              1746 	sjmp	00125$
    04C8                    1747 00120$:
-                           1748 ;	atoh_f.c:117: else if(*(c)>=65 && *(c)<=70)
+                           1748 ;	atoh_f.c:135: else if(*(c)>=65 && *(c)<=70)
                            1749 ;	genAssign
    04C8 90 00 05           1750 	mov	dptr,#_atoh_data_c_1_1
    04CB E0                 1751 	movx	a,@dptr
@@ -1761,7 +1761,7 @@
    04D3 8A 82              1761 	mov	dpl,r2
    04D5 8B 83              1762 	mov	dph,r3
    04D7 8C F0              1763 	mov	b,r4
-   04D9 12 3B E3           1764 	lcall	__gptrget
+   04D9 12 43 46           1764 	lcall	__gptrget
                            1765 ;	genCmpLt
                            1766 ;	genCmp
    04DC FA                 1767 	mov	r2,a
@@ -1787,7 +1787,7 @@
                            1787 ;	Peephole 160.a	removed sjmp by inverse jump logic
    04ED 40 21              1788 	jc	00116$
                            1789 ;	Peephole 300	removed redundant label 00154$
-                           1790 ;	atoh_f.c:119: result += (*c - 55);
+                           1790 ;	atoh_f.c:137: result += (*c - 55);
                            1791 ;	genCast
    04EF EA                 1792 	mov	a,r2
    04F0 33                 1793 	rlc	a
@@ -1823,7 +1823,7 @@
                            1823 ;	Peephole 112.b	changed ljmp to sjmp
    050E 80 04              1824 	sjmp	00125$
    0510                    1825 00116$:
-                           1826 ;	atoh_f.c:123: return 257;
+                           1826 ;	atoh_f.c:141: return 257;
                            1827 ;	genRet
                            1828 ;	Peephole 182.b	used 16 bit load of dptr
    0510 90 01 01           1829 	mov	dptr,#0x0101
@@ -1831,7 +1831,7 @@
                            1831 ;	Peephole 251.b	replaced sjmp to ret with ret
    0513 22                 1832 	ret
    0514                    1833 00125$:
-                           1834 ;	atoh_f.c:125: return result;
+                           1834 ;	atoh_f.c:143: return result;
                            1835 ;	genAssign
    0514 90 00 08           1836 	mov	dptr,#_atoh_data_result_1_1
    0517 E0                 1837 	movx	a,@dptr
@@ -1851,7 +1851,7 @@
                            1851 ;i                         Allocated with name '_ctoa_i_1_1'
                            1852 ;d                         Allocated with name '_ctoa_d_1_1'
                            1853 ;------------------------------------------------------------
-                           1854 ;	atoh_f.c:128: char ctoa(int c)
+                           1854 ;	atoh_f.c:159: char ctoa(int c)
                            1855 ;	-----------------------------------------
                            1856 ;	 function ctoa
                            1857 ;	-----------------------------------------
@@ -1864,7 +1864,7 @@
    0528 A3                 1864 	inc	dptr
    0529 EA                 1865 	mov	a,r2
    052A F0                 1866 	movx	@dptr,a
-                           1867 ;	atoh_f.c:131: if(c<10)
+                           1867 ;	atoh_f.c:162: if(c<10)
                            1868 ;	genAssign
    052B 90 00 0A           1869 	mov	dptr,#_ctoa_c_1_1
    052E E0                 1870 	movx	a,@dptr
@@ -1884,12 +1884,12 @@
                            1884 ;	Peephole 108.a	removed ljmp by inverse jump logic
    053C 50 38              1885 	jnc	00118$
                            1886 ;	Peephole 300	removed redundant label 00130$
-                           1887 ;	atoh_f.c:133: d=0x30;
+                           1887 ;	atoh_f.c:164: d=0x30;
                            1888 ;	genAssign
    053E 90 00 0C           1889 	mov	dptr,#_ctoa_d_1_1
    0541 74 30              1890 	mov	a,#0x30
    0543 F0                 1891 	movx	@dptr,a
-                           1892 ;	atoh_f.c:134: for(i=0;i<10;i++)
+                           1892 ;	atoh_f.c:165: for(i=0;i<10;i++)
                            1893 ;	genAssign
    0544 8A 04              1894 	mov	ar4,r2
    0546 8B 05              1895 	mov	ar5,r3
@@ -1911,7 +1911,7 @@
                            1911 ;	Peephole 108.a	removed ljmp by inverse jump logic
    0557 50 5C              1912 	jnc	00120$
                            1913 ;	Peephole 300	removed redundant label 00131$
-                           1914 ;	atoh_f.c:136: if(c==i)
+                           1914 ;	atoh_f.c:167: if(c==i)
                            1915 ;	genCmpEq
                            1916 ;	gencjneshort
    0559 EC                 1917 	mov	a,r4
@@ -1923,7 +1923,7 @@
                            1923 ;	Peephole 200.b	removed redundant sjmp
                            1924 ;	Peephole 300	removed redundant label 00132$
                            1925 ;	Peephole 300	removed redundant label 00133$
-                           1926 ;	atoh_f.c:138: return d;
+                           1926 ;	atoh_f.c:169: return d;
                            1927 ;	genAssign
    0561 90 00 0C           1928 	mov	dptr,#_ctoa_d_1_1
    0564 E0                 1929 	movx	a,@dptr
@@ -1931,12 +1931,12 @@
    0565 F9                 1931 	mov	r1,a
                            1932 ;	Peephole 244.c	loading dpl from a instead of r1
    0566 F5 82              1933 	mov	dpl,a
-                           1934 ;	atoh_f.c:139: break;
+                           1934 ;	atoh_f.c:170: break;
                            1935 ;	Peephole 112.b	changed ljmp to sjmp
                            1936 ;	Peephole 251.b	replaced sjmp to ret with ret
    0568 22                 1937 	ret
    0569                    1938 00102$:
-                           1939 ;	atoh_f.c:141: else{d++;}
+                           1939 ;	atoh_f.c:172: else{d++;}
                            1940 ;	genPlus
                            1941 ;     genPlusIncr
    0569 0E                 1942 	inc	r6
@@ -1944,7 +1944,7 @@
    056A 90 00 0C           1944 	mov	dptr,#_ctoa_d_1_1
    056D EE                 1945 	mov	a,r6
    056E F0                 1946 	movx	@dptr,a
-                           1947 ;	atoh_f.c:134: for(i=0;i<10;i++)
+                           1947 ;	atoh_f.c:165: for(i=0;i<10;i++)
                            1948 ;	genPlus
                            1949 ;     genPlusIncr
                            1950 ;	tail increment optimized (range 10)
@@ -1954,7 +1954,7 @@
                            1954 ;	Peephole 112.b	changed ljmp to sjmp
    0574 80 D8              1955 	sjmp	00104$
    0576                    1956 00118$:
-                           1957 ;	atoh_f.c:144: else if(c<16)
+                           1957 ;	atoh_f.c:175: else if(c<16)
                            1958 ;	genCmpLt
                            1959 ;	genCmp
    0576 C3                 1960 	clr	c
@@ -1967,12 +1967,12 @@
                            1967 ;	Peephole 108.a	removed ljmp by inverse jump logic
    057F 50 34              1968 	jnc	00120$
                            1969 ;	Peephole 300	removed redundant label 00134$
-                           1970 ;	atoh_f.c:146: d=0x41;
+                           1970 ;	atoh_f.c:177: d=0x41;
                            1971 ;	genAssign
    0581 90 00 0C           1972 	mov	dptr,#_ctoa_d_1_1
    0584 74 41              1973 	mov	a,#0x41
    0586 F0                 1974 	movx	@dptr,a
-                           1975 ;	atoh_f.c:147: for(i=10;i<16;i++)
+                           1975 ;	atoh_f.c:178: for(i=10;i<16;i++)
                            1976 ;	genAssign
                            1977 ;	genAssign
    0587 7C 41              1978 	mov	r4,#0x41
@@ -1992,7 +1992,7 @@
                            1992 ;	Peephole 108.a	removed ljmp by inverse jump logic
    0596 50 1D              1993 	jnc	00120$
                            1994 ;	Peephole 300	removed redundant label 00135$
-                           1995 ;	atoh_f.c:149: if(c==i)
+                           1995 ;	atoh_f.c:180: if(c==i)
                            1996 ;	genCmpEq
                            1997 ;	gencjneshort
    0598 EA                 1998 	mov	a,r2
@@ -2004,7 +2004,7 @@
                            2004 ;	Peephole 200.b	removed redundant sjmp
                            2005 ;	Peephole 300	removed redundant label 00136$
                            2006 ;	Peephole 300	removed redundant label 00137$
-                           2007 ;	atoh_f.c:151: return d;
+                           2007 ;	atoh_f.c:182: return d;
                            2008 ;	genAssign
    05A0 90 00 0C           2009 	mov	dptr,#_ctoa_d_1_1
    05A3 E0                 2010 	movx	a,@dptr
@@ -2012,12 +2012,12 @@
    05A4 FF                 2012 	mov	r7,a
                            2013 ;	Peephole 244.c	loading dpl from a instead of r7
    05A5 F5 82              2014 	mov	dpl,a
-                           2015 ;	atoh_f.c:152: break;
+                           2015 ;	atoh_f.c:183: break;
                            2016 ;	Peephole 112.b	changed ljmp to sjmp
                            2017 ;	Peephole 251.b	replaced sjmp to ret with ret
    05A7 22                 2018 	ret
    05A8                    2019 00109$:
-                           2020 ;	atoh_f.c:154: else{d++;}
+                           2020 ;	atoh_f.c:185: else{d++;}
                            2021 ;	genPlus
                            2022 ;     genPlusIncr
    05A8 0C                 2023 	inc	r4
@@ -2025,7 +2025,7 @@
    05A9 90 00 0C           2025 	mov	dptr,#_ctoa_d_1_1
    05AC EC                 2026 	mov	a,r4
    05AD F0                 2027 	movx	@dptr,a
-                           2028 ;	atoh_f.c:147: for(i=10;i<16;i++)
+                           2028 ;	atoh_f.c:178: for(i=10;i<16;i++)
                            2029 ;	genPlus
                            2030 ;     genPlusIncr
                            2031 ;	tail increment optimized (range 10)
@@ -2043,7 +2043,7 @@
                            2043 ;i                         Allocated with name '_atob_i_1_1'
                            2044 ;d                         Allocated with name '_atob_d_1_1'
                            2045 ;------------------------------------------------------------
-                           2046 ;	atoh_f.c:164: unsigned char atob(unsigned char c)
+                           2046 ;	atoh_f.c:195: unsigned char atob(unsigned char c)
                            2047 ;	-----------------------------------------
                            2048 ;	 function atob
                            2049 ;	-----------------------------------------
@@ -2052,18 +2052,18 @@
    05B6 E5 82              2052 	mov	a,dpl
    05B8 90 00 0D           2053 	mov	dptr,#_atob_c_1_1
    05BB F0                 2054 	movx	@dptr,a
-                           2055 ;	atoh_f.c:167: unsigned char d=0;
+                           2055 ;	atoh_f.c:198: unsigned char d=0;
                            2056 ;	genAssign
    05BC 90 00 0E           2057 	mov	dptr,#_atob_d_1_1
                            2058 ;	Peephole 181	changed mov to clr
    05BF E4                 2059 	clr	a
    05C0 F0                 2060 	movx	@dptr,a
-                           2061 ;	atoh_f.c:169: for(i=0;i<8;i++)
+                           2061 ;	atoh_f.c:200: for(i=0;i<8;i++)
                            2062 ;	genAssign
    05C1 7A 08              2063 	mov	r2,#0x08
    05C3 7B 00              2064 	mov	r3,#0x00
    05C5                    2065 00103$:
-                           2066 ;	atoh_f.c:171: d= d<<1;
+                           2066 ;	atoh_f.c:202: d= d<<1;
                            2067 ;	genAssign
    05C5 90 00 0E           2068 	mov	dptr,#_atob_d_1_1
    05C8 E0                 2069 	movx	a,@dptr
@@ -2078,7 +2078,7 @@
    05CC 90 00 0E           2078 	mov	dptr,#_atob_d_1_1
                            2079 ;	Peephole 100	removed redundant mov
    05CF F0                 2080 	movx	@dptr,a
-                           2081 ;	atoh_f.c:172: d=d | (c%(2));
+                           2081 ;	atoh_f.c:203: d=d | (c%(2));
                            2082 ;	genAssign
    05D0 90 00 0D           2083 	mov	dptr,#_atob_c_1_1
    05D3 E0                 2084 	movx	a,@dptr
@@ -2095,7 +2095,7 @@
                            2095 ;	Peephole 248.a	optimized or to xdata
    05DE 4D                 2096 	orl	a,r5
    05DF F0                 2097 	movx	@dptr,a
-                           2098 ;	atoh_f.c:174: c=c/2;
+                           2098 ;	atoh_f.c:205: c=c/2;
                            2099 ;	genRightShift
                            2100 ;	genRightShiftLiteral
                            2101 ;	genrshOne
@@ -2113,7 +2113,7 @@
    05E9 BA FF 01           2113 	cjne	r2,#0xff,00109$
    05EC 1B                 2114 	dec	r3
    05ED                    2115 00109$:
-                           2116 ;	atoh_f.c:169: for(i=0;i<8;i++)
+                           2116 ;	atoh_f.c:200: for(i=0;i<8;i++)
                            2117 ;	genIfx
    05ED EA                 2118 	mov	a,r2
    05EE 4B                 2119 	orl	a,r3
@@ -2121,7 +2121,7 @@
                            2121 ;	Peephole 108.b	removed ljmp by inverse jump logic
    05EF 70 D4              2122 	jnz	00103$
                            2123 ;	Peephole 300	removed redundant label 00110$
-                           2124 ;	atoh_f.c:177: return d;
+                           2124 ;	atoh_f.c:208: return d;
                            2125 ;	genAssign
    05F1 90 00 0E           2126 	mov	dptr,#_atob_d_1_1
    05F4 E0                 2127 	movx	a,@dptr

@@ -138,7 +138,7 @@ void lcdgotoaddr(unsigned char addr)
 
  * description: Polls the LCD busy flag. Function does not return until the LCD controller is ready to accept another command.
 -----------------------------------------------------------------------------------------*/
-void lcdbusywait()
+char lcdbusywait()
 {
     volatile char temp;
     RS=0;                       // Command Register selected
@@ -150,7 +150,7 @@ void lcdbusywait()
    {
        temp = *read;
    }
-
+    return temp;
 }
 
 /*-----------------------------------------------------------------------------------------
@@ -168,10 +168,16 @@ void lcdbusywait()
 void lcdputstr(char *str)
 {
     int i=0;
+    char addr;
+
     while(*(str+i) != '\0')                     // While end of string is reached data is sent to LCD
     {
         lcdputch(*(str+i));
         i++;
+        addr=lcdbusywait();
+        if(addr==0x10){lcdgotoxy(2,1);}
+        if(addr==0x50){lcdgotoxy(3,1);}
+        if(addr==0x40){lcdgotoxy(4,1);}
     }
 }
 
@@ -343,9 +349,7 @@ void logo_creator() __critical
 void lcd_dis_cus(unsigned char ccode,unsigned char row,unsigned char col) __critical
 {
 
-    WDTPRG |=0x07;
-    WDTRST = 0x01E;         // Watchdog resetting
-    WDTRST = 0x0E1;
+
     lcdgotoxy(row,col);     // Dsiplay Custom character on the LCD
     lcdputch(ccode);
 

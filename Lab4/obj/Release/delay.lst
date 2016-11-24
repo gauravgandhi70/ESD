@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.6.0 #4309 (Jul 28 2006)
-                              4 ; This file generated Tue Nov 15 08:41:24 2016
+                              4 ; This file generated Sun Nov 20 00:57:56 2016
                               5 ;--------------------------------------------------------
                               6 	.module delay
                               7 	.optsdcc -mmcs51 --model-large
@@ -619,7 +619,7 @@
                             619 ;------------------------------------------------------------
                             620 ;sec                       Allocated with name '_delay_sec_sec_1_1'
                             621 ;------------------------------------------------------------
-                            622 ;	delay.c:39: void delay_sec(unsigned char sec)
+                            622 ;	delay.c:40: void delay_sec(unsigned char sec)
                             623 ;	-----------------------------------------
                             624 ;	 function delay_sec
                             625 ;	-----------------------------------------
@@ -628,7 +628,7 @@
    0074 E5 82               628 	mov	a,dpl
    0076 90s00r04            629 	mov	dptr,#_delay_sec_sec_1_1
    0079 F0                  630 	movx	@dptr,a
-                            631 ;	delay.c:43: while(sec!=0)
+                            631 ;	delay.c:44: while(sec!=0)
                             632 ;	genAssign
    007A 90s00r04            633 	mov	dptr,#_delay_sec_sec_1_1
    007D E0                  634 	movx	a,@dptr
@@ -640,14 +640,14 @@
                             640 ;	Peephole 112.b	changed ljmp to sjmp
    0082 80 12               641 	sjmp	00108$
    0084                     642 00109$:
-                            643 ;	delay.c:45: delay_ms(1000);	//delay_ms is called to generate 1sec delay
+                            643 ;	delay.c:46: delay_ms(1000);	//delay_ms is called to generate 1sec delay
                             644 ;	genCall
                             645 ;	Peephole 182.b	used 16 bit load of dptr
    0084 90 03 E8            646 	mov	dptr,#0x03E8
    0087 C0 02               647 	push	ar2
    0089 12s00r33            648 	lcall	_delay_ms
    008C D0 02               649 	pop	ar2
-                            650 ;	delay.c:46: sec--;
+                            650 ;	delay.c:47: sec--;
                             651 ;	genMinus
                             652 ;	genMinusDec
    008E 1A                  653 	dec	r2

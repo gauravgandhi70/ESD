@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1479281588 source:c:\users\admin\documents\lab4_sup\atoh_f.c
+1480019087 source:c:\users\admin\documents\lab4_sup\atoh_f.c
 	<mcs51/8051.h>
 	<at89c51ed2.h>
 	<stdio.h>
@@ -10,34 +10,44 @@
 	"delay.h"
 	"uart.h"
 
-1479338084 c:\users\admin\documents\lab4_sup\lcd.h
+1479947776 c:\users\admin\documents\lab4_sup\lcd.h
 	<stdint.h>
 
-1478845869 c:\users\admin\documents\lab4_sup\i2c.h
+1479946896 c:\users\admin\documents\lab4_sup\i2c.h
 
-1479025468 c:\users\admin\documents\lab4_sup\eeprom.h
+1479947130 c:\users\admin\documents\lab4_sup\eeprom.h
 
 1477783478 c:\users\admin\documents\lab4_sup\delay.h
 
 1478820874 c:\users\admin\documents\lab4_sup\uart.h
 
-1478860253 source:c:\users\admin\documents\lab4_sup\delay.c
+1479628676 source:c:\users\admin\documents\lab4_sup\delay.c
 	<mcs51/8051.h>
 	<at89c51ed2.h>
 
-1479026328 source:c:\users\admin\documents\lab4_sup\eeprom.c
+1479986532 source:c:\users\admin\documents\lab4_sup\eeprom.c
+	<mcs51/8051.h>
 	<at89c51ed2.h>
+	<stdio.h>
+	<stdlib.h>
+	"lcd.h"
 	"i2c.h"
 	"eeprom.h"
 	"delay.h"
+	"uart.h"
+	"atoh_f.h"
+	"clock.h"
+	"data_dump.h"
+	"io_exp.h"
+	"profile.h"
 
-1478910457 source:c:\users\admin\documents\lab4_sup\i2c.c
+1479986532 source:c:\users\admin\documents\lab4_sup\i2c.c
 	<at89c51ed2.h>
 	<mcs51/8051.h>
 	"delay.h"
 	"i2c.h"
 
-1479448914 source:c:\users\admin\documents\lab4_sup\lcd.c
+1479947776 source:c:\users\admin\documents\lab4_sup\lcd.c
 	<mcs51/8051.h>
 	<at89c51ed2.h>
 	<stdio.h>
@@ -54,7 +64,7 @@
 
 1479338084 c:\users\admin\documents\lab4_sup\atoh_f.h
 
-1479451300 source:c:\users\admin\documents\lab4_sup\main.c
+1479988456 source:c:\users\admin\documents\lab4_sup\main.c
 	<mcs51/8051.h>
 	<at89c51ed2.h>
 	<stdio.h>
@@ -68,14 +78,15 @@
 	"clock.h"
 	"data_dump.h"
 	"io_exp.h"
+	"profile.h"
 
-1479326254 source:c:\users\admin\documents\lab4_sup\uart.c
+1479628291 source:c:\users\admin\documents\lab4_sup\uart.c
 	<mcs51/8051.h>
 	<at89c51ed2.h>
 	"delay.h"
 	"uart.h"
 
-1479325538 source:c:\users\admin\documents\lab4_sup\clock.c
+1479987933 source:c:\users\admin\documents\lab4_sup\clock.c
 	<mcs51/8051.h>
 	<at89c51ed2.h>
 	<stdio.h>
@@ -123,4 +134,22 @@
 	"io_exp.h"
 
 1479448994 c:\users\admin\documents\lab4_sup\io_exp.h
+
+1479987921 source:c:\users\admin\documents\lab4_sup\profile.c
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+	<stdio.h>
+	<stdlib.h>
+	"lcd.h"
+	"i2c.h"
+	"eeprom.h"
+	"delay.h"
+	"uart.h"
+	"atoh_f.h"
+	"clock.h"
+	"data_dump.h"
+	"io_exp.h"
+	"profile.h"
+
+1479625488 c:\users\admin\documents\lab4_sup\profile.h
 

@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.6.0 #4309 (Jul 28 2006)
-; This file generated Thu Nov 17 23:50:29 2016
+; This file generated Thu Nov 24 04:45:33 2016
 ;--------------------------------------------------------
 	.module clock
 	.optsdcc -mmcs51 --model-large
@@ -581,16 +581,7 @@ _clock_control:
 	clr	c
 00112$:
 	push	psw
-;	clock.c:72: WDTPRG |=0x07;
-;	genOr
-	orl	_WDTPRG,#0x07
-;	clock.c:73: WDTRST = 0x01E;
-;	genAssign
-	mov	_WDTRST,#0x1E
-;	clock.c:74: WDTRST = 0x0E1;
-;	genAssign
-	mov	_WDTRST,#0xE1
-;	clock.c:75: ms++;
+;	clock.c:73: ms++;
 ;	genAssign
 	mov	dptr,#_ms
 	movx	a,@dptr
@@ -602,7 +593,7 @@ _clock_control:
 ;	Peephole 236.a	used r2 instead of ar2
 	add	a,r2
 	movx	@dptr,a
-;	clock.c:76: if(ms==10){ms=0;sec++;}
+;	clock.c:74: if(ms==10){ms=0;sec++;}
 ;	genAssign
 	mov	dptr,#_ms
 	movx	a,@dptr
@@ -632,7 +623,7 @@ _clock_control:
 	add	a,r2
 	movx	@dptr,a
 00102$:
-;	clock.c:77: c[0]=ctoa(ms);
+;	clock.c:75: c[0]=ctoa(ms);                          // Convdert the character into ascii value to print on the LCD
 ;	genAssign
 	mov	dptr,#_ms
 	movx	a,@dptr
@@ -652,7 +643,7 @@ _clock_control:
 	mov	dptr,#_clock_control_c_1_1
 	mov	a,r2
 	movx	@dptr,a
-;	clock.c:78: lcdgotoxy(4,16);
+;	clock.c:76: lcdgotoxy(4,16);                        // Specifybthe location every time before print
 ;	genAssign
 	mov	dptr,#_lcdgotoxy_PARM_2
 	mov	a,#0x10
@@ -660,7 +651,7 @@ _clock_control:
 ;	genCall
 	mov	dpl,#0x04
 	lcall	_lcdgotoxy
-;	clock.c:79: lcdputch(c[0]);
+;	clock.c:77: lcdputch(c[0]);
 ;	genPointerGet
 ;	genFarPointerGet
 	mov	dptr,#_clock_control_c_1_1
@@ -670,7 +661,7 @@ _clock_control:
 ;	Peephole 244.c	loading dpl from a instead of r2
 	mov	dpl,a
 	lcall	_lcdputch
-;	clock.c:81: if(sec==60){sec=0;mi++;}
+;	clock.c:79: if(sec==60){sec=0;mi++;}
 ;	genAssign
 	mov	dptr,#_sec
 	movx	a,@dptr
@@ -700,7 +691,7 @@ _clock_control:
 	add	a,r2
 	movx	@dptr,a
 00104$:
-;	clock.c:82: t=sec/10;
+;	clock.c:80: t=sec/10;
 ;	genAssign
 	mov	dptr,#_sec
 	movx	a,@dptr
@@ -731,7 +722,7 @@ _clock_control:
 	inc	dptr
 	mov	a,r3
 	movx	@dptr,a
-;	clock.c:83: c[0]=ctoa(t);
+;	clock.c:81: c[0]=ctoa(t);                           // Convdert the number into ascii value to print on the LCD
 ;	genCall
 	mov	dpl,r2
 	mov	dph,r3
@@ -742,7 +733,7 @@ _clock_control:
 	mov	dptr,#_clock_control_c_1_1
 	mov	a,r2
 	movx	@dptr,a
-;	clock.c:84: t=sec-(t*10);
+;	clock.c:82: t=sec-(t*10);
 ;	genAssign
 	mov	dptr,#_sec
 	movx	a,@dptr
@@ -788,7 +779,7 @@ _clock_control:
 	subb	a,r5
 	inc	dptr
 	movx	@dptr,a
-;	clock.c:85: c[1]=ctoa(t);
+;	clock.c:83: c[1]=ctoa(t);
 ;	genAssign
 	mov	dptr,#_clock_control_t_1_1
 	movx	a,@dptr
@@ -806,14 +797,14 @@ _clock_control:
 	mov	dptr,#(_clock_control_c_1_1 + 0x0001)
 	mov	a,r2
 	movx	@dptr,a
-;	clock.c:86: c[2]='\0';
+;	clock.c:84: c[2]='\0';
 ;	genPointerSet
 ;     genFarPointerSet
 	mov	dptr,#(_clock_control_c_1_1 + 0x0002)
 ;	Peephole 181	changed mov to clr
 	clr	a
 	movx	@dptr,a
-;	clock.c:87: lcdgotoxy(4,13);
+;	clock.c:85: lcdgotoxy(4,13);                        // Specifybthe location every time before print
 ;	genAssign
 	mov	dptr,#_lcdgotoxy_PARM_2
 	mov	a,#0x0D
@@ -821,13 +812,13 @@ _clock_control:
 ;	genCall
 	mov	dpl,#0x04
 	lcall	_lcdgotoxy
-;	clock.c:88: lcdputstr(c);
+;	clock.c:86: lcdputstr(c);
 ;	genCall
 ;	Peephole 182.a	used 16 bit load of DPTR
 	mov	dptr,#_clock_control_c_1_1
 	mov	b,#0x00
 	lcall	_lcdputstr
-;	clock.c:91: if(mi==60){mi=0;}
+;	clock.c:89: if(mi==60){mi=0;}
 ;	genAssign
 	mov	dptr,#_mi
 	movx	a,@dptr
@@ -846,7 +837,7 @@ _clock_control:
 	clr	a
 	movx	@dptr,a
 00106$:
-;	clock.c:92: t=mi/10;
+;	clock.c:90: t=mi/10;
 ;	genAssign
 	mov	dptr,#_mi
 	movx	a,@dptr
@@ -877,7 +868,7 @@ _clock_control:
 	inc	dptr
 	mov	a,r3
 	movx	@dptr,a
-;	clock.c:93: c[0]=ctoa(t);
+;	clock.c:91: c[0]=ctoa(t);                           // Convdert the number into ascii value to print on the LCD
 ;	genCall
 	mov	dpl,r2
 	mov	dph,r3
@@ -888,7 +879,7 @@ _clock_control:
 	mov	dptr,#_clock_control_c_1_1
 	mov	a,r2
 	movx	@dptr,a
-;	clock.c:94: t=mi-(t*10);
+;	clock.c:92: t=mi-(t*10);
 ;	genAssign
 	mov	dptr,#_mi
 	movx	a,@dptr
@@ -934,7 +925,7 @@ _clock_control:
 	subb	a,r5
 	inc	dptr
 	movx	@dptr,a
-;	clock.c:95: c[1]=ctoa(t);
+;	clock.c:93: c[1]=ctoa(t);
 ;	genAssign
 	mov	dptr,#_clock_control_t_1_1
 	movx	a,@dptr
@@ -952,14 +943,14 @@ _clock_control:
 	mov	dptr,#(_clock_control_c_1_1 + 0x0001)
 	mov	a,r2
 	movx	@dptr,a
-;	clock.c:96: c[2]='\0';
+;	clock.c:94: c[2]='\0';
 ;	genPointerSet
 ;     genFarPointerSet
 	mov	dptr,#(_clock_control_c_1_1 + 0x0002)
 ;	Peephole 181	changed mov to clr
 	clr	a
 	movx	@dptr,a
-;	clock.c:97: lcdgotoxy(4,10);
+;	clock.c:95: lcdgotoxy(4,10);                         // Specifybthe location every time before print
 ;	genAssign
 	mov	dptr,#_lcdgotoxy_PARM_2
 	mov	a,#0x0A
@@ -967,7 +958,7 @@ _clock_control:
 ;	genCall
 	mov	dpl,#0x04
 	lcall	_lcdgotoxy
-;	clock.c:98: lcdputstr(c);
+;	clock.c:96: lcdputstr(c);
 ;	genCall
 ;	Peephole 182.a	used 16 bit load of DPTR
 	mov	dptr,#_clock_control_c_1_1
@@ -988,7 +979,7 @@ _clock_control:
 ;c                         Allocated with name '_countdown_alarm_c_1_1'
 ;t                         Allocated with name '_countdown_alarm_t_1_1'
 ;------------------------------------------------------------
-;	clock.c:110: void countdown_alarm(unsigned int nm,unsigned int nse,unsigned int nmi,char cn,int num) __critical
+;	clock.c:109: void countdown_alarm(unsigned int nm,unsigned int nse,unsigned int nmi,char cn,int num) __critical
 ;	-----------------------------------------
 ;	 function countdown_alarm
 ;	-----------------------------------------
@@ -1006,7 +997,7 @@ _countdown_alarm:
 	inc	dptr
 	mov	a,r2
 	movx	@dptr,a
-;	clock.c:115: c[0]=ctoa(nm);
+;	clock.c:114: c[0]=ctoa(nm);                          // Convdert the number into ascii value to print on the LCD
 ;	genAssign
 	mov	dptr,#_countdown_alarm_nm_1_1
 	movx	a,@dptr
@@ -1024,7 +1015,7 @@ _countdown_alarm:
 	mov	dptr,#_countdown_alarm_c_1_1
 	mov	a,r2
 	movx	@dptr,a
-;	clock.c:116: lcdgotoxy(num+1,16);
+;	clock.c:115: lcdgotoxy(num+1,16);
 ;	genAssign
 	mov	dptr,#_countdown_alarm_PARM_5
 	movx	a,@dptr
@@ -1050,7 +1041,7 @@ _countdown_alarm:
 	lcall	_lcdgotoxy
 	pop	ar3
 	pop	ar2
-;	clock.c:117: lcdputch(c[0]);
+;	clock.c:116: lcdputch(c[0]);
 ;	genPointerGet
 ;	genFarPointerGet
 	mov	dptr,#_countdown_alarm_c_1_1
@@ -1064,7 +1055,7 @@ _countdown_alarm:
 	lcall	_lcdputch
 	pop	ar3
 	pop	ar2
-;	clock.c:120: t=nse/10;
+;	clock.c:119: t=nse/10;
 ;	genAssign
 	mov	dptr,#_countdown_alarm_PARM_2
 	movx	a,@dptr
@@ -1079,7 +1070,7 @@ _countdown_alarm:
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	clock.c:121: c[0]=ctoa(t);
+;	clock.c:120: c[0]=ctoa(t);                           // Convdert the number into ascii value to print on the LCD
 ;	genCall
 	mov	dpl,r4
 	mov	dph,r5
@@ -1116,7 +1107,7 @@ _countdown_alarm:
 	mov	dptr,#_countdown_alarm_c_1_1
 	mov	a,r0
 	movx	@dptr,a
-;	clock.c:122: t=nse-(t*10);
+;	clock.c:121: t=nse-(t*10);
 ;	genAssign
 ;	genAssign
 	mov	dptr,#__mulint_PARM_2
@@ -1149,7 +1140,7 @@ _countdown_alarm:
 ;	Peephole 236.l	used r7 instead of ar7
 	subb	a,r7
 	mov	r5,a
-;	clock.c:123: c[1]=ctoa(t);
+;	clock.c:122: c[1]=ctoa(t);
 ;	genCall
 	mov	dpl,r4
 	mov	dph,r5
@@ -1164,14 +1155,14 @@ _countdown_alarm:
 	mov	dptr,#(_countdown_alarm_c_1_1 + 0x0001)
 	mov	a,r4
 	movx	@dptr,a
-;	clock.c:124: c[2]='\0';
+;	clock.c:123: c[2]='\0';
 ;	genPointerSet
 ;     genFarPointerSet
 	mov	dptr,#(_countdown_alarm_c_1_1 + 0x0002)
 ;	Peephole 181	changed mov to clr
 	clr	a
 	movx	@dptr,a
-;	clock.c:125: lcdgotoxy(num+1,13);
+;	clock.c:124: lcdgotoxy(num+1,13);
 ;	genAssign
 	mov	dptr,#_lcdgotoxy_PARM_2
 	mov	a,#0x0D
@@ -1183,7 +1174,7 @@ _countdown_alarm:
 	lcall	_lcdgotoxy
 	pop	ar3
 	pop	ar2
-;	clock.c:126: lcdputstr(c);
+;	clock.c:125: lcdputstr(c);
 ;	genCall
 ;	Peephole 182.a	used 16 bit load of DPTR
 	mov	dptr,#_countdown_alarm_c_1_1
@@ -1193,7 +1184,7 @@ _countdown_alarm:
 	lcall	_lcdputstr
 	pop	ar3
 	pop	ar2
-;	clock.c:130: t=nmi/10;
+;	clock.c:129: t=nmi/10;
 ;	genAssign
 	mov	dptr,#_countdown_alarm_PARM_3
 	movx	a,@dptr
@@ -1208,7 +1199,7 @@ _countdown_alarm:
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	clock.c:131: c[0]=ctoa(t);
+;	clock.c:130: c[0]=ctoa(t);                           // Convdert the number into ascii value to print on the LCD
 ;	genCall
 	mov	dpl,r4
 	mov	dph,r5
@@ -1245,7 +1236,7 @@ _countdown_alarm:
 	mov	dptr,#_countdown_alarm_c_1_1
 	mov	a,r0
 	movx	@dptr,a
-;	clock.c:132: t=nmi-(t*10);
+;	clock.c:131: t=nmi-(t*10);
 ;	genAssign
 ;	genAssign
 	mov	dptr,#__mulint_PARM_2
@@ -1278,7 +1269,7 @@ _countdown_alarm:
 ;	Peephole 236.l	used r7 instead of ar7
 	subb	a,r7
 	mov	r5,a
-;	clock.c:133: c[1]=ctoa(t);
+;	clock.c:132: c[1]=ctoa(t);
 ;	genCall
 	mov	dpl,r4
 	mov	dph,r5
@@ -1293,14 +1284,14 @@ _countdown_alarm:
 	mov	dptr,#(_countdown_alarm_c_1_1 + 0x0001)
 	mov	a,r4
 	movx	@dptr,a
-;	clock.c:134: c[2]='\0';
+;	clock.c:133: c[2]='\0';
 ;	genPointerSet
 ;     genFarPointerSet
 	mov	dptr,#(_countdown_alarm_c_1_1 + 0x0002)
 ;	Peephole 181	changed mov to clr
 	clr	a
 	movx	@dptr,a
-;	clock.c:135: lcdgotoxy(num+1,10);
+;	clock.c:134: lcdgotoxy(num+1,10);
 ;	genAssign
 	mov	dptr,#_lcdgotoxy_PARM_2
 	mov	a,#0x0A
@@ -1310,7 +1301,7 @@ _countdown_alarm:
 	push	ar2
 	lcall	_lcdgotoxy
 	pop	ar2
-;	clock.c:136: lcdputstr(c);
+;	clock.c:135: lcdputstr(c);
 ;	genCall
 ;	Peephole 182.a	used 16 bit load of DPTR
 	mov	dptr,#_countdown_alarm_c_1_1
@@ -1318,7 +1309,7 @@ _countdown_alarm:
 	push	ar2
 	lcall	_lcdputstr
 	pop	ar2
-;	clock.c:137: if(cn==0)
+;	clock.c:136: if(cn==0)                               // If countdown timer reaches zero then Display Alarm on the LCD screen
 ;	genAssign
 	mov	dptr,#_countdown_alarm_PARM_4
 	movx	a,@dptr
@@ -1329,7 +1320,7 @@ _countdown_alarm:
 ;	Peephole 108.b	removed ljmp by inverse jump logic
 	jnz	00103$
 ;	Peephole 300	removed redundant label 00107$
-;	clock.c:140: lcdgotoxy(num+1,1);
+;	clock.c:139: lcdgotoxy(num+1,1);
 ;	genPlus
 ;     genPlusIncr
 	inc	r2
@@ -1340,7 +1331,7 @@ _countdown_alarm:
 ;	genCall
 	mov	dpl,r2
 	lcall	_lcdgotoxy
-;	clock.c:141: lcdputstr("*Alarm*  ");
+;	clock.c:140: lcdputstr("*Alarm*  ");
 ;	genCall
 ;	Peephole 182.a	used 16 bit load of DPTR
 	mov	dptr,#__str_0

@@ -221,21 +221,24 @@ unsigned char I2C_Read(void)
  * description  :This function is used to wait for a the Positive ACK
                  pulse on SDA after sending a byte.
 -----------------------------------------------------------------------------------*/
-void I2C_Ack()
+char I2C_Ack()
 {
     char dat=1;
 	P1_2 = 1;
 	//while(dat!=0)
     //{
 
+
         P1_1 = 1;			// Pull SCL High
-		delay_us(1);
+        delay_us(1);
 
 		dat = P1_2;
 
 		P1_1 = 0;
-		if(dat==0){;}
-    //}
+
+		return dat;         // Return Ack status
+
+   // }
 }
 
 
@@ -264,3 +267,6 @@ void I2C_NoAck()
    I2C_Clock();	    // Generate the Clock
 	P1_1 = 1;		// Set SCL */
 }
+
+
+
