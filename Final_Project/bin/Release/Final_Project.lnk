@@ -1,0 +1,29 @@
+-myuxi
+-Y
+-w 0x8000
+-b HOME = 0x0000
+-b ISEG = 0x0080
+-b BSEG = 0x0000
+-k C:\Program Files (x86)\sdcc\lib
+-k C:\Program Files (x86)\SDCC\bin\..\lib\large
+-l mcs51
+-l libsdcc
+-l libint
+-l liblong
+-l libfloat
+obj\Release\adc.rel
+obj\Release\atoh_f.rel
+obj\Release\clock.rel
+obj\Release\data_dump.rel
+obj\Release\delay.rel
+obj\Release\eeprom.rel
+obj\Release\gps.rel
+obj\Release\i2c.rel
+obj\Release\io_exp.rel
+obj\Release\lcd.rel
+obj\Release\main.rel
+obj\Release\profile.rel
+obj\Release\uart.rel
+obj\Release\weather_shield.rel
+
+-e

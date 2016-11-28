@@ -1,0 +1,222 @@
+# depslib dependency file v1.0
+1479281588 source:c:\users\admin\documents\final_project\atoh_f.c
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+	<stdio.h>
+	<stdlib.h>
+	"lcd.h"
+	"i2c.h"
+	"eeprom.h"
+	"delay.h"
+	"uart.h"
+
+1479894242 c:\users\admin\documents\final_project\lcd.h
+	<stdint.h>
+
+1479946896 c:\users\admin\documents\final_project\i2c.h
+
+1479947130 c:\users\admin\documents\final_project\eeprom.h
+
+1477783478 c:\users\admin\documents\final_project\delay.h
+
+1478820874 c:\users\admin\documents\final_project\uart.h
+
+1479880173 source:c:\users\admin\documents\final_project\clock.c
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+	<stdio.h>
+	<stdlib.h>
+	"lcd.h"
+	"i2c.h"
+	"eeprom.h"
+	"delay.h"
+	"uart.h"
+	"atoh_f.h"
+	"clock.h"
+
+1479338084 c:\users\admin\documents\final_project\atoh_f.h
+
+1479879934 c:\users\admin\documents\final_project\clock.h
+
+1479240799 source:c:\users\admin\documents\final_project\data_dump.c
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+	<stdio.h>
+	<stdlib.h>
+	"lcd.h"
+	"i2c.h"
+	"eeprom.h"
+	"delay.h"
+	"uart.h"
+	"atoh_f.h"
+	"clock.h"
+	"data_dump.h"
+
+1479027759 c:\users\admin\documents\final_project\data_dump.h
+
+1479628676 source:c:\users\admin\documents\final_project\delay.c
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+
+1479986532 source:c:\users\admin\documents\final_project\eeprom.c
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+	<stdio.h>
+	<stdlib.h>
+	"lcd.h"
+	"i2c.h"
+	"eeprom.h"
+	"delay.h"
+	"uart.h"
+	"atoh_f.h"
+	"clock.h"
+	"data_dump.h"
+	"io_exp.h"
+	"profile.h"
+
+1479448994 c:\users\admin\documents\final_project\io_exp.h
+
+1479625488 c:\users\admin\documents\final_project\profile.h
+
+1480291956 source:c:\users\admin\documents\final_project\i2c.c
+	<at89c51ed2.h>
+	<mcs51/8051.h>
+	"delay.h"
+	"i2c.h"
+
+1479451123 source:c:\users\admin\documents\final_project\io_exp.c
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"lcd.h"
+	"i2c.h"
+	"eeprom.h"
+	"delay.h"
+	"uart.h"
+	"atoh_f.h"
+	"clock.h"
+	"data_dump.h"
+	"io_exp.h"
+
+1479894918 source:c:\users\admin\documents\final_project\lcd.c
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+	<stdio.h>
+	<stdlib.h>
+	"lcd.h"
+	"i2c.h"
+	"eeprom.h"
+	"delay.h"
+	"uart.h"
+	"atoh_f.h"
+	"clock.h"
+	"data_dump.h"
+	"io_exp.h"
+
+1479844928 source:c:\users\admin\documents\final_project\profile.c
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+	<stdio.h>
+	<stdlib.h>
+	"lcd.h"
+	"i2c.h"
+	"eeprom.h"
+	"delay.h"
+	"uart.h"
+	"atoh_f.h"
+	"clock.h"
+	"data_dump.h"
+	"io_exp.h"
+	"profile.h"
+
+1479867663 source:c:\users\admin\documents\final_project\uart.c
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+	"delay.h"
+	"uart.h"
+
+1480313749 source:c:\users\admin\documents\final_project\main.c
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lcd.h"
+	"i2c.h"
+	"eeprom.h"
+	"delay.h"
+	"uart.h"
+	"atoh_f.h"
+	"clock.h"
+	"data_dump.h"
+	"io_exp.h"
+	"profile.h"
+	"gps.h"
+	"weather_shield.h"
+	"adc.h"
+
+1479972559 source:c:\users\admin\documents\final_project\gps.c
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lcd.h"
+	"i2c.h"
+	"eeprom.h"
+	"delay.h"
+	"uart.h"
+	"atoh_f.h"
+	"clock.h"
+	"data_dump.h"
+	"io_exp.h"
+	"profile.h"
+	"gps.h"
+
+1479894738 c:\users\admin\documents\final_project\gps.h
+
+1480280778 source:c:\users\admin\documents\final_project\weather_shield.c
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lcd.h"
+	"i2c.h"
+	"eeprom.h"
+	"delay.h"
+	"uart.h"
+	"atoh_f.h"
+	"clock.h"
+	"data_dump.h"
+	"io_exp.h"
+	"profile.h"
+	"gps.h"
+	"weather_shield.h"
+
+1480280778 c:\users\admin\documents\final_project\weather_shield.h
+
+1480064605 c:\users\admin\documents\final_project\adc.h
+
+1480313962 source:c:\users\admin\documents\final_project\adc.c
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lcd.h"
+	"i2c.h"
+	"eeprom.h"
+	"delay.h"
+	"uart.h"
+	"atoh_f.h"
+	"clock.h"
+	"data_dump.h"
+	"io_exp.h"
+	"profile.h"
+	"gps.h"
+	"weather_shield.h"
+	"adc.h"
+

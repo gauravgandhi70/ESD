@@ -1,0 +1,65 @@
+#include <mcs51/8051.h>
+#include<at89c51ed2.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include"lcd.h"
+#include"i2c.h"
+#include"eeprom.h"
+#include"delay.h"
+#include"uart.h"
+#include"atoh_f.h"
+#include"clock.h"
+#include"data_dump.h"
+#include"io_exp.h"
+#include"profile.h"
+#include"gps.h"
+#include"weather_shield.h"
+
+
+
+void PRESSURE_WriteByte(unsigned char addr, unsigned char p_Data)
+{
+
+    I2C_Start();               // Start i2c communication
+   	I2C_Write(PRESSURE_ID);	   // Select IO_expander as the SLAVE by sending its ID (01110000)
+	I2C_Ack();
+
+	I2C_Write(addr); // Select the Specified EEPROM address of AT2404
+	I2C_Ack();
+
+   	I2C_Write(p_Data);    // Write the data at specified address
+	I2C_Ack();
+    I2C_Stop();           	   // Stop i2c communication after Writing the data
+	delay_ms(5);               // Write operation takes max 5ms, refer At2404 datasheet
+}
+
+
+
+
+
+
+unsigned char PRESSURE_ReadByte(char reg)
+{
+  unsigned char p_Data;
+
+    I2C_Start();               // Start i2c communication
+   	I2C_Write(PRESSURE_ID);	   // connect to AT2404(write) by sending its ID on I2c Bus
+	I2C_Ack();
+   	I2C_Write(reg); // Select the Specified EEPROM address of AT2404
+    I2C_Ack();
+
+    I2C_Start();               // Start i2c communication
+   	I2C_Write(PRESSURE_ID+1);	  // Select IO_expander as the SLAVE by sending its ID (01110000)
+	I2C_Ack();
+
+    p_Data = I2C_Read();  // Read the data from specified address
+	I2C_NoAck();
+    I2C_Stop();		           // Stop i2c communication after Reading the data
+	delay_us(10);
+  return p_Data;          // Return the Read data
+
+}
+
+
+
