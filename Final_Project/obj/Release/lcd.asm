@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.6.0 #4309 (Jul 28 2006)
-; This file generated Wed Nov 23 20:07:43 2016
+; This file generated Mon Nov 28 22:51:33 2016
 ;--------------------------------------------------------
 	.module lcd
 	.optsdcc -mmcs51 --model-large
@@ -652,11 +652,16 @@ _lcd_init:
 ;------------------------------------------------------------
 ;c                         Allocated with name '_lcdputch_c_1_1'
 ;------------------------------------------------------------
-;	lcd.c:73: void lcdputch(char c)
+;	lcd.c:73: void lcdputch(char c)  __critical
 ;	-----------------------------------------
 ;	 function lcdputch
 ;	-----------------------------------------
 _lcdputch:
+	setb	c
+	jbc	ea,00103$
+	clr	c
+00103$:
+	push	psw
 ;	genReceive
 	mov	a,dpl
 	mov	dptr,#_lcdputch_c_1_1
@@ -685,9 +690,11 @@ _lcdputch:
 	movx	@dptr,a
 ;	lcd.c:78: lcdbusywait();              // Poll for busy flag
 ;	genCall
-;	Peephole 253.b	replaced lcall/ret with ljmp
-	ljmp	_lcdbusywait
-;
+	lcall	_lcdbusywait
+;	Peephole 300	removed redundant label 00101$
+	pop	psw
+	mov	ea,c
+	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'lcdputcmd'
 ;------------------------------------------------------------

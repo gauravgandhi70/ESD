@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.6.0 #4309 (Jul 28 2006)
-                              4 ; This file generated Wed Nov 23 20:06:55 2016
+                              4 ; This file generated Mon Nov 28 22:08:17 2016
                               5 ;--------------------------------------------------------
                               6 	.module clock
                               7 	.optsdcc -mmcs51 --model-large
@@ -510,12 +510,12 @@
                             510 ;	clock.c:35: IPL0 =0x02;
                             511 ;	genAssign
    0009 75 B8 02            512 	mov	_IPL0,#0x02
-                            513 ;	clock.c:36: IE  |= 0x83;
+                            513 ;	clock.c:36: IE  |= 0x87;
                             514 ;	genOr
-   000C 43 A8 83            515 	orl	_IE,#0x83
-                            516 ;	clock.c:37: TCON |= 0x11;
+   000C 43 A8 87            515 	orl	_IE,#0x87
+                            516 ;	clock.c:37: TCON |= 0x15;
                             517 ;	genOr
-   000F 43 88 11            518 	orl	_TCON,#0x11
+   000F 43 88 15            518 	orl	_TCON,#0x15
                             519 ;	Peephole 300	removed redundant label 00101$
    0012 22                  520 	ret
                             521 ;------------------------------------------------------------

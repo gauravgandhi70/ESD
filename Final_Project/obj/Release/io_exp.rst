@@ -444,14 +444,14 @@
                             444 ; external ram data
                             445 ;--------------------------------------------------------
                             446 	.area XSEG    (XDATA)
-   00E7                     447 _IOEX_WriteByte_ioex_Data_1_1:
-   00E7                     448 	.ds 1
-   00E8                     449 _io_cnt_io_exp_counter_1_1:
-   00E8                     450 	.ds 2
-   00EA                     451 _io_exp_dir_c_1_1:
-   00EA                     452 	.ds 3
-   00ED                     453 _io_exp_dir_io_status_1_1:
-   00ED                     454 	.ds 1
+   00F7                     447 _IOEX_WriteByte_ioex_Data_1_1:
+   00F7                     448 	.ds 1
+   00F8                     449 _io_cnt_io_exp_counter_1_1:
+   00F8                     450 	.ds 2
+   00FA                     451 _io_exp_dir_c_1_1:
+   00FA                     452 	.ds 3
+   00FD                     453 _io_exp_dir_io_status_1_1:
+   00FD                     454 	.ds 1
                             455 ;--------------------------------------------------------
                             456 ; external initialized ram data
                             457 ;--------------------------------------------------------
@@ -491,7 +491,7 @@
                             491 ;	-----------------------------------------
                             492 ;	 function IOEX_WriteByte
                             493 ;	-----------------------------------------
-   1899                     494 _IOEX_WriteByte:
+   18A3                     494 _IOEX_WriteByte:
                     0002    495 	ar2 = 0x02
                     0003    496 	ar3 = 0x03
                     0004    497 	ar4 = 0x04
@@ -501,40 +501,40 @@
                     0000    501 	ar0 = 0x00
                     0001    502 	ar1 = 0x01
                             503 ;	genReceive
-   1899 E5 82               504 	mov	a,dpl
-   189B 90 00 E7            505 	mov	dptr,#_IOEX_WriteByte_ioex_Data_1_1
-   189E F0                  506 	movx	@dptr,a
+   18A3 E5 82               504 	mov	a,dpl
+   18A5 90 00 F7            505 	mov	dptr,#_IOEX_WriteByte_ioex_Data_1_1
+   18A8 F0                  506 	movx	@dptr,a
                             507 ;	io_exp.c:37: I2C_Start();               // Start i2c communication
                             508 ;	genCall
-   189F 12 17 C6            509 	lcall	_I2C_Start
+   18A9 12 17 D0            509 	lcall	_I2C_Start
                             510 ;	io_exp.c:38: I2C_Write(IOEX_ID);	   // Select IO_expander as the SLAVE by sending its ID (01110000)
                             511 ;	genCall
-   18A2 75 82 70            512 	mov	dpl,#0x70
-   18A5 12 17 FE            513 	lcall	_I2C_Write
+   18AC 75 82 70            512 	mov	dpl,#0x70
+   18AF 12 18 08            513 	lcall	_I2C_Write
                             514 ;	io_exp.c:39: I2C_Ack();
                             515 ;	genCall
-   18A8 12 18 75            516 	lcall	_I2C_Ack
+   18B2 12 18 7F            516 	lcall	_I2C_Ack
                             517 ;	io_exp.c:41: I2C_Write(ioex_Data);    // Write the data at specified address
                             518 ;	genAssign
-   18AB 90 00 E7            519 	mov	dptr,#_IOEX_WriteByte_ioex_Data_1_1
-   18AE E0                  520 	movx	a,@dptr
+   18B5 90 00 F7            519 	mov	dptr,#_IOEX_WriteByte_ioex_Data_1_1
+   18B8 E0                  520 	movx	a,@dptr
                             521 ;	genCall
-   18AF FA                  522 	mov	r2,a
+   18B9 FA                  522 	mov	r2,a
                             523 ;	Peephole 244.c	loading dpl from a instead of r2
-   18B0 F5 82               524 	mov	dpl,a
-   18B2 12 17 FE            525 	lcall	_I2C_Write
+   18BA F5 82               524 	mov	dpl,a
+   18BC 12 18 08            525 	lcall	_I2C_Write
                             526 ;	io_exp.c:42: I2C_Ack();
                             527 ;	genCall
-   18B5 12 18 75            528 	lcall	_I2C_Ack
+   18BF 12 18 7F            528 	lcall	_I2C_Ack
                             529 ;	io_exp.c:43: I2C_Stop();           	   // Stop i2c communication after Writing the data
                             530 ;	genCall
-   18B8 12 17 E3            531 	lcall	_I2C_Stop
+   18C2 12 17 ED            531 	lcall	_I2C_Stop
                             532 ;	io_exp.c:44: delay_ms(5);               // Write operation takes max 5ms, refer At2404 datasheet
                             533 ;	genCall
                             534 ;	Peephole 182.b	used 16 bit load of dptr
-   18BB 90 00 05            535 	mov	dptr,#0x0005
+   18C5 90 00 05            535 	mov	dptr,#0x0005
                             536 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   18BE 02 0D B4            537 	ljmp	_delay_ms
+   18C8 02 0D C1            537 	ljmp	_delay_ms
                             538 ;
                             539 ;------------------------------------------------------------
                             540 ;Allocation info for local variables in function 'IOEX_ReadByte'
@@ -545,43 +545,43 @@
                             545 ;	-----------------------------------------
                             546 ;	 function IOEX_ReadByte
                             547 ;	-----------------------------------------
-   18C1                     548 _IOEX_ReadByte:
+   18CB                     548 _IOEX_ReadByte:
                             549 ;	io_exp.c:65: I2C_Start();               // Start i2c communication
                             550 ;	genCall
-   18C1 12 17 C6            551 	lcall	_I2C_Start
+   18CB 12 17 D0            551 	lcall	_I2C_Start
                             552 ;	io_exp.c:66: I2C_Write(0x71);	  // Select IO_expander as the SLAVE by sending its ID (01110000)
                             553 ;	genCall
-   18C4 75 82 71            554 	mov	dpl,#0x71
-   18C7 12 17 FE            555 	lcall	_I2C_Write
+   18CE 75 82 71            554 	mov	dpl,#0x71
+   18D1 12 18 08            555 	lcall	_I2C_Write
                             556 ;	io_exp.c:67: I2C_Ack();
                             557 ;	genCall
-   18CA 12 18 75            558 	lcall	_I2C_Ack
+   18D4 12 18 7F            558 	lcall	_I2C_Ack
                             559 ;	io_exp.c:69: ioex_Data = I2C_Read();  // Read the data from specified address
                             560 ;	genCall
-   18CD 12 18 2B            561 	lcall	_I2C_Read
-   18D0 AA 82               562 	mov	r2,dpl
+   18D7 12 18 35            561 	lcall	_I2C_Read
+   18DA AA 82               562 	mov	r2,dpl
                             563 ;	io_exp.c:70: I2C_Ack_seq();
                             564 ;	genCall
-   18D2 C0 02               565 	push	ar2
-   18D4 12 18 89            566 	lcall	_I2C_Ack_seq
-   18D7 D0 02               567 	pop	ar2
+   18DC C0 02               565 	push	ar2
+   18DE 12 18 93            566 	lcall	_I2C_Ack_seq
+   18E1 D0 02               567 	pop	ar2
                             568 ;	io_exp.c:71: I2C_Stop();		           // Stop i2c communication after Reading the data
                             569 ;	genCall
-   18D9 C0 02               570 	push	ar2
-   18DB 12 17 E3            571 	lcall	_I2C_Stop
-   18DE D0 02               572 	pop	ar2
+   18E3 C0 02               570 	push	ar2
+   18E5 12 17 ED            571 	lcall	_I2C_Stop
+   18E8 D0 02               572 	pop	ar2
                             573 ;	io_exp.c:72: delay_us(10);
                             574 ;	genCall
                             575 ;	Peephole 182.b	used 16 bit load of dptr
-   18E0 90 00 0A            576 	mov	dptr,#0x000A
-   18E3 C0 02               577 	push	ar2
-   18E5 12 0D 81            578 	lcall	_delay_us
-   18E8 D0 02               579 	pop	ar2
+   18EA 90 00 0A            576 	mov	dptr,#0x000A
+   18ED C0 02               577 	push	ar2
+   18EF 12 0D 8E            578 	lcall	_delay_us
+   18F2 D0 02               579 	pop	ar2
                             580 ;	io_exp.c:73: return ioex_Data;          // Return the Read data
                             581 ;	genRet
-   18EA 8A 82               582 	mov	dpl,r2
+   18F4 8A 82               582 	mov	dpl,r2
                             583 ;	Peephole 300	removed redundant label 00101$
-   18EC 22                  584 	ret
+   18F6 22                  584 	ret
                             585 ;------------------------------------------------------------
                             586 ;Allocation info for local variables in function 'io_cnt'
                             587 ;------------------------------------------------------------
@@ -592,114 +592,114 @@
                             592 ;	-----------------------------------------
                             593 ;	 function io_cnt
                             594 ;	-----------------------------------------
-   18ED                     595 _io_cnt:
-   18ED D3                  596 	setb	c
-   18EE 10 AF 01            597 	jbc	ea,00103$
-   18F1 C3                  598 	clr	c
-   18F2                     599 00103$:
-   18F2 C0 D0               600 	push	psw
+   18F7                     595 _io_cnt:
+   18F7 D3                  596 	setb	c
+   18F8 10 AF 01            597 	jbc	ea,00103$
+   18FB C3                  598 	clr	c
+   18FC                     599 00103$:
+   18FC C0 D0               600 	push	psw
                             601 ;	genReceive
-   18F4 AA 83               602 	mov	r2,dph
-   18F6 E5 82               603 	mov	a,dpl
-   18F8 90 00 E8            604 	mov	dptr,#_io_cnt_io_exp_counter_1_1
-   18FB F0                  605 	movx	@dptr,a
-   18FC A3                  606 	inc	dptr
-   18FD EA                  607 	mov	a,r2
-   18FE F0                  608 	movx	@dptr,a
+   18FE AA 83               602 	mov	r2,dph
+   1900 E5 82               603 	mov	a,dpl
+   1902 90 00 F8            604 	mov	dptr,#_io_cnt_io_exp_counter_1_1
+   1905 F0                  605 	movx	@dptr,a
+   1906 A3                  606 	inc	dptr
+   1907 EA                  607 	mov	a,r2
+   1908 F0                  608 	movx	@dptr,a
                             609 ;	io_exp.c:90: c=ctoa(io_exp_counter);
                             610 ;	genAssign
-   18FF 90 00 E8            611 	mov	dptr,#_io_cnt_io_exp_counter_1_1
-   1902 E0                  612 	movx	a,@dptr
-   1903 FA                  613 	mov	r2,a
-   1904 A3                  614 	inc	dptr
-   1905 E0                  615 	movx	a,@dptr
-   1906 FB                  616 	mov	r3,a
+   1909 90 00 F8            611 	mov	dptr,#_io_cnt_io_exp_counter_1_1
+   190C E0                  612 	movx	a,@dptr
+   190D FA                  613 	mov	r2,a
+   190E A3                  614 	inc	dptr
+   190F E0                  615 	movx	a,@dptr
+   1910 FB                  616 	mov	r3,a
                             617 ;	genCall
-   1907 8A 82               618 	mov	dpl,r2
-   1909 8B 83               619 	mov	dph,r3
-   190B C0 02               620 	push	ar2
-   190D C0 03               621 	push	ar3
-   190F 12 06 48            622 	lcall	_ctoa
-   1912 AC 82               623 	mov	r4,dpl
-   1914 D0 03               624 	pop	ar3
-   1916 D0 02               625 	pop	ar2
+   1911 8A 82               618 	mov	dpl,r2
+   1913 8B 83               619 	mov	dph,r3
+   1915 C0 02               620 	push	ar2
+   1917 C0 03               621 	push	ar3
+   1919 12 06 55            622 	lcall	_ctoa
+   191C AC 82               623 	mov	r4,dpl
+   191E D0 03               624 	pop	ar3
+   1920 D0 02               625 	pop	ar2
                             626 ;	io_exp.c:91: lcdgotoxy(4,7);
                             627 ;	genAssign
-   1918 90 00 F5            628 	mov	dptr,#_lcdgotoxy_PARM_2
-   191B 74 07               629 	mov	a,#0x07
-   191D F0                  630 	movx	@dptr,a
+   1922 90 01 05            628 	mov	dptr,#_lcdgotoxy_PARM_2
+   1925 74 07               629 	mov	a,#0x07
+   1927 F0                  630 	movx	@dptr,a
                             631 ;	genCall
-   191E 75 82 04            632 	mov	dpl,#0x04
-   1921 C0 02               633 	push	ar2
-   1923 C0 03               634 	push	ar3
-   1925 C0 04               635 	push	ar4
-   1927 12 1C ED            636 	lcall	_lcdgotoxy
-   192A D0 04               637 	pop	ar4
-   192C D0 03               638 	pop	ar3
-   192E D0 02               639 	pop	ar2
+   1928 75 82 04            632 	mov	dpl,#0x04
+   192B C0 02               633 	push	ar2
+   192D C0 03               634 	push	ar3
+   192F C0 04               635 	push	ar4
+   1931 12 1D 03            636 	lcall	_lcdgotoxy
+   1934 D0 04               637 	pop	ar4
+   1936 D0 03               638 	pop	ar3
+   1938 D0 02               639 	pop	ar2
                             640 ;	io_exp.c:92: lcdputch(c);
                             641 ;	genCall
-   1930 8C 82               642 	mov	dpl,r4
-   1932 C0 02               643 	push	ar2
-   1934 C0 03               644 	push	ar3
-   1936 12 1B 5B            645 	lcall	_lcdputch
-   1939 D0 03               646 	pop	ar3
-   193B D0 02               647 	pop	ar2
+   193A 8C 82               642 	mov	dpl,r4
+   193C C0 02               643 	push	ar2
+   193E C0 03               644 	push	ar3
+   1940 12 1B 65            645 	lcall	_lcdputch
+   1943 D0 03               646 	pop	ar3
+   1945 D0 02               647 	pop	ar2
                             648 ;	io_exp.c:93: io_exp_counter=io_exp_counter<<4;
                             649 ;	genLeftShift
                             650 ;	genLeftShiftLiteral
                             651 ;	genlshTwo
-   193D EB                  652 	mov	a,r3
-   193E C4                  653 	swap	a
-   193F 54 F0               654 	anl	a,#0xf0
-   1941 CA                  655 	xch	a,r2
-   1942 C4                  656 	swap	a
-   1943 CA                  657 	xch	a,r2
-   1944 6A                  658 	xrl	a,r2
-   1945 CA                  659 	xch	a,r2
-   1946 54 F0               660 	anl	a,#0xf0
-   1948 CA                  661 	xch	a,r2
-   1949 6A                  662 	xrl	a,r2
-   194A FB                  663 	mov	r3,a
+   1947 EB                  652 	mov	a,r3
+   1948 C4                  653 	swap	a
+   1949 54 F0               654 	anl	a,#0xf0
+   194B CA                  655 	xch	a,r2
+   194C C4                  656 	swap	a
+   194D CA                  657 	xch	a,r2
+   194E 6A                  658 	xrl	a,r2
+   194F CA                  659 	xch	a,r2
+   1950 54 F0               660 	anl	a,#0xf0
+   1952 CA                  661 	xch	a,r2
+   1953 6A                  662 	xrl	a,r2
+   1954 FB                  663 	mov	r3,a
                             664 ;	genAssign
-   194B 90 00 E8            665 	mov	dptr,#_io_cnt_io_exp_counter_1_1
-   194E EA                  666 	mov	a,r2
-   194F F0                  667 	movx	@dptr,a
-   1950 A3                  668 	inc	dptr
-   1951 EB                  669 	mov	a,r3
-   1952 F0                  670 	movx	@dptr,a
+   1955 90 00 F8            665 	mov	dptr,#_io_cnt_io_exp_counter_1_1
+   1958 EA                  666 	mov	a,r2
+   1959 F0                  667 	movx	@dptr,a
+   195A A3                  668 	inc	dptr
+   195B EB                  669 	mov	a,r3
+   195C F0                  670 	movx	@dptr,a
                             671 ;	io_exp.c:94: io_exp_counter |= 0x0F;
                             672 ;	genAssign
-   1953 90 00 E8            673 	mov	dptr,#_io_cnt_io_exp_counter_1_1
-   1956 E0                  674 	movx	a,@dptr
-   1957 FA                  675 	mov	r2,a
-   1958 A3                  676 	inc	dptr
-   1959 E0                  677 	movx	a,@dptr
-   195A FB                  678 	mov	r3,a
+   195D 90 00 F8            673 	mov	dptr,#_io_cnt_io_exp_counter_1_1
+   1960 E0                  674 	movx	a,@dptr
+   1961 FA                  675 	mov	r2,a
+   1962 A3                  676 	inc	dptr
+   1963 E0                  677 	movx	a,@dptr
+   1964 FB                  678 	mov	r3,a
                             679 ;	genOr
-   195B 90 00 E8            680 	mov	dptr,#_io_cnt_io_exp_counter_1_1
-   195E 74 0F               681 	mov	a,#0x0F
-   1960 4A                  682 	orl	a,r2
-   1961 F0                  683 	movx	@dptr,a
-   1962 A3                  684 	inc	dptr
-   1963 EB                  685 	mov	a,r3
-   1964 F0                  686 	movx	@dptr,a
+   1965 90 00 F8            680 	mov	dptr,#_io_cnt_io_exp_counter_1_1
+   1968 74 0F               681 	mov	a,#0x0F
+   196A 4A                  682 	orl	a,r2
+   196B F0                  683 	movx	@dptr,a
+   196C A3                  684 	inc	dptr
+   196D EB                  685 	mov	a,r3
+   196E F0                  686 	movx	@dptr,a
                             687 ;	io_exp.c:95: IOEX_WriteByte(io_exp_counter);
                             688 ;	genAssign
-   1965 90 00 E8            689 	mov	dptr,#_io_cnt_io_exp_counter_1_1
-   1968 E0                  690 	movx	a,@dptr
-   1969 FA                  691 	mov	r2,a
-   196A A3                  692 	inc	dptr
-   196B E0                  693 	movx	a,@dptr
-   196C FB                  694 	mov	r3,a
+   196F 90 00 F8            689 	mov	dptr,#_io_cnt_io_exp_counter_1_1
+   1972 E0                  690 	movx	a,@dptr
+   1973 FA                  691 	mov	r2,a
+   1974 A3                  692 	inc	dptr
+   1975 E0                  693 	movx	a,@dptr
+   1976 FB                  694 	mov	r3,a
                             695 ;	genCast
                             696 ;	genCall
-   196D 8A 82               697 	mov	dpl,r2
-   196F 12 18 99            698 	lcall	_IOEX_WriteByte
+   1977 8A 82               697 	mov	dpl,r2
+   1979 12 18 A3            698 	lcall	_IOEX_WriteByte
                             699 ;	Peephole 300	removed redundant label 00101$
-   1972 D0 D0               700 	pop	psw
-   1974 92 AF               701 	mov	ea,c
-   1976 22                  702 	ret
+   197C D0 D0               700 	pop	psw
+   197E 92 AF               701 	mov	ea,c
+   1980 22                  702 	ret
                             703 ;------------------------------------------------------------
                             704 ;Allocation info for local variables in function 'io_exp_dir'
                             705 ;------------------------------------------------------------
@@ -713,352 +713,352 @@
                             713 ;	-----------------------------------------
                             714 ;	 function io_exp_dir
                             715 ;	-----------------------------------------
-   1977                     716 _io_exp_dir:
+   1981                     716 _io_exp_dir:
                             717 ;	io_exp.c:118: printf_tiny("\n\n\r\t Select pin number from 0 to 7: ");
                             718 ;	genIpush
-   1977 74 2C               719 	mov	a,#__str_0
-   1979 C0 E0               720 	push	acc
-   197B 74 36               721 	mov	a,#(__str_0 >> 8)
-   197D C0 E0               722 	push	acc
+   1981 74 AF               719 	mov	a,#__str_0
+   1983 C0 E0               720 	push	acc
+   1985 74 3B               721 	mov	a,#(__str_0 >> 8)
+   1987 C0 E0               722 	push	acc
                             723 ;	genCall
-   197F 12 28 62            724 	lcall	_printf_tiny
-   1982 15 81               725 	dec	sp
-   1984 15 81               726 	dec	sp
+   1989 12 2D E5            724 	lcall	_printf_tiny
+   198C 15 81               725 	dec	sp
+   198E 15 81               726 	dec	sp
                             727 ;	io_exp.c:119: do
-   1986                     728 00103$:
+   1990                     728 00103$:
                             729 ;	io_exp.c:121: gets(c);
                             730 ;	genCall
                             731 ;	Peephole 182.a	used 16 bit load of DPTR
-   1986 90 00 EA            732 	mov	dptr,#_io_exp_dir_c_1_1
-   1989 75 F0 00            733 	mov	b,#0x00
-   198C 12 27 35            734 	lcall	_gets
+   1990 90 00 FA            732 	mov	dptr,#_io_exp_dir_c_1_1
+   1993 75 F0 00            733 	mov	b,#0x00
+   1996 12 2C B8            734 	lcall	_gets
                             735 ;	io_exp.c:122: pin=atoi(c);
                             736 ;	genCall
                             737 ;	Peephole 182.a	used 16 bit load of DPTR
-   198F 90 00 EA            738 	mov	dptr,#_io_exp_dir_c_1_1
-   1992 75 F0 00            739 	mov	b,#0x00
-   1995 12 25 30            740 	lcall	_atoi
-   1998 AA 82               741 	mov	r2,dpl
-   199A AB 83               742 	mov	r3,dph
+   1999 90 00 FA            738 	mov	dptr,#_io_exp_dir_c_1_1
+   199C 75 F0 00            739 	mov	b,#0x00
+   199F 12 2A B3            740 	lcall	_atoi
+   19A2 AA 82               741 	mov	r2,dpl
+   19A4 AB 83               742 	mov	r3,dph
                             743 ;	io_exp.c:123: if(pin>7){printf_tiny("\n\n\r *-ERROR-*\n\r\t Enter a valid number between 0 to 7: ");}
                             744 ;	genAssign
-   199C 8A 04               745 	mov	ar4,r2
-   199E 8B 05               746 	mov	ar5,r3
+   19A6 8A 04               745 	mov	ar4,r2
+   19A8 8B 05               746 	mov	ar5,r3
                             747 ;	genCmpGt
                             748 ;	genCmp
-   19A0 C3                  749 	clr	c
-   19A1 74 07               750 	mov	a,#0x07
-   19A3 9C                  751 	subb	a,r4
+   19AA C3                  749 	clr	c
+   19AB 74 07               750 	mov	a,#0x07
+   19AD 9C                  751 	subb	a,r4
                             752 ;	Peephole 181	changed mov to clr
-   19A4 E4                  753 	clr	a
-   19A5 9D                  754 	subb	a,r5
+   19AE E4                  753 	clr	a
+   19AF 9D                  754 	subb	a,r5
                             755 ;	genIfxJump
                             756 ;	Peephole 108.a	removed ljmp by inverse jump logic
-   19A6 50 17               757 	jnc	00104$
+   19B0 50 17               757 	jnc	00104$
                             758 ;	Peephole 300	removed redundant label 00123$
                             759 ;	genIpush
-   19A8 C0 02               760 	push	ar2
-   19AA C0 03               761 	push	ar3
-   19AC 74 51               762 	mov	a,#__str_1
-   19AE C0 E0               763 	push	acc
-   19B0 74 36               764 	mov	a,#(__str_1 >> 8)
-   19B2 C0 E0               765 	push	acc
+   19B2 C0 02               760 	push	ar2
+   19B4 C0 03               761 	push	ar3
+   19B6 74 D4               762 	mov	a,#__str_1
+   19B8 C0 E0               763 	push	acc
+   19BA 74 3B               764 	mov	a,#(__str_1 >> 8)
+   19BC C0 E0               765 	push	acc
                             766 ;	genCall
-   19B4 12 28 62            767 	lcall	_printf_tiny
-   19B7 15 81               768 	dec	sp
-   19B9 15 81               769 	dec	sp
-   19BB D0 03               770 	pop	ar3
-   19BD D0 02               771 	pop	ar2
-   19BF                     772 00104$:
+   19BE 12 2D E5            767 	lcall	_printf_tiny
+   19C1 15 81               768 	dec	sp
+   19C3 15 81               769 	dec	sp
+   19C5 D0 03               770 	pop	ar3
+   19C7 D0 02               771 	pop	ar2
+   19C9                     772 00104$:
                             773 ;	io_exp.c:124: }while(pin>7);
                             774 ;	genAssign
-   19BF 8A 04               775 	mov	ar4,r2
-   19C1 8B 05               776 	mov	ar5,r3
+   19C9 8A 04               775 	mov	ar4,r2
+   19CB 8B 05               776 	mov	ar5,r3
                             777 ;	genCmpGt
                             778 ;	genCmp
-   19C3 C3                  779 	clr	c
-   19C4 74 07               780 	mov	a,#0x07
-   19C6 9C                  781 	subb	a,r4
+   19CD C3                  779 	clr	c
+   19CE 74 07               780 	mov	a,#0x07
+   19D0 9C                  781 	subb	a,r4
                             782 ;	Peephole 181	changed mov to clr
-   19C7 E4                  783 	clr	a
-   19C8 9D                  784 	subb	a,r5
+   19D1 E4                  783 	clr	a
+   19D2 9D                  784 	subb	a,r5
                             785 ;	genIfxJump
                             786 ;	Peephole 112.b	changed ljmp to sjmp
                             787 ;	Peephole 160.a	removed sjmp by inverse jump logic
-   19C9 40 BB               788 	jc	00103$
+   19D3 40 BB               788 	jc	00103$
                             789 ;	Peephole 300	removed redundant label 00124$
                             790 ;	io_exp.c:127: printf_tiny("\n\n\r\t Select Direction of pin:  0.Output  1. Input\t");
                             791 ;	genIpush
-   19CB C0 02               792 	push	ar2
-   19CD C0 03               793 	push	ar3
-   19CF 74 88               794 	mov	a,#__str_2
-   19D1 C0 E0               795 	push	acc
-   19D3 74 36               796 	mov	a,#(__str_2 >> 8)
-   19D5 C0 E0               797 	push	acc
+   19D5 C0 02               792 	push	ar2
+   19D7 C0 03               793 	push	ar3
+   19D9 74 0B               794 	mov	a,#__str_2
+   19DB C0 E0               795 	push	acc
+   19DD 74 3C               796 	mov	a,#(__str_2 >> 8)
+   19DF C0 E0               797 	push	acc
                             798 ;	genCall
-   19D7 12 28 62            799 	lcall	_printf_tiny
-   19DA 15 81               800 	dec	sp
-   19DC 15 81               801 	dec	sp
-   19DE D0 03               802 	pop	ar3
-   19E0 D0 02               803 	pop	ar2
+   19E1 12 2D E5            799 	lcall	_printf_tiny
+   19E4 15 81               800 	dec	sp
+   19E6 15 81               801 	dec	sp
+   19E8 D0 03               802 	pop	ar3
+   19EA D0 02               803 	pop	ar2
                             804 ;	io_exp.c:128: do
-   19E2                     805 00108$:
+   19EC                     805 00108$:
                             806 ;	io_exp.c:130: gets(c);
                             807 ;	genCall
                             808 ;	Peephole 182.a	used 16 bit load of DPTR
-   19E2 90 00 EA            809 	mov	dptr,#_io_exp_dir_c_1_1
-   19E5 75 F0 00            810 	mov	b,#0x00
-   19E8 C0 02               811 	push	ar2
-   19EA C0 03               812 	push	ar3
-   19EC 12 27 35            813 	lcall	_gets
-   19EF D0 03               814 	pop	ar3
-   19F1 D0 02               815 	pop	ar2
+   19EC 90 00 FA            809 	mov	dptr,#_io_exp_dir_c_1_1
+   19EF 75 F0 00            810 	mov	b,#0x00
+   19F2 C0 02               811 	push	ar2
+   19F4 C0 03               812 	push	ar3
+   19F6 12 2C B8            813 	lcall	_gets
+   19F9 D0 03               814 	pop	ar3
+   19FB D0 02               815 	pop	ar2
                             816 ;	io_exp.c:131: dir=atoi(c);
                             817 ;	genCall
                             818 ;	Peephole 182.a	used 16 bit load of DPTR
-   19F3 90 00 EA            819 	mov	dptr,#_io_exp_dir_c_1_1
-   19F6 75 F0 00            820 	mov	b,#0x00
-   19F9 C0 02               821 	push	ar2
-   19FB C0 03               822 	push	ar3
-   19FD 12 25 30            823 	lcall	_atoi
-   1A00 AC 82               824 	mov	r4,dpl
-   1A02 AD 83               825 	mov	r5,dph
-   1A04 D0 03               826 	pop	ar3
-   1A06 D0 02               827 	pop	ar2
+   19FD 90 00 FA            819 	mov	dptr,#_io_exp_dir_c_1_1
+   1A00 75 F0 00            820 	mov	b,#0x00
+   1A03 C0 02               821 	push	ar2
+   1A05 C0 03               822 	push	ar3
+   1A07 12 2A B3            823 	lcall	_atoi
+   1A0A AC 82               824 	mov	r4,dpl
+   1A0C AD 83               825 	mov	r5,dph
+   1A0E D0 03               826 	pop	ar3
+   1A10 D0 02               827 	pop	ar2
                             828 ;	io_exp.c:132: if(dir>1){printf_tiny("\n\n\r *-ERROR-*\n\r\t Enter a valid number between 0 or 1: ");}
                             829 ;	genAssign
-   1A08 8C 06               830 	mov	ar6,r4
-   1A0A 8D 07               831 	mov	ar7,r5
+   1A12 8C 06               830 	mov	ar6,r4
+   1A14 8D 07               831 	mov	ar7,r5
                             832 ;	genCmpGt
                             833 ;	genCmp
-   1A0C C3                  834 	clr	c
-   1A0D 74 01               835 	mov	a,#0x01
-   1A0F 9E                  836 	subb	a,r6
+   1A16 C3                  834 	clr	c
+   1A17 74 01               835 	mov	a,#0x01
+   1A19 9E                  836 	subb	a,r6
                             837 ;	Peephole 181	changed mov to clr
-   1A10 E4                  838 	clr	a
-   1A11 9F                  839 	subb	a,r7
+   1A1A E4                  838 	clr	a
+   1A1B 9F                  839 	subb	a,r7
                             840 ;	genIfxJump
                             841 ;	Peephole 108.a	removed ljmp by inverse jump logic
-   1A12 50 1F               842 	jnc	00109$
+   1A1C 50 1F               842 	jnc	00109$
                             843 ;	Peephole 300	removed redundant label 00125$
                             844 ;	genIpush
-   1A14 C0 02               845 	push	ar2
-   1A16 C0 03               846 	push	ar3
-   1A18 C0 04               847 	push	ar4
-   1A1A C0 05               848 	push	ar5
-   1A1C 74 BB               849 	mov	a,#__str_3
-   1A1E C0 E0               850 	push	acc
-   1A20 74 36               851 	mov	a,#(__str_3 >> 8)
-   1A22 C0 E0               852 	push	acc
+   1A1E C0 02               845 	push	ar2
+   1A20 C0 03               846 	push	ar3
+   1A22 C0 04               847 	push	ar4
+   1A24 C0 05               848 	push	ar5
+   1A26 74 3E               849 	mov	a,#__str_3
+   1A28 C0 E0               850 	push	acc
+   1A2A 74 3C               851 	mov	a,#(__str_3 >> 8)
+   1A2C C0 E0               852 	push	acc
                             853 ;	genCall
-   1A24 12 28 62            854 	lcall	_printf_tiny
-   1A27 15 81               855 	dec	sp
-   1A29 15 81               856 	dec	sp
-   1A2B D0 05               857 	pop	ar5
-   1A2D D0 04               858 	pop	ar4
-   1A2F D0 03               859 	pop	ar3
-   1A31 D0 02               860 	pop	ar2
-   1A33                     861 00109$:
+   1A2E 12 2D E5            854 	lcall	_printf_tiny
+   1A31 15 81               855 	dec	sp
+   1A33 15 81               856 	dec	sp
+   1A35 D0 05               857 	pop	ar5
+   1A37 D0 04               858 	pop	ar4
+   1A39 D0 03               859 	pop	ar3
+   1A3B D0 02               860 	pop	ar2
+   1A3D                     861 00109$:
                             862 ;	io_exp.c:133: }while(dir>1);
                             863 ;	genAssign
-   1A33 8C 06               864 	mov	ar6,r4
-   1A35 8D 07               865 	mov	ar7,r5
+   1A3D 8C 06               864 	mov	ar6,r4
+   1A3F 8D 07               865 	mov	ar7,r5
                             866 ;	genCmpGt
                             867 ;	genCmp
-   1A37 C3                  868 	clr	c
-   1A38 74 01               869 	mov	a,#0x01
-   1A3A 9E                  870 	subb	a,r6
+   1A41 C3                  868 	clr	c
+   1A42 74 01               869 	mov	a,#0x01
+   1A44 9E                  870 	subb	a,r6
                             871 ;	Peephole 181	changed mov to clr
-   1A3B E4                  872 	clr	a
-   1A3C 9F                  873 	subb	a,r7
+   1A45 E4                  872 	clr	a
+   1A46 9F                  873 	subb	a,r7
                             874 ;	genIfxJump
                             875 ;	Peephole 112.b	changed ljmp to sjmp
                             876 ;	Peephole 160.a	removed sjmp by inverse jump logic
-   1A3D 40 A3               877 	jc	00108$
+   1A47 40 A3               877 	jc	00108$
                             878 ;	Peephole 300	removed redundant label 00126$
                             879 ;	io_exp.c:137: io_status = IOEX_ReadByte();
                             880 ;	genCall
-   1A3F C0 02               881 	push	ar2
-   1A41 C0 03               882 	push	ar3
-   1A43 C0 04               883 	push	ar4
-   1A45 C0 05               884 	push	ar5
-   1A47 12 18 C1            885 	lcall	_IOEX_ReadByte
-   1A4A 85 82 0F            886 	mov	_io_exp_dir_sloc0_1_0,dpl
-   1A4D D0 05               887 	pop	ar5
-   1A4F D0 04               888 	pop	ar4
-   1A51 D0 03               889 	pop	ar3
-   1A53 D0 02               890 	pop	ar2
+   1A49 C0 02               881 	push	ar2
+   1A4B C0 03               882 	push	ar3
+   1A4D C0 04               883 	push	ar4
+   1A4F C0 05               884 	push	ar5
+   1A51 12 18 CB            885 	lcall	_IOEX_ReadByte
+   1A54 85 82 0F            886 	mov	_io_exp_dir_sloc0_1_0,dpl
+   1A57 D0 05               887 	pop	ar5
+   1A59 D0 04               888 	pop	ar4
+   1A5B D0 03               889 	pop	ar3
+   1A5D D0 02               890 	pop	ar2
                             891 ;	io_exp.c:141: if(dir==0)
                             892 ;	genIfx
-   1A55 EC                  893 	mov	a,r4
-   1A56 4D                  894 	orl	a,r5
+   1A5F EC                  893 	mov	a,r4
+   1A60 4D                  894 	orl	a,r5
                             895 ;	genIfxJump
                             896 ;	Peephole 108.b	removed ljmp by inverse jump logic
-   1A57 70 71               897 	jnz	00112$
+   1A61 70 71               897 	jnz	00112$
                             898 ;	Peephole 300	removed redundant label 00127$
                             899 ;	io_exp.c:143: dir = 255-powf(2, pin);
                             900 ;	genAssign
-   1A59 8A 07               901 	mov	ar7,r2
-   1A5B 8B 00               902 	mov	ar0,r3
+   1A63 8A 07               901 	mov	ar7,r2
+   1A65 8B 00               902 	mov	ar0,r3
                             903 ;	genCall
-   1A5D 8F 82               904 	mov	dpl,r7
-   1A5F 88 83               905 	mov	dph,r0
-   1A61 12 2C 89            906 	lcall	___uint2fs
-   1A64 AF 82               907 	mov	r7,dpl
-   1A66 A8 83               908 	mov	r0,dph
-   1A68 A9 F0               909 	mov	r1,b
-   1A6A FE                  910 	mov	r6,a
+   1A67 8F 82               904 	mov	dpl,r7
+   1A69 88 83               905 	mov	dph,r0
+   1A6B 12 32 0C            906 	lcall	___uint2fs
+   1A6E AF 82               907 	mov	r7,dpl
+   1A70 A8 83               908 	mov	r0,dph
+   1A72 A9 F0               909 	mov	r1,b
+   1A74 FE                  910 	mov	r6,a
                             911 ;	genAssign
-   1A6B 90 01 70            912 	mov	dptr,#_powf_PARM_2
-   1A6E EF                  913 	mov	a,r7
-   1A6F F0                  914 	movx	@dptr,a
-   1A70 A3                  915 	inc	dptr
-   1A71 E8                  916 	mov	a,r0
-   1A72 F0                  917 	movx	@dptr,a
-   1A73 A3                  918 	inc	dptr
-   1A74 E9                  919 	mov	a,r1
-   1A75 F0                  920 	movx	@dptr,a
-   1A76 A3                  921 	inc	dptr
-   1A77 EE                  922 	mov	a,r6
-   1A78 F0                  923 	movx	@dptr,a
+   1A75 90 01 76            912 	mov	dptr,#_powf_PARM_2
+   1A78 EF                  913 	mov	a,r7
+   1A79 F0                  914 	movx	@dptr,a
+   1A7A A3                  915 	inc	dptr
+   1A7B E8                  916 	mov	a,r0
+   1A7C F0                  917 	movx	@dptr,a
+   1A7D A3                  918 	inc	dptr
+   1A7E E9                  919 	mov	a,r1
+   1A7F F0                  920 	movx	@dptr,a
+   1A80 A3                  921 	inc	dptr
+   1A81 EE                  922 	mov	a,r6
+   1A82 F0                  923 	movx	@dptr,a
                             924 ;	genCall
                             925 ;	Peephole 3.c	changed mov to clr
                             926 ;	Peephole 182.d	used 16 bit load of dptr
-   1A79 90 00 00            927 	mov	dptr,#(0x00&0x00ff)
-   1A7C E4                  928 	clr	a
-   1A7D F5 F0               929 	mov	b,a
-   1A7F 74 40               930 	mov	a,#0x40
-   1A81 12 29 8A            931 	lcall	_powf
-   1A84 AE 82               932 	mov	r6,dpl
-   1A86 AF 83               933 	mov	r7,dph
-   1A88 A8 F0               934 	mov	r0,b
-   1A8A F9                  935 	mov	r1,a
+   1A83 90 00 00            927 	mov	dptr,#(0x00&0x00ff)
+   1A86 E4                  928 	clr	a
+   1A87 F5 F0               929 	mov	b,a
+   1A89 74 40               930 	mov	a,#0x40
+   1A8B 12 2F 0D            931 	lcall	_powf
+   1A8E AE 82               932 	mov	r6,dpl
+   1A90 AF 83               933 	mov	r7,dph
+   1A92 A8 F0               934 	mov	r0,b
+   1A94 F9                  935 	mov	r1,a
                             936 ;	genIpush
-   1A8B C0 06               937 	push	ar6
-   1A8D C0 07               938 	push	ar7
-   1A8F C0 00               939 	push	ar0
-   1A91 C0 01               940 	push	ar1
+   1A95 C0 06               937 	push	ar6
+   1A97 C0 07               938 	push	ar7
+   1A99 C0 00               939 	push	ar0
+   1A9B C0 01               940 	push	ar1
                             941 ;	genCall
                             942 ;	Peephole 182.b	used 16 bit load of dptr
-   1A93 90 00 00            943 	mov	dptr,#0x0000
-   1A96 75 F0 7F            944 	mov	b,#0x7F
-   1A99 74 43               945 	mov	a,#0x43
-   1A9B 12 24 8A            946 	lcall	___fssub
-   1A9E AE 82               947 	mov	r6,dpl
-   1AA0 AF 83               948 	mov	r7,dph
-   1AA2 A8 F0               949 	mov	r0,b
-   1AA4 F9                  950 	mov	r1,a
-   1AA5 E5 81               951 	mov	a,sp
-   1AA7 24 FC               952 	add	a,#0xfc
-   1AA9 F5 81               953 	mov	sp,a
+   1A9D 90 00 00            943 	mov	dptr,#0x0000
+   1AA0 75 F0 7F            944 	mov	b,#0x7F
+   1AA3 74 43               945 	mov	a,#0x43
+   1AA5 12 2A 0D            946 	lcall	___fssub
+   1AA8 AE 82               947 	mov	r6,dpl
+   1AAA AF 83               948 	mov	r7,dph
+   1AAC A8 F0               949 	mov	r0,b
+   1AAE F9                  950 	mov	r1,a
+   1AAF E5 81               951 	mov	a,sp
+   1AB1 24 FC               952 	add	a,#0xfc
+   1AB3 F5 81               953 	mov	sp,a
                             954 ;	genCall
-   1AAB 8E 82               955 	mov	dpl,r6
-   1AAD 8F 83               956 	mov	dph,r7
-   1AAF 88 F0               957 	mov	b,r0
-   1AB1 E9                  958 	mov	a,r1
-   1AB2 12 2C 95            959 	lcall	___fs2uint
-   1AB5 AE 82               960 	mov	r6,dpl
-   1AB7 AF 83               961 	mov	r7,dph
+   1AB5 8E 82               955 	mov	dpl,r6
+   1AB7 8F 83               956 	mov	dph,r7
+   1AB9 88 F0               957 	mov	b,r0
+   1ABB E9                  958 	mov	a,r1
+   1ABC 12 32 18            959 	lcall	___fs2uint
+   1ABF AE 82               960 	mov	r6,dpl
+   1AC1 AF 83               961 	mov	r7,dph
                             962 ;	io_exp.c:144: io_status &= dir;
                             963 ;	genCast
-   1AB9 A8 0F               964 	mov	r0,_io_exp_dir_sloc0_1_0
-   1ABB 79 00               965 	mov	r1,#0x00
+   1AC3 A8 0F               964 	mov	r0,_io_exp_dir_sloc0_1_0
+   1AC5 79 00               965 	mov	r1,#0x00
                             966 ;	genAnd
-   1ABD E8                  967 	mov	a,r0
-   1ABE 52 06               968 	anl	ar6,a
-   1AC0 E9                  969 	mov	a,r1
-   1AC1 52 07               970 	anl	ar7,a
+   1AC7 E8                  967 	mov	a,r0
+   1AC8 52 06               968 	anl	ar6,a
+   1ACA E9                  969 	mov	a,r1
+   1ACB 52 07               970 	anl	ar7,a
                             971 ;	genCast
-   1AC3 90 00 ED            972 	mov	dptr,#_io_exp_dir_io_status_1_1
-   1AC6 EE                  973 	mov	a,r6
-   1AC7 F0                  974 	movx	@dptr,a
+   1ACD 90 00 FD            972 	mov	dptr,#_io_exp_dir_io_status_1_1
+   1AD0 EE                  973 	mov	a,r6
+   1AD1 F0                  974 	movx	@dptr,a
                             975 ;	Peephole 112.b	changed ljmp to sjmp
-   1AC8 80 22               976 	sjmp	00113$
-   1ACA                     977 00112$:
+   1AD2 80 22               976 	sjmp	00113$
+   1AD4                     977 00112$:
                             978 ;	io_exp.c:149: dir = dir<<pin;
                             979 ;	genLeftShift
-   1ACA 8A F0               980 	mov	b,r2
-   1ACC 05 F0               981 	inc	b
-   1ACE AA 04               982 	mov	r2,ar4
-   1AD0 AB 05               983 	mov	r3,ar5
-   1AD2 80 06               984 	sjmp	00129$
-   1AD4                     985 00128$:
-   1AD4 EA                  986 	mov	a,r2
+   1AD4 8A F0               980 	mov	b,r2
+   1AD6 05 F0               981 	inc	b
+   1AD8 AA 04               982 	mov	r2,ar4
+   1ADA AB 05               983 	mov	r3,ar5
+   1ADC 80 06               984 	sjmp	00129$
+   1ADE                     985 00128$:
+   1ADE EA                  986 	mov	a,r2
                             987 ;	Peephole 254	optimized left shift
-   1AD5 2A                  988 	add	a,r2
-   1AD6 FA                  989 	mov	r2,a
-   1AD7 EB                  990 	mov	a,r3
-   1AD8 33                  991 	rlc	a
-   1AD9 FB                  992 	mov	r3,a
-   1ADA                     993 00129$:
-   1ADA D5 F0 F7            994 	djnz	b,00128$
+   1ADF 2A                  988 	add	a,r2
+   1AE0 FA                  989 	mov	r2,a
+   1AE1 EB                  990 	mov	a,r3
+   1AE2 33                  991 	rlc	a
+   1AE3 FB                  992 	mov	r3,a
+   1AE4                     993 00129$:
+   1AE4 D5 F0 F7            994 	djnz	b,00128$
                             995 ;	io_exp.c:150: io_status |= dir;
                             996 ;	genCast
-   1ADD AE 0F               997 	mov	r6,_io_exp_dir_sloc0_1_0
-   1ADF 7C 00               998 	mov	r4,#0x00
+   1AE7 AE 0F               997 	mov	r6,_io_exp_dir_sloc0_1_0
+   1AE9 7C 00               998 	mov	r4,#0x00
                             999 ;	genOr
-   1AE1 EE                 1000 	mov	a,r6
-   1AE2 42 02              1001 	orl	ar2,a
-   1AE4 EC                 1002 	mov	a,r4
-   1AE5 42 03              1003 	orl	ar3,a
+   1AEB EE                 1000 	mov	a,r6
+   1AEC 42 02              1001 	orl	ar2,a
+   1AEE EC                 1002 	mov	a,r4
+   1AEF 42 03              1003 	orl	ar3,a
                            1004 ;	genCast
-   1AE7 90 00 ED           1005 	mov	dptr,#_io_exp_dir_io_status_1_1
-   1AEA EA                 1006 	mov	a,r2
-   1AEB F0                 1007 	movx	@dptr,a
-   1AEC                    1008 00113$:
+   1AF1 90 00 FD           1005 	mov	dptr,#_io_exp_dir_io_status_1_1
+   1AF4 EA                 1006 	mov	a,r2
+   1AF5 F0                 1007 	movx	@dptr,a
+   1AF6                    1008 00113$:
                            1009 ;	io_exp.c:154: IOEX_WriteByte(io_status);
                            1010 ;	genAssign
-   1AEC 90 00 ED           1011 	mov	dptr,#_io_exp_dir_io_status_1_1
-   1AEF E0                 1012 	movx	a,@dptr
+   1AF6 90 00 FD           1011 	mov	dptr,#_io_exp_dir_io_status_1_1
+   1AF9 E0                 1012 	movx	a,@dptr
                            1013 ;	genCall
-   1AF0 FA                 1014 	mov	r2,a
+   1AFA FA                 1014 	mov	r2,a
                            1015 ;	Peephole 244.c	loading dpl from a instead of r2
-   1AF1 F5 82              1016 	mov	dpl,a
-   1AF3 12 18 99           1017 	lcall	_IOEX_WriteByte
+   1AFB F5 82              1016 	mov	dpl,a
+   1AFD 12 18 A3           1017 	lcall	_IOEX_WriteByte
                            1018 ;	io_exp.c:156: delay_us(5);
                            1019 ;	genCall
                            1020 ;	Peephole 182.b	used 16 bit load of dptr
-   1AF6 90 00 05           1021 	mov	dptr,#0x0005
+   1B00 90 00 05           1021 	mov	dptr,#0x0005
                            1022 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   1AF9 02 0D 81           1023 	ljmp	_delay_us
+   1B03 02 0D 8E           1023 	ljmp	_delay_us
                            1024 ;
                            1025 	.area CSEG    (CODE)
                            1026 	.area CONST   (CODE)
-   362C                    1027 __str_0:
-   362C 0A                 1028 	.db 0x0A
-   362D 0A                 1029 	.db 0x0A
-   362E 0D                 1030 	.db 0x0D
-   362F 09                 1031 	.db 0x09
-   3630 20 53 65 6C 65 63  1032 	.ascii " Select pin number from 0 to 7: "
+   3BAF                    1027 __str_0:
+   3BAF 0A                 1028 	.db 0x0A
+   3BB0 0A                 1029 	.db 0x0A
+   3BB1 0D                 1030 	.db 0x0D
+   3BB2 09                 1031 	.db 0x09
+   3BB3 20 53 65 6C 65 63  1032 	.ascii " Select pin number from 0 to 7: "
         74 20 70 69 6E 20
         6E 75 6D 62 65 72
         20 66 72 6F 6D 20
         30 20 74 6F 20 37
         3A 20
-   3650 00                 1033 	.db 0x00
-   3651                    1034 __str_1:
-   3651 0A                 1035 	.db 0x0A
-   3652 0A                 1036 	.db 0x0A
-   3653 0D                 1037 	.db 0x0D
-   3654 20 2A 2D 45 52 52  1038 	.ascii " *-ERROR-*"
+   3BD3 00                 1033 	.db 0x00
+   3BD4                    1034 __str_1:
+   3BD4 0A                 1035 	.db 0x0A
+   3BD5 0A                 1036 	.db 0x0A
+   3BD6 0D                 1037 	.db 0x0D
+   3BD7 20 2A 2D 45 52 52  1038 	.ascii " *-ERROR-*"
         4F 52 2D 2A
-   365E 0A                 1039 	.db 0x0A
-   365F 0D                 1040 	.db 0x0D
-   3660 09                 1041 	.db 0x09
-   3661 20 45 6E 74 65 72  1042 	.ascii " Enter a valid number between 0 to 7: "
+   3BE1 0A                 1039 	.db 0x0A
+   3BE2 0D                 1040 	.db 0x0D
+   3BE3 09                 1041 	.db 0x09
+   3BE4 20 45 6E 74 65 72  1042 	.ascii " Enter a valid number between 0 to 7: "
         20 61 20 76 61 6C
         69 64 20 6E 75 6D
         62 65 72 20 62 65
         74 77 65 65 6E 20
         30 20 74 6F 20 37
         3A 20
-   3687 00                 1043 	.db 0x00
-   3688                    1044 __str_2:
-   3688 0A                 1045 	.db 0x0A
-   3689 0A                 1046 	.db 0x0A
-   368A 0D                 1047 	.db 0x0D
-   368B 09                 1048 	.db 0x09
-   368C 20 53 65 6C 65 63  1049 	.ascii " Select Direction of pin:  0.Output  1. Input"
+   3C0A 00                 1043 	.db 0x00
+   3C0B                    1044 __str_2:
+   3C0B 0A                 1045 	.db 0x0A
+   3C0C 0A                 1046 	.db 0x0A
+   3C0D 0D                 1047 	.db 0x0D
+   3C0E 09                 1048 	.db 0x09
+   3C0F 20 53 65 6C 65 63  1049 	.ascii " Select Direction of pin:  0.Output  1. Input"
         74 20 44 69 72 65
         63 74 69 6F 6E 20
         6F 66 20 70 69 6E
@@ -1066,23 +1066,23 @@
         75 74 70 75 74 20
         20 31 2E 20 49 6E
         70 75 74
-   36B9 09                 1050 	.db 0x09
-   36BA 00                 1051 	.db 0x00
-   36BB                    1052 __str_3:
-   36BB 0A                 1053 	.db 0x0A
-   36BC 0A                 1054 	.db 0x0A
-   36BD 0D                 1055 	.db 0x0D
-   36BE 20 2A 2D 45 52 52  1056 	.ascii " *-ERROR-*"
+   3C3C 09                 1050 	.db 0x09
+   3C3D 00                 1051 	.db 0x00
+   3C3E                    1052 __str_3:
+   3C3E 0A                 1053 	.db 0x0A
+   3C3F 0A                 1054 	.db 0x0A
+   3C40 0D                 1055 	.db 0x0D
+   3C41 20 2A 2D 45 52 52  1056 	.ascii " *-ERROR-*"
         4F 52 2D 2A
-   36C8 0A                 1057 	.db 0x0A
-   36C9 0D                 1058 	.db 0x0D
-   36CA 09                 1059 	.db 0x09
-   36CB 20 45 6E 74 65 72  1060 	.ascii " Enter a valid number between 0 or 1: "
+   3C4B 0A                 1057 	.db 0x0A
+   3C4C 0D                 1058 	.db 0x0D
+   3C4D 09                 1059 	.db 0x09
+   3C4E 20 45 6E 74 65 72  1060 	.ascii " Enter a valid number between 0 or 1: "
         20 61 20 76 61 6C
         69 64 20 6E 75 6D
         62 65 72 20 62 65
         74 77 65 65 6E 20
         30 20 6F 72 20 31
         3A 20
-   36F1 00                 1061 	.db 0x00
+   3C74 00                 1061 	.db 0x00
                            1062 	.area XINIT   (CODE)

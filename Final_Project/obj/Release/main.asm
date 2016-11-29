@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.6.0 #4309 (Jul 28 2006)
-; This file generated Sun Nov 27 23:21:17 2016
+; This file generated Mon Nov 28 23:17:15 2016
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mmcs51 --model-large
@@ -10,7 +10,8 @@
 ; Public variables in this module
 ;--------------------------------------------------------
 	.globl _timer_isr
-	.globl _ext_zero
+	.globl _s_two
+	.globl _s_one
 	.globl _main
 	.globl __sdcc_external_startup
 	.globl _P5_7
@@ -209,18 +210,15 @@
 	.globl _DPL
 	.globl _SP
 	.globl _P0
-	.globl _timers
 	.globl _flag
+	.globl _sensor
+	.globl _log_f
 	.globl _sensor_data
 	.globl _s
 	.globl _m
 	.globl _h
-	.globl _i
-	.globl _io_counter
-	.globl _nmi
-	.globl _nsec
-	.globl _nms
-	.globl _cnt
+	.globl _display
+	.globl _fr
 ;--------------------------------------------------------
 ; special function registers
 ;--------------------------------------------------------
@@ -461,17 +459,9 @@ __start__stack:
 ; external ram data
 ;--------------------------------------------------------
 	.area XSEG    (XDATA)
-_cnt::
-	.ds 3
-_nms::
-	.ds 6
-_nsec::
-	.ds 6
-_nmi::
-	.ds 6
-_io_counter::
+_fr::
 	.ds 2
-_i::
+_display::
 	.ds 2
 _h::
 	.ds 1
@@ -480,15 +470,21 @@ _m::
 _s::
 	.ds 1
 _sensor_data::
-	.ds 3
+	.ds 5
+_log_f::
+	.ds 1
+_sensor::
+	.ds 1
+_main_c_1_1:
+	.ds 5
+_main_te_1_1:
+	.ds 2
 ;--------------------------------------------------------
 ; external initialized ram data
 ;--------------------------------------------------------
 	.area XISEG   (XDATA)
 _flag::
 	.ds 1
-_timers::
-	.ds 2
 	.area HOME    (CODE)
 	.area GSINIT0 (CODE)
 	.area GSINIT1 (CODE)
@@ -505,9 +501,11 @@ _timers::
 	.area HOME    (CODE)
 __interrupt_vect:
 	ljmp	__sdcc_gsinit_startup
-	ljmp	_ext_zero
+	ljmp	_s_one
 	.ds	5
 	ljmp	_timer_isr
+	.ds	5
+	ljmp	_s_two
 ;--------------------------------------------------------
 ; global & static initialisations
 ;--------------------------------------------------------
@@ -540,7 +538,7 @@ __sdcc_program_startup:
 ;Allocation info for local variables in function '_sdcc_external_startup'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:37: _sdcc_external_startup()
+;	main.c:38: _sdcc_external_startup()
 ;	-----------------------------------------
 ;	 function _sdcc_external_startup
 ;	-----------------------------------------
@@ -553,10 +551,10 @@ __sdcc_external_startup:
 	ar7 = 0x07
 	ar0 = 0x00
 	ar1 = 0x01
-;	main.c:39: AUXR |= 0x0C;
+;	main.c:40: AUXR |= 0x0C;
 ;	genOr
 	orl	_AUXR,#0x0C
-;	main.c:41: return 0;
+;	main.c:42: return 0;
 ;	genRet
 ;	Peephole 182.b	used 16 bit load of dptr
 	mov	dptr,#0x0000
@@ -565,43 +563,162 @@ __sdcc_external_startup:
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'main'
 ;------------------------------------------------------------
-;pressure                  Allocated with name '_main_pressure_1_1'
-;msb                       Allocated with name '_main_msb_1_1'
-;csb                       Allocated with name '_main_csb_1_1'
-;lsb                       Allocated with name '_main_lsb_1_1'
+;gps_data                  Allocated with name '_main_gps_data_1_1'
+;c                         Allocated with name '_main_c_1_1'
+;te                        Allocated with name '_main_te_1_1'
 ;------------------------------------------------------------
-;	main.c:46: void main(void)
+;	main.c:47: void main(void)
 ;	-----------------------------------------
 ;	 function main
 ;	-----------------------------------------
 _main:
-;	main.c:50: lcd_init();                                     // Initilaize LCD
+;	main.c:51: IOEX_WriteByte(1);
+;	genCall
+	mov	dpl,#0x01
+	lcall	_IOEX_WriteByte
+;	main.c:52: lcd_init();                                     // Initilaize LCD
 ;	genCall
 	lcall	_lcd_init
-;	main.c:51: uart_init()	;                                   // Initilalize UART
+;	main.c:53: uart_init()	;                                   // Initilalize UART
 ;	genCall
 	lcall	_uart_init
-;	main.c:53: P1_0=0;
+;	main.c:54: timer_init();                                   // Initialize the Timer
+;	genCall
+	lcall	_timer_init
+;	main.c:55: P1_0=0;
 ;	genAssign
 	clr	_P1_0
-;	main.c:55: eereset();                                      // EEPROM is reset at every powerup
+;	main.c:56: fr=1;
+;	genAssign
+	mov	dptr,#_fr
+	mov	a,#0x01
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+;	main.c:57: display=1;
+;	genAssign
+	mov	dptr,#_display
+	mov	a,#0x01
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+;	main.c:58: eereset();                                      // EEPROM is reset at every powerup
 ;	genCall
 	lcall	_eereset
-;	main.c:62: while(1)
-00102$:
-;	main.c:66: delay_ms(100);
+;	main.c:65: while(1)
+00128$:
+;	main.c:67: sensor_data[LIGHT]=LIGHT_calibration();
 ;	genCall
-;	Peephole 182.b	used 16 bit load of dptr
-	mov	dptr,#0x0064
-	lcall	_delay_ms
-;	main.c:69: printf_tiny("\n\rTemp: %d Celcius",(TEMP_calibration()));
+	lcall	_LIGHT_calibration
+	mov	r2,dpl
+	mov	r3,dph
+;	genCast
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#(_sensor_data + 0x0001)
+	mov	a,r2
+	movx	@dptr,a
+;	main.c:68: sensor_data[TEMP]=TEMP_calibration();
 ;	genCall
 	lcall	_TEMP_calibration
 	mov	r2,dpl
 	mov	r3,dph
+;	genCast
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#(_sensor_data + 0x0002)
+	mov	a,r2
+	movx	@dptr,a
+;	main.c:69: sensor_data[HUMIDITY]=HUMIDITY_calibration();
+;	genCall
+	lcall	_HUMIDITY_calibration
+	mov	r2,dpl
+	mov	r3,dph
+;	genCast
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#(_sensor_data + 0x0003)
+	mov	a,r2
+	movx	@dptr,a
+;	main.c:70: sensor_data[PRESSURE]=PRESSURE_calibration();
+;	genCall
+	lcall	_PRESSURE_calibration
+	mov	r2,dpl
+	mov	r3,dph
+;	genCast
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#(_sensor_data + 0x0004)
+	mov	a,r2
+	movx	@dptr,a
+;	main.c:72: if(log_f==fr)
+;	genAssign
+	mov	dptr,#_log_f
+	movx	a,@dptr
+	mov	r2,a
+;	genAssign
+	mov	dptr,#_fr
+	movx	a,@dptr
+	mov	r3,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r4,a
+;	genCast
+	mov	a,r2
+	rlc	a
+	subb	a,acc
+	mov	r5,a
+;	genCmpEq
+;	gencjneshort
+	mov	a,r2
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 197.b	optimized misc jump sequence
+	cjne	a,ar3,00128$
+	mov	a,r5
+	cjne	a,ar4,00128$
+;	Peephole 200.b	removed redundant sjmp
+;	Peephole 300	removed redundant label 00144$
+;	Peephole 300	removed redundant label 00145$
+;	main.c:76: if(sensor==LIGHT)
+;	genAssign
+	mov	dptr,#_sensor
+	movx	a,@dptr
+	mov	r2,a
+;	genCmpEq
+;	gencjneshort
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 198.b	optimized misc jump sequence
+	cjne	r2,#0x01,00110$
+;	Peephole 200.b	removed redundant sjmp
+;	Peephole 300	removed redundant label 00146$
+;	Peephole 300	removed redundant label 00147$
+;	main.c:78: printf_tiny("\n\r Light : %d percent   freq- %d",sensor_data[sensor],fr);
+;	genPlus
+;	Peephole 236.g	used r2 instead of ar2
+	mov	a,r2
+	add	a,#_sensor_data
+	mov	dpl,a
+;	Peephole 181	changed mov to clr
+	clr	a
+	addc	a,#(_sensor_data >> 8)
+	mov	dph,a
+;	genPointerGet
+;	genFarPointerGet
+	movx	a,@dptr
+;	genCast
+	mov	r5,a
+;	Peephole 105	removed redundant mov
+	rlc	a
+	subb	a,acc
+	mov	r6,a
 ;	genIpush
-	push	ar2
 	push	ar3
+	push	ar4
+;	genIpush
+	push	ar5
+	push	ar6
 ;	genIpush
 	mov	a,#__str_0
 	push	acc
@@ -610,21 +727,47 @@ _main:
 ;	genCall
 	lcall	_printf_tiny
 	mov	a,sp
-	add	a,#0xfc
+	add	a,#0xfa
 	mov	sp,a
-;	main.c:70: delay_ms(100);
-;	genCall
-;	Peephole 182.b	used 16 bit load of dptr
-	mov	dptr,#0x0064
-	lcall	_delay_ms
-;	main.c:71: printf_tiny("\tHUMIDITY: %d RH",HUMIDITY_calibration());
-;	genCall
-	lcall	_HUMIDITY_calibration
-	mov	r2,dpl
-	mov	r3,dph
+;	main.c:79: log_f=0;
+;	genAssign
+	mov	dptr,#_log_f
+;	Peephole 181	changed mov to clr
+	clr	a
+	movx	@dptr,a
+	ljmp	00111$
+00110$:
+;	main.c:81: else  if( sensor==TEMP)
+;	genCmpEq
+;	gencjneshort
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 198.b	optimized misc jump sequence
+	cjne	r2,#0x02,00107$
+;	Peephole 200.b	removed redundant sjmp
+;	Peephole 300	removed redundant label 00148$
+;	Peephole 300	removed redundant label 00149$
+;	main.c:83: printf_tiny("\t Temparature : %d degree Celcius",sensor_data[sensor]);
+;	genPlus
+;	Peephole 236.g	used r2 instead of ar2
+	mov	a,r2
+	add	a,#_sensor_data
+	mov	dpl,a
+;	Peephole 181	changed mov to clr
+	clr	a
+	addc	a,#(_sensor_data >> 8)
+	mov	dph,a
+;	genPointerGet
+;	genFarPointerGet
+	movx	a,@dptr
+;	genCast
+	mov	r3,a
+;	Peephole 105	removed redundant mov
+	rlc	a
+	subb	a,acc
+	mov	r4,a
 ;	genIpush
-	push	ar2
 	push	ar3
+	push	ar4
 ;	genIpush
 	mov	a,#__str_1
 	push	acc
@@ -635,19 +778,46 @@ _main:
 	mov	a,sp
 	add	a,#0xfc
 	mov	sp,a
-;	main.c:72: delay_ms(100);
-;	genCall
-;	Peephole 182.b	used 16 bit load of dptr
-	mov	dptr,#0x0064
-	lcall	_delay_ms
-;	main.c:73: printf_tiny("\LIGHT : %d ",LIGHT_calibration());
-;	genCall
-	lcall	_LIGHT_calibration
-	mov	r2,dpl
-	mov	r3,dph
+;	main.c:84: log_f=0;
+;	genAssign
+	mov	dptr,#_log_f
+;	Peephole 181	changed mov to clr
+	clr	a
+	movx	@dptr,a
+;	Peephole 112.b	changed ljmp to sjmp
+	sjmp	00111$
+00107$:
+;	main.c:87: else  if(sensor==HUMIDITY)
+;	genCmpEq
+;	gencjneshort
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 198.b	optimized misc jump sequence
+	cjne	r2,#0x03,00104$
+;	Peephole 200.b	removed redundant sjmp
+;	Peephole 300	removed redundant label 00150$
+;	Peephole 300	removed redundant label 00151$
+;	main.c:89: printf_tiny("\t Humidity : %d RH",sensor_data[sensor]);
+;	genPlus
+;	Peephole 236.g	used r2 instead of ar2
+	mov	a,r2
+	add	a,#_sensor_data
+	mov	dpl,a
+;	Peephole 181	changed mov to clr
+	clr	a
+	addc	a,#(_sensor_data >> 8)
+	mov	dph,a
+;	genPointerGet
+;	genFarPointerGet
+	movx	a,@dptr
+;	genCast
+	mov	r3,a
+;	Peephole 105	removed redundant mov
+	rlc	a
+	subb	a,acc
+	mov	r4,a
 ;	genIpush
-	push	ar2
 	push	ar3
+	push	ar4
 ;	genIpush
 	mov	a,#__str_2
 	push	acc
@@ -658,57 +828,58 @@ _main:
 	mov	a,sp
 	add	a,#0xfc
 	mov	sp,a
-;	Peephole 112.b	changed ljmp to sjmp
-	sjmp	00102$
-;	Peephole 259.a	removed redundant label 00104$ and ret
-;
-;------------------------------------------------------------
-;Allocation info for local variables in function 'ext_zero'
-;------------------------------------------------------------
-;------------------------------------------------------------
-;	main.c:110: void ext_zero() interrupt 0
-;	-----------------------------------------
-;	 function ext_zero
-;	-----------------------------------------
-_ext_zero:
-	push	acc
-	push	b
-	push	dpl
-	push	dph
-	push	(0+2)
-	push	(0+3)
-	push	(0+4)
-	push	(0+5)
-	push	(0+6)
-	push	(0+7)
-	push	(0+0)
-	push	(0+1)
-	push	psw
-	mov	psw,#0x00
-;	main.c:113: io_counter++;
+;	main.c:90: log_f=0;
 ;	genAssign
-	mov	dptr,#_io_counter
-	movx	a,@dptr
-	mov	r2,a
-	inc	dptr
-	movx	a,@dptr
-	mov	r3,a
-;	genPlus
-	mov	dptr,#_io_counter
-;     genPlusIncr
-	mov	a,#0x01
-;	Peephole 236.a	used r2 instead of ar2
-	add	a,r2
-	movx	@dptr,a
+	mov	dptr,#_log_f
 ;	Peephole 181	changed mov to clr
 	clr	a
-;	Peephole 236.b	used r3 instead of ar3
-	addc	a,r3
-	inc	dptr
 	movx	@dptr,a
-;	main.c:114: if(io_counter==32)
+;	Peephole 112.b	changed ljmp to sjmp
+	sjmp	00111$
+00104$:
+;	main.c:92: else  if( sensor==PRESSURE)
+;	genCmpEq
+;	gencjneshort
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 198.b	optimized misc jump sequence
+	cjne	r2,#0x04,00111$
+;	Peephole 200.b	removed redundant sjmp
+;	Peephole 300	removed redundant label 00152$
+;	Peephole 300	removed redundant label 00153$
+;	main.c:94: printf_tiny("\t Pressure %d mmHg",PRESSURE_calibration());
+;	genCall
+	lcall	_PRESSURE_calibration
+	mov	r2,dpl
+	mov	r3,dph
+;	genIpush
+	push	ar2
+	push	ar3
+;	genIpush
+	mov	a,#__str_3
+	push	acc
+	mov	a,#(__str_3 >> 8)
+	push	acc
+;	genCall
+	lcall	_printf_tiny
+	mov	a,sp
+	add	a,#0xfc
+	mov	sp,a
+;	main.c:95: sensor=0;
 ;	genAssign
-	mov	dptr,#_io_counter
+	mov	dptr,#_sensor
+;	Peephole 181	changed mov to clr
+;	main.c:96: log_f=0;
+;	genAssign
+;	Peephole 181	changed mov to clr
+;	Peephole 219.a	removed redundant clear
+	clr	a
+	movx	@dptr,a
+	mov	dptr,#_log_f
+	movx	@dptr,a
+00111$:
+;	main.c:103: if(display==LIGHT)
+;	genAssign
+	mov	dptr,#_display
 	movx	a,@dptr
 	mov	r2,a
 	inc	dptr
@@ -716,256 +887,635 @@ _ext_zero:
 	mov	r3,a
 ;	genCmpEq
 ;	gencjneshort
-;	Peephole 112.b	changed ljmp to sjmp
-;	Peephole 198.a	optimized misc jump sequence
-	cjne	r2,#0x20,00102$
-	cjne	r3,#0x00,00102$
-;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00109$
-;	Peephole 300	removed redundant label 00110$
-;	main.c:116: io_counter=0;
+	cjne	r2,#0x01,00154$
+	cjne	r3,#0x00,00154$
+	sjmp	00155$
+00154$:
+	ljmp	00113$
+00155$:
+;	main.c:105: te=sensor_data[LIGHT]/10;
+;	genPointerGet
+;	genFarPointerGet
+	mov	dptr,#(_sensor_data + 0x0001)
+	movx	a,@dptr
+	mov	r2,a
+;	genDiv
+;     genDivOneByte
+	clr	F0
+	mov	b,#0x0a
+	mov	a,r2
+	jnb	acc.7,00156$
+	cpl	F0
+	cpl	a
+	inc	a
+00156$:
+	div	ab
+	jnb	F0,00157$
+	cpl	a
+	inc	a
+00157$:
+	mov	r2,a
+	mov	c,F0
+	subb	a,acc
+	mov	r3,a
 ;	genAssign
-	mov	dptr,#_io_counter
-	clr	a
+	mov	dptr,#_main_te_1_1
+	mov	a,r2
 	movx	@dptr,a
 	inc	dptr
+	mov	a,r3
 	movx	@dptr,a
-00102$:
-;	main.c:118: if(io_counter%2==0){io_cnt(io_counter/2);}
+;	main.c:106: c[0]=ctoa(te);
+;	genCall
+	mov	dpl,r2
+	mov	dph,r3
+	lcall	_ctoa
+	mov	r2,dpl
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#_main_c_1_1
+	mov	a,r2
+	movx	@dptr,a
+;	main.c:107: te=sensor_data[LIGHT]-(te*10);
+;	genPointerGet
+;	genFarPointerGet
+	mov	dptr,#(_sensor_data + 0x0001)
+	movx	a,@dptr
+;	genCast
+	mov	r2,a
+;	Peephole 105	removed redundant mov
+	rlc	a
+	subb	a,acc
+	mov	r3,a
 ;	genAssign
-	mov	dptr,#_io_counter
+	mov	dptr,#_main_te_1_1
+	movx	a,@dptr
+	mov	r4,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r5,a
+;	genAssign
+	mov	dptr,#__mulint_PARM_2
+	mov	a,#0x0A
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+;	genCall
+	mov	dpl,r4
+	mov	dph,r5
+	push	ar2
+	push	ar3
+	lcall	__mulint
+	mov	r4,dpl
+	mov	r5,dph
+	pop	ar3
+	pop	ar2
+;	genMinus
+	mov	dptr,#_main_te_1_1
+	mov	a,r2
+	clr	c
+;	Peephole 236.l	used r4 instead of ar4
+	subb	a,r4
+	movx	@dptr,a
+	mov	a,r3
+;	Peephole 236.l	used r5 instead of ar5
+	subb	a,r5
+	inc	dptr
+	movx	@dptr,a
+;	main.c:108: c[1]=ctoa(te);
+;	genAssign
+	mov	dptr,#_main_te_1_1
 	movx	a,@dptr
 	mov	r2,a
 	inc	dptr
 	movx	a,@dptr
-	mov	r3,a
-;	genAnd
-	mov	a,r2
-;	genIfxJump
-;	Peephole 108.e	removed ljmp by inverse jump logic
-	jb	acc.0,00105$
-;	Peephole 300	removed redundant label 00111$
-;	genRightShift
-;	genRightShiftLiteral
-;	genrshTwo
-	mov	a,r3
-	clr	c
-	rrc	a
-	xch	a,r2
-	rrc	a
-	xch	a,r2
 	mov	r3,a
 ;	genCall
 	mov	dpl,r2
 	mov	dph,r3
-	lcall	_io_cnt
-00105$:
-	pop	psw
-	pop	(0+1)
-	pop	(0+0)
-	pop	(0+7)
-	pop	(0+6)
-	pop	(0+5)
-	pop	(0+4)
-	pop	(0+3)
-	pop	(0+2)
-	pop	dph
-	pop	dpl
-	pop	b
-	pop	acc
-	reti
-;------------------------------------------------------------
-;Allocation info for local variables in function 'timer_isr'
-;------------------------------------------------------------
-;c                         Allocated with name '_timer_isr_c_1_1'
-;------------------------------------------------------------
-;	main.c:133: void timer_isr() interrupt 1
-;	-----------------------------------------
-;	 function timer_isr
-;	-----------------------------------------
-_timer_isr:
-	push	acc
-	push	b
-	push	dpl
-	push	dph
-	push	(0+2)
-	push	(0+3)
-	push	(0+4)
-	push	(0+5)
-	push	(0+6)
-	push	(0+7)
-	push	(0+0)
-	push	(0+1)
-	push	psw
-	mov	psw,#0x00
-;	main.c:137: flag++;
-;	genAssign
-	mov	dptr,#_flag
-	movx	a,@dptr
-	mov	r2,a
-;	genPlus
-	mov	dptr,#_flag
-;     genPlusIncr
-	mov	a,#0x01
-;	Peephole 236.a	used r2 instead of ar2
-	add	a,r2
+	lcall	_ctoa
+	mov	r2,dpl
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#(_main_c_1_1 + 0x0001)
+	mov	a,r2
 	movx	@dptr,a
-;	main.c:138: TH0 =   0x58;
-;	genAssign
-	mov	_TH0,#0x58
-;	main.c:139: TL0 =   0x00;
-;	genAssign
-	mov	_TL0,#0x00
-;	main.c:141: if(flag==20)
-;	genAssign
-	mov	dptr,#_flag
-	movx	a,@dptr
-	mov	r2,a
-;	genCmpEq
-;	gencjneshort
-	cjne	r2,#0x14,00118$
-	sjmp	00119$
-00118$:
-	ljmp	00111$
-00119$:
-;	main.c:144: s++;i++;
-;	genAssign
-	mov	dptr,#_s
-	movx	a,@dptr
-	mov	r2,a
-;	genPlus
-	mov	dptr,#_s
-;     genPlusIncr
-	mov	a,#0x01
-;	Peephole 236.a	used r2 instead of ar2
-	add	a,r2
+;	main.c:109: c[2]='\0';
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#(_main_c_1_1 + 0x0002)
+;	Peephole 181	changed mov to clr
+	clr	a
 	movx	@dptr,a
+;	main.c:111: lcdgotoxy(2,3);
 ;	genAssign
-	mov	dptr,#_i
+	mov	dptr,#_lcdgotoxy_PARM_2
+	mov	a,#0x03
+	movx	@dptr,a
+;	genCall
+	mov	dpl,#0x02
+	lcall	_lcdgotoxy
+;	main.c:112: lcdputstr("LIGHT: ");
+;	genCall
+;	Peephole 182.a	used 16 bit load of DPTR
+	mov	dptr,#__str_4
+	mov	b,#0x80
+	lcall	_lcdputstr
+;	main.c:113: lcdputstr(c);
+;	genCall
+;	Peephole 182.a	used 16 bit load of DPTR
+	mov	dptr,#_main_c_1_1
+	mov	b,#0x00
+	lcall	_lcdputstr
+00113$:
+;	main.c:117: if(display==TEMP)
+;	genAssign
+	mov	dptr,#_display
 	movx	a,@dptr
 	mov	r2,a
 	inc	dptr
 	movx	a,@dptr
 	mov	r3,a
-;	genPlus
-	mov	dptr,#_i
-;     genPlusIncr
-	mov	a,#0x01
-;	Peephole 236.a	used r2 instead of ar2
-	add	a,r2
-	movx	@dptr,a
-;	Peephole 181	changed mov to clr
-	clr	a
-;	Peephole 236.b	used r3 instead of ar3
-	addc	a,r3
-	inc	dptr
-	movx	@dptr,a
-;	main.c:145: if(s==60){s=0;m++;}
-;	genAssign
-	mov	dptr,#_s
-	movx	a,@dptr
-	mov	r2,a
 ;	genCmpEq
 ;	gencjneshort
-;	Peephole 112.b	changed ljmp to sjmp
-;	Peephole 198.b	optimized misc jump sequence
-	cjne	r2,#0x3C,00102$
-;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00120$
-;	Peephole 300	removed redundant label 00121$
-;	genAssign
-	mov	dptr,#_s
-;	Peephole 181	changed mov to clr
-	clr	a
-	movx	@dptr,a
-;	genAssign
-	mov	dptr,#_m
+	cjne	r2,#0x02,00158$
+	cjne	r3,#0x00,00158$
+	sjmp	00159$
+00158$:
+	ljmp	00115$
+00159$:
+;	main.c:119: te=sensor_data[TEMP]/10;
+;	genPointerGet
+;	genFarPointerGet
+	mov	dptr,#(_sensor_data + 0x0002)
 	movx	a,@dptr
 	mov	r2,a
-;	genPlus
-	mov	dptr,#_m
-;     genPlusIncr
-	mov	a,#0x01
-;	Peephole 236.a	used r2 instead of ar2
-	add	a,r2
-	movx	@dptr,a
-00102$:
-;	main.c:146: if(m==60){m=0;h++;}
-;	genAssign
-	mov	dptr,#_m
-	movx	a,@dptr
+;	genDiv
+;     genDivOneByte
+	clr	F0
+	mov	b,#0x0a
+	mov	a,r2
+	jnb	acc.7,00160$
+	cpl	F0
+	cpl	a
+	inc	a
+00160$:
+	div	ab
+	jnb	F0,00161$
+	cpl	a
+	inc	a
+00161$:
 	mov	r2,a
-;	genCmpEq
-;	gencjneshort
-;	Peephole 112.b	changed ljmp to sjmp
-;	Peephole 198.b	optimized misc jump sequence
-	cjne	r2,#0x3C,00104$
-;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00122$
-;	Peephole 300	removed redundant label 00123$
-;	genAssign
-	mov	dptr,#_m
-;	Peephole 181	changed mov to clr
-	clr	a
-	movx	@dptr,a
-;	genAssign
-	mov	dptr,#_h
-	movx	a,@dptr
-	mov	r2,a
-;	genPlus
-	mov	dptr,#_h
-;     genPlusIncr
-	mov	a,#0x01
-;	Peephole 236.a	used r2 instead of ar2
-	add	a,r2
-	movx	@dptr,a
-00104$:
-;	main.c:147: if(h==24){h=0;}
-;	genAssign
-	mov	dptr,#_h
-	movx	a,@dptr
-	mov	r2,a
-;	genCmpEq
-;	gencjneshort
-;	Peephole 112.b	changed ljmp to sjmp
-;	Peephole 198.b	optimized misc jump sequence
-	cjne	r2,#0x18,00106$
-;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00124$
-;	Peephole 300	removed redundant label 00125$
-;	genAssign
-	mov	dptr,#_h
-;	Peephole 181	changed mov to clr
-	clr	a
-	movx	@dptr,a
-00106$:
-;	main.c:149: clock_control(h,m,s);
-;	genAssign
-	mov	dptr,#_h
-	movx	a,@dptr
-	mov	r2,a
-;	genAssign
-	mov	dptr,#_m
-	movx	a,@dptr
+	mov	c,F0
+	subb	a,acc
 	mov	r3,a
 ;	genAssign
-	mov	dptr,#_s
-	movx	a,@dptr
-	mov	r4,a
-;	genAssign
-	mov	dptr,#_clock_control_PARM_2
+	mov	dptr,#_main_te_1_1
+	mov	a,r2
+	movx	@dptr,a
+	inc	dptr
 	mov	a,r3
 	movx	@dptr,a
+;	main.c:120: c[0]=ctoa(te);
+;	genCall
+	mov	dpl,r2
+	mov	dph,r3
+	lcall	_ctoa
+	mov	r2,dpl
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#_main_c_1_1
+	mov	a,r2
+	movx	@dptr,a
+;	main.c:121: te=sensor_data[TEMP]-(te*10);
+;	genPointerGet
+;	genFarPointerGet
+	mov	dptr,#(_sensor_data + 0x0002)
+	movx	a,@dptr
+;	genCast
+	mov	r2,a
+;	Peephole 105	removed redundant mov
+	rlc	a
+	subb	a,acc
+	mov	r3,a
 ;	genAssign
-	mov	dptr,#_clock_control_PARM_3
+	mov	dptr,#_main_te_1_1
+	movx	a,@dptr
+	mov	r4,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r5,a
+;	genAssign
+	mov	dptr,#__mulint_PARM_2
+	mov	a,#0x0A
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+;	genCall
+	mov	dpl,r4
+	mov	dph,r5
+	push	ar2
+	push	ar3
+	lcall	__mulint
+	mov	r4,dpl
+	mov	r5,dph
+	pop	ar3
+	pop	ar2
+;	genMinus
+	mov	dptr,#_main_te_1_1
+	mov	a,r2
+	clr	c
+;	Peephole 236.l	used r4 instead of ar4
+	subb	a,r4
+	movx	@dptr,a
+	mov	a,r3
+;	Peephole 236.l	used r5 instead of ar5
+	subb	a,r5
+	inc	dptr
+	movx	@dptr,a
+;	main.c:122: c[1]=ctoa(te);
+;	genAssign
+	mov	dptr,#_main_te_1_1
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genCall
+	mov	dpl,r2
+	mov	dph,r3
+	lcall	_ctoa
+	mov	r2,dpl
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#(_main_c_1_1 + 0x0001)
+	mov	a,r2
+	movx	@dptr,a
+;	main.c:123: c[2]='\0';
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#(_main_c_1_1 + 0x0002)
+;	Peephole 181	changed mov to clr
+	clr	a
+	movx	@dptr,a
+;	main.c:124: lcdgotoxy(2,3);
+;	genAssign
+	mov	dptr,#_lcdgotoxy_PARM_2
+	mov	a,#0x03
+	movx	@dptr,a
+;	genCall
+	mov	dpl,#0x02
+	lcall	_lcdgotoxy
+;	main.c:125: lcdputstr("TEMP: ");
+;	genCall
+;	Peephole 182.a	used 16 bit load of DPTR
+	mov	dptr,#__str_5
+	mov	b,#0x80
+	lcall	_lcdputstr
+;	main.c:126: lcdputstr(c);
+;	genCall
+;	Peephole 182.a	used 16 bit load of DPTR
+	mov	dptr,#_main_c_1_1
+	mov	b,#0x00
+	lcall	_lcdputstr
+00115$:
+;	main.c:130: if(display==HUMIDITY)
+;	genAssign
+	mov	dptr,#_display
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genCmpEq
+;	gencjneshort
+	cjne	r2,#0x03,00162$
+	cjne	r3,#0x00,00162$
+	sjmp	00163$
+00162$:
+	ljmp	00117$
+00163$:
+;	main.c:132: te=sensor_data[HUMIDITY]/10;
+;	genPointerGet
+;	genFarPointerGet
+	mov	dptr,#(_sensor_data + 0x0003)
+	movx	a,@dptr
+	mov	r2,a
+;	genDiv
+;     genDivOneByte
+	clr	F0
+	mov	b,#0x0a
+	mov	a,r2
+	jnb	acc.7,00164$
+	cpl	F0
+	cpl	a
+	inc	a
+00164$:
+	div	ab
+	jnb	F0,00165$
+	cpl	a
+	inc	a
+00165$:
+	mov	r2,a
+	mov	c,F0
+	subb	a,acc
+	mov	r3,a
+;	genAssign
+	mov	dptr,#_main_te_1_1
+	mov	a,r2
+	movx	@dptr,a
+	inc	dptr
+	mov	a,r3
+	movx	@dptr,a
+;	main.c:133: c[0]=ctoa(te);
+;	genCall
+	mov	dpl,r2
+	mov	dph,r3
+	lcall	_ctoa
+	mov	r2,dpl
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#_main_c_1_1
+	mov	a,r2
+	movx	@dptr,a
+;	main.c:134: te=sensor_data[HUMIDITY]-(te*10);
+;	genPointerGet
+;	genFarPointerGet
+	mov	dptr,#(_sensor_data + 0x0003)
+	movx	a,@dptr
+;	genCast
+	mov	r2,a
+;	Peephole 105	removed redundant mov
+	rlc	a
+	subb	a,acc
+	mov	r3,a
+;	genAssign
+	mov	dptr,#_main_te_1_1
+	movx	a,@dptr
+	mov	r4,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r5,a
+;	genAssign
+	mov	dptr,#__mulint_PARM_2
+	mov	a,#0x0A
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+;	genCall
+	mov	dpl,r4
+	mov	dph,r5
+	push	ar2
+	push	ar3
+	lcall	__mulint
+	mov	r4,dpl
+	mov	r5,dph
+	pop	ar3
+	pop	ar2
+;	genMinus
+	mov	dptr,#_main_te_1_1
+	mov	a,r2
+	clr	c
+;	Peephole 236.l	used r4 instead of ar4
+	subb	a,r4
+	movx	@dptr,a
+	mov	a,r3
+;	Peephole 236.l	used r5 instead of ar5
+	subb	a,r5
+	inc	dptr
+	movx	@dptr,a
+;	main.c:135: c[1]=ctoa(te);
+;	genAssign
+	mov	dptr,#_main_te_1_1
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genCall
+	mov	dpl,r2
+	mov	dph,r3
+	lcall	_ctoa
+	mov	r2,dpl
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#(_main_c_1_1 + 0x0001)
+	mov	a,r2
+	movx	@dptr,a
+;	main.c:136: c[2]='\0';
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#(_main_c_1_1 + 0x0002)
+;	Peephole 181	changed mov to clr
+	clr	a
+	movx	@dptr,a
+;	main.c:137: lcdgotoxy(2,3);
+;	genAssign
+	mov	dptr,#_lcdgotoxy_PARM_2
+	mov	a,#0x03
+	movx	@dptr,a
+;	genCall
+	mov	dpl,#0x02
+	lcall	_lcdgotoxy
+;	main.c:138: lcdputstr("HUMIDITY: ");
+;	genCall
+;	Peephole 182.a	used 16 bit load of DPTR
+	mov	dptr,#__str_6
+	mov	b,#0x80
+	lcall	_lcdputstr
+;	main.c:139: lcdputstr(c);
+;	genCall
+;	Peephole 182.a	used 16 bit load of DPTR
+	mov	dptr,#_main_c_1_1
+	mov	b,#0x00
+	lcall	_lcdputstr
+00117$:
+;	main.c:142: if(display==PRESSURE)
+;	genAssign
+	mov	dptr,#_display
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genCmpEq
+;	gencjneshort
+	cjne	r2,#0x04,00166$
+	cjne	r3,#0x00,00166$
+	sjmp	00167$
+00166$:
+	ljmp	00119$
+00167$:
+;	main.c:144: te=PRESSURE_calibration()/100;
+;	genCall
+	lcall	_PRESSURE_calibration
+	mov	r2,dpl
+	mov	r3,dph
+;	genAssign
+	mov	dptr,#__divuint_PARM_2
+	mov	a,#0x64
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+;	main.c:145: c[0]=ctoa(te);
+;	genCall
+	mov	dpl,r2
+	mov	dph,r3
+	lcall	__divuint
+;	genCall
+	mov	r2,dpl
+;	Peephole 177.d	removed redundant move
+	mov  r3,dph
+;	Peephole 177.a	removed redundant mov
+	push	ar2
+	push	ar3
+	lcall	_ctoa
+	mov	r4,dpl
+	pop	ar3
+	pop	ar2
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#_main_c_1_1
 	mov	a,r4
+	movx	@dptr,a
+;	main.c:146: te=(PRESSURE_calibration()-(te*100))/10;
+;	genCall
+	push	ar2
+	push	ar3
+	lcall	_PRESSURE_calibration
+	mov	r4,dpl
+	mov	r5,dph
+	pop	ar3
+	pop	ar2
+;	genAssign
+;	genAssign
+	mov	dptr,#__mulint_PARM_2
+	mov	a,#0x64
+	movx	@dptr,a
+	clr	a
+	inc	dptr
 	movx	@dptr,a
 ;	genCall
 	mov	dpl,r2
-	lcall	_clock_control
-;	main.c:151: if(i==8)
+	mov	dph,r3
+	push	ar4
+	push	ar5
+	lcall	__mulint
+	mov	r2,dpl
+	mov	r3,dph
+	pop	ar5
+	pop	ar4
+;	genMinus
+	mov	a,r4
+	clr	c
+;	Peephole 236.l	used r2 instead of ar2
+	subb	a,r2
+	mov	r4,a
+	mov	a,r5
+;	Peephole 236.l	used r3 instead of ar3
+	subb	a,r3
+	mov	r5,a
 ;	genAssign
-	mov	dptr,#_i
+	mov	dptr,#__divuint_PARM_2
+	mov	a,#0x0A
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+;	main.c:147: c[1]=ctoa(te);
+;	genCall
+	mov	dpl,r4
+	mov	dph,r5
+	lcall	__divuint
+;	genCall
+	mov	r2,dpl
+;	Peephole 177.d	removed redundant move
+	mov  r3,dph
+;	Peephole 177.a	removed redundant mov
+	lcall	_ctoa
+	mov	r2,dpl
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#(_main_c_1_1 + 0x0001)
+	mov	a,r2
+	movx	@dptr,a
+;	main.c:148: te=(PRESSURE_calibration()%100)%10;
+;	genCall
+	lcall	_PRESSURE_calibration
+	mov	r2,dpl
+	mov	r3,dph
+;	genAssign
+	mov	dptr,#__moduint_PARM_2
+	mov	a,#0x64
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+;	genCall
+	mov	dpl,r2
+	mov	dph,r3
+	lcall	__moduint
+	mov	r2,dpl
+	mov	r3,dph
+;	genAssign
+	mov	dptr,#__moduint_PARM_2
+	mov	a,#0x0A
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+;	main.c:149: c[2]=ctoa(te);
+;	genCall
+	mov	dpl,r2
+	mov	dph,r3
+	lcall	__moduint
+;	genCall
+	mov	r2,dpl
+;	Peephole 177.d	removed redundant move
+	mov  r3,dph
+;	Peephole 177.a	removed redundant mov
+	lcall	_ctoa
+	mov	r2,dpl
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#(_main_c_1_1 + 0x0002)
+	mov	a,r2
+	movx	@dptr,a
+;	main.c:150: c[3]='\0';
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#(_main_c_1_1 + 0x0003)
+;	Peephole 181	changed mov to clr
+	clr	a
+	movx	@dptr,a
+;	main.c:151: lcdgotoxy(2,3);
+;	genAssign
+	mov	dptr,#_lcdgotoxy_PARM_2
+	mov	a,#0x03
+	movx	@dptr,a
+;	genCall
+	mov	dpl,#0x02
+	lcall	_lcdgotoxy
+;	main.c:152: lcdputstr("PRESSURE: ");
+;	genCall
+;	Peephole 182.a	used 16 bit load of DPTR
+	mov	dptr,#__str_7
+	mov	b,#0x80
+	lcall	_lcdputstr
+;	main.c:153: lcdputstr(c);
+;	genCall
+;	Peephole 182.a	used 16 bit load of DPTR
+	mov	dptr,#_main_c_1_1
+	mov	b,#0x00
+	lcall	_lcdputstr
+00119$:
+;	main.c:157: if(display==GPS)
+;	genAssign
+	mov	dptr,#_display
 	movx	a,@dptr
 	mov	r2,a
 	inc	dptr
@@ -973,49 +1523,21 @@ _timer_isr:
 	mov	r3,a
 ;	genCmpEq
 ;	gencjneshort
-	cjne	r2,#0x08,00126$
-	cjne	r3,#0x00,00126$
-	sjmp	00127$
-00126$:
-	ljmp	00108$
-00127$:
-;	main.c:153: TH0 =   0x80;
-;	genAssign
-	mov	_TH0,#0x80
-;	main.c:154: TL0 =   0x00;
-;	genAssign
-	mov	_TL0,#0x00
-;	main.c:158: UART=0;
-;	genAssign
-	clr	_P1_4
-;	main.c:159: c=gps_read();
+	cjne	r2,#0x05,00168$
+	cjne	r3,#0x00,00168$
+	sjmp	00169$
+00168$:
+	ljmp	00128$
+00169$:
+;	main.c:160: gps_data= gps_read();
 ;	genCall
 	lcall	_gps_read
+;	main.c:161: if(gps_status(gps_data)=='V')
+;	genCall
 	mov	r2,dpl
 	mov	r3,dph
 	mov	r4,b
-;	main.c:160: UART=1;
-;	genAssign
-	setb	_P1_4
-;	main.c:165: lcdgotoxy(1,1);
-;	genAssign
-	mov	dptr,#_lcdgotoxy_PARM_2
-	mov	a,#0x01
-	movx	@dptr,a
-;	genCall
-	mov	dpl,#0x01
-	push	ar2
-	push	ar3
-	push	ar4
-	lcall	_lcdgotoxy
-	pop	ar4
-	pop	ar3
-	pop	ar2
-;	main.c:167: lcdputch(gps_status(c));
-;	genCall
-	mov	dpl,r2
-	mov	dph,r3
-	mov	b,r4
+;	Peephole 238.d	removed 3 redundant moves
 	push	ar2
 	push	ar3
 	push	ar4
@@ -1024,16 +1546,71 @@ _timer_isr:
 	pop	ar4
 	pop	ar3
 	pop	ar2
+;	genCmpEq
+;	gencjneshort
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 198.b	optimized misc jump sequence
+	cjne	r5,#0x56,00121$
+;	Peephole 200.b	removed redundant sjmp
+;	Peephole 300	removed redundant label 00170$
+;	Peephole 300	removed redundant label 00171$
+;	main.c:164: lcdgotoxy(2,1);
+;	genAssign
+	mov	dptr,#_lcdgotoxy_PARM_2
+	mov	a,#0x01
+	movx	@dptr,a
 ;	genCall
-	mov	dpl,r5
+	mov	dpl,#0x02
+	lcall	_lcdgotoxy
+;	main.c:165: lcdputstr("  GPS DATA ");
+;	genCall
+;	Peephole 182.a	used 16 bit load of DPTR
+	mov	dptr,#__str_8
+	mov	b,#0x80
+	lcall	_lcdputstr
+;	main.c:166: lcdgotoxy(3,1);
+;	genAssign
+	mov	dptr,#_lcdgotoxy_PARM_2
+	mov	a,#0x01
+	movx	@dptr,a
+;	genCall
+	mov	dpl,#0x03
+	lcall	_lcdgotoxy
+;	main.c:167: lcdputstr("  Invalid  ");
+;	genCall
+;	Peephole 182.a	used 16 bit load of DPTR
+	mov	dptr,#__str_9
+	mov	b,#0x80
+	lcall	_lcdputstr
+	ljmp	00128$
+00121$:
+;	main.c:173: lcdgotoxy(2,1);
+;	genAssign
+	mov	dptr,#_lcdgotoxy_PARM_2
+	mov	a,#0x01
+	movx	@dptr,a
+;	genCall
+	mov	dpl,#0x02
 	push	ar2
 	push	ar3
 	push	ar4
-	lcall	_lcdputch
+	lcall	_lcdgotoxy
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	main.c:168: lcdputstr(gps_latitude(c));
+;	main.c:174: lcdputstr("La: ");
+;	genCall
+;	Peephole 182.a	used 16 bit load of DPTR
+	mov	dptr,#__str_10
+	mov	b,#0x80
+	push	ar2
+	push	ar3
+	push	ar4
+	lcall	_lcdputstr
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	main.c:175: lcdputstr(gps_latitude(gps_data));
 ;	genCall
 	mov	dpl,r2
 	mov	dph,r3
@@ -1059,7 +1636,33 @@ _timer_isr:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	main.c:169: lcdputstr(gps_longitude(c));
+;	main.c:176: lcdgotoxy(3,1);
+;	genAssign
+	mov	dptr,#_lcdgotoxy_PARM_2
+	mov	a,#0x01
+	movx	@dptr,a
+;	genCall
+	mov	dpl,#0x03
+	push	ar2
+	push	ar3
+	push	ar4
+	lcall	_lcdgotoxy
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	main.c:177: lcdputstr("Lo: ");
+;	genCall
+;	Peephole 182.a	used 16 bit load of DPTR
+	mov	dptr,#__str_11
+	mov	b,#0x80
+	push	ar2
+	push	ar3
+	push	ar4
+	lcall	_lcdputstr
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	main.c:178: lcdputstr(gps_longitude(gps_data));
 ;	genCall
 	mov	dpl,r2
 	mov	dph,r3
@@ -1071,21 +1674,501 @@ _timer_isr:
 	mov	r4,b
 ;	Peephole 238.d	removed 3 redundant moves
 	lcall	_lcdputstr
-;	main.c:172: i=0;
+	ljmp	00128$
+;	Peephole 259.b	removed redundant label 00130$ and ret
+;
+;------------------------------------------------------------
+;Allocation info for local variables in function 's_one'
+;------------------------------------------------------------
+;------------------------------------------------------------
+;	main.c:209: void s_one() interrupt 0
+;	-----------------------------------------
+;	 function s_one
+;	-----------------------------------------
+_s_one:
+	push	acc
+	push	b
+	push	dpl
+	push	dph
+	push	(0+2)
+	push	(0+3)
+	push	(0+4)
+	push	(0+5)
+	push	(0+6)
+	push	(0+7)
+	push	(0+0)
+	push	(0+1)
+	push	psw
+	mov	psw,#0x00
+;	main.c:211: fr++;
 ;	genAssign
-	mov	dptr,#_i
-	clr	a
+	mov	dptr,#_fr
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genPlus
+	mov	dptr,#_fr
+;     genPlusIncr
+	mov	a,#0x01
+;	Peephole 236.a	used r2 instead of ar2
+	add	a,r2
 	movx	@dptr,a
+;	Peephole 181	changed mov to clr
+	clr	a
+;	Peephole 236.b	used r3 instead of ar3
+	addc	a,r3
 	inc	dptr
 	movx	@dptr,a
-00108$:
-;	main.c:177: flag=0;
+;	main.c:212: if(fr>8)
+;	genAssign
+	mov	dptr,#_fr
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genCmpGt
+;	genCmp
+	clr	c
+	mov	a,#0x08
+	subb	a,r2
+;	Peephole 181	changed mov to clr
+	clr	a
+	subb	a,r3
+;	genIfxJump
+;	Peephole 108.a	removed ljmp by inverse jump logic
+	jnc	00102$
+;	Peephole 300	removed redundant label 00106$
+;	main.c:214: fr=1;
+;	genAssign
+	mov	dptr,#_fr
+	mov	a,#0x01
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+00102$:
+;	main.c:216: P1_0 = !P1_0;
+;	genNot
+	cpl	_P1_0
+;	main.c:217: lcdgotoxy(4,1);
+;	genAssign
+	mov	dptr,#_lcdgotoxy_PARM_2
+	mov	a,#0x01
+	movx	@dptr,a
+;	genCall
+	mov	dpl,#0x04
+	lcall	_lcdgotoxy
+;	main.c:218: lcdputstr("log_f:");
+;	genCall
+;	Peephole 182.a	used 16 bit load of DPTR
+	mov	dptr,#__str_12
+	mov	b,#0x80
+	lcall	_lcdputstr
+;	main.c:219: lcdputch(ctoa(fr));
+;	genAssign
+	mov	dptr,#_fr
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genCall
+	mov	dpl,r2
+	mov	dph,r3
+	lcall	_ctoa
+;	genCall
+	mov  r2,dpl
+;	Peephole 177.a	removed redundant mov
+	lcall	_lcdputch
+;	Peephole 300	removed redundant label 00103$
+	pop	psw
+	pop	(0+1)
+	pop	(0+0)
+	pop	(0+7)
+	pop	(0+6)
+	pop	(0+5)
+	pop	(0+4)
+	pop	(0+3)
+	pop	(0+2)
+	pop	dph
+	pop	dpl
+	pop	b
+	pop	acc
+	reti
+;------------------------------------------------------------
+;Allocation info for local variables in function 's_two'
+;------------------------------------------------------------
+;------------------------------------------------------------
+;	main.c:224: void s_two() interrupt 2
+;	-----------------------------------------
+;	 function s_two
+;	-----------------------------------------
+_s_two:
+	push	acc
+	push	b
+	push	dpl
+	push	dph
+	push	(0+2)
+	push	(0+3)
+	push	(0+4)
+	push	(0+5)
+	push	(0+6)
+	push	(0+7)
+	push	(0+0)
+	push	(0+1)
+	push	psw
+	mov	psw,#0x00
+;	main.c:226: display--;
+;	genAssign
+	mov	dptr,#_display
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genMinus
+;	genMinusDec
+	dec	r2
+	cjne	r2,#0xff,00106$
+	dec	r3
+00106$:
+;	genAssign
+	mov	dptr,#_display
+	mov	a,r2
+	movx	@dptr,a
+	inc	dptr
+	mov	a,r3
+	movx	@dptr,a
+;	main.c:227: lcdputcmd(1);
+;	genCall
+	mov	dpl,#0x01
+	lcall	_lcdputcmd
+;	main.c:228: lcdgotoxy(4,1);
+;	genAssign
+	mov	dptr,#_lcdgotoxy_PARM_2
+	mov	a,#0x01
+	movx	@dptr,a
+;	genCall
+	mov	dpl,#0x04
+	lcall	_lcdgotoxy
+;	main.c:229: lcdputstr("log_f:");
+;	genCall
+;	Peephole 182.a	used 16 bit load of DPTR
+	mov	dptr,#__str_12
+	mov	b,#0x80
+	lcall	_lcdputstr
+;	main.c:230: lcdputch(ctoa(fr));
+;	genAssign
+	mov	dptr,#_fr
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genCall
+	mov	dpl,r2
+	mov	dph,r3
+	lcall	_ctoa
+;	genCall
+	mov  r2,dpl
+;	Peephole 177.a	removed redundant mov
+	lcall	_lcdputch
+;	main.c:231: if(display==0)
+;	genAssign
+	mov	dptr,#_display
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+;	genIfx
+	mov	r3,a
+;	Peephole 135	removed redundant mov
+	orl	a,r2
+;	genIfxJump
+;	Peephole 108.b	removed ljmp by inverse jump logic
+	jnz	00103$
+;	Peephole 300	removed redundant label 00107$
+;	main.c:233: display=5;
+;	genAssign
+	mov	dptr,#_display
+	mov	a,#0x05
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+00103$:
+	pop	psw
+	pop	(0+1)
+	pop	(0+0)
+	pop	(0+7)
+	pop	(0+6)
+	pop	(0+5)
+	pop	(0+4)
+	pop	(0+3)
+	pop	(0+2)
+	pop	dph
+	pop	dpl
+	pop	b
+	pop	acc
+	reti
+;------------------------------------------------------------
+;Allocation info for local variables in function 'timer_isr'
+;------------------------------------------------------------
+;------------------------------------------------------------
+;	main.c:245: void timer_isr() interrupt 1
+;	-----------------------------------------
+;	 function timer_isr
+;	-----------------------------------------
+_timer_isr:
+	push	acc
+	push	b
+	push	dpl
+	push	dph
+	push	(0+2)
+	push	(0+3)
+	push	(0+4)
+	push	(0+5)
+	push	(0+6)
+	push	(0+7)
+	push	(0+0)
+	push	(0+1)
+	push	psw
+	mov	psw,#0x00
+;	main.c:249: flag++;
+;	genAssign
+	mov	dptr,#_flag
+	movx	a,@dptr
+	mov	r2,a
+;	genPlus
+	mov	dptr,#_flag
+;     genPlusIncr
+	mov	a,#0x01
+;	Peephole 236.a	used r2 instead of ar2
+	add	a,r2
+	movx	@dptr,a
+;	main.c:250: if(display==GPS)
+;	genAssign
+	mov	dptr,#_display
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genCmpEq
+;	gencjneshort
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 198.a	optimized misc jump sequence
+	cjne	r2,#0x05,00102$
+	cjne	r3,#0x00,00102$
+;	Peephole 200.b	removed redundant sjmp
+;	Peephole 300	removed redundant label 00122$
+;	Peephole 300	removed redundant label 00123$
+;	main.c:252: TH0 =   0xB0;
+;	genAssign
+	mov	_TH0,#0xB0
+;	main.c:253: TL0 =   0x00;
+;	genAssign
+	mov	_TL0,#0x00
+;	Peephole 112.b	changed ljmp to sjmp
+	sjmp	00103$
+00102$:
+;	main.c:257: TH0 =   0x80;
+;	genAssign
+	mov	_TH0,#0x80
+;	main.c:258: TL0 =   0x00;
+;	genAssign
+	mov	_TL0,#0x00
+00103$:
+;	main.c:262: if(flag==20)
+;	genAssign
+	mov	dptr,#_flag
+	movx	a,@dptr
+	mov	r2,a
+;	genCmpEq
+;	gencjneshort
+	cjne	r2,#0x14,00124$
+	sjmp	00125$
+00124$:
+	ljmp	00114$
+00125$:
+;	main.c:265: log_f++;
+;	genAssign
+	mov	dptr,#_log_f
+	movx	a,@dptr
+	mov	r2,a
+;	genPlus
+	mov	dptr,#_log_f
+;     genPlusIncr
+	mov	a,#0x01
+;	Peephole 236.a	used r2 instead of ar2
+	add	a,r2
+	movx	@dptr,a
+;	main.c:266: if(log_f==fr)
+;	genAssign
+	mov	dptr,#_log_f
+	movx	a,@dptr
+	mov	r2,a
+;	genAssign
+	mov	dptr,#_fr
+	movx	a,@dptr
+	mov	r3,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r4,a
+;	genCast
+	mov	a,r2
+	rlc	a
+	subb	a,acc
+	mov	r5,a
+;	genCmpEq
+;	gencjneshort
+	mov	a,r2
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 197.b	optimized misc jump sequence
+	cjne	a,ar3,00105$
+	mov	a,r5
+	cjne	a,ar4,00105$
+;	Peephole 200.b	removed redundant sjmp
+;	Peephole 300	removed redundant label 00126$
+;	Peephole 300	removed redundant label 00127$
+;	main.c:269: sensor++;
+;	genAssign
+	mov	dptr,#_sensor
+	movx	a,@dptr
+	mov	r2,a
+;	genPlus
+	mov	dptr,#_sensor
+;     genPlusIncr
+	mov	a,#0x01
+;	Peephole 236.a	used r2 instead of ar2
+	add	a,r2
+	movx	@dptr,a
+00105$:
+;	main.c:274: s++;
+;	genAssign
+	mov	dptr,#_s
+	movx	a,@dptr
+	mov	r2,a
+;	genPlus
+	mov	dptr,#_s
+;     genPlusIncr
+	mov	a,#0x01
+;	Peephole 236.a	used r2 instead of ar2
+	add	a,r2
+	movx	@dptr,a
+;	main.c:275: if(s==60){s=0;m++;}
+;	genAssign
+	mov	dptr,#_s
+	movx	a,@dptr
+	mov	r2,a
+;	genCmpEq
+;	gencjneshort
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 198.b	optimized misc jump sequence
+	cjne	r2,#0x3C,00107$
+;	Peephole 200.b	removed redundant sjmp
+;	Peephole 300	removed redundant label 00128$
+;	Peephole 300	removed redundant label 00129$
+;	genAssign
+	mov	dptr,#_s
+;	Peephole 181	changed mov to clr
+	clr	a
+	movx	@dptr,a
+;	genAssign
+	mov	dptr,#_m
+	movx	a,@dptr
+	mov	r2,a
+;	genPlus
+	mov	dptr,#_m
+;     genPlusIncr
+	mov	a,#0x01
+;	Peephole 236.a	used r2 instead of ar2
+	add	a,r2
+	movx	@dptr,a
+00107$:
+;	main.c:276: if(m==60){m=0;h++;}
+;	genAssign
+	mov	dptr,#_m
+	movx	a,@dptr
+	mov	r2,a
+;	genCmpEq
+;	gencjneshort
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 198.b	optimized misc jump sequence
+	cjne	r2,#0x3C,00109$
+;	Peephole 200.b	removed redundant sjmp
+;	Peephole 300	removed redundant label 00130$
+;	Peephole 300	removed redundant label 00131$
+;	genAssign
+	mov	dptr,#_m
+;	Peephole 181	changed mov to clr
+	clr	a
+	movx	@dptr,a
+;	genAssign
+	mov	dptr,#_h
+	movx	a,@dptr
+	mov	r2,a
+;	genPlus
+	mov	dptr,#_h
+;     genPlusIncr
+	mov	a,#0x01
+;	Peephole 236.a	used r2 instead of ar2
+	add	a,r2
+	movx	@dptr,a
+00109$:
+;	main.c:277: if(h==24){h=0;}
+;	genAssign
+	mov	dptr,#_h
+	movx	a,@dptr
+	mov	r2,a
+;	genCmpEq
+;	gencjneshort
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 198.b	optimized misc jump sequence
+	cjne	r2,#0x18,00111$
+;	Peephole 200.b	removed redundant sjmp
+;	Peephole 300	removed redundant label 00132$
+;	Peephole 300	removed redundant label 00133$
+;	genAssign
+	mov	dptr,#_h
+;	Peephole 181	changed mov to clr
+	clr	a
+	movx	@dptr,a
+00111$:
+;	main.c:279: clock_control(h,m,s);
+;	genAssign
+	mov	dptr,#_h
+	movx	a,@dptr
+	mov	r2,a
+;	genAssign
+	mov	dptr,#_m
+	movx	a,@dptr
+	mov	r3,a
+;	genAssign
+	mov	dptr,#_s
+	movx	a,@dptr
+	mov	r4,a
+;	genAssign
+	mov	dptr,#_clock_control_PARM_2
+	mov	a,r3
+	movx	@dptr,a
+;	genAssign
+	mov	dptr,#_clock_control_PARM_3
+	mov	a,r4
+	movx	@dptr,a
+;	genCall
+	mov	dpl,r2
+	lcall	_clock_control
+;	main.c:284: flag=0;
 ;	genAssign
 	mov	dptr,#_flag
 ;	Peephole 181	changed mov to clr
 	clr	a
 	movx	@dptr,a
-00111$:
+00114$:
 	pop	psw
 	pop	(0+1)
 	pop	(0+0)
@@ -1105,17 +2188,47 @@ _timer_isr:
 __str_0:
 	.db 0x0A
 	.db 0x0D
-	.ascii "Temp: %d Celcius"
+	.ascii " Light : %d percent   freq- %d"
 	.db 0x00
 __str_1:
 	.db 0x09
-	.ascii "HUMIDITY: %d RH"
+	.ascii " Temparature : %d degree Celcius"
 	.db 0x00
 __str_2:
-	.ascii "LIGHT : %d "
+	.db 0x09
+	.ascii " Humidity : %d RH"
+	.db 0x00
+__str_3:
+	.db 0x09
+	.ascii " Pressure %d mmHg"
+	.db 0x00
+__str_4:
+	.ascii "LIGHT: "
+	.db 0x00
+__str_5:
+	.ascii "TEMP: "
+	.db 0x00
+__str_6:
+	.ascii "HUMIDITY: "
+	.db 0x00
+__str_7:
+	.ascii "PRESSURE: "
+	.db 0x00
+__str_8:
+	.ascii "  GPS DATA "
+	.db 0x00
+__str_9:
+	.ascii "  Invalid  "
+	.db 0x00
+__str_10:
+	.ascii "La: "
+	.db 0x00
+__str_11:
+	.ascii "Lo: "
+	.db 0x00
+__str_12:
+	.ascii "log_f:"
 	.db 0x00
 	.area XINIT   (CODE)
 __xinit__flag:
 	.db #0x00
-__xinit__timers:
-	.byte #0x00,#0x00

@@ -33,8 +33,8 @@ void timer_init()
     TH0 =   0x90;
     TL0 =   0x00;
     IPL0 =0x02;
-    IE  |= 0x83;
-    TCON |= 0x11;
+    IE  |= 0x87;
+    TCON |= 0x15;
 }
 
 

@@ -61,5 +61,19 @@ unsigned char PRESSURE_ReadByte(char reg)
 
 }
 
+unsigned int PRESSURE_calibration(void) __critical
+{
+    unsigned int  msb,csb,pressure;
 
+             PRESSURE_WriteByte(0x26,0x02);
+
+             msb= PRESSURE_ReadByte(0x01);
+
+             csb = PRESSURE_ReadByte(0x02);
+
+            pressure= (msb)*(1024/133) + (csb/133);
+
+            return pressure;
+
+}
 

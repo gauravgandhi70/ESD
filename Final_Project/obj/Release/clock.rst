@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.6.0 #4309 (Jul 28 2006)
-                              4 ; This file generated Wed Nov 23 20:06:55 2016
+                              4 ; This file generated Mon Nov 28 22:08:17 2016
                               5 ;--------------------------------------------------------
                               6 	.module clock
                               7 	.optsdcc -mmcs51 --model-large
@@ -489,7 +489,7 @@
                             489 ;	-----------------------------------------
                             490 ;	 function timer_init
                             491 ;	-----------------------------------------
-   0720                     492 _timer_init:
+   072D                     492 _timer_init:
                     0002    493 	ar2 = 0x02
                     0003    494 	ar3 = 0x03
                     0004    495 	ar4 = 0x04
@@ -500,24 +500,24 @@
                     0001    500 	ar1 = 0x01
                             501 ;	clock.c:32: TMOD |= 0x01;
                             502 ;	genOr
-   0720 43 89 01            503 	orl	_TMOD,#0x01
+   072D 43 89 01            503 	orl	_TMOD,#0x01
                             504 ;	clock.c:33: TH0 =   0x90;
                             505 ;	genAssign
-   0723 75 8C 90            506 	mov	_TH0,#0x90
+   0730 75 8C 90            506 	mov	_TH0,#0x90
                             507 ;	clock.c:34: TL0 =   0x00;
                             508 ;	genAssign
-   0726 75 8A 00            509 	mov	_TL0,#0x00
+   0733 75 8A 00            509 	mov	_TL0,#0x00
                             510 ;	clock.c:35: IPL0 =0x02;
                             511 ;	genAssign
-   0729 75 B8 02            512 	mov	_IPL0,#0x02
-                            513 ;	clock.c:36: IE  |= 0x83;
+   0736 75 B8 02            512 	mov	_IPL0,#0x02
+                            513 ;	clock.c:36: IE  |= 0x87;
                             514 ;	genOr
-   072C 43 A8 83            515 	orl	_IE,#0x83
-                            516 ;	clock.c:37: TCON |= 0x11;
+   0739 43 A8 87            515 	orl	_IE,#0x87
+                            516 ;	clock.c:37: TCON |= 0x15;
                             517 ;	genOr
-   072F 43 88 11            518 	orl	_TCON,#0x11
+   073C 43 88 15            518 	orl	_TCON,#0x15
                             519 ;	Peephole 300	removed redundant label 00101$
-   0732 22                  520 	ret
+   073F 22                  520 	ret
                             521 ;------------------------------------------------------------
                             522 ;Allocation info for local variables in function 'clock_reset'
                             523 ;------------------------------------------------------------
@@ -526,22 +526,22 @@
                             526 ;	-----------------------------------------
                             527 ;	 function clock_reset
                             528 ;	-----------------------------------------
-   0733                     529 _clock_reset:
+   0740                     529 _clock_reset:
                             530 ;	clock.c:52: clock_control(0,0,0);
                             531 ;	genAssign
-   0733 90 00 11            532 	mov	dptr,#_clock_control_PARM_2
+   0740 90 00 11            532 	mov	dptr,#_clock_control_PARM_2
                             533 ;	Peephole 181	changed mov to clr
                             534 ;	genAssign
                             535 ;	Peephole 181	changed mov to clr
                             536 ;	Peephole 219.a	removed redundant clear
-   0736 E4                  537 	clr	a
-   0737 F0                  538 	movx	@dptr,a
-   0738 90 00 12            539 	mov	dptr,#_clock_control_PARM_3
-   073B F0                  540 	movx	@dptr,a
+   0743 E4                  537 	clr	a
+   0744 F0                  538 	movx	@dptr,a
+   0745 90 00 12            539 	mov	dptr,#_clock_control_PARM_3
+   0748 F0                  540 	movx	@dptr,a
                             541 ;	genCall
-   073C 75 82 00            542 	mov	dpl,#0x00
+   0749 75 82 00            542 	mov	dpl,#0x00
                             543 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   073F 02 07 42            544 	ljmp	_clock_control
+   074C 02 07 4F            544 	ljmp	_clock_control
                             545 ;
                             546 ;------------------------------------------------------------
                             547 ;Allocation info for local variables in function 'clock_control'
@@ -556,350 +556,350 @@
                             556 ;	-----------------------------------------
                             557 ;	 function clock_control
                             558 ;	-----------------------------------------
-   0742                     559 _clock_control:
-   0742 D3                  560 	setb	c
-   0743 10 AF 01            561 	jbc	ea,00103$
-   0746 C3                  562 	clr	c
-   0747                     563 00103$:
-   0747 C0 D0               564 	push	psw
+   074F                     559 _clock_control:
+   074F D3                  560 	setb	c
+   0750 10 AF 01            561 	jbc	ea,00103$
+   0753 C3                  562 	clr	c
+   0754                     563 00103$:
+   0754 C0 D0               564 	push	psw
                             565 ;	genReceive
-   0749 E5 82               566 	mov	a,dpl
-   074B 90 00 13            567 	mov	dptr,#_clock_control_hour_1_1
-   074E F0                  568 	movx	@dptr,a
+   0756 E5 82               566 	mov	a,dpl
+   0758 90 00 13            567 	mov	dptr,#_clock_control_hour_1_1
+   075B F0                  568 	movx	@dptr,a
                             569 ;	clock.c:75: t=sec/10;
                             570 ;	genAssign
-   074F 90 00 12            571 	mov	dptr,#_clock_control_PARM_3
-   0752 E0                  572 	movx	a,@dptr
-   0753 FA                  573 	mov	r2,a
+   075C 90 00 12            571 	mov	dptr,#_clock_control_PARM_3
+   075F E0                  572 	movx	a,@dptr
+   0760 FA                  573 	mov	r2,a
                             574 ;	genDiv
                             575 ;     genDivOneByte
-   0754 C2 D5               576 	clr	F0
-   0756 75 F0 0A            577 	mov	b,#0x0a
-   0759 EA                  578 	mov	a,r2
-   075A 30 E7 04            579 	jnb	acc.7,00104$
-   075D B2 D5               580 	cpl	F0
-   075F F4                  581 	cpl	a
-   0760 04                  582 	inc	a
-   0761                     583 00104$:
-   0761 84                  584 	div	ab
-   0762 30 D5 02            585 	jnb	F0,00105$
-   0765 F4                  586 	cpl	a
-   0766 04                  587 	inc	a
-   0767                     588 00105$:
-   0767 FB                  589 	mov	r3,a
-   0768 A2 D5               590 	mov	c,F0
-   076A 95 E0               591 	subb	a,acc
-   076C FC                  592 	mov	r4,a
+   0761 C2 D5               576 	clr	F0
+   0763 75 F0 0A            577 	mov	b,#0x0a
+   0766 EA                  578 	mov	a,r2
+   0767 30 E7 04            579 	jnb	acc.7,00104$
+   076A B2 D5               580 	cpl	F0
+   076C F4                  581 	cpl	a
+   076D 04                  582 	inc	a
+   076E                     583 00104$:
+   076E 84                  584 	div	ab
+   076F 30 D5 02            585 	jnb	F0,00105$
+   0772 F4                  586 	cpl	a
+   0773 04                  587 	inc	a
+   0774                     588 00105$:
+   0774 FB                  589 	mov	r3,a
+   0775 A2 D5               590 	mov	c,F0
+   0777 95 E0               591 	subb	a,acc
+   0779 FC                  592 	mov	r4,a
                             593 ;	clock.c:76: c[0]=ctoa(t);
                             594 ;	genCall
-   076D 8B 82               595 	mov	dpl,r3
-   076F 8C 83               596 	mov	dph,r4
-   0771 C0 02               597 	push	ar2
-   0773 C0 03               598 	push	ar3
-   0775 C0 04               599 	push	ar4
-   0777 12 06 48            600 	lcall	_ctoa
-   077A AD 82               601 	mov	r5,dpl
-   077C D0 04               602 	pop	ar4
-   077E D0 03               603 	pop	ar3
-   0780 D0 02               604 	pop	ar2
+   077A 8B 82               595 	mov	dpl,r3
+   077C 8C 83               596 	mov	dph,r4
+   077E C0 02               597 	push	ar2
+   0780 C0 03               598 	push	ar3
+   0782 C0 04               599 	push	ar4
+   0784 12 06 55            600 	lcall	_ctoa
+   0787 AD 82               601 	mov	r5,dpl
+   0789 D0 04               602 	pop	ar4
+   078B D0 03               603 	pop	ar3
+   078D D0 02               604 	pop	ar2
                             605 ;	genPointerSet
                             606 ;     genFarPointerSet
-   0782 90 00 14            607 	mov	dptr,#_clock_control_c_1_1
-   0785 ED                  608 	mov	a,r5
-   0786 F0                  609 	movx	@dptr,a
+   078F 90 00 14            607 	mov	dptr,#_clock_control_c_1_1
+   0792 ED                  608 	mov	a,r5
+   0793 F0                  609 	movx	@dptr,a
                             610 ;	clock.c:77: t=sec-(t*10);
                             611 ;	genCast
-   0787 EA                  612 	mov	a,r2
-   0788 33                  613 	rlc	a
-   0789 95 E0               614 	subb	a,acc
-   078B FD                  615 	mov	r5,a
+   0794 EA                  612 	mov	a,r2
+   0795 33                  613 	rlc	a
+   0796 95 E0               614 	subb	a,acc
+   0798 FD                  615 	mov	r5,a
                             616 ;	genAssign
-   078C 90 01 6E            617 	mov	dptr,#__mulint_PARM_2
-   078F 74 0A               618 	mov	a,#0x0A
-   0791 F0                  619 	movx	@dptr,a
-   0792 E4                  620 	clr	a
-   0793 A3                  621 	inc	dptr
-   0794 F0                  622 	movx	@dptr,a
+   0799 90 01 74            617 	mov	dptr,#__mulint_PARM_2
+   079C 74 0A               618 	mov	a,#0x0A
+   079E F0                  619 	movx	@dptr,a
+   079F E4                  620 	clr	a
+   07A0 A3                  621 	inc	dptr
+   07A1 F0                  622 	movx	@dptr,a
                             623 ;	genCall
-   0795 8B 82               624 	mov	dpl,r3
-   0797 8C 83               625 	mov	dph,r4
-   0799 C0 02               626 	push	ar2
-   079B C0 05               627 	push	ar5
-   079D 12 29 6A            628 	lcall	__mulint
-   07A0 AB 82               629 	mov	r3,dpl
-   07A2 AC 83               630 	mov	r4,dph
-   07A4 D0 05               631 	pop	ar5
-   07A6 D0 02               632 	pop	ar2
+   07A2 8B 82               624 	mov	dpl,r3
+   07A4 8C 83               625 	mov	dph,r4
+   07A6 C0 02               626 	push	ar2
+   07A8 C0 05               627 	push	ar5
+   07AA 12 2E ED            628 	lcall	__mulint
+   07AD AB 82               629 	mov	r3,dpl
+   07AF AC 83               630 	mov	r4,dph
+   07B1 D0 05               631 	pop	ar5
+   07B3 D0 02               632 	pop	ar2
                             633 ;	genMinus
-   07A8 EA                  634 	mov	a,r2
-   07A9 C3                  635 	clr	c
+   07B5 EA                  634 	mov	a,r2
+   07B6 C3                  635 	clr	c
                             636 ;	Peephole 236.l	used r3 instead of ar3
-   07AA 9B                  637 	subb	a,r3
-   07AB FA                  638 	mov	r2,a
-   07AC ED                  639 	mov	a,r5
+   07B7 9B                  637 	subb	a,r3
+   07B8 FA                  638 	mov	r2,a
+   07B9 ED                  639 	mov	a,r5
                             640 ;	Peephole 236.l	used r4 instead of ar4
-   07AD 9C                  641 	subb	a,r4
-   07AE FD                  642 	mov	r5,a
+   07BA 9C                  641 	subb	a,r4
+   07BB FD                  642 	mov	r5,a
                             643 ;	clock.c:78: c[1]=ctoa(t);
                             644 ;	genCall
-   07AF 8A 82               645 	mov	dpl,r2
-   07B1 8D 83               646 	mov	dph,r5
-   07B3 12 06 48            647 	lcall	_ctoa
-   07B6 AA 82               648 	mov	r2,dpl
+   07BC 8A 82               645 	mov	dpl,r2
+   07BE 8D 83               646 	mov	dph,r5
+   07C0 12 06 55            647 	lcall	_ctoa
+   07C3 AA 82               648 	mov	r2,dpl
                             649 ;	genPointerSet
                             650 ;     genFarPointerSet
-   07B8 90 00 15            651 	mov	dptr,#(_clock_control_c_1_1 + 0x0001)
-   07BB EA                  652 	mov	a,r2
-   07BC F0                  653 	movx	@dptr,a
+   07C5 90 00 15            651 	mov	dptr,#(_clock_control_c_1_1 + 0x0001)
+   07C8 EA                  652 	mov	a,r2
+   07C9 F0                  653 	movx	@dptr,a
                             654 ;	clock.c:79: c[2]='\0';
                             655 ;	genPointerSet
                             656 ;     genFarPointerSet
-   07BD 90 00 16            657 	mov	dptr,#(_clock_control_c_1_1 + 0x0002)
+   07CA 90 00 16            657 	mov	dptr,#(_clock_control_c_1_1 + 0x0002)
                             658 ;	Peephole 181	changed mov to clr
-   07C0 E4                  659 	clr	a
-   07C1 F0                  660 	movx	@dptr,a
+   07CD E4                  659 	clr	a
+   07CE F0                  660 	movx	@dptr,a
                             661 ;	clock.c:80: lcdgotoxy(4,15);
                             662 ;	genAssign
-   07C2 90 00 F5            663 	mov	dptr,#_lcdgotoxy_PARM_2
-   07C5 74 0F               664 	mov	a,#0x0F
-   07C7 F0                  665 	movx	@dptr,a
+   07CF 90 01 05            663 	mov	dptr,#_lcdgotoxy_PARM_2
+   07D2 74 0F               664 	mov	a,#0x0F
+   07D4 F0                  665 	movx	@dptr,a
                             666 ;	genCall
-   07C8 75 82 04            667 	mov	dpl,#0x04
-   07CB 12 1C ED            668 	lcall	_lcdgotoxy
+   07D5 75 82 04            667 	mov	dpl,#0x04
+   07D8 12 1D 03            668 	lcall	_lcdgotoxy
                             669 ;	clock.c:81: lcdputstr(c);
                             670 ;	genCall
                             671 ;	Peephole 182.a	used 16 bit load of DPTR
-   07CE 90 00 14            672 	mov	dptr,#_clock_control_c_1_1
-   07D1 75 F0 00            673 	mov	b,#0x00
-   07D4 12 1B FA            674 	lcall	_lcdputstr
+   07DB 90 00 14            672 	mov	dptr,#_clock_control_c_1_1
+   07DE 75 F0 00            673 	mov	b,#0x00
+   07E1 12 1C 10            674 	lcall	_lcdputstr
                             675 ;	clock.c:87: t=mi/10;
                             676 ;	genAssign
-   07D7 90 00 11            677 	mov	dptr,#_clock_control_PARM_2
-   07DA E0                  678 	movx	a,@dptr
-   07DB FA                  679 	mov	r2,a
+   07E4 90 00 11            677 	mov	dptr,#_clock_control_PARM_2
+   07E7 E0                  678 	movx	a,@dptr
+   07E8 FA                  679 	mov	r2,a
                             680 ;	genDiv
                             681 ;     genDivOneByte
-   07DC C2 D5               682 	clr	F0
-   07DE 75 F0 0A            683 	mov	b,#0x0a
-   07E1 EA                  684 	mov	a,r2
-   07E2 30 E7 04            685 	jnb	acc.7,00106$
-   07E5 B2 D5               686 	cpl	F0
-   07E7 F4                  687 	cpl	a
-   07E8 04                  688 	inc	a
-   07E9                     689 00106$:
-   07E9 84                  690 	div	ab
-   07EA 30 D5 02            691 	jnb	F0,00107$
-   07ED F4                  692 	cpl	a
-   07EE 04                  693 	inc	a
-   07EF                     694 00107$:
-   07EF FB                  695 	mov	r3,a
-   07F0 A2 D5               696 	mov	c,F0
-   07F2 95 E0               697 	subb	a,acc
-   07F4 FC                  698 	mov	r4,a
+   07E9 C2 D5               682 	clr	F0
+   07EB 75 F0 0A            683 	mov	b,#0x0a
+   07EE EA                  684 	mov	a,r2
+   07EF 30 E7 04            685 	jnb	acc.7,00106$
+   07F2 B2 D5               686 	cpl	F0
+   07F4 F4                  687 	cpl	a
+   07F5 04                  688 	inc	a
+   07F6                     689 00106$:
+   07F6 84                  690 	div	ab
+   07F7 30 D5 02            691 	jnb	F0,00107$
+   07FA F4                  692 	cpl	a
+   07FB 04                  693 	inc	a
+   07FC                     694 00107$:
+   07FC FB                  695 	mov	r3,a
+   07FD A2 D5               696 	mov	c,F0
+   07FF 95 E0               697 	subb	a,acc
+   0801 FC                  698 	mov	r4,a
                             699 ;	clock.c:88: c[0]=ctoa(t);
                             700 ;	genCall
-   07F5 8B 82               701 	mov	dpl,r3
-   07F7 8C 83               702 	mov	dph,r4
-   07F9 C0 02               703 	push	ar2
-   07FB C0 03               704 	push	ar3
-   07FD C0 04               705 	push	ar4
-   07FF 12 06 48            706 	lcall	_ctoa
-   0802 AD 82               707 	mov	r5,dpl
-   0804 D0 04               708 	pop	ar4
-   0806 D0 03               709 	pop	ar3
-   0808 D0 02               710 	pop	ar2
+   0802 8B 82               701 	mov	dpl,r3
+   0804 8C 83               702 	mov	dph,r4
+   0806 C0 02               703 	push	ar2
+   0808 C0 03               704 	push	ar3
+   080A C0 04               705 	push	ar4
+   080C 12 06 55            706 	lcall	_ctoa
+   080F AD 82               707 	mov	r5,dpl
+   0811 D0 04               708 	pop	ar4
+   0813 D0 03               709 	pop	ar3
+   0815 D0 02               710 	pop	ar2
                             711 ;	genPointerSet
                             712 ;     genFarPointerSet
-   080A 90 00 14            713 	mov	dptr,#_clock_control_c_1_1
-   080D ED                  714 	mov	a,r5
-   080E F0                  715 	movx	@dptr,a
+   0817 90 00 14            713 	mov	dptr,#_clock_control_c_1_1
+   081A ED                  714 	mov	a,r5
+   081B F0                  715 	movx	@dptr,a
                             716 ;	clock.c:89: t=mi-(t*10);
                             717 ;	genCast
-   080F EA                  718 	mov	a,r2
-   0810 33                  719 	rlc	a
-   0811 95 E0               720 	subb	a,acc
-   0813 FD                  721 	mov	r5,a
+   081C EA                  718 	mov	a,r2
+   081D 33                  719 	rlc	a
+   081E 95 E0               720 	subb	a,acc
+   0820 FD                  721 	mov	r5,a
                             722 ;	genAssign
-   0814 90 01 6E            723 	mov	dptr,#__mulint_PARM_2
-   0817 74 0A               724 	mov	a,#0x0A
-   0819 F0                  725 	movx	@dptr,a
-   081A E4                  726 	clr	a
-   081B A3                  727 	inc	dptr
-   081C F0                  728 	movx	@dptr,a
+   0821 90 01 74            723 	mov	dptr,#__mulint_PARM_2
+   0824 74 0A               724 	mov	a,#0x0A
+   0826 F0                  725 	movx	@dptr,a
+   0827 E4                  726 	clr	a
+   0828 A3                  727 	inc	dptr
+   0829 F0                  728 	movx	@dptr,a
                             729 ;	genCall
-   081D 8B 82               730 	mov	dpl,r3
-   081F 8C 83               731 	mov	dph,r4
-   0821 C0 02               732 	push	ar2
-   0823 C0 05               733 	push	ar5
-   0825 12 29 6A            734 	lcall	__mulint
-   0828 AB 82               735 	mov	r3,dpl
-   082A AC 83               736 	mov	r4,dph
-   082C D0 05               737 	pop	ar5
-   082E D0 02               738 	pop	ar2
+   082A 8B 82               730 	mov	dpl,r3
+   082C 8C 83               731 	mov	dph,r4
+   082E C0 02               732 	push	ar2
+   0830 C0 05               733 	push	ar5
+   0832 12 2E ED            734 	lcall	__mulint
+   0835 AB 82               735 	mov	r3,dpl
+   0837 AC 83               736 	mov	r4,dph
+   0839 D0 05               737 	pop	ar5
+   083B D0 02               738 	pop	ar2
                             739 ;	genMinus
-   0830 EA                  740 	mov	a,r2
-   0831 C3                  741 	clr	c
+   083D EA                  740 	mov	a,r2
+   083E C3                  741 	clr	c
                             742 ;	Peephole 236.l	used r3 instead of ar3
-   0832 9B                  743 	subb	a,r3
-   0833 FA                  744 	mov	r2,a
-   0834 ED                  745 	mov	a,r5
+   083F 9B                  743 	subb	a,r3
+   0840 FA                  744 	mov	r2,a
+   0841 ED                  745 	mov	a,r5
                             746 ;	Peephole 236.l	used r4 instead of ar4
-   0835 9C                  747 	subb	a,r4
-   0836 FD                  748 	mov	r5,a
+   0842 9C                  747 	subb	a,r4
+   0843 FD                  748 	mov	r5,a
                             749 ;	clock.c:90: c[1]=ctoa(t);
                             750 ;	genCall
-   0837 8A 82               751 	mov	dpl,r2
-   0839 8D 83               752 	mov	dph,r5
-   083B 12 06 48            753 	lcall	_ctoa
-   083E AA 82               754 	mov	r2,dpl
+   0844 8A 82               751 	mov	dpl,r2
+   0846 8D 83               752 	mov	dph,r5
+   0848 12 06 55            753 	lcall	_ctoa
+   084B AA 82               754 	mov	r2,dpl
                             755 ;	genPointerSet
                             756 ;     genFarPointerSet
-   0840 90 00 15            757 	mov	dptr,#(_clock_control_c_1_1 + 0x0001)
-   0843 EA                  758 	mov	a,r2
-   0844 F0                  759 	movx	@dptr,a
+   084D 90 00 15            757 	mov	dptr,#(_clock_control_c_1_1 + 0x0001)
+   0850 EA                  758 	mov	a,r2
+   0851 F0                  759 	movx	@dptr,a
                             760 ;	clock.c:91: c[2]=':';
                             761 ;	genPointerSet
                             762 ;     genFarPointerSet
-   0845 90 00 16            763 	mov	dptr,#(_clock_control_c_1_1 + 0x0002)
-   0848 74 3A               764 	mov	a,#0x3A
-   084A F0                  765 	movx	@dptr,a
+   0852 90 00 16            763 	mov	dptr,#(_clock_control_c_1_1 + 0x0002)
+   0855 74 3A               764 	mov	a,#0x3A
+   0857 F0                  765 	movx	@dptr,a
                             766 ;	clock.c:92: c[3]='\0';
                             767 ;	genPointerSet
                             768 ;     genFarPointerSet
-   084B 90 00 17            769 	mov	dptr,#(_clock_control_c_1_1 + 0x0003)
+   0858 90 00 17            769 	mov	dptr,#(_clock_control_c_1_1 + 0x0003)
                             770 ;	Peephole 181	changed mov to clr
-   084E E4                  771 	clr	a
-   084F F0                  772 	movx	@dptr,a
+   085B E4                  771 	clr	a
+   085C F0                  772 	movx	@dptr,a
                             773 ;	clock.c:93: lcdgotoxy(4,12);
                             774 ;	genAssign
-   0850 90 00 F5            775 	mov	dptr,#_lcdgotoxy_PARM_2
-   0853 74 0C               776 	mov	a,#0x0C
-   0855 F0                  777 	movx	@dptr,a
+   085D 90 01 05            775 	mov	dptr,#_lcdgotoxy_PARM_2
+   0860 74 0C               776 	mov	a,#0x0C
+   0862 F0                  777 	movx	@dptr,a
                             778 ;	genCall
-   0856 75 82 04            779 	mov	dpl,#0x04
-   0859 12 1C ED            780 	lcall	_lcdgotoxy
+   0863 75 82 04            779 	mov	dpl,#0x04
+   0866 12 1D 03            780 	lcall	_lcdgotoxy
                             781 ;	clock.c:94: lcdputstr(c);
                             782 ;	genCall
                             783 ;	Peephole 182.a	used 16 bit load of DPTR
-   085C 90 00 14            784 	mov	dptr,#_clock_control_c_1_1
-   085F 75 F0 00            785 	mov	b,#0x00
-   0862 12 1B FA            786 	lcall	_lcdputstr
+   0869 90 00 14            784 	mov	dptr,#_clock_control_c_1_1
+   086C 75 F0 00            785 	mov	b,#0x00
+   086F 12 1C 10            786 	lcall	_lcdputstr
                             787 ;	clock.c:98: t=hour/10;
                             788 ;	genAssign
-   0865 90 00 13            789 	mov	dptr,#_clock_control_hour_1_1
-   0868 E0                  790 	movx	a,@dptr
-   0869 FA                  791 	mov	r2,a
+   0872 90 00 13            789 	mov	dptr,#_clock_control_hour_1_1
+   0875 E0                  790 	movx	a,@dptr
+   0876 FA                  791 	mov	r2,a
                             792 ;	genDiv
                             793 ;     genDivOneByte
-   086A C2 D5               794 	clr	F0
-   086C 75 F0 0A            795 	mov	b,#0x0a
-   086F EA                  796 	mov	a,r2
-   0870 30 E7 04            797 	jnb	acc.7,00108$
-   0873 B2 D5               798 	cpl	F0
-   0875 F4                  799 	cpl	a
-   0876 04                  800 	inc	a
-   0877                     801 00108$:
-   0877 84                  802 	div	ab
-   0878 30 D5 02            803 	jnb	F0,00109$
-   087B F4                  804 	cpl	a
-   087C 04                  805 	inc	a
-   087D                     806 00109$:
-   087D FB                  807 	mov	r3,a
-   087E A2 D5               808 	mov	c,F0
-   0880 95 E0               809 	subb	a,acc
-   0882 FC                  810 	mov	r4,a
+   0877 C2 D5               794 	clr	F0
+   0879 75 F0 0A            795 	mov	b,#0x0a
+   087C EA                  796 	mov	a,r2
+   087D 30 E7 04            797 	jnb	acc.7,00108$
+   0880 B2 D5               798 	cpl	F0
+   0882 F4                  799 	cpl	a
+   0883 04                  800 	inc	a
+   0884                     801 00108$:
+   0884 84                  802 	div	ab
+   0885 30 D5 02            803 	jnb	F0,00109$
+   0888 F4                  804 	cpl	a
+   0889 04                  805 	inc	a
+   088A                     806 00109$:
+   088A FB                  807 	mov	r3,a
+   088B A2 D5               808 	mov	c,F0
+   088D 95 E0               809 	subb	a,acc
+   088F FC                  810 	mov	r4,a
                             811 ;	clock.c:99: c[0]=ctoa(t);
                             812 ;	genCall
-   0883 8B 82               813 	mov	dpl,r3
-   0885 8C 83               814 	mov	dph,r4
-   0887 C0 02               815 	push	ar2
-   0889 C0 03               816 	push	ar3
-   088B C0 04               817 	push	ar4
-   088D 12 06 48            818 	lcall	_ctoa
-   0890 AD 82               819 	mov	r5,dpl
-   0892 D0 04               820 	pop	ar4
-   0894 D0 03               821 	pop	ar3
-   0896 D0 02               822 	pop	ar2
+   0890 8B 82               813 	mov	dpl,r3
+   0892 8C 83               814 	mov	dph,r4
+   0894 C0 02               815 	push	ar2
+   0896 C0 03               816 	push	ar3
+   0898 C0 04               817 	push	ar4
+   089A 12 06 55            818 	lcall	_ctoa
+   089D AD 82               819 	mov	r5,dpl
+   089F D0 04               820 	pop	ar4
+   08A1 D0 03               821 	pop	ar3
+   08A3 D0 02               822 	pop	ar2
                             823 ;	genPointerSet
                             824 ;     genFarPointerSet
-   0898 90 00 14            825 	mov	dptr,#_clock_control_c_1_1
-   089B ED                  826 	mov	a,r5
-   089C F0                  827 	movx	@dptr,a
+   08A5 90 00 14            825 	mov	dptr,#_clock_control_c_1_1
+   08A8 ED                  826 	mov	a,r5
+   08A9 F0                  827 	movx	@dptr,a
                             828 ;	clock.c:100: t=hour-(t*10);
                             829 ;	genCast
-   089D EA                  830 	mov	a,r2
-   089E 33                  831 	rlc	a
-   089F 95 E0               832 	subb	a,acc
-   08A1 FD                  833 	mov	r5,a
+   08AA EA                  830 	mov	a,r2
+   08AB 33                  831 	rlc	a
+   08AC 95 E0               832 	subb	a,acc
+   08AE FD                  833 	mov	r5,a
                             834 ;	genAssign
-   08A2 90 01 6E            835 	mov	dptr,#__mulint_PARM_2
-   08A5 74 0A               836 	mov	a,#0x0A
-   08A7 F0                  837 	movx	@dptr,a
-   08A8 E4                  838 	clr	a
-   08A9 A3                  839 	inc	dptr
-   08AA F0                  840 	movx	@dptr,a
+   08AF 90 01 74            835 	mov	dptr,#__mulint_PARM_2
+   08B2 74 0A               836 	mov	a,#0x0A
+   08B4 F0                  837 	movx	@dptr,a
+   08B5 E4                  838 	clr	a
+   08B6 A3                  839 	inc	dptr
+   08B7 F0                  840 	movx	@dptr,a
                             841 ;	genCall
-   08AB 8B 82               842 	mov	dpl,r3
-   08AD 8C 83               843 	mov	dph,r4
-   08AF C0 02               844 	push	ar2
-   08B1 C0 05               845 	push	ar5
-   08B3 12 29 6A            846 	lcall	__mulint
-   08B6 AB 82               847 	mov	r3,dpl
-   08B8 AC 83               848 	mov	r4,dph
-   08BA D0 05               849 	pop	ar5
-   08BC D0 02               850 	pop	ar2
+   08B8 8B 82               842 	mov	dpl,r3
+   08BA 8C 83               843 	mov	dph,r4
+   08BC C0 02               844 	push	ar2
+   08BE C0 05               845 	push	ar5
+   08C0 12 2E ED            846 	lcall	__mulint
+   08C3 AB 82               847 	mov	r3,dpl
+   08C5 AC 83               848 	mov	r4,dph
+   08C7 D0 05               849 	pop	ar5
+   08C9 D0 02               850 	pop	ar2
                             851 ;	genMinus
-   08BE EA                  852 	mov	a,r2
-   08BF C3                  853 	clr	c
+   08CB EA                  852 	mov	a,r2
+   08CC C3                  853 	clr	c
                             854 ;	Peephole 236.l	used r3 instead of ar3
-   08C0 9B                  855 	subb	a,r3
-   08C1 FA                  856 	mov	r2,a
-   08C2 ED                  857 	mov	a,r5
+   08CD 9B                  855 	subb	a,r3
+   08CE FA                  856 	mov	r2,a
+   08CF ED                  857 	mov	a,r5
                             858 ;	Peephole 236.l	used r4 instead of ar4
-   08C3 9C                  859 	subb	a,r4
-   08C4 FD                  860 	mov	r5,a
+   08D0 9C                  859 	subb	a,r4
+   08D1 FD                  860 	mov	r5,a
                             861 ;	clock.c:101: c[1]=ctoa(t);
                             862 ;	genCall
-   08C5 8A 82               863 	mov	dpl,r2
-   08C7 8D 83               864 	mov	dph,r5
-   08C9 12 06 48            865 	lcall	_ctoa
-   08CC AA 82               866 	mov	r2,dpl
+   08D2 8A 82               863 	mov	dpl,r2
+   08D4 8D 83               864 	mov	dph,r5
+   08D6 12 06 55            865 	lcall	_ctoa
+   08D9 AA 82               866 	mov	r2,dpl
                             867 ;	genPointerSet
                             868 ;     genFarPointerSet
-   08CE 90 00 15            869 	mov	dptr,#(_clock_control_c_1_1 + 0x0001)
-   08D1 EA                  870 	mov	a,r2
-   08D2 F0                  871 	movx	@dptr,a
+   08DB 90 00 15            869 	mov	dptr,#(_clock_control_c_1_1 + 0x0001)
+   08DE EA                  870 	mov	a,r2
+   08DF F0                  871 	movx	@dptr,a
                             872 ;	clock.c:102: c[2]=':';
                             873 ;	genPointerSet
                             874 ;     genFarPointerSet
-   08D3 90 00 16            875 	mov	dptr,#(_clock_control_c_1_1 + 0x0002)
-   08D6 74 3A               876 	mov	a,#0x3A
-   08D8 F0                  877 	movx	@dptr,a
+   08E0 90 00 16            875 	mov	dptr,#(_clock_control_c_1_1 + 0x0002)
+   08E3 74 3A               876 	mov	a,#0x3A
+   08E5 F0                  877 	movx	@dptr,a
                             878 ;	clock.c:103: c[3]='\0';
                             879 ;	genPointerSet
                             880 ;     genFarPointerSet
-   08D9 90 00 17            881 	mov	dptr,#(_clock_control_c_1_1 + 0x0003)
+   08E6 90 00 17            881 	mov	dptr,#(_clock_control_c_1_1 + 0x0003)
                             882 ;	Peephole 181	changed mov to clr
-   08DC E4                  883 	clr	a
-   08DD F0                  884 	movx	@dptr,a
+   08E9 E4                  883 	clr	a
+   08EA F0                  884 	movx	@dptr,a
                             885 ;	clock.c:104: lcdgotoxy(4,9);
                             886 ;	genAssign
-   08DE 90 00 F5            887 	mov	dptr,#_lcdgotoxy_PARM_2
-   08E1 74 09               888 	mov	a,#0x09
-   08E3 F0                  889 	movx	@dptr,a
+   08EB 90 01 05            887 	mov	dptr,#_lcdgotoxy_PARM_2
+   08EE 74 09               888 	mov	a,#0x09
+   08F0 F0                  889 	movx	@dptr,a
                             890 ;	genCall
-   08E4 75 82 04            891 	mov	dpl,#0x04
-   08E7 12 1C ED            892 	lcall	_lcdgotoxy
+   08F1 75 82 04            891 	mov	dpl,#0x04
+   08F4 12 1D 03            892 	lcall	_lcdgotoxy
                             893 ;	clock.c:105: lcdputstr(c);
                             894 ;	genCall
                             895 ;	Peephole 182.a	used 16 bit load of DPTR
-   08EA 90 00 14            896 	mov	dptr,#_clock_control_c_1_1
-   08ED 75 F0 00            897 	mov	b,#0x00
-   08F0 12 1B FA            898 	lcall	_lcdputstr
+   08F7 90 00 14            896 	mov	dptr,#_clock_control_c_1_1
+   08FA 75 F0 00            897 	mov	b,#0x00
+   08FD 12 1C 10            898 	lcall	_lcdputstr
                             899 ;	Peephole 300	removed redundant label 00101$
-   08F3 D0 D0               900 	pop	psw
-   08F5 92 AF               901 	mov	ea,c
-   08F7 22                  902 	ret
+   0900 D0 D0               900 	pop	psw
+   0902 92 AF               901 	mov	ea,c
+   0904 22                  902 	ret
                             903 	.area CSEG    (CODE)
                             904 	.area CONST   (CODE)
                             905 	.area XINIT   (CODE)

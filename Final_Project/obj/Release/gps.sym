@@ -367,24 +367,25 @@ Symbol Table
     _WDTRST                                                     =  00A6 G
     _WR                                                         =  00B6 G
     __gptrget                                                      **** GX
+    _delay_ms                                                      **** GX
     _gets                                                          **** GX
- 13 _gps_date                                                      0247 GR
-  8 _gps_date_s_1_1                                                0074 R
-  8 _gps_date_temp_1_1                                             0077 R
- 13 _gps_latitude                                                  0115 GR
-  8 _gps_latitude_s_1_1                                            0052 R
-  8 _gps_latitude_temp_1_1                                         0055 R
- 13 _gps_longitude                                                 01AE GR
-  8 _gps_longitude_s_1_1                                           0063 R
-  8 _gps_longitude_temp_1_1                                        0066 R
+ 13 _gps_date                                                      0244 GR
+  8 _gps_date_s_1_1                                                0084 R
+  8 _gps_date_temp_1_1                                             0087 R
+ 13 _gps_latitude                                                  0112 GR
+  8 _gps_latitude_s_1_1                                            0062 R
+  8 _gps_latitude_temp_1_1                                         0065 R
+ 13 _gps_longitude                                                 01AB GR
+  8 _gps_longitude_s_1_1                                           0073 R
+  8 _gps_longitude_temp_1_1                                        0076 R
  13 _gps_read                                                      0000 GR
   8 _gps_read_c_1_1                                                0000 R
-  8 _gps_read_d_1_1                                                0040 R
- 13 _gps_status                                                    00B6 GR
-  8 _gps_status_s_1_1                                              004F R
- 13 _gps_time                                                      0069 GR
-  8 _gps_time_s_1_1                                                0046 R
-  8 _gps_time_temp_1_1                                             0049 R
+  8 _gps_read_d_1_1                                                0050 R
+ 13 _gps_status                                                    00B3 GR
+  8 _gps_status_s_1_1                                              005F R
+ 13 _gps_time                                                      0066 GR
+  8 _gps_time_s_1_1                                                0056 R
+  8 _gps_time_temp_1_1                                             0059 R
     _strstr                                                        **** GX
     _strstr_PARM_2                                                 **** GX
     a                                                              00D6 
@@ -576,7 +577,7 @@ Area Table
    5 ISEG                                                                               size    0   flags 0
    6 BSEG                                                                               size    0   flags 80
    7 PSEG                                                                               size    0   flags 50
-   8 XSEG                                                                               size   85   flags 40
+   8 XSEG                                                                               size   95   flags 40
    9 XISEG                                                                              size    0   flags 40
    A HOME                                                                               size    0   flags 20
    B GSINIT0                                                                            size    0   flags 20
@@ -587,6 +588,6 @@ Area Table
   10 GSINIT5                                                                            size    0   flags 20
   11 GSINIT                                                                             size    0   flags 20
   12 GSFINAL                                                                            size    0   flags 20
-  13 CSEG                                                                               size  2C2   flags 20
+  13 CSEG                                                                               size  2BF   flags 20
   14 CONST                                                                              size    0   flags 20
   15 XINIT                                                                              size    0   flags 20

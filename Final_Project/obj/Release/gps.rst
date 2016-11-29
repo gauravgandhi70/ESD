@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.6.0 #4309 (Jul 28 2006)
-                              4 ; This file generated Thu Nov 24 00:29:20 2016
+                              4 ; This file generated Mon Nov 28 22:36:58 2016
                               5 ;--------------------------------------------------------
                               6 	.module gps
                               7 	.optsdcc -mmcs51 --model-large
@@ -445,27 +445,27 @@
                             445 ;--------------------------------------------------------
                             446 	.area XSEG    (XDATA)
    0060                     447 _gps_read_c_1_1:
-   0060                     448 	.ds 64
-   00A0                     449 _gps_read_d_1_1:
-   00A0                     450 	.ds 6
-   00A6                     451 _gps_time_s_1_1:
-   00A6                     452 	.ds 3
-   00A9                     453 _gps_time_temp_1_1:
-   00A9                     454 	.ds 6
-   00AF                     455 _gps_status_s_1_1:
-   00AF                     456 	.ds 3
-   00B2                     457 _gps_latitude_s_1_1:
-   00B2                     458 	.ds 3
-   00B5                     459 _gps_latitude_temp_1_1:
-   00B5                     460 	.ds 14
-   00C3                     461 _gps_longitude_s_1_1:
-   00C3                     462 	.ds 3
-   00C6                     463 _gps_longitude_temp_1_1:
-   00C6                     464 	.ds 14
-   00D4                     465 _gps_date_s_1_1:
-   00D4                     466 	.ds 3
-   00D7                     467 _gps_date_temp_1_1:
-   00D7                     468 	.ds 14
+   0060                     448 	.ds 80
+   00B0                     449 _gps_read_d_1_1:
+   00B0                     450 	.ds 6
+   00B6                     451 _gps_time_s_1_1:
+   00B6                     452 	.ds 3
+   00B9                     453 _gps_time_temp_1_1:
+   00B9                     454 	.ds 6
+   00BF                     455 _gps_status_s_1_1:
+   00BF                     456 	.ds 3
+   00C2                     457 _gps_latitude_s_1_1:
+   00C2                     458 	.ds 3
+   00C5                     459 _gps_latitude_temp_1_1:
+   00C5                     460 	.ds 14
+   00D3                     461 _gps_longitude_s_1_1:
+   00D3                     462 	.ds 3
+   00D6                     463 _gps_longitude_temp_1_1:
+   00D6                     464 	.ds 14
+   00E4                     465 _gps_date_s_1_1:
+   00E4                     466 	.ds 3
+   00E7                     467 _gps_date_temp_1_1:
+   00E7                     468 	.ds 14
                             469 ;--------------------------------------------------------
                             470 ; external initialized ram data
                             471 ;--------------------------------------------------------
@@ -507,7 +507,7 @@
                             507 ;	-----------------------------------------
                             508 ;	 function gps_read
                             509 ;	-----------------------------------------
-   14F3                     510 _gps_read:
+   1500                     510 _gps_read:
                     0002    511 	ar2 = 0x02
                     0003    512 	ar3 = 0x03
                     0004    513 	ar4 = 0x04
@@ -516,876 +516,873 @@
                     0007    516 	ar7 = 0x07
                     0000    517 	ar0 = 0x00
                     0001    518 	ar1 = 0x01
-   14F3 D3                  519 	setb	c
-   14F4 10 AF 01            520 	jbc	ea,00107$
-   14F7 C3                  521 	clr	c
-   14F8                     522 00107$:
-   14F8 C0 D0               523 	push	psw
-                            524 ;	gps.c:22: char c[64],d[6]="$GPRMC",*p;
+   1500 D3                  519 	setb	c
+   1501 10 AF 01            520 	jbc	ea,00103$
+   1504 C3                  521 	clr	c
+   1505                     522 00103$:
+   1505 C0 D0               523 	push	psw
+                            524 ;	gps.c:22: char c[80],d[6]="$GPRMC",*p;
                             525 ;	genPointerSet
                             526 ;     genFarPointerSet
-   14FA 90 00 A0            527 	mov	dptr,#_gps_read_d_1_1
-   14FD 74 24               528 	mov	a,#0x24
-   14FF F0                  529 	movx	@dptr,a
+   1507 90 00 B0            527 	mov	dptr,#_gps_read_d_1_1
+   150A 74 24               528 	mov	a,#0x24
+   150C F0                  529 	movx	@dptr,a
                             530 ;	genPointerSet
                             531 ;     genFarPointerSet
-   1500 90 00 A1            532 	mov	dptr,#(_gps_read_d_1_1 + 0x0001)
-   1503 74 47               533 	mov	a,#0x47
-   1505 F0                  534 	movx	@dptr,a
+   150D 90 00 B1            532 	mov	dptr,#(_gps_read_d_1_1 + 0x0001)
+   1510 74 47               533 	mov	a,#0x47
+   1512 F0                  534 	movx	@dptr,a
                             535 ;	genPointerSet
                             536 ;     genFarPointerSet
-   1506 90 00 A2            537 	mov	dptr,#(_gps_read_d_1_1 + 0x0002)
-   1509 74 50               538 	mov	a,#0x50
-   150B F0                  539 	movx	@dptr,a
+   1513 90 00 B2            537 	mov	dptr,#(_gps_read_d_1_1 + 0x0002)
+   1516 74 50               538 	mov	a,#0x50
+   1518 F0                  539 	movx	@dptr,a
                             540 ;	genPointerSet
                             541 ;     genFarPointerSet
-   150C 90 00 A3            542 	mov	dptr,#(_gps_read_d_1_1 + 0x0003)
-   150F 74 52               543 	mov	a,#0x52
-   1511 F0                  544 	movx	@dptr,a
+   1519 90 00 B3            542 	mov	dptr,#(_gps_read_d_1_1 + 0x0003)
+   151C 74 52               543 	mov	a,#0x52
+   151E F0                  544 	movx	@dptr,a
                             545 ;	genPointerSet
                             546 ;     genFarPointerSet
-   1512 90 00 A4            547 	mov	dptr,#(_gps_read_d_1_1 + 0x0004)
-   1515 74 4D               548 	mov	a,#0x4D
-   1517 F0                  549 	movx	@dptr,a
+   151F 90 00 B4            547 	mov	dptr,#(_gps_read_d_1_1 + 0x0004)
+   1522 74 4D               548 	mov	a,#0x4D
+   1524 F0                  549 	movx	@dptr,a
                             550 ;	genPointerSet
                             551 ;     genFarPointerSet
-   1518 90 00 A5            552 	mov	dptr,#(_gps_read_d_1_1 + 0x0005)
-   151B 74 43               553 	mov	a,#0x43
-   151D F0                  554 	movx	@dptr,a
-                            555 ;	gps.c:23: gets(c);
-                            556 ;	genCall
-                            557 ;	Peephole 182.a	used 16 bit load of DPTR
-   151E 90 00 60            558 	mov	dptr,#_gps_read_c_1_1
-   1521 75 F0 00            559 	mov	b,#0x00
-   1524 12 27 35            560 	lcall	_gets
-                            561 ;	gps.c:24: p=strstr(c,d);
-                            562 ;	genCast
-   1527 90 01 5C            563 	mov	dptr,#_strstr_PARM_2
-   152A 74 A0               564 	mov	a,#_gps_read_d_1_1
-   152C F0                  565 	movx	@dptr,a
-   152D A3                  566 	inc	dptr
-   152E 74 00               567 	mov	a,#(_gps_read_d_1_1 >> 8)
-   1530 F0                  568 	movx	@dptr,a
-   1531 A3                  569 	inc	dptr
-   1532 74 00               570 	mov	a,#0x0
-   1534 F0                  571 	movx	@dptr,a
-                            572 ;	genCall
-                            573 ;	Peephole 182.a	used 16 bit load of DPTR
-   1535 90 00 60            574 	mov	dptr,#_gps_read_c_1_1
-   1538 75 F0 00            575 	mov	b,#0x00
-   153B 12 26 63            576 	lcall	_strstr
-   153E AA 82               577 	mov	r2,dpl
-   1540 AB 83               578 	mov	r3,dph
-   1542 AC F0               579 	mov	r4,b
-                            580 ;	gps.c:25: if(p)
-                            581 ;	genIfx
-   1544 EA                  582 	mov	a,r2
-   1545 4B                  583 	orl	a,r3
-   1546 4C                  584 	orl	a,r4
-                            585 ;	genIfxJump
-                            586 ;	Peephole 108.c	removed ljmp by inverse jump logic
-   1547 60 08               587 	jz	00102$
-                            588 ;	Peephole 300	removed redundant label 00108$
-                            589 ;	gps.c:27: return p;
-                            590 ;	genRet
-   1549 8A 82               591 	mov	dpl,r2
-   154B 8B 83               592 	mov	dph,r3
-   154D 8C F0               593 	mov	b,r4
-                            594 ;	Peephole 112.b	changed ljmp to sjmp
-   154F 80 06               595 	sjmp	00104$
-   1551                     596 00102$:
-                            597 ;	gps.c:31: return p;
-                            598 ;	genRet
-   1551 8A 82               599 	mov	dpl,r2
-   1553 8B 83               600 	mov	dph,r3
-   1555 8C F0               601 	mov	b,r4
-   1557                     602 00104$:
-   1557 D0 D0               603 	pop	psw
-   1559 92 AF               604 	mov	ea,c
-   155B 22                  605 	ret
-                            606 ;------------------------------------------------------------
-                            607 ;Allocation info for local variables in function 'gps_time'
-                            608 ;------------------------------------------------------------
-                            609 ;s                         Allocated with name '_gps_time_s_1_1'
-                            610 ;temp                      Allocated with name '_gps_time_temp_1_1'
-                            611 ;i                         Allocated with name '_gps_time_i_1_1'
-                            612 ;j                         Allocated with name '_gps_time_j_1_1'
-                            613 ;------------------------------------------------------------
-                            614 ;	gps.c:36: char* gps_time(char *s)
-                            615 ;	-----------------------------------------
-                            616 ;	 function gps_time
-                            617 ;	-----------------------------------------
-   155C                     618 _gps_time:
-                            619 ;	genReceive
-   155C AA F0               620 	mov	r2,b
-   155E AB 83               621 	mov	r3,dph
-   1560 E5 82               622 	mov	a,dpl
-   1562 90 00 A6            623 	mov	dptr,#_gps_time_s_1_1
-   1565 F0                  624 	movx	@dptr,a
-   1566 A3                  625 	inc	dptr
-   1567 EB                  626 	mov	a,r3
-   1568 F0                  627 	movx	@dptr,a
-   1569 A3                  628 	inc	dptr
-   156A EA                  629 	mov	a,r2
-   156B F0                  630 	movx	@dptr,a
-                            631 ;	gps.c:40: while(*(s+i)!= ',')
-                            632 ;	genAssign
-   156C 90 00 A6            633 	mov	dptr,#_gps_time_s_1_1
-   156F E0                  634 	movx	a,@dptr
-   1570 FA                  635 	mov	r2,a
-   1571 A3                  636 	inc	dptr
-   1572 E0                  637 	movx	a,@dptr
-   1573 FB                  638 	mov	r3,a
-   1574 A3                  639 	inc	dptr
-   1575 E0                  640 	movx	a,@dptr
-   1576 FC                  641 	mov	r4,a
-                            642 ;	genAssign
-   1577 7D 00               643 	mov	r5,#0x00
-                            644 ;	genAssign
-   1579 7E 07               645 	mov	r6,#0x07
-   157B                     646 00101$:
-                            647 ;	genPlus
-                            648 ;	Peephole 236.g	used r6 instead of ar6
-   157B EE                  649 	mov	a,r6
-                            650 ;	Peephole 236.a	used r2 instead of ar2
-   157C 2A                  651 	add	a,r2
-   157D FF                  652 	mov	r7,a
-                            653 ;	Peephole 181	changed mov to clr
-   157E E4                  654 	clr	a
-                            655 ;	Peephole 236.b	used r3 instead of ar3
-   157F 3B                  656 	addc	a,r3
-   1580 F8                  657 	mov	r0,a
-   1581 8C 01               658 	mov	ar1,r4
-                            659 ;	genPointerGet
-                            660 ;	genGenPointerGet
-   1583 8F 82               661 	mov	dpl,r7
-   1585 88 83               662 	mov	dph,r0
-   1587 89 F0               663 	mov	b,r1
-   1589 12 2D CC            664 	lcall	__gptrget
-   158C FF                  665 	mov	r7,a
-                            666 ;	genCmpEq
-                            667 ;	gencjneshort
-   158D BF 2C 02            668 	cjne	r7,#0x2C,00109$
-                            669 ;	Peephole 112.b	changed ljmp to sjmp
-   1590 80 10               670 	sjmp	00103$
-   1592                     671 00109$:
-                            672 ;	gps.c:42: temp[j]=*(s+i);
-                            673 ;	genPlus
-                            674 ;	Peephole 236.g	used r5 instead of ar5
-   1592 ED                  675 	mov	a,r5
-   1593 24 A9               676 	add	a,#_gps_time_temp_1_1
-   1595 F5 82               677 	mov	dpl,a
-                            678 ;	Peephole 181	changed mov to clr
-   1597 E4                  679 	clr	a
-   1598 34 00               680 	addc	a,#(_gps_time_temp_1_1 >> 8)
-   159A F5 83               681 	mov	dph,a
-                            682 ;	genPointerSet
-                            683 ;     genFarPointerSet
-   159C EF                  684 	mov	a,r7
-   159D F0                  685 	movx	@dptr,a
-                            686 ;	gps.c:43: j++;i++;
+   1525 90 00 B5            552 	mov	dptr,#(_gps_read_d_1_1 + 0x0005)
+   1528 74 43               553 	mov	a,#0x43
+   152A F0                  554 	movx	@dptr,a
+                            555 ;	gps.c:24: UART=0;
+                            556 ;	genAssign
+   152B C2 94               557 	clr	_P1_4
+                            558 ;	gps.c:25: delay_ms(100);
+                            559 ;	genCall
+                            560 ;	Peephole 182.b	used 16 bit load of dptr
+   152D 90 00 64            561 	mov	dptr,#0x0064
+   1530 12 0D C1            562 	lcall	_delay_ms
+                            563 ;	gps.c:27: gets(c);
+                            564 ;	genCall
+                            565 ;	Peephole 182.a	used 16 bit load of DPTR
+   1533 90 00 60            566 	mov	dptr,#_gps_read_c_1_1
+   1536 75 F0 00            567 	mov	b,#0x00
+   1539 12 2C B8            568 	lcall	_gets
+                            569 ;	gps.c:29: delay_ms(50);
+                            570 ;	genCall
+                            571 ;	Peephole 182.b	used 16 bit load of dptr
+   153C 90 00 32            572 	mov	dptr,#0x0032
+   153F 12 0D C1            573 	lcall	_delay_ms
+                            574 ;	gps.c:30: UART=1;
+                            575 ;	genAssign
+   1542 D2 94               576 	setb	_P1_4
+                            577 ;	gps.c:32: p=strstr(c,d);
+                            578 ;	genCast
+   1544 90 01 62            579 	mov	dptr,#_strstr_PARM_2
+   1547 74 B0               580 	mov	a,#_gps_read_d_1_1
+   1549 F0                  581 	movx	@dptr,a
+   154A A3                  582 	inc	dptr
+   154B 74 00               583 	mov	a,#(_gps_read_d_1_1 >> 8)
+   154D F0                  584 	movx	@dptr,a
+   154E A3                  585 	inc	dptr
+   154F 74 00               586 	mov	a,#0x0
+   1551 F0                  587 	movx	@dptr,a
+                            588 ;	genCall
+                            589 ;	Peephole 182.a	used 16 bit load of DPTR
+   1552 90 00 60            590 	mov	dptr,#_gps_read_c_1_1
+   1555 75 F0 00            591 	mov	b,#0x00
+   1558 12 2B E6            592 	lcall	_strstr
+                            593 ;	gps.c:36: return p;
+                            594 ;	genRet
+   155B AA 82               595 	mov	r2,dpl
+   155D AB 83               596 	mov	r3,dph
+   155F AC F0               597 	mov	r4,b
+                            598 ;	Peephole 238.d	removed 3 redundant moves
+                            599 ;	Peephole 300	removed redundant label 00101$
+   1561 D0 D0               600 	pop	psw
+   1563 92 AF               601 	mov	ea,c
+   1565 22                  602 	ret
+                            603 ;------------------------------------------------------------
+                            604 ;Allocation info for local variables in function 'gps_time'
+                            605 ;------------------------------------------------------------
+                            606 ;s                         Allocated with name '_gps_time_s_1_1'
+                            607 ;temp                      Allocated with name '_gps_time_temp_1_1'
+                            608 ;i                         Allocated with name '_gps_time_i_1_1'
+                            609 ;j                         Allocated with name '_gps_time_j_1_1'
+                            610 ;------------------------------------------------------------
+                            611 ;	gps.c:41: char* gps_time(char *s)
+                            612 ;	-----------------------------------------
+                            613 ;	 function gps_time
+                            614 ;	-----------------------------------------
+   1566                     615 _gps_time:
+                            616 ;	genReceive
+   1566 AA F0               617 	mov	r2,b
+   1568 AB 83               618 	mov	r3,dph
+   156A E5 82               619 	mov	a,dpl
+   156C 90 00 B6            620 	mov	dptr,#_gps_time_s_1_1
+   156F F0                  621 	movx	@dptr,a
+   1570 A3                  622 	inc	dptr
+   1571 EB                  623 	mov	a,r3
+   1572 F0                  624 	movx	@dptr,a
+   1573 A3                  625 	inc	dptr
+   1574 EA                  626 	mov	a,r2
+   1575 F0                  627 	movx	@dptr,a
+                            628 ;	gps.c:45: while(*(s+i)!= ',')
+                            629 ;	genAssign
+   1576 90 00 B6            630 	mov	dptr,#_gps_time_s_1_1
+   1579 E0                  631 	movx	a,@dptr
+   157A FA                  632 	mov	r2,a
+   157B A3                  633 	inc	dptr
+   157C E0                  634 	movx	a,@dptr
+   157D FB                  635 	mov	r3,a
+   157E A3                  636 	inc	dptr
+   157F E0                  637 	movx	a,@dptr
+   1580 FC                  638 	mov	r4,a
+                            639 ;	genAssign
+   1581 7D 00               640 	mov	r5,#0x00
+                            641 ;	genAssign
+   1583 7E 07               642 	mov	r6,#0x07
+   1585                     643 00101$:
+                            644 ;	genPlus
+                            645 ;	Peephole 236.g	used r6 instead of ar6
+   1585 EE                  646 	mov	a,r6
+                            647 ;	Peephole 236.a	used r2 instead of ar2
+   1586 2A                  648 	add	a,r2
+   1587 FF                  649 	mov	r7,a
+                            650 ;	Peephole 181	changed mov to clr
+   1588 E4                  651 	clr	a
+                            652 ;	Peephole 236.b	used r3 instead of ar3
+   1589 3B                  653 	addc	a,r3
+   158A F8                  654 	mov	r0,a
+   158B 8C 01               655 	mov	ar1,r4
+                            656 ;	genPointerGet
+                            657 ;	genGenPointerGet
+   158D 8F 82               658 	mov	dpl,r7
+   158F 88 83               659 	mov	dph,r0
+   1591 89 F0               660 	mov	b,r1
+   1593 12 33 4F            661 	lcall	__gptrget
+   1596 FF                  662 	mov	r7,a
+                            663 ;	genCmpEq
+                            664 ;	gencjneshort
+   1597 BF 2C 02            665 	cjne	r7,#0x2C,00109$
+                            666 ;	Peephole 112.b	changed ljmp to sjmp
+   159A 80 10               667 	sjmp	00103$
+   159C                     668 00109$:
+                            669 ;	gps.c:47: temp[j]=*(s+i);
+                            670 ;	genPlus
+                            671 ;	Peephole 236.g	used r5 instead of ar5
+   159C ED                  672 	mov	a,r5
+   159D 24 B9               673 	add	a,#_gps_time_temp_1_1
+   159F F5 82               674 	mov	dpl,a
+                            675 ;	Peephole 181	changed mov to clr
+   15A1 E4                  676 	clr	a
+   15A2 34 00               677 	addc	a,#(_gps_time_temp_1_1 >> 8)
+   15A4 F5 83               678 	mov	dph,a
+                            679 ;	genPointerSet
+                            680 ;     genFarPointerSet
+   15A6 EF                  681 	mov	a,r7
+   15A7 F0                  682 	movx	@dptr,a
+                            683 ;	gps.c:48: j++;i++;
+                            684 ;	genPlus
+                            685 ;     genPlusIncr
+   15A8 0D                  686 	inc	r5
                             687 ;	genPlus
                             688 ;     genPlusIncr
-   159E 0D                  689 	inc	r5
-                            690 ;	genPlus
-                            691 ;     genPlusIncr
-   159F 0E                  692 	inc	r6
-                            693 ;	Peephole 112.b	changed ljmp to sjmp
-   15A0 80 D9               694 	sjmp	00101$
-   15A2                     695 00103$:
-                            696 ;	gps.c:46: return temp;
-                            697 ;	genRet
-                            698 ;	Peephole 182.a	used 16 bit load of DPTR
-   15A2 90 00 A9            699 	mov	dptr,#_gps_time_temp_1_1
-   15A5 75 F0 00            700 	mov	b,#0x00
-                            701 ;	Peephole 300	removed redundant label 00104$
-   15A8 22                  702 	ret
-                            703 ;------------------------------------------------------------
-                            704 ;Allocation info for local variables in function 'gps_status'
-                            705 ;------------------------------------------------------------
-                            706 ;s                         Allocated with name '_gps_status_s_1_1'
-                            707 ;i                         Allocated with name '_gps_status_i_1_1'
-                            708 ;j                         Allocated with name '_gps_status_j_1_1'
-                            709 ;k                         Allocated with name '_gps_status_k_1_1'
-                            710 ;------------------------------------------------------------
-                            711 ;	gps.c:50: char gps_status(char *s)
-                            712 ;	-----------------------------------------
-                            713 ;	 function gps_status
-                            714 ;	-----------------------------------------
-   15A9                     715 _gps_status:
-                            716 ;	genReceive
-   15A9 AA F0               717 	mov	r2,b
-   15AB AB 83               718 	mov	r3,dph
-   15AD E5 82               719 	mov	a,dpl
-   15AF 90 00 AF            720 	mov	dptr,#_gps_status_s_1_1
-   15B2 F0                  721 	movx	@dptr,a
-   15B3 A3                  722 	inc	dptr
-   15B4 EB                  723 	mov	a,r3
-   15B5 F0                  724 	movx	@dptr,a
-   15B6 A3                  725 	inc	dptr
-   15B7 EA                  726 	mov	a,r2
-   15B8 F0                  727 	movx	@dptr,a
-                            728 ;	gps.c:53: while(k<2)
-                            729 ;	genAssign
-   15B9 90 00 AF            730 	mov	dptr,#_gps_status_s_1_1
-   15BC E0                  731 	movx	a,@dptr
-   15BD FA                  732 	mov	r2,a
-   15BE A3                  733 	inc	dptr
-   15BF E0                  734 	movx	a,@dptr
-   15C0 FB                  735 	mov	r3,a
-   15C1 A3                  736 	inc	dptr
-   15C2 E0                  737 	movx	a,@dptr
-   15C3 FC                  738 	mov	r4,a
-                            739 ;	genAssign
-   15C4 7D 00               740 	mov	r5,#0x00
-                            741 ;	genAssign
-   15C6 7E 00               742 	mov	r6,#0x00
-   15C8                     743 00103$:
-                            744 ;	genCmpLt
-                            745 ;	genCmp
-   15C8 C3                  746 	clr	c
-   15C9 ED                  747 	mov	a,r5
-   15CA 64 80               748 	xrl	a,#0x80
-   15CC 94 82               749 	subb	a,#0x82
-                            750 ;	genIfxJump
-                            751 ;	Peephole 108.a	removed ljmp by inverse jump logic
-   15CE 50 19               752 	jnc	00105$
-                            753 ;	Peephole 300	removed redundant label 00112$
-                            754 ;	gps.c:55: if(*(s+i)==','){k++;}
-                            755 ;	genPlus
-                            756 ;	Peephole 236.g	used r6 instead of ar6
-   15D0 EE                  757 	mov	a,r6
-                            758 ;	Peephole 236.a	used r2 instead of ar2
-   15D1 2A                  759 	add	a,r2
-   15D2 FF                  760 	mov	r7,a
-                            761 ;	Peephole 181	changed mov to clr
-   15D3 E4                  762 	clr	a
-                            763 ;	Peephole 236.b	used r3 instead of ar3
-   15D4 3B                  764 	addc	a,r3
-   15D5 F8                  765 	mov	r0,a
-   15D6 8C 01               766 	mov	ar1,r4
-                            767 ;	genPointerGet
-                            768 ;	genGenPointerGet
-   15D8 8F 82               769 	mov	dpl,r7
-   15DA 88 83               770 	mov	dph,r0
-   15DC 89 F0               771 	mov	b,r1
-   15DE 12 2D CC            772 	lcall	__gptrget
-   15E1 FF                  773 	mov	r7,a
-                            774 ;	genCmpEq
-                            775 ;	gencjneshort
-                            776 ;	Peephole 112.b	changed ljmp to sjmp
-                            777 ;	Peephole 198.b	optimized misc jump sequence
-   15E2 BF 2C 01            778 	cjne	r7,#0x2C,00102$
-                            779 ;	Peephole 200.b	removed redundant sjmp
-                            780 ;	Peephole 300	removed redundant label 00113$
-                            781 ;	Peephole 300	removed redundant label 00114$
-                            782 ;	genPlus
-                            783 ;     genPlusIncr
-   15E5 0D                  784 	inc	r5
-   15E6                     785 00102$:
-                            786 ;	gps.c:56: i++;
-                            787 ;	genPlus
-                            788 ;     genPlusIncr
-   15E6 0E                  789 	inc	r6
-                            790 ;	Peephole 112.b	changed ljmp to sjmp
-   15E7 80 DF               791 	sjmp	00103$
-   15E9                     792 00105$:
-                            793 ;	gps.c:58: return *(s+i);
-                            794 ;	genAssign
-   15E9 90 00 AF            795 	mov	dptr,#_gps_status_s_1_1
-   15EC E0                  796 	movx	a,@dptr
-   15ED FA                  797 	mov	r2,a
-   15EE A3                  798 	inc	dptr
-   15EF E0                  799 	movx	a,@dptr
-   15F0 FB                  800 	mov	r3,a
-   15F1 A3                  801 	inc	dptr
-   15F2 E0                  802 	movx	a,@dptr
-   15F3 FC                  803 	mov	r4,a
-                            804 ;	genPlus
-                            805 ;	Peephole 236.g	used r6 instead of ar6
-   15F4 EE                  806 	mov	a,r6
-                            807 ;	Peephole 236.a	used r2 instead of ar2
-   15F5 2A                  808 	add	a,r2
-   15F6 FE                  809 	mov	r6,a
-                            810 ;	Peephole 181	changed mov to clr
-   15F7 E4                  811 	clr	a
-                            812 ;	Peephole 236.b	used r3 instead of ar3
-   15F8 3B                  813 	addc	a,r3
-   15F9 FD                  814 	mov	r5,a
-   15FA 8C 07               815 	mov	ar7,r4
-                            816 ;	genPointerGet
-                            817 ;	genGenPointerGet
-   15FC 8E 82               818 	mov	dpl,r6
-   15FE 8D 83               819 	mov	dph,r5
-   1600 8F F0               820 	mov	b,r7
-   1602 12 2D CC            821 	lcall	__gptrget
-                            822 ;	genRet
-                            823 ;	Peephole 234.a	loading dpl directly from a(ccumulator), r6 not set
-   1605 F5 82               824 	mov	dpl,a
-                            825 ;	Peephole 300	removed redundant label 00106$
-   1607 22                  826 	ret
-                            827 ;------------------------------------------------------------
-                            828 ;Allocation info for local variables in function 'gps_latitude'
-                            829 ;------------------------------------------------------------
-                            830 ;s                         Allocated with name '_gps_latitude_s_1_1'
-                            831 ;temp                      Allocated with name '_gps_latitude_temp_1_1'
-                            832 ;i                         Allocated with name '_gps_latitude_i_1_1'
-                            833 ;j                         Allocated with name '_gps_latitude_j_1_1'
-                            834 ;k                         Allocated with name '_gps_latitude_k_1_1'
-                            835 ;------------------------------------------------------------
-                            836 ;	gps.c:62: char* gps_latitude(char *s)
-                            837 ;	-----------------------------------------
-                            838 ;	 function gps_latitude
-                            839 ;	-----------------------------------------
-   1608                     840 _gps_latitude:
-                            841 ;	genReceive
-   1608 AA F0               842 	mov	r2,b
-   160A AB 83               843 	mov	r3,dph
-   160C E5 82               844 	mov	a,dpl
-   160E 90 00 B2            845 	mov	dptr,#_gps_latitude_s_1_1
-   1611 F0                  846 	movx	@dptr,a
-   1612 A3                  847 	inc	dptr
-   1613 EB                  848 	mov	a,r3
-   1614 F0                  849 	movx	@dptr,a
-   1615 A3                  850 	inc	dptr
-   1616 EA                  851 	mov	a,r2
-   1617 F0                  852 	movx	@dptr,a
-                            853 ;	gps.c:65: while(k<3)
-                            854 ;	genAssign
-   1618 90 00 B2            855 	mov	dptr,#_gps_latitude_s_1_1
-   161B E0                  856 	movx	a,@dptr
-   161C FA                  857 	mov	r2,a
-   161D A3                  858 	inc	dptr
-   161E E0                  859 	movx	a,@dptr
-   161F FB                  860 	mov	r3,a
-   1620 A3                  861 	inc	dptr
-   1621 E0                  862 	movx	a,@dptr
-   1622 FC                  863 	mov	r4,a
-                            864 ;	genAssign
-   1623 7D 00               865 	mov	r5,#0x00
-                            866 ;	genAssign
-   1625 7E 00               867 	mov	r6,#0x00
-   1627                     868 00103$:
-                            869 ;	genCmpLt
-                            870 ;	genCmp
-   1627 C3                  871 	clr	c
-   1628 ED                  872 	mov	a,r5
-   1629 64 80               873 	xrl	a,#0x80
-   162B 94 83               874 	subb	a,#0x83
-                            875 ;	genIfxJump
-                            876 ;	Peephole 108.a	removed ljmp by inverse jump logic
-   162D 50 19               877 	jnc	00115$
-                            878 ;	Peephole 300	removed redundant label 00118$
-                            879 ;	gps.c:67: if(*(s+i)==','){k++;}
-                            880 ;	genPlus
-                            881 ;	Peephole 236.g	used r6 instead of ar6
-   162F EE                  882 	mov	a,r6
-                            883 ;	Peephole 236.a	used r2 instead of ar2
-   1630 2A                  884 	add	a,r2
-   1631 FF                  885 	mov	r7,a
-                            886 ;	Peephole 181	changed mov to clr
-   1632 E4                  887 	clr	a
-                            888 ;	Peephole 236.b	used r3 instead of ar3
-   1633 3B                  889 	addc	a,r3
-   1634 F8                  890 	mov	r0,a
-   1635 8C 01               891 	mov	ar1,r4
-                            892 ;	genPointerGet
-                            893 ;	genGenPointerGet
-   1637 8F 82               894 	mov	dpl,r7
-   1639 88 83               895 	mov	dph,r0
-   163B 89 F0               896 	mov	b,r1
-   163D 12 2D CC            897 	lcall	__gptrget
-   1640 FF                  898 	mov	r7,a
-                            899 ;	genCmpEq
-                            900 ;	gencjneshort
-                            901 ;	Peephole 112.b	changed ljmp to sjmp
-                            902 ;	Peephole 198.b	optimized misc jump sequence
-   1641 BF 2C 01            903 	cjne	r7,#0x2C,00102$
-                            904 ;	Peephole 200.b	removed redundant sjmp
-                            905 ;	Peephole 300	removed redundant label 00119$
-                            906 ;	Peephole 300	removed redundant label 00120$
-                            907 ;	genPlus
-                            908 ;     genPlusIncr
-   1644 0D                  909 	inc	r5
-   1645                     910 00102$:
-                            911 ;	gps.c:68: i++;
-                            912 ;	genPlus
-                            913 ;     genPlusIncr
-   1645 0E                  914 	inc	r6
-                            915 ;	gps.c:71: while(*(s+i)!= ',')
-                            916 ;	Peephole 112.b	changed ljmp to sjmp
-   1646 80 DF               917 	sjmp	00103$
-   1648                     918 00115$:
-                            919 ;	genAssign
-   1648 90 00 B2            920 	mov	dptr,#_gps_latitude_s_1_1
-   164B E0                  921 	movx	a,@dptr
-   164C FA                  922 	mov	r2,a
-   164D A3                  923 	inc	dptr
-   164E E0                  924 	movx	a,@dptr
-   164F FB                  925 	mov	r3,a
-   1650 A3                  926 	inc	dptr
-   1651 E0                  927 	movx	a,@dptr
-   1652 FC                  928 	mov	r4,a
-                            929 ;	genAssign
-   1653 7D 00               930 	mov	r5,#0x00
-                            931 ;	genAssign
-   1655                     932 00106$:
-                            933 ;	genPlus
-                            934 ;	Peephole 236.g	used r6 instead of ar6
-   1655 EE                  935 	mov	a,r6
-                            936 ;	Peephole 236.a	used r2 instead of ar2
-   1656 2A                  937 	add	a,r2
-   1657 FF                  938 	mov	r7,a
-                            939 ;	Peephole 181	changed mov to clr
-   1658 E4                  940 	clr	a
-                            941 ;	Peephole 236.b	used r3 instead of ar3
-   1659 3B                  942 	addc	a,r3
-   165A F8                  943 	mov	r0,a
-   165B 8C 01               944 	mov	ar1,r4
-                            945 ;	genPointerGet
-                            946 ;	genGenPointerGet
-   165D 8F 82               947 	mov	dpl,r7
-   165F 88 83               948 	mov	dph,r0
-   1661 89 F0               949 	mov	b,r1
-   1663 12 2D CC            950 	lcall	__gptrget
-   1666 FF                  951 	mov	r7,a
-                            952 ;	genCmpEq
-                            953 ;	gencjneshort
-   1667 BF 2C 02            954 	cjne	r7,#0x2C,00121$
-                            955 ;	Peephole 112.b	changed ljmp to sjmp
-   166A 80 10               956 	sjmp	00108$
-   166C                     957 00121$:
-                            958 ;	gps.c:73: temp[j]=*(s+i);
-                            959 ;	genPlus
-                            960 ;	Peephole 236.g	used r5 instead of ar5
-   166C ED                  961 	mov	a,r5
-   166D 24 B5               962 	add	a,#_gps_latitude_temp_1_1
-   166F F5 82               963 	mov	dpl,a
-                            964 ;	Peephole 181	changed mov to clr
-   1671 E4                  965 	clr	a
-   1672 34 00               966 	addc	a,#(_gps_latitude_temp_1_1 >> 8)
-   1674 F5 83               967 	mov	dph,a
-                            968 ;	genPointerSet
-                            969 ;     genFarPointerSet
-   1676 EF                  970 	mov	a,r7
-   1677 F0                  971 	movx	@dptr,a
-                            972 ;	gps.c:74: j++;i++;
+   15A9 0E                  689 	inc	r6
+                            690 ;	Peephole 112.b	changed ljmp to sjmp
+   15AA 80 D9               691 	sjmp	00101$
+   15AC                     692 00103$:
+                            693 ;	gps.c:51: return temp;
+                            694 ;	genRet
+                            695 ;	Peephole 182.a	used 16 bit load of DPTR
+   15AC 90 00 B9            696 	mov	dptr,#_gps_time_temp_1_1
+   15AF 75 F0 00            697 	mov	b,#0x00
+                            698 ;	Peephole 300	removed redundant label 00104$
+   15B2 22                  699 	ret
+                            700 ;------------------------------------------------------------
+                            701 ;Allocation info for local variables in function 'gps_status'
+                            702 ;------------------------------------------------------------
+                            703 ;s                         Allocated with name '_gps_status_s_1_1'
+                            704 ;i                         Allocated with name '_gps_status_i_1_1'
+                            705 ;j                         Allocated with name '_gps_status_j_1_1'
+                            706 ;k                         Allocated with name '_gps_status_k_1_1'
+                            707 ;------------------------------------------------------------
+                            708 ;	gps.c:55: char gps_status(char *s)
+                            709 ;	-----------------------------------------
+                            710 ;	 function gps_status
+                            711 ;	-----------------------------------------
+   15B3                     712 _gps_status:
+                            713 ;	genReceive
+   15B3 AA F0               714 	mov	r2,b
+   15B5 AB 83               715 	mov	r3,dph
+   15B7 E5 82               716 	mov	a,dpl
+   15B9 90 00 BF            717 	mov	dptr,#_gps_status_s_1_1
+   15BC F0                  718 	movx	@dptr,a
+   15BD A3                  719 	inc	dptr
+   15BE EB                  720 	mov	a,r3
+   15BF F0                  721 	movx	@dptr,a
+   15C0 A3                  722 	inc	dptr
+   15C1 EA                  723 	mov	a,r2
+   15C2 F0                  724 	movx	@dptr,a
+                            725 ;	gps.c:58: while(k<2)
+                            726 ;	genAssign
+   15C3 90 00 BF            727 	mov	dptr,#_gps_status_s_1_1
+   15C6 E0                  728 	movx	a,@dptr
+   15C7 FA                  729 	mov	r2,a
+   15C8 A3                  730 	inc	dptr
+   15C9 E0                  731 	movx	a,@dptr
+   15CA FB                  732 	mov	r3,a
+   15CB A3                  733 	inc	dptr
+   15CC E0                  734 	movx	a,@dptr
+   15CD FC                  735 	mov	r4,a
+                            736 ;	genAssign
+   15CE 7D 00               737 	mov	r5,#0x00
+                            738 ;	genAssign
+   15D0 7E 00               739 	mov	r6,#0x00
+   15D2                     740 00103$:
+                            741 ;	genCmpLt
+                            742 ;	genCmp
+   15D2 C3                  743 	clr	c
+   15D3 ED                  744 	mov	a,r5
+   15D4 64 80               745 	xrl	a,#0x80
+   15D6 94 82               746 	subb	a,#0x82
+                            747 ;	genIfxJump
+                            748 ;	Peephole 108.a	removed ljmp by inverse jump logic
+   15D8 50 19               749 	jnc	00105$
+                            750 ;	Peephole 300	removed redundant label 00112$
+                            751 ;	gps.c:60: if(*(s+i)==','){k++;}
+                            752 ;	genPlus
+                            753 ;	Peephole 236.g	used r6 instead of ar6
+   15DA EE                  754 	mov	a,r6
+                            755 ;	Peephole 236.a	used r2 instead of ar2
+   15DB 2A                  756 	add	a,r2
+   15DC FF                  757 	mov	r7,a
+                            758 ;	Peephole 181	changed mov to clr
+   15DD E4                  759 	clr	a
+                            760 ;	Peephole 236.b	used r3 instead of ar3
+   15DE 3B                  761 	addc	a,r3
+   15DF F8                  762 	mov	r0,a
+   15E0 8C 01               763 	mov	ar1,r4
+                            764 ;	genPointerGet
+                            765 ;	genGenPointerGet
+   15E2 8F 82               766 	mov	dpl,r7
+   15E4 88 83               767 	mov	dph,r0
+   15E6 89 F0               768 	mov	b,r1
+   15E8 12 33 4F            769 	lcall	__gptrget
+   15EB FF                  770 	mov	r7,a
+                            771 ;	genCmpEq
+                            772 ;	gencjneshort
+                            773 ;	Peephole 112.b	changed ljmp to sjmp
+                            774 ;	Peephole 198.b	optimized misc jump sequence
+   15EC BF 2C 01            775 	cjne	r7,#0x2C,00102$
+                            776 ;	Peephole 200.b	removed redundant sjmp
+                            777 ;	Peephole 300	removed redundant label 00113$
+                            778 ;	Peephole 300	removed redundant label 00114$
+                            779 ;	genPlus
+                            780 ;     genPlusIncr
+   15EF 0D                  781 	inc	r5
+   15F0                     782 00102$:
+                            783 ;	gps.c:61: i++;
+                            784 ;	genPlus
+                            785 ;     genPlusIncr
+   15F0 0E                  786 	inc	r6
+                            787 ;	Peephole 112.b	changed ljmp to sjmp
+   15F1 80 DF               788 	sjmp	00103$
+   15F3                     789 00105$:
+                            790 ;	gps.c:63: return *(s+i);
+                            791 ;	genAssign
+   15F3 90 00 BF            792 	mov	dptr,#_gps_status_s_1_1
+   15F6 E0                  793 	movx	a,@dptr
+   15F7 FA                  794 	mov	r2,a
+   15F8 A3                  795 	inc	dptr
+   15F9 E0                  796 	movx	a,@dptr
+   15FA FB                  797 	mov	r3,a
+   15FB A3                  798 	inc	dptr
+   15FC E0                  799 	movx	a,@dptr
+   15FD FC                  800 	mov	r4,a
+                            801 ;	genPlus
+                            802 ;	Peephole 236.g	used r6 instead of ar6
+   15FE EE                  803 	mov	a,r6
+                            804 ;	Peephole 236.a	used r2 instead of ar2
+   15FF 2A                  805 	add	a,r2
+   1600 FE                  806 	mov	r6,a
+                            807 ;	Peephole 181	changed mov to clr
+   1601 E4                  808 	clr	a
+                            809 ;	Peephole 236.b	used r3 instead of ar3
+   1602 3B                  810 	addc	a,r3
+   1603 FD                  811 	mov	r5,a
+   1604 8C 07               812 	mov	ar7,r4
+                            813 ;	genPointerGet
+                            814 ;	genGenPointerGet
+   1606 8E 82               815 	mov	dpl,r6
+   1608 8D 83               816 	mov	dph,r5
+   160A 8F F0               817 	mov	b,r7
+   160C 12 33 4F            818 	lcall	__gptrget
+                            819 ;	genRet
+                            820 ;	Peephole 234.a	loading dpl directly from a(ccumulator), r6 not set
+   160F F5 82               821 	mov	dpl,a
+                            822 ;	Peephole 300	removed redundant label 00106$
+   1611 22                  823 	ret
+                            824 ;------------------------------------------------------------
+                            825 ;Allocation info for local variables in function 'gps_latitude'
+                            826 ;------------------------------------------------------------
+                            827 ;s                         Allocated with name '_gps_latitude_s_1_1'
+                            828 ;temp                      Allocated with name '_gps_latitude_temp_1_1'
+                            829 ;i                         Allocated with name '_gps_latitude_i_1_1'
+                            830 ;j                         Allocated with name '_gps_latitude_j_1_1'
+                            831 ;k                         Allocated with name '_gps_latitude_k_1_1'
+                            832 ;------------------------------------------------------------
+                            833 ;	gps.c:67: char* gps_latitude(char *s)
+                            834 ;	-----------------------------------------
+                            835 ;	 function gps_latitude
+                            836 ;	-----------------------------------------
+   1612                     837 _gps_latitude:
+                            838 ;	genReceive
+   1612 AA F0               839 	mov	r2,b
+   1614 AB 83               840 	mov	r3,dph
+   1616 E5 82               841 	mov	a,dpl
+   1618 90 00 C2            842 	mov	dptr,#_gps_latitude_s_1_1
+   161B F0                  843 	movx	@dptr,a
+   161C A3                  844 	inc	dptr
+   161D EB                  845 	mov	a,r3
+   161E F0                  846 	movx	@dptr,a
+   161F A3                  847 	inc	dptr
+   1620 EA                  848 	mov	a,r2
+   1621 F0                  849 	movx	@dptr,a
+                            850 ;	gps.c:70: while(k<3)
+                            851 ;	genAssign
+   1622 90 00 C2            852 	mov	dptr,#_gps_latitude_s_1_1
+   1625 E0                  853 	movx	a,@dptr
+   1626 FA                  854 	mov	r2,a
+   1627 A3                  855 	inc	dptr
+   1628 E0                  856 	movx	a,@dptr
+   1629 FB                  857 	mov	r3,a
+   162A A3                  858 	inc	dptr
+   162B E0                  859 	movx	a,@dptr
+   162C FC                  860 	mov	r4,a
+                            861 ;	genAssign
+   162D 7D 00               862 	mov	r5,#0x00
+                            863 ;	genAssign
+   162F 7E 00               864 	mov	r6,#0x00
+   1631                     865 00103$:
+                            866 ;	genCmpLt
+                            867 ;	genCmp
+   1631 C3                  868 	clr	c
+   1632 ED                  869 	mov	a,r5
+   1633 64 80               870 	xrl	a,#0x80
+   1635 94 83               871 	subb	a,#0x83
+                            872 ;	genIfxJump
+                            873 ;	Peephole 108.a	removed ljmp by inverse jump logic
+   1637 50 19               874 	jnc	00115$
+                            875 ;	Peephole 300	removed redundant label 00118$
+                            876 ;	gps.c:72: if(*(s+i)==','){k++;}
+                            877 ;	genPlus
+                            878 ;	Peephole 236.g	used r6 instead of ar6
+   1639 EE                  879 	mov	a,r6
+                            880 ;	Peephole 236.a	used r2 instead of ar2
+   163A 2A                  881 	add	a,r2
+   163B FF                  882 	mov	r7,a
+                            883 ;	Peephole 181	changed mov to clr
+   163C E4                  884 	clr	a
+                            885 ;	Peephole 236.b	used r3 instead of ar3
+   163D 3B                  886 	addc	a,r3
+   163E F8                  887 	mov	r0,a
+   163F 8C 01               888 	mov	ar1,r4
+                            889 ;	genPointerGet
+                            890 ;	genGenPointerGet
+   1641 8F 82               891 	mov	dpl,r7
+   1643 88 83               892 	mov	dph,r0
+   1645 89 F0               893 	mov	b,r1
+   1647 12 33 4F            894 	lcall	__gptrget
+   164A FF                  895 	mov	r7,a
+                            896 ;	genCmpEq
+                            897 ;	gencjneshort
+                            898 ;	Peephole 112.b	changed ljmp to sjmp
+                            899 ;	Peephole 198.b	optimized misc jump sequence
+   164B BF 2C 01            900 	cjne	r7,#0x2C,00102$
+                            901 ;	Peephole 200.b	removed redundant sjmp
+                            902 ;	Peephole 300	removed redundant label 00119$
+                            903 ;	Peephole 300	removed redundant label 00120$
+                            904 ;	genPlus
+                            905 ;     genPlusIncr
+   164E 0D                  906 	inc	r5
+   164F                     907 00102$:
+                            908 ;	gps.c:73: i++;
+                            909 ;	genPlus
+                            910 ;     genPlusIncr
+   164F 0E                  911 	inc	r6
+                            912 ;	gps.c:76: while(*(s+i)!= ',')
+                            913 ;	Peephole 112.b	changed ljmp to sjmp
+   1650 80 DF               914 	sjmp	00103$
+   1652                     915 00115$:
+                            916 ;	genAssign
+   1652 90 00 C2            917 	mov	dptr,#_gps_latitude_s_1_1
+   1655 E0                  918 	movx	a,@dptr
+   1656 FA                  919 	mov	r2,a
+   1657 A3                  920 	inc	dptr
+   1658 E0                  921 	movx	a,@dptr
+   1659 FB                  922 	mov	r3,a
+   165A A3                  923 	inc	dptr
+   165B E0                  924 	movx	a,@dptr
+   165C FC                  925 	mov	r4,a
+                            926 ;	genAssign
+   165D 7D 00               927 	mov	r5,#0x00
+                            928 ;	genAssign
+   165F                     929 00106$:
+                            930 ;	genPlus
+                            931 ;	Peephole 236.g	used r6 instead of ar6
+   165F EE                  932 	mov	a,r6
+                            933 ;	Peephole 236.a	used r2 instead of ar2
+   1660 2A                  934 	add	a,r2
+   1661 FF                  935 	mov	r7,a
+                            936 ;	Peephole 181	changed mov to clr
+   1662 E4                  937 	clr	a
+                            938 ;	Peephole 236.b	used r3 instead of ar3
+   1663 3B                  939 	addc	a,r3
+   1664 F8                  940 	mov	r0,a
+   1665 8C 01               941 	mov	ar1,r4
+                            942 ;	genPointerGet
+                            943 ;	genGenPointerGet
+   1667 8F 82               944 	mov	dpl,r7
+   1669 88 83               945 	mov	dph,r0
+   166B 89 F0               946 	mov	b,r1
+   166D 12 33 4F            947 	lcall	__gptrget
+   1670 FF                  948 	mov	r7,a
+                            949 ;	genCmpEq
+                            950 ;	gencjneshort
+   1671 BF 2C 02            951 	cjne	r7,#0x2C,00121$
+                            952 ;	Peephole 112.b	changed ljmp to sjmp
+   1674 80 10               953 	sjmp	00108$
+   1676                     954 00121$:
+                            955 ;	gps.c:78: temp[j]=*(s+i);
+                            956 ;	genPlus
+                            957 ;	Peephole 236.g	used r5 instead of ar5
+   1676 ED                  958 	mov	a,r5
+   1677 24 C5               959 	add	a,#_gps_latitude_temp_1_1
+   1679 F5 82               960 	mov	dpl,a
+                            961 ;	Peephole 181	changed mov to clr
+   167B E4                  962 	clr	a
+   167C 34 00               963 	addc	a,#(_gps_latitude_temp_1_1 >> 8)
+   167E F5 83               964 	mov	dph,a
+                            965 ;	genPointerSet
+                            966 ;     genFarPointerSet
+   1680 EF                  967 	mov	a,r7
+   1681 F0                  968 	movx	@dptr,a
+                            969 ;	gps.c:79: j++;i++;
+                            970 ;	genPlus
+                            971 ;     genPlusIncr
+   1682 0D                  972 	inc	r5
                             973 ;	genPlus
                             974 ;     genPlusIncr
-   1678 0D                  975 	inc	r5
-                            976 ;	genPlus
-                            977 ;     genPlusIncr
-   1679 0E                  978 	inc	r6
-                            979 ;	Peephole 112.b	changed ljmp to sjmp
-   167A 80 D9               980 	sjmp	00106$
-   167C                     981 00108$:
-                            982 ;	gps.c:76: i++;
-                            983 ;	genPlus
-                            984 ;     genPlusIncr
-   167C 0E                  985 	inc	r6
-                            986 ;	gps.c:79: temp[j]=*(s+i);
-                            987 ;	genPlus
-                            988 ;	Peephole 236.g	used r5 instead of ar5
-   167D ED                  989 	mov	a,r5
-   167E 24 B5               990 	add	a,#_gps_latitude_temp_1_1
-   1680 FD                  991 	mov	r5,a
-                            992 ;	Peephole 181	changed mov to clr
-   1681 E4                  993 	clr	a
-   1682 34 00               994 	addc	a,#(_gps_latitude_temp_1_1 >> 8)
-   1684 FF                  995 	mov	r7,a
-                            996 ;	genPlus
-                            997 ;	Peephole 236.g	used r6 instead of ar6
-   1685 EE                  998 	mov	a,r6
-                            999 ;	Peephole 236.a	used r2 instead of ar2
-   1686 2A                 1000 	add	a,r2
-   1687 FA                 1001 	mov	r2,a
-                           1002 ;	Peephole 181	changed mov to clr
-   1688 E4                 1003 	clr	a
-                           1004 ;	Peephole 236.b	used r3 instead of ar3
-   1689 3B                 1005 	addc	a,r3
-   168A FB                 1006 	mov	r3,a
-                           1007 ;	genPointerGet
-                           1008 ;	genGenPointerGet
-   168B 8A 82              1009 	mov	dpl,r2
-   168D 8B 83              1010 	mov	dph,r3
-   168F 8C F0              1011 	mov	b,r4
-   1691 12 2D CC           1012 	lcall	__gptrget
-                           1013 ;	genPointerSet
-                           1014 ;     genFarPointerSet
-   1694 FA                 1015 	mov	r2,a
-   1695 8D 82              1016 	mov	dpl,r5
-   1697 8F 83              1017 	mov	dph,r7
-                           1018 ;	Peephole 136	removed redundant move
-   1699 F0                 1019 	movx	@dptr,a
-                           1020 ;	gps.c:81: return temp;
-                           1021 ;	genRet
-                           1022 ;	Peephole 182.a	used 16 bit load of DPTR
-   169A 90 00 B5           1023 	mov	dptr,#_gps_latitude_temp_1_1
-   169D 75 F0 00           1024 	mov	b,#0x00
-                           1025 ;	Peephole 300	removed redundant label 00109$
-   16A0 22                 1026 	ret
-                           1027 ;------------------------------------------------------------
-                           1028 ;Allocation info for local variables in function 'gps_longitude'
-                           1029 ;------------------------------------------------------------
-                           1030 ;s                         Allocated with name '_gps_longitude_s_1_1'
-                           1031 ;temp                      Allocated with name '_gps_longitude_temp_1_1'
-                           1032 ;i                         Allocated with name '_gps_longitude_i_1_1'
-                           1033 ;j                         Allocated with name '_gps_longitude_j_1_1'
-                           1034 ;k                         Allocated with name '_gps_longitude_k_1_1'
-                           1035 ;------------------------------------------------------------
-                           1036 ;	gps.c:86: char* gps_longitude(char *s)
-                           1037 ;	-----------------------------------------
-                           1038 ;	 function gps_longitude
-                           1039 ;	-----------------------------------------
-   16A1                    1040 _gps_longitude:
-                           1041 ;	genReceive
-   16A1 AA F0              1042 	mov	r2,b
-   16A3 AB 83              1043 	mov	r3,dph
-   16A5 E5 82              1044 	mov	a,dpl
-   16A7 90 00 C3           1045 	mov	dptr,#_gps_longitude_s_1_1
-   16AA F0                 1046 	movx	@dptr,a
-   16AB A3                 1047 	inc	dptr
-   16AC EB                 1048 	mov	a,r3
-   16AD F0                 1049 	movx	@dptr,a
-   16AE A3                 1050 	inc	dptr
-   16AF EA                 1051 	mov	a,r2
-   16B0 F0                 1052 	movx	@dptr,a
-                           1053 ;	gps.c:89: while(k<5)
-                           1054 ;	genAssign
-   16B1 90 00 C3           1055 	mov	dptr,#_gps_longitude_s_1_1
-   16B4 E0                 1056 	movx	a,@dptr
-   16B5 FA                 1057 	mov	r2,a
-   16B6 A3                 1058 	inc	dptr
-   16B7 E0                 1059 	movx	a,@dptr
-   16B8 FB                 1060 	mov	r3,a
-   16B9 A3                 1061 	inc	dptr
-   16BA E0                 1062 	movx	a,@dptr
-   16BB FC                 1063 	mov	r4,a
-                           1064 ;	genAssign
-   16BC 7D 00              1065 	mov	r5,#0x00
-                           1066 ;	genAssign
-   16BE 7E 00              1067 	mov	r6,#0x00
-   16C0                    1068 00103$:
-                           1069 ;	genCmpLt
-                           1070 ;	genCmp
-   16C0 C3                 1071 	clr	c
-   16C1 ED                 1072 	mov	a,r5
-   16C2 64 80              1073 	xrl	a,#0x80
-   16C4 94 85              1074 	subb	a,#0x85
-                           1075 ;	genIfxJump
-                           1076 ;	Peephole 108.a	removed ljmp by inverse jump logic
-   16C6 50 19              1077 	jnc	00115$
-                           1078 ;	Peephole 300	removed redundant label 00118$
-                           1079 ;	gps.c:91: if(*(s+i)==','){k++;}
-                           1080 ;	genPlus
-                           1081 ;	Peephole 236.g	used r6 instead of ar6
-   16C8 EE                 1082 	mov	a,r6
-                           1083 ;	Peephole 236.a	used r2 instead of ar2
-   16C9 2A                 1084 	add	a,r2
-   16CA FF                 1085 	mov	r7,a
-                           1086 ;	Peephole 181	changed mov to clr
-   16CB E4                 1087 	clr	a
-                           1088 ;	Peephole 236.b	used r3 instead of ar3
-   16CC 3B                 1089 	addc	a,r3
-   16CD F8                 1090 	mov	r0,a
-   16CE 8C 01              1091 	mov	ar1,r4
-                           1092 ;	genPointerGet
-                           1093 ;	genGenPointerGet
-   16D0 8F 82              1094 	mov	dpl,r7
-   16D2 88 83              1095 	mov	dph,r0
-   16D4 89 F0              1096 	mov	b,r1
-   16D6 12 2D CC           1097 	lcall	__gptrget
-   16D9 FF                 1098 	mov	r7,a
-                           1099 ;	genCmpEq
-                           1100 ;	gencjneshort
-                           1101 ;	Peephole 112.b	changed ljmp to sjmp
-                           1102 ;	Peephole 198.b	optimized misc jump sequence
-   16DA BF 2C 01           1103 	cjne	r7,#0x2C,00102$
-                           1104 ;	Peephole 200.b	removed redundant sjmp
-                           1105 ;	Peephole 300	removed redundant label 00119$
-                           1106 ;	Peephole 300	removed redundant label 00120$
-                           1107 ;	genPlus
-                           1108 ;     genPlusIncr
-   16DD 0D                 1109 	inc	r5
-   16DE                    1110 00102$:
-                           1111 ;	gps.c:92: i++;
-                           1112 ;	genPlus
-                           1113 ;     genPlusIncr
-   16DE 0E                 1114 	inc	r6
-                           1115 ;	gps.c:95: while(*(s+i)!= ',')
-                           1116 ;	Peephole 112.b	changed ljmp to sjmp
-   16DF 80 DF              1117 	sjmp	00103$
-   16E1                    1118 00115$:
-                           1119 ;	genAssign
-   16E1 90 00 C3           1120 	mov	dptr,#_gps_longitude_s_1_1
-   16E4 E0                 1121 	movx	a,@dptr
-   16E5 FA                 1122 	mov	r2,a
-   16E6 A3                 1123 	inc	dptr
-   16E7 E0                 1124 	movx	a,@dptr
-   16E8 FB                 1125 	mov	r3,a
-   16E9 A3                 1126 	inc	dptr
-   16EA E0                 1127 	movx	a,@dptr
-   16EB FC                 1128 	mov	r4,a
-                           1129 ;	genAssign
-   16EC 7D 00              1130 	mov	r5,#0x00
-                           1131 ;	genAssign
-   16EE                    1132 00106$:
-                           1133 ;	genPlus
-                           1134 ;	Peephole 236.g	used r6 instead of ar6
-   16EE EE                 1135 	mov	a,r6
-                           1136 ;	Peephole 236.a	used r2 instead of ar2
-   16EF 2A                 1137 	add	a,r2
-   16F0 FF                 1138 	mov	r7,a
-                           1139 ;	Peephole 181	changed mov to clr
-   16F1 E4                 1140 	clr	a
-                           1141 ;	Peephole 236.b	used r3 instead of ar3
-   16F2 3B                 1142 	addc	a,r3
-   16F3 F8                 1143 	mov	r0,a
-   16F4 8C 01              1144 	mov	ar1,r4
-                           1145 ;	genPointerGet
-                           1146 ;	genGenPointerGet
-   16F6 8F 82              1147 	mov	dpl,r7
-   16F8 88 83              1148 	mov	dph,r0
-   16FA 89 F0              1149 	mov	b,r1
-   16FC 12 2D CC           1150 	lcall	__gptrget
-   16FF FF                 1151 	mov	r7,a
-                           1152 ;	genCmpEq
-                           1153 ;	gencjneshort
-   1700 BF 2C 02           1154 	cjne	r7,#0x2C,00121$
-                           1155 ;	Peephole 112.b	changed ljmp to sjmp
-   1703 80 10              1156 	sjmp	00108$
-   1705                    1157 00121$:
-                           1158 ;	gps.c:97: temp[j]=*(s+i);
-                           1159 ;	genPlus
-                           1160 ;	Peephole 236.g	used r5 instead of ar5
-   1705 ED                 1161 	mov	a,r5
-   1706 24 C6              1162 	add	a,#_gps_longitude_temp_1_1
-   1708 F5 82              1163 	mov	dpl,a
-                           1164 ;	Peephole 181	changed mov to clr
-   170A E4                 1165 	clr	a
-   170B 34 00              1166 	addc	a,#(_gps_longitude_temp_1_1 >> 8)
-   170D F5 83              1167 	mov	dph,a
-                           1168 ;	genPointerSet
-                           1169 ;     genFarPointerSet
-   170F EF                 1170 	mov	a,r7
-   1710 F0                 1171 	movx	@dptr,a
-                           1172 ;	gps.c:98: j++;i++;
+   1683 0E                  975 	inc	r6
+                            976 ;	Peephole 112.b	changed ljmp to sjmp
+   1684 80 D9               977 	sjmp	00106$
+   1686                     978 00108$:
+                            979 ;	gps.c:81: i++;
+                            980 ;	genPlus
+                            981 ;     genPlusIncr
+   1686 0E                  982 	inc	r6
+                            983 ;	gps.c:84: temp[j]=*(s+i);
+                            984 ;	genPlus
+                            985 ;	Peephole 236.g	used r5 instead of ar5
+   1687 ED                  986 	mov	a,r5
+   1688 24 C5               987 	add	a,#_gps_latitude_temp_1_1
+   168A FD                  988 	mov	r5,a
+                            989 ;	Peephole 181	changed mov to clr
+   168B E4                  990 	clr	a
+   168C 34 00               991 	addc	a,#(_gps_latitude_temp_1_1 >> 8)
+   168E FF                  992 	mov	r7,a
+                            993 ;	genPlus
+                            994 ;	Peephole 236.g	used r6 instead of ar6
+   168F EE                  995 	mov	a,r6
+                            996 ;	Peephole 236.a	used r2 instead of ar2
+   1690 2A                  997 	add	a,r2
+   1691 FA                  998 	mov	r2,a
+                            999 ;	Peephole 181	changed mov to clr
+   1692 E4                 1000 	clr	a
+                           1001 ;	Peephole 236.b	used r3 instead of ar3
+   1693 3B                 1002 	addc	a,r3
+   1694 FB                 1003 	mov	r3,a
+                           1004 ;	genPointerGet
+                           1005 ;	genGenPointerGet
+   1695 8A 82              1006 	mov	dpl,r2
+   1697 8B 83              1007 	mov	dph,r3
+   1699 8C F0              1008 	mov	b,r4
+   169B 12 33 4F           1009 	lcall	__gptrget
+                           1010 ;	genPointerSet
+                           1011 ;     genFarPointerSet
+   169E FA                 1012 	mov	r2,a
+   169F 8D 82              1013 	mov	dpl,r5
+   16A1 8F 83              1014 	mov	dph,r7
+                           1015 ;	Peephole 136	removed redundant move
+   16A3 F0                 1016 	movx	@dptr,a
+                           1017 ;	gps.c:86: return temp;
+                           1018 ;	genRet
+                           1019 ;	Peephole 182.a	used 16 bit load of DPTR
+   16A4 90 00 C5           1020 	mov	dptr,#_gps_latitude_temp_1_1
+   16A7 75 F0 00           1021 	mov	b,#0x00
+                           1022 ;	Peephole 300	removed redundant label 00109$
+   16AA 22                 1023 	ret
+                           1024 ;------------------------------------------------------------
+                           1025 ;Allocation info for local variables in function 'gps_longitude'
+                           1026 ;------------------------------------------------------------
+                           1027 ;s                         Allocated with name '_gps_longitude_s_1_1'
+                           1028 ;temp                      Allocated with name '_gps_longitude_temp_1_1'
+                           1029 ;i                         Allocated with name '_gps_longitude_i_1_1'
+                           1030 ;j                         Allocated with name '_gps_longitude_j_1_1'
+                           1031 ;k                         Allocated with name '_gps_longitude_k_1_1'
+                           1032 ;------------------------------------------------------------
+                           1033 ;	gps.c:91: char* gps_longitude(char *s)
+                           1034 ;	-----------------------------------------
+                           1035 ;	 function gps_longitude
+                           1036 ;	-----------------------------------------
+   16AB                    1037 _gps_longitude:
+                           1038 ;	genReceive
+   16AB AA F0              1039 	mov	r2,b
+   16AD AB 83              1040 	mov	r3,dph
+   16AF E5 82              1041 	mov	a,dpl
+   16B1 90 00 D3           1042 	mov	dptr,#_gps_longitude_s_1_1
+   16B4 F0                 1043 	movx	@dptr,a
+   16B5 A3                 1044 	inc	dptr
+   16B6 EB                 1045 	mov	a,r3
+   16B7 F0                 1046 	movx	@dptr,a
+   16B8 A3                 1047 	inc	dptr
+   16B9 EA                 1048 	mov	a,r2
+   16BA F0                 1049 	movx	@dptr,a
+                           1050 ;	gps.c:94: while(k<5)
+                           1051 ;	genAssign
+   16BB 90 00 D3           1052 	mov	dptr,#_gps_longitude_s_1_1
+   16BE E0                 1053 	movx	a,@dptr
+   16BF FA                 1054 	mov	r2,a
+   16C0 A3                 1055 	inc	dptr
+   16C1 E0                 1056 	movx	a,@dptr
+   16C2 FB                 1057 	mov	r3,a
+   16C3 A3                 1058 	inc	dptr
+   16C4 E0                 1059 	movx	a,@dptr
+   16C5 FC                 1060 	mov	r4,a
+                           1061 ;	genAssign
+   16C6 7D 00              1062 	mov	r5,#0x00
+                           1063 ;	genAssign
+   16C8 7E 00              1064 	mov	r6,#0x00
+   16CA                    1065 00103$:
+                           1066 ;	genCmpLt
+                           1067 ;	genCmp
+   16CA C3                 1068 	clr	c
+   16CB ED                 1069 	mov	a,r5
+   16CC 64 80              1070 	xrl	a,#0x80
+   16CE 94 85              1071 	subb	a,#0x85
+                           1072 ;	genIfxJump
+                           1073 ;	Peephole 108.a	removed ljmp by inverse jump logic
+   16D0 50 19              1074 	jnc	00115$
+                           1075 ;	Peephole 300	removed redundant label 00118$
+                           1076 ;	gps.c:96: if(*(s+i)==','){k++;}
+                           1077 ;	genPlus
+                           1078 ;	Peephole 236.g	used r6 instead of ar6
+   16D2 EE                 1079 	mov	a,r6
+                           1080 ;	Peephole 236.a	used r2 instead of ar2
+   16D3 2A                 1081 	add	a,r2
+   16D4 FF                 1082 	mov	r7,a
+                           1083 ;	Peephole 181	changed mov to clr
+   16D5 E4                 1084 	clr	a
+                           1085 ;	Peephole 236.b	used r3 instead of ar3
+   16D6 3B                 1086 	addc	a,r3
+   16D7 F8                 1087 	mov	r0,a
+   16D8 8C 01              1088 	mov	ar1,r4
+                           1089 ;	genPointerGet
+                           1090 ;	genGenPointerGet
+   16DA 8F 82              1091 	mov	dpl,r7
+   16DC 88 83              1092 	mov	dph,r0
+   16DE 89 F0              1093 	mov	b,r1
+   16E0 12 33 4F           1094 	lcall	__gptrget
+   16E3 FF                 1095 	mov	r7,a
+                           1096 ;	genCmpEq
+                           1097 ;	gencjneshort
+                           1098 ;	Peephole 112.b	changed ljmp to sjmp
+                           1099 ;	Peephole 198.b	optimized misc jump sequence
+   16E4 BF 2C 01           1100 	cjne	r7,#0x2C,00102$
+                           1101 ;	Peephole 200.b	removed redundant sjmp
+                           1102 ;	Peephole 300	removed redundant label 00119$
+                           1103 ;	Peephole 300	removed redundant label 00120$
+                           1104 ;	genPlus
+                           1105 ;     genPlusIncr
+   16E7 0D                 1106 	inc	r5
+   16E8                    1107 00102$:
+                           1108 ;	gps.c:97: i++;
+                           1109 ;	genPlus
+                           1110 ;     genPlusIncr
+   16E8 0E                 1111 	inc	r6
+                           1112 ;	gps.c:100: while(*(s+i)!= ',')
+                           1113 ;	Peephole 112.b	changed ljmp to sjmp
+   16E9 80 DF              1114 	sjmp	00103$
+   16EB                    1115 00115$:
+                           1116 ;	genAssign
+   16EB 90 00 D3           1117 	mov	dptr,#_gps_longitude_s_1_1
+   16EE E0                 1118 	movx	a,@dptr
+   16EF FA                 1119 	mov	r2,a
+   16F0 A3                 1120 	inc	dptr
+   16F1 E0                 1121 	movx	a,@dptr
+   16F2 FB                 1122 	mov	r3,a
+   16F3 A3                 1123 	inc	dptr
+   16F4 E0                 1124 	movx	a,@dptr
+   16F5 FC                 1125 	mov	r4,a
+                           1126 ;	genAssign
+   16F6 7D 00              1127 	mov	r5,#0x00
+                           1128 ;	genAssign
+   16F8                    1129 00106$:
+                           1130 ;	genPlus
+                           1131 ;	Peephole 236.g	used r6 instead of ar6
+   16F8 EE                 1132 	mov	a,r6
+                           1133 ;	Peephole 236.a	used r2 instead of ar2
+   16F9 2A                 1134 	add	a,r2
+   16FA FF                 1135 	mov	r7,a
+                           1136 ;	Peephole 181	changed mov to clr
+   16FB E4                 1137 	clr	a
+                           1138 ;	Peephole 236.b	used r3 instead of ar3
+   16FC 3B                 1139 	addc	a,r3
+   16FD F8                 1140 	mov	r0,a
+   16FE 8C 01              1141 	mov	ar1,r4
+                           1142 ;	genPointerGet
+                           1143 ;	genGenPointerGet
+   1700 8F 82              1144 	mov	dpl,r7
+   1702 88 83              1145 	mov	dph,r0
+   1704 89 F0              1146 	mov	b,r1
+   1706 12 33 4F           1147 	lcall	__gptrget
+   1709 FF                 1148 	mov	r7,a
+                           1149 ;	genCmpEq
+                           1150 ;	gencjneshort
+   170A BF 2C 02           1151 	cjne	r7,#0x2C,00121$
+                           1152 ;	Peephole 112.b	changed ljmp to sjmp
+   170D 80 10              1153 	sjmp	00108$
+   170F                    1154 00121$:
+                           1155 ;	gps.c:102: temp[j]=*(s+i);
+                           1156 ;	genPlus
+                           1157 ;	Peephole 236.g	used r5 instead of ar5
+   170F ED                 1158 	mov	a,r5
+   1710 24 D6              1159 	add	a,#_gps_longitude_temp_1_1
+   1712 F5 82              1160 	mov	dpl,a
+                           1161 ;	Peephole 181	changed mov to clr
+   1714 E4                 1162 	clr	a
+   1715 34 00              1163 	addc	a,#(_gps_longitude_temp_1_1 >> 8)
+   1717 F5 83              1164 	mov	dph,a
+                           1165 ;	genPointerSet
+                           1166 ;     genFarPointerSet
+   1719 EF                 1167 	mov	a,r7
+   171A F0                 1168 	movx	@dptr,a
+                           1169 ;	gps.c:103: j++;i++;
+                           1170 ;	genPlus
+                           1171 ;     genPlusIncr
+   171B 0D                 1172 	inc	r5
                            1173 ;	genPlus
                            1174 ;     genPlusIncr
-   1711 0D                 1175 	inc	r5
-                           1176 ;	genPlus
-                           1177 ;     genPlusIncr
-   1712 0E                 1178 	inc	r6
-                           1179 ;	Peephole 112.b	changed ljmp to sjmp
-   1713 80 D9              1180 	sjmp	00106$
-   1715                    1181 00108$:
-                           1182 ;	gps.c:100: i++;
-                           1183 ;	genPlus
-                           1184 ;     genPlusIncr
-   1715 0E                 1185 	inc	r6
-                           1186 ;	gps.c:103: temp[j]=*(s+i);
-                           1187 ;	genPlus
-                           1188 ;	Peephole 236.g	used r5 instead of ar5
-   1716 ED                 1189 	mov	a,r5
-   1717 24 C6              1190 	add	a,#_gps_longitude_temp_1_1
-   1719 FD                 1191 	mov	r5,a
-                           1192 ;	Peephole 181	changed mov to clr
-   171A E4                 1193 	clr	a
-   171B 34 00              1194 	addc	a,#(_gps_longitude_temp_1_1 >> 8)
-   171D FF                 1195 	mov	r7,a
-                           1196 ;	genPlus
-                           1197 ;	Peephole 236.g	used r6 instead of ar6
-   171E EE                 1198 	mov	a,r6
-                           1199 ;	Peephole 236.a	used r2 instead of ar2
-   171F 2A                 1200 	add	a,r2
-   1720 FA                 1201 	mov	r2,a
-                           1202 ;	Peephole 181	changed mov to clr
-   1721 E4                 1203 	clr	a
-                           1204 ;	Peephole 236.b	used r3 instead of ar3
-   1722 3B                 1205 	addc	a,r3
-   1723 FB                 1206 	mov	r3,a
-                           1207 ;	genPointerGet
-                           1208 ;	genGenPointerGet
-   1724 8A 82              1209 	mov	dpl,r2
-   1726 8B 83              1210 	mov	dph,r3
-   1728 8C F0              1211 	mov	b,r4
-   172A 12 2D CC           1212 	lcall	__gptrget
-                           1213 ;	genPointerSet
-                           1214 ;     genFarPointerSet
-   172D FA                 1215 	mov	r2,a
-   172E 8D 82              1216 	mov	dpl,r5
-   1730 8F 83              1217 	mov	dph,r7
-                           1218 ;	Peephole 136	removed redundant move
-   1732 F0                 1219 	movx	@dptr,a
-                           1220 ;	gps.c:105: return temp;
-                           1221 ;	genRet
-                           1222 ;	Peephole 182.a	used 16 bit load of DPTR
-   1733 90 00 C6           1223 	mov	dptr,#_gps_longitude_temp_1_1
-   1736 75 F0 00           1224 	mov	b,#0x00
-                           1225 ;	Peephole 300	removed redundant label 00109$
-   1739 22                 1226 	ret
-                           1227 ;------------------------------------------------------------
-                           1228 ;Allocation info for local variables in function 'gps_date'
-                           1229 ;------------------------------------------------------------
-                           1230 ;s                         Allocated with name '_gps_date_s_1_1'
-                           1231 ;temp                      Allocated with name '_gps_date_temp_1_1'
-                           1232 ;i                         Allocated with name '_gps_date_i_1_1'
-                           1233 ;j                         Allocated with name '_gps_date_j_1_1'
-                           1234 ;k                         Allocated with name '_gps_date_k_1_1'
-                           1235 ;------------------------------------------------------------
-                           1236 ;	gps.c:110: char* gps_date(char *s)
-                           1237 ;	-----------------------------------------
-                           1238 ;	 function gps_date
-                           1239 ;	-----------------------------------------
-   173A                    1240 _gps_date:
-                           1241 ;	genReceive
-   173A AA F0              1242 	mov	r2,b
-   173C AB 83              1243 	mov	r3,dph
-   173E E5 82              1244 	mov	a,dpl
-   1740 90 00 D4           1245 	mov	dptr,#_gps_date_s_1_1
-   1743 F0                 1246 	movx	@dptr,a
-   1744 A3                 1247 	inc	dptr
-   1745 EB                 1248 	mov	a,r3
-   1746 F0                 1249 	movx	@dptr,a
-   1747 A3                 1250 	inc	dptr
-   1748 EA                 1251 	mov	a,r2
-   1749 F0                 1252 	movx	@dptr,a
-                           1253 ;	gps.c:113: while(k<9)
-                           1254 ;	genAssign
-   174A 90 00 D4           1255 	mov	dptr,#_gps_date_s_1_1
-   174D E0                 1256 	movx	a,@dptr
-   174E FA                 1257 	mov	r2,a
-   174F A3                 1258 	inc	dptr
-   1750 E0                 1259 	movx	a,@dptr
-   1751 FB                 1260 	mov	r3,a
-   1752 A3                 1261 	inc	dptr
-   1753 E0                 1262 	movx	a,@dptr
-   1754 FC                 1263 	mov	r4,a
-                           1264 ;	genAssign
-   1755 7D 00              1265 	mov	r5,#0x00
-                           1266 ;	genAssign
-   1757 7E 00              1267 	mov	r6,#0x00
-   1759                    1268 00103$:
-                           1269 ;	genCmpLt
-                           1270 ;	genCmp
-   1759 C3                 1271 	clr	c
-   175A ED                 1272 	mov	a,r5
-   175B 64 80              1273 	xrl	a,#0x80
-   175D 94 89              1274 	subb	a,#0x89
-                           1275 ;	genIfxJump
-                           1276 ;	Peephole 108.a	removed ljmp by inverse jump logic
-   175F 50 19              1277 	jnc	00115$
-                           1278 ;	Peephole 300	removed redundant label 00118$
-                           1279 ;	gps.c:115: if(*(s+i)==','){k++;}
-                           1280 ;	genPlus
-                           1281 ;	Peephole 236.g	used r6 instead of ar6
-   1761 EE                 1282 	mov	a,r6
-                           1283 ;	Peephole 236.a	used r2 instead of ar2
-   1762 2A                 1284 	add	a,r2
-   1763 FF                 1285 	mov	r7,a
-                           1286 ;	Peephole 181	changed mov to clr
-   1764 E4                 1287 	clr	a
-                           1288 ;	Peephole 236.b	used r3 instead of ar3
-   1765 3B                 1289 	addc	a,r3
-   1766 F8                 1290 	mov	r0,a
-   1767 8C 01              1291 	mov	ar1,r4
-                           1292 ;	genPointerGet
-                           1293 ;	genGenPointerGet
-   1769 8F 82              1294 	mov	dpl,r7
-   176B 88 83              1295 	mov	dph,r0
-   176D 89 F0              1296 	mov	b,r1
-   176F 12 2D CC           1297 	lcall	__gptrget
-   1772 FF                 1298 	mov	r7,a
-                           1299 ;	genCmpEq
-                           1300 ;	gencjneshort
-                           1301 ;	Peephole 112.b	changed ljmp to sjmp
-                           1302 ;	Peephole 198.b	optimized misc jump sequence
-   1773 BF 2C 01           1303 	cjne	r7,#0x2C,00102$
-                           1304 ;	Peephole 200.b	removed redundant sjmp
-                           1305 ;	Peephole 300	removed redundant label 00119$
-                           1306 ;	Peephole 300	removed redundant label 00120$
-                           1307 ;	genPlus
-                           1308 ;     genPlusIncr
-   1776 0D                 1309 	inc	r5
-   1777                    1310 00102$:
-                           1311 ;	gps.c:116: i++;
-                           1312 ;	genPlus
-                           1313 ;     genPlusIncr
-   1777 0E                 1314 	inc	r6
-                           1315 ;	gps.c:119: while(*(s+i)!= ',')
-                           1316 ;	Peephole 112.b	changed ljmp to sjmp
-   1778 80 DF              1317 	sjmp	00103$
-   177A                    1318 00115$:
-                           1319 ;	genAssign
-   177A 90 00 D4           1320 	mov	dptr,#_gps_date_s_1_1
-   177D E0                 1321 	movx	a,@dptr
-   177E FA                 1322 	mov	r2,a
-   177F A3                 1323 	inc	dptr
-   1780 E0                 1324 	movx	a,@dptr
-   1781 FB                 1325 	mov	r3,a
-   1782 A3                 1326 	inc	dptr
-   1783 E0                 1327 	movx	a,@dptr
-   1784 FC                 1328 	mov	r4,a
-                           1329 ;	genAssign
-   1785 7D 00              1330 	mov	r5,#0x00
-                           1331 ;	genAssign
-   1787                    1332 00106$:
-                           1333 ;	genPlus
-                           1334 ;	Peephole 236.g	used r6 instead of ar6
-   1787 EE                 1335 	mov	a,r6
-                           1336 ;	Peephole 236.a	used r2 instead of ar2
-   1788 2A                 1337 	add	a,r2
-   1789 FF                 1338 	mov	r7,a
-                           1339 ;	Peephole 181	changed mov to clr
-   178A E4                 1340 	clr	a
-                           1341 ;	Peephole 236.b	used r3 instead of ar3
-   178B 3B                 1342 	addc	a,r3
-   178C F8                 1343 	mov	r0,a
-   178D 8C 01              1344 	mov	ar1,r4
-                           1345 ;	genPointerGet
-                           1346 ;	genGenPointerGet
-   178F 8F 82              1347 	mov	dpl,r7
-   1791 88 83              1348 	mov	dph,r0
-   1793 89 F0              1349 	mov	b,r1
-   1795 12 2D CC           1350 	lcall	__gptrget
-   1798 FF                 1351 	mov	r7,a
-                           1352 ;	genCmpEq
-                           1353 ;	gencjneshort
-   1799 BF 2C 02           1354 	cjne	r7,#0x2C,00121$
-                           1355 ;	Peephole 112.b	changed ljmp to sjmp
-   179C 80 10              1356 	sjmp	00108$
-   179E                    1357 00121$:
-                           1358 ;	gps.c:121: temp[j]=*(s+i);
-                           1359 ;	genPlus
-                           1360 ;	Peephole 236.g	used r5 instead of ar5
-   179E ED                 1361 	mov	a,r5
-   179F 24 D7              1362 	add	a,#_gps_date_temp_1_1
-   17A1 F5 82              1363 	mov	dpl,a
-                           1364 ;	Peephole 181	changed mov to clr
-   17A3 E4                 1365 	clr	a
-   17A4 34 00              1366 	addc	a,#(_gps_date_temp_1_1 >> 8)
-   17A6 F5 83              1367 	mov	dph,a
-                           1368 ;	genPointerSet
-                           1369 ;     genFarPointerSet
-   17A8 EF                 1370 	mov	a,r7
-   17A9 F0                 1371 	movx	@dptr,a
-                           1372 ;	gps.c:122: j++;i++;
+   171C 0E                 1175 	inc	r6
+                           1176 ;	Peephole 112.b	changed ljmp to sjmp
+   171D 80 D9              1177 	sjmp	00106$
+   171F                    1178 00108$:
+                           1179 ;	gps.c:105: i++;
+                           1180 ;	genPlus
+                           1181 ;     genPlusIncr
+   171F 0E                 1182 	inc	r6
+                           1183 ;	gps.c:108: temp[j]=*(s+i);
+                           1184 ;	genPlus
+                           1185 ;	Peephole 236.g	used r5 instead of ar5
+   1720 ED                 1186 	mov	a,r5
+   1721 24 D6              1187 	add	a,#_gps_longitude_temp_1_1
+   1723 FD                 1188 	mov	r5,a
+                           1189 ;	Peephole 181	changed mov to clr
+   1724 E4                 1190 	clr	a
+   1725 34 00              1191 	addc	a,#(_gps_longitude_temp_1_1 >> 8)
+   1727 FF                 1192 	mov	r7,a
+                           1193 ;	genPlus
+                           1194 ;	Peephole 236.g	used r6 instead of ar6
+   1728 EE                 1195 	mov	a,r6
+                           1196 ;	Peephole 236.a	used r2 instead of ar2
+   1729 2A                 1197 	add	a,r2
+   172A FA                 1198 	mov	r2,a
+                           1199 ;	Peephole 181	changed mov to clr
+   172B E4                 1200 	clr	a
+                           1201 ;	Peephole 236.b	used r3 instead of ar3
+   172C 3B                 1202 	addc	a,r3
+   172D FB                 1203 	mov	r3,a
+                           1204 ;	genPointerGet
+                           1205 ;	genGenPointerGet
+   172E 8A 82              1206 	mov	dpl,r2
+   1730 8B 83              1207 	mov	dph,r3
+   1732 8C F0              1208 	mov	b,r4
+   1734 12 33 4F           1209 	lcall	__gptrget
+                           1210 ;	genPointerSet
+                           1211 ;     genFarPointerSet
+   1737 FA                 1212 	mov	r2,a
+   1738 8D 82              1213 	mov	dpl,r5
+   173A 8F 83              1214 	mov	dph,r7
+                           1215 ;	Peephole 136	removed redundant move
+   173C F0                 1216 	movx	@dptr,a
+                           1217 ;	gps.c:110: return temp;
+                           1218 ;	genRet
+                           1219 ;	Peephole 182.a	used 16 bit load of DPTR
+   173D 90 00 D6           1220 	mov	dptr,#_gps_longitude_temp_1_1
+   1740 75 F0 00           1221 	mov	b,#0x00
+                           1222 ;	Peephole 300	removed redundant label 00109$
+   1743 22                 1223 	ret
+                           1224 ;------------------------------------------------------------
+                           1225 ;Allocation info for local variables in function 'gps_date'
+                           1226 ;------------------------------------------------------------
+                           1227 ;s                         Allocated with name '_gps_date_s_1_1'
+                           1228 ;temp                      Allocated with name '_gps_date_temp_1_1'
+                           1229 ;i                         Allocated with name '_gps_date_i_1_1'
+                           1230 ;j                         Allocated with name '_gps_date_j_1_1'
+                           1231 ;k                         Allocated with name '_gps_date_k_1_1'
+                           1232 ;------------------------------------------------------------
+                           1233 ;	gps.c:115: char* gps_date(char *s)
+                           1234 ;	-----------------------------------------
+                           1235 ;	 function gps_date
+                           1236 ;	-----------------------------------------
+   1744                    1237 _gps_date:
+                           1238 ;	genReceive
+   1744 AA F0              1239 	mov	r2,b
+   1746 AB 83              1240 	mov	r3,dph
+   1748 E5 82              1241 	mov	a,dpl
+   174A 90 00 E4           1242 	mov	dptr,#_gps_date_s_1_1
+   174D F0                 1243 	movx	@dptr,a
+   174E A3                 1244 	inc	dptr
+   174F EB                 1245 	mov	a,r3
+   1750 F0                 1246 	movx	@dptr,a
+   1751 A3                 1247 	inc	dptr
+   1752 EA                 1248 	mov	a,r2
+   1753 F0                 1249 	movx	@dptr,a
+                           1250 ;	gps.c:118: while(k<9)
+                           1251 ;	genAssign
+   1754 90 00 E4           1252 	mov	dptr,#_gps_date_s_1_1
+   1757 E0                 1253 	movx	a,@dptr
+   1758 FA                 1254 	mov	r2,a
+   1759 A3                 1255 	inc	dptr
+   175A E0                 1256 	movx	a,@dptr
+   175B FB                 1257 	mov	r3,a
+   175C A3                 1258 	inc	dptr
+   175D E0                 1259 	movx	a,@dptr
+   175E FC                 1260 	mov	r4,a
+                           1261 ;	genAssign
+   175F 7D 00              1262 	mov	r5,#0x00
+                           1263 ;	genAssign
+   1761 7E 00              1264 	mov	r6,#0x00
+   1763                    1265 00103$:
+                           1266 ;	genCmpLt
+                           1267 ;	genCmp
+   1763 C3                 1268 	clr	c
+   1764 ED                 1269 	mov	a,r5
+   1765 64 80              1270 	xrl	a,#0x80
+   1767 94 89              1271 	subb	a,#0x89
+                           1272 ;	genIfxJump
+                           1273 ;	Peephole 108.a	removed ljmp by inverse jump logic
+   1769 50 19              1274 	jnc	00115$
+                           1275 ;	Peephole 300	removed redundant label 00118$
+                           1276 ;	gps.c:120: if(*(s+i)==','){k++;}
+                           1277 ;	genPlus
+                           1278 ;	Peephole 236.g	used r6 instead of ar6
+   176B EE                 1279 	mov	a,r6
+                           1280 ;	Peephole 236.a	used r2 instead of ar2
+   176C 2A                 1281 	add	a,r2
+   176D FF                 1282 	mov	r7,a
+                           1283 ;	Peephole 181	changed mov to clr
+   176E E4                 1284 	clr	a
+                           1285 ;	Peephole 236.b	used r3 instead of ar3
+   176F 3B                 1286 	addc	a,r3
+   1770 F8                 1287 	mov	r0,a
+   1771 8C 01              1288 	mov	ar1,r4
+                           1289 ;	genPointerGet
+                           1290 ;	genGenPointerGet
+   1773 8F 82              1291 	mov	dpl,r7
+   1775 88 83              1292 	mov	dph,r0
+   1777 89 F0              1293 	mov	b,r1
+   1779 12 33 4F           1294 	lcall	__gptrget
+   177C FF                 1295 	mov	r7,a
+                           1296 ;	genCmpEq
+                           1297 ;	gencjneshort
+                           1298 ;	Peephole 112.b	changed ljmp to sjmp
+                           1299 ;	Peephole 198.b	optimized misc jump sequence
+   177D BF 2C 01           1300 	cjne	r7,#0x2C,00102$
+                           1301 ;	Peephole 200.b	removed redundant sjmp
+                           1302 ;	Peephole 300	removed redundant label 00119$
+                           1303 ;	Peephole 300	removed redundant label 00120$
+                           1304 ;	genPlus
+                           1305 ;     genPlusIncr
+   1780 0D                 1306 	inc	r5
+   1781                    1307 00102$:
+                           1308 ;	gps.c:121: i++;
+                           1309 ;	genPlus
+                           1310 ;     genPlusIncr
+   1781 0E                 1311 	inc	r6
+                           1312 ;	gps.c:124: while(*(s+i)!= ',')
+                           1313 ;	Peephole 112.b	changed ljmp to sjmp
+   1782 80 DF              1314 	sjmp	00103$
+   1784                    1315 00115$:
+                           1316 ;	genAssign
+   1784 90 00 E4           1317 	mov	dptr,#_gps_date_s_1_1
+   1787 E0                 1318 	movx	a,@dptr
+   1788 FA                 1319 	mov	r2,a
+   1789 A3                 1320 	inc	dptr
+   178A E0                 1321 	movx	a,@dptr
+   178B FB                 1322 	mov	r3,a
+   178C A3                 1323 	inc	dptr
+   178D E0                 1324 	movx	a,@dptr
+   178E FC                 1325 	mov	r4,a
+                           1326 ;	genAssign
+   178F 7D 00              1327 	mov	r5,#0x00
+                           1328 ;	genAssign
+   1791                    1329 00106$:
+                           1330 ;	genPlus
+                           1331 ;	Peephole 236.g	used r6 instead of ar6
+   1791 EE                 1332 	mov	a,r6
+                           1333 ;	Peephole 236.a	used r2 instead of ar2
+   1792 2A                 1334 	add	a,r2
+   1793 FF                 1335 	mov	r7,a
+                           1336 ;	Peephole 181	changed mov to clr
+   1794 E4                 1337 	clr	a
+                           1338 ;	Peephole 236.b	used r3 instead of ar3
+   1795 3B                 1339 	addc	a,r3
+   1796 F8                 1340 	mov	r0,a
+   1797 8C 01              1341 	mov	ar1,r4
+                           1342 ;	genPointerGet
+                           1343 ;	genGenPointerGet
+   1799 8F 82              1344 	mov	dpl,r7
+   179B 88 83              1345 	mov	dph,r0
+   179D 89 F0              1346 	mov	b,r1
+   179F 12 33 4F           1347 	lcall	__gptrget
+   17A2 FF                 1348 	mov	r7,a
+                           1349 ;	genCmpEq
+                           1350 ;	gencjneshort
+   17A3 BF 2C 02           1351 	cjne	r7,#0x2C,00121$
+                           1352 ;	Peephole 112.b	changed ljmp to sjmp
+   17A6 80 10              1353 	sjmp	00108$
+   17A8                    1354 00121$:
+                           1355 ;	gps.c:126: temp[j]=*(s+i);
+                           1356 ;	genPlus
+                           1357 ;	Peephole 236.g	used r5 instead of ar5
+   17A8 ED                 1358 	mov	a,r5
+   17A9 24 E7              1359 	add	a,#_gps_date_temp_1_1
+   17AB F5 82              1360 	mov	dpl,a
+                           1361 ;	Peephole 181	changed mov to clr
+   17AD E4                 1362 	clr	a
+   17AE 34 00              1363 	addc	a,#(_gps_date_temp_1_1 >> 8)
+   17B0 F5 83              1364 	mov	dph,a
+                           1365 ;	genPointerSet
+                           1366 ;     genFarPointerSet
+   17B2 EF                 1367 	mov	a,r7
+   17B3 F0                 1368 	movx	@dptr,a
+                           1369 ;	gps.c:127: j++;i++;
+                           1370 ;	genPlus
+                           1371 ;     genPlusIncr
+   17B4 0D                 1372 	inc	r5
                            1373 ;	genPlus
                            1374 ;     genPlusIncr
-   17AA 0D                 1375 	inc	r5
-                           1376 ;	genPlus
-                           1377 ;     genPlusIncr
-   17AB 0E                 1378 	inc	r6
-                           1379 ;	Peephole 112.b	changed ljmp to sjmp
-   17AC 80 D9              1380 	sjmp	00106$
-   17AE                    1381 00108$:
-                           1382 ;	gps.c:124: return temp;
-                           1383 ;	genRet
-                           1384 ;	Peephole 182.a	used 16 bit load of DPTR
-   17AE 90 00 D7           1385 	mov	dptr,#_gps_date_temp_1_1
-   17B1 75 F0 00           1386 	mov	b,#0x00
-                           1387 ;	Peephole 300	removed redundant label 00109$
-   17B4 22                 1388 	ret
-                           1389 	.area CSEG    (CODE)
-                           1390 	.area CONST   (CODE)
-                           1391 	.area XINIT   (CODE)
+   17B5 0E                 1375 	inc	r6
+                           1376 ;	Peephole 112.b	changed ljmp to sjmp
+   17B6 80 D9              1377 	sjmp	00106$
+   17B8                    1378 00108$:
+                           1379 ;	gps.c:129: return temp;
+                           1380 ;	genRet
+                           1381 ;	Peephole 182.a	used 16 bit load of DPTR
+   17B8 90 00 E7           1382 	mov	dptr,#_gps_date_temp_1_1
+   17BB 75 F0 00           1383 	mov	b,#0x00
+                           1384 ;	Peephole 300	removed redundant label 00109$
+   17BE 22                 1385 	ret
+                           1386 	.area CSEG    (CODE)
+                           1387 	.area CONST   (CODE)
+                           1388 	.area XINIT   (CODE)

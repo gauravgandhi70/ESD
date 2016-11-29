@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.6.0 #4309 (Jul 28 2006)
-                              4 ; This file generated Sun Nov 27 23:19:22 2016
+                              4 ; This file generated Mon Nov 28 03:05:59 2016
                               5 ;--------------------------------------------------------
                               6 	.module adc
                               7 	.optsdcc -mmcs51 --model-large
@@ -9,207 +9,207 @@
                               9 ;--------------------------------------------------------
                              10 ; Public variables in this module
                              11 ;--------------------------------------------------------
-                             12 	.globl _LIGHT_calibration
-                             13 	.globl _HUMIDITY_calibration
-                             14 	.globl _TEMP_calibration
-                             15 	.globl _P5_7
-                             16 	.globl _P5_6
-                             17 	.globl _P5_5
-                             18 	.globl _P5_4
-                             19 	.globl _P5_3
-                             20 	.globl _P5_2
-                             21 	.globl _P5_1
-                             22 	.globl _P5_0
-                             23 	.globl _P4_7
-                             24 	.globl _P4_6
-                             25 	.globl _P4_5
-                             26 	.globl _P4_4
-                             27 	.globl _P4_3
-                             28 	.globl _P4_2
-                             29 	.globl _P4_1
-                             30 	.globl _P4_0
-                             31 	.globl _PX0L
-                             32 	.globl _PT0L
-                             33 	.globl _PX1L
-                             34 	.globl _PT1L
-                             35 	.globl _PLS
-                             36 	.globl _PT2L
-                             37 	.globl _PPCL
-                             38 	.globl _EC
-                             39 	.globl _CCF0
-                             40 	.globl _CCF1
-                             41 	.globl _CCF2
-                             42 	.globl _CCF3
-                             43 	.globl _CCF4
-                             44 	.globl _CR
-                             45 	.globl _CF
-                             46 	.globl _TF2
-                             47 	.globl _EXF2
-                             48 	.globl _RCLK
-                             49 	.globl _TCLK
-                             50 	.globl _EXEN2
-                             51 	.globl _TR2
-                             52 	.globl _C_T2
-                             53 	.globl _CP_RL2
-                             54 	.globl _T2CON_7
-                             55 	.globl _T2CON_6
-                             56 	.globl _T2CON_5
-                             57 	.globl _T2CON_4
-                             58 	.globl _T2CON_3
-                             59 	.globl _T2CON_2
-                             60 	.globl _T2CON_1
-                             61 	.globl _T2CON_0
-                             62 	.globl _PT2
-                             63 	.globl _ET2
-                             64 	.globl _CY
-                             65 	.globl _AC
-                             66 	.globl _F0
-                             67 	.globl _RS1
-                             68 	.globl _RS0
-                             69 	.globl _OV
-                             70 	.globl _F1
-                             71 	.globl _P
-                             72 	.globl _PS
-                             73 	.globl _PT1
-                             74 	.globl _PX1
-                             75 	.globl _PT0
-                             76 	.globl _PX0
-                             77 	.globl _RD
-                             78 	.globl _WR
-                             79 	.globl _T1
-                             80 	.globl _T0
-                             81 	.globl _INT1
-                             82 	.globl _INT0
-                             83 	.globl _TXD
-                             84 	.globl _RXD
-                             85 	.globl _P3_7
-                             86 	.globl _P3_6
-                             87 	.globl _P3_5
-                             88 	.globl _P3_4
-                             89 	.globl _P3_3
-                             90 	.globl _P3_2
-                             91 	.globl _P3_1
-                             92 	.globl _P3_0
-                             93 	.globl _EA
-                             94 	.globl _ES
-                             95 	.globl _ET1
-                             96 	.globl _EX1
-                             97 	.globl _ET0
-                             98 	.globl _EX0
-                             99 	.globl _P2_7
-                            100 	.globl _P2_6
-                            101 	.globl _P2_5
-                            102 	.globl _P2_4
-                            103 	.globl _P2_3
-                            104 	.globl _P2_2
-                            105 	.globl _P2_1
-                            106 	.globl _P2_0
-                            107 	.globl _SM0
-                            108 	.globl _SM1
-                            109 	.globl _SM2
-                            110 	.globl _REN
-                            111 	.globl _TB8
-                            112 	.globl _RB8
-                            113 	.globl _TI
-                            114 	.globl _RI
-                            115 	.globl _P1_7
-                            116 	.globl _P1_6
-                            117 	.globl _P1_5
-                            118 	.globl _P1_4
-                            119 	.globl _P1_3
-                            120 	.globl _P1_2
-                            121 	.globl _P1_1
-                            122 	.globl _P1_0
-                            123 	.globl _TF1
-                            124 	.globl _TR1
-                            125 	.globl _TF0
-                            126 	.globl _TR0
-                            127 	.globl _IE1
-                            128 	.globl _IT1
-                            129 	.globl _IE0
-                            130 	.globl _IT0
-                            131 	.globl _P0_7
-                            132 	.globl _P0_6
-                            133 	.globl _P0_5
-                            134 	.globl _P0_4
-                            135 	.globl _P0_3
-                            136 	.globl _P0_2
-                            137 	.globl _P0_1
-                            138 	.globl _P0_0
-                            139 	.globl _EECON
-                            140 	.globl _KBF
-                            141 	.globl _KBE
-                            142 	.globl _KBLS
-                            143 	.globl _BRL
-                            144 	.globl _BDRCON
-                            145 	.globl _T2MOD
-                            146 	.globl _SPDAT
-                            147 	.globl _SPSTA
-                            148 	.globl _SPCON
-                            149 	.globl _SADEN
-                            150 	.globl _SADDR
-                            151 	.globl _WDTPRG
-                            152 	.globl _WDTRST
-                            153 	.globl _P5
-                            154 	.globl _P4
-                            155 	.globl _IPH1
-                            156 	.globl _IPL1
-                            157 	.globl _IPH0
-                            158 	.globl _IPL0
-                            159 	.globl _IEN1
-                            160 	.globl _IEN0
-                            161 	.globl _CMOD
-                            162 	.globl _CL
-                            163 	.globl _CH
-                            164 	.globl _CCON
-                            165 	.globl _CCAPM4
-                            166 	.globl _CCAPM3
-                            167 	.globl _CCAPM2
-                            168 	.globl _CCAPM1
-                            169 	.globl _CCAPM0
-                            170 	.globl _CCAP4L
-                            171 	.globl _CCAP3L
-                            172 	.globl _CCAP2L
-                            173 	.globl _CCAP1L
-                            174 	.globl _CCAP0L
-                            175 	.globl _CCAP4H
-                            176 	.globl _CCAP3H
-                            177 	.globl _CCAP2H
-                            178 	.globl _CCAP1H
-                            179 	.globl _CCAP0H
-                            180 	.globl _CKCKON1
-                            181 	.globl _CKCKON0
-                            182 	.globl _CKRL
-                            183 	.globl _AUXR1
-                            184 	.globl _AUXR
-                            185 	.globl _TH2
-                            186 	.globl _TL2
-                            187 	.globl _RCAP2H
-                            188 	.globl _RCAP2L
-                            189 	.globl _T2CON
-                            190 	.globl _B
-                            191 	.globl _ACC
-                            192 	.globl _PSW
-                            193 	.globl _IP
-                            194 	.globl _P3
-                            195 	.globl _IE
-                            196 	.globl _P2
-                            197 	.globl _SBUF
-                            198 	.globl _SCON
-                            199 	.globl _P1
-                            200 	.globl _TH1
-                            201 	.globl _TH0
-                            202 	.globl _TL1
-                            203 	.globl _TL0
-                            204 	.globl _TMOD
-                            205 	.globl _TCON
-                            206 	.globl _PCON
-                            207 	.globl _DPH
-                            208 	.globl _DPL
-                            209 	.globl _SP
-                            210 	.globl _P0
-                            211 	.globl _ADC_write
-                            212 	.globl _ADC_read
+                             12 	.globl _P5_7
+                             13 	.globl _P5_6
+                             14 	.globl _P5_5
+                             15 	.globl _P5_4
+                             16 	.globl _P5_3
+                             17 	.globl _P5_2
+                             18 	.globl _P5_1
+                             19 	.globl _P5_0
+                             20 	.globl _P4_7
+                             21 	.globl _P4_6
+                             22 	.globl _P4_5
+                             23 	.globl _P4_4
+                             24 	.globl _P4_3
+                             25 	.globl _P4_2
+                             26 	.globl _P4_1
+                             27 	.globl _P4_0
+                             28 	.globl _PX0L
+                             29 	.globl _PT0L
+                             30 	.globl _PX1L
+                             31 	.globl _PT1L
+                             32 	.globl _PLS
+                             33 	.globl _PT2L
+                             34 	.globl _PPCL
+                             35 	.globl _EC
+                             36 	.globl _CCF0
+                             37 	.globl _CCF1
+                             38 	.globl _CCF2
+                             39 	.globl _CCF3
+                             40 	.globl _CCF4
+                             41 	.globl _CR
+                             42 	.globl _CF
+                             43 	.globl _TF2
+                             44 	.globl _EXF2
+                             45 	.globl _RCLK
+                             46 	.globl _TCLK
+                             47 	.globl _EXEN2
+                             48 	.globl _TR2
+                             49 	.globl _C_T2
+                             50 	.globl _CP_RL2
+                             51 	.globl _T2CON_7
+                             52 	.globl _T2CON_6
+                             53 	.globl _T2CON_5
+                             54 	.globl _T2CON_4
+                             55 	.globl _T2CON_3
+                             56 	.globl _T2CON_2
+                             57 	.globl _T2CON_1
+                             58 	.globl _T2CON_0
+                             59 	.globl _PT2
+                             60 	.globl _ET2
+                             61 	.globl _CY
+                             62 	.globl _AC
+                             63 	.globl _F0
+                             64 	.globl _RS1
+                             65 	.globl _RS0
+                             66 	.globl _OV
+                             67 	.globl _F1
+                             68 	.globl _P
+                             69 	.globl _PS
+                             70 	.globl _PT1
+                             71 	.globl _PX1
+                             72 	.globl _PT0
+                             73 	.globl _PX0
+                             74 	.globl _RD
+                             75 	.globl _WR
+                             76 	.globl _T1
+                             77 	.globl _T0
+                             78 	.globl _INT1
+                             79 	.globl _INT0
+                             80 	.globl _TXD
+                             81 	.globl _RXD
+                             82 	.globl _P3_7
+                             83 	.globl _P3_6
+                             84 	.globl _P3_5
+                             85 	.globl _P3_4
+                             86 	.globl _P3_3
+                             87 	.globl _P3_2
+                             88 	.globl _P3_1
+                             89 	.globl _P3_0
+                             90 	.globl _EA
+                             91 	.globl _ES
+                             92 	.globl _ET1
+                             93 	.globl _EX1
+                             94 	.globl _ET0
+                             95 	.globl _EX0
+                             96 	.globl _P2_7
+                             97 	.globl _P2_6
+                             98 	.globl _P2_5
+                             99 	.globl _P2_4
+                            100 	.globl _P2_3
+                            101 	.globl _P2_2
+                            102 	.globl _P2_1
+                            103 	.globl _P2_0
+                            104 	.globl _SM0
+                            105 	.globl _SM1
+                            106 	.globl _SM2
+                            107 	.globl _REN
+                            108 	.globl _TB8
+                            109 	.globl _RB8
+                            110 	.globl _TI
+                            111 	.globl _RI
+                            112 	.globl _P1_7
+                            113 	.globl _P1_6
+                            114 	.globl _P1_5
+                            115 	.globl _P1_4
+                            116 	.globl _P1_3
+                            117 	.globl _P1_2
+                            118 	.globl _P1_1
+                            119 	.globl _P1_0
+                            120 	.globl _TF1
+                            121 	.globl _TR1
+                            122 	.globl _TF0
+                            123 	.globl _TR0
+                            124 	.globl _IE1
+                            125 	.globl _IT1
+                            126 	.globl _IE0
+                            127 	.globl _IT0
+                            128 	.globl _P0_7
+                            129 	.globl _P0_6
+                            130 	.globl _P0_5
+                            131 	.globl _P0_4
+                            132 	.globl _P0_3
+                            133 	.globl _P0_2
+                            134 	.globl _P0_1
+                            135 	.globl _P0_0
+                            136 	.globl _EECON
+                            137 	.globl _KBF
+                            138 	.globl _KBE
+                            139 	.globl _KBLS
+                            140 	.globl _BRL
+                            141 	.globl _BDRCON
+                            142 	.globl _T2MOD
+                            143 	.globl _SPDAT
+                            144 	.globl _SPSTA
+                            145 	.globl _SPCON
+                            146 	.globl _SADEN
+                            147 	.globl _SADDR
+                            148 	.globl _WDTPRG
+                            149 	.globl _WDTRST
+                            150 	.globl _P5
+                            151 	.globl _P4
+                            152 	.globl _IPH1
+                            153 	.globl _IPL1
+                            154 	.globl _IPH0
+                            155 	.globl _IPL0
+                            156 	.globl _IEN1
+                            157 	.globl _IEN0
+                            158 	.globl _CMOD
+                            159 	.globl _CL
+                            160 	.globl _CH
+                            161 	.globl _CCON
+                            162 	.globl _CCAPM4
+                            163 	.globl _CCAPM3
+                            164 	.globl _CCAPM2
+                            165 	.globl _CCAPM1
+                            166 	.globl _CCAPM0
+                            167 	.globl _CCAP4L
+                            168 	.globl _CCAP3L
+                            169 	.globl _CCAP2L
+                            170 	.globl _CCAP1L
+                            171 	.globl _CCAP0L
+                            172 	.globl _CCAP4H
+                            173 	.globl _CCAP3H
+                            174 	.globl _CCAP2H
+                            175 	.globl _CCAP1H
+                            176 	.globl _CCAP0H
+                            177 	.globl _CKCKON1
+                            178 	.globl _CKCKON0
+                            179 	.globl _CKRL
+                            180 	.globl _AUXR1
+                            181 	.globl _AUXR
+                            182 	.globl _TH2
+                            183 	.globl _TL2
+                            184 	.globl _RCAP2H
+                            185 	.globl _RCAP2L
+                            186 	.globl _T2CON
+                            187 	.globl _B
+                            188 	.globl _ACC
+                            189 	.globl _PSW
+                            190 	.globl _IP
+                            191 	.globl _P3
+                            192 	.globl _IE
+                            193 	.globl _P2
+                            194 	.globl _SBUF
+                            195 	.globl _SCON
+                            196 	.globl _P1
+                            197 	.globl _TH1
+                            198 	.globl _TH0
+                            199 	.globl _TL1
+                            200 	.globl _TL0
+                            201 	.globl _TMOD
+                            202 	.globl _TCON
+                            203 	.globl _PCON
+                            204 	.globl _DPH
+                            205 	.globl _DPL
+                            206 	.globl _SP
+                            207 	.globl _P0
+                            208 	.globl _ADC_write
+                            209 	.globl _ADC_read
+                            210 	.globl _TEMP_calibration
+                            211 	.globl _HUMIDITY_calibration
+                            212 	.globl _LIGHT_calibration
                             213 ;--------------------------------------------------------
                             214 ; special function registers
                             215 ;--------------------------------------------------------
@@ -513,250 +513,255 @@
    0011 8B 83               513 	mov	dph,r3
                             514 ;	Peephole 136	removed redundant move
    0013 F0                  515 	movx	@dptr,a
-                            516 ;	Peephole 300	removed redundant label 00101$
-   0014 22                  517 	ret
-                            518 ;------------------------------------------------------------
-                            519 ;Allocation info for local variables in function 'ADC_read'
-                            520 ;------------------------------------------------------------
-                            521 ;adc_channel               Allocated with name '_ADC_read_adc_channel_1_1'
-                            522 ;------------------------------------------------------------
-                            523 ;	adc.c:28: unsigned char ADC_read(char adc_channel)
-                            524 ;	-----------------------------------------
-                            525 ;	 function ADC_read
-                            526 ;	-----------------------------------------
-   0015                     527 _ADC_read:
-                            528 ;	genReceive
-   0015 E5 82               529 	mov	a,dpl
-   0017 90s00r01            530 	mov	dptr,#_ADC_read_adc_channel_1_1
-   001A F0                  531 	movx	@dptr,a
-                            532 ;	adc.c:31: ADC_write(adc_channel);
-                            533 ;	genAssign
-   001B 90s00r01            534 	mov	dptr,#_ADC_read_adc_channel_1_1
-   001E E0                  535 	movx	a,@dptr
-                            536 ;	genCall
-   001F FA                  537 	mov	r2,a
-                            538 ;	Peephole 244.c	loading dpl from a instead of r2
-   0020 F5 82               539 	mov	dpl,a
-   0022 12s00r00            540 	lcall	_ADC_write
-                            541 ;	adc.c:33: return *adc_address;;
-                            542 ;	genPointerGet
-                            543 ;	genFarPointerGet
-                            544 ;	Peephole 182.b	used 16 bit load of dptr
-   0025 90 80 00            545 	mov	dptr,#0x8000
-   0028 E0                  546 	movx	a,@dptr
-                            547 ;	genRet
-                            548 ;	Peephole 234.a	loading dpl directly from a(ccumulator), r2 not set
-   0029 F5 82               549 	mov	dpl,a
-                            550 ;	Peephole 300	removed redundant label 00101$
-   002B 22                  551 	ret
-                            552 ;------------------------------------------------------------
-                            553 ;Allocation info for local variables in function 'TEMP_calibration'
-                            554 ;------------------------------------------------------------
-                            555 ;calib                     Allocated with name '_TEMP_calibration_calib_1_1'
-                            556 ;------------------------------------------------------------
-                            557 ;	adc.c:39: unsigned int TEMP_calibration(void)
-                            558 ;	-----------------------------------------
-                            559 ;	 function TEMP_calibration
-                            560 ;	-----------------------------------------
-   002C                     561 _TEMP_calibration:
-                            562 ;	adc.c:42: calib = (ADC_read(ADC_TEMP));
-                            563 ;	genCall
-   002C 75 82 09            564 	mov	dpl,#0x09
-   002F 12s00r15            565 	lcall	_ADC_read
-                            566 ;	genCast
-                            567 ;	adc.c:43: calib = (calib-0.5)/1.5;
+                            516 ;	adc.c:25: delay_us(50);
+                            517 ;	genCall
+                            518 ;	Peephole 182.b	used 16 bit load of dptr
+   0014 90 00 32            519 	mov	dptr,#0x0032
+                            520 ;	Peephole 253.b	replaced lcall/ret with ljmp
+   0017 02s00r00            521 	ljmp	_delay_us
+                            522 ;
+                            523 ;------------------------------------------------------------
+                            524 ;Allocation info for local variables in function 'ADC_read'
+                            525 ;------------------------------------------------------------
+                            526 ;adc_channel               Allocated with name '_ADC_read_adc_channel_1_1'
+                            527 ;------------------------------------------------------------
+                            528 ;	adc.c:28: unsigned char ADC_read(char adc_channel)
+                            529 ;	-----------------------------------------
+                            530 ;	 function ADC_read
+                            531 ;	-----------------------------------------
+   001A                     532 _ADC_read:
+                            533 ;	genReceive
+   001A E5 82               534 	mov	a,dpl
+   001C 90s00r01            535 	mov	dptr,#_ADC_read_adc_channel_1_1
+   001F F0                  536 	movx	@dptr,a
+                            537 ;	adc.c:31: ADC_write(adc_channel);
+                            538 ;	genAssign
+   0020 90s00r01            539 	mov	dptr,#_ADC_read_adc_channel_1_1
+   0023 E0                  540 	movx	a,@dptr
+                            541 ;	genCall
+   0024 FA                  542 	mov	r2,a
+                            543 ;	Peephole 244.c	loading dpl from a instead of r2
+   0025 F5 82               544 	mov	dpl,a
+   0027 12s00r00            545 	lcall	_ADC_write
+                            546 ;	adc.c:33: return *adc_address;;
+                            547 ;	genPointerGet
+                            548 ;	genFarPointerGet
+                            549 ;	Peephole 182.b	used 16 bit load of dptr
+   002A 90 80 00            550 	mov	dptr,#0x8000
+   002D E0                  551 	movx	a,@dptr
+                            552 ;	genRet
+                            553 ;	Peephole 234.a	loading dpl directly from a(ccumulator), r2 not set
+   002E F5 82               554 	mov	dpl,a
+                            555 ;	Peephole 300	removed redundant label 00101$
+   0030 22                  556 	ret
+                            557 ;------------------------------------------------------------
+                            558 ;Allocation info for local variables in function 'TEMP_calibration'
+                            559 ;------------------------------------------------------------
+                            560 ;calib                     Allocated with name '_TEMP_calibration_calib_1_1'
+                            561 ;------------------------------------------------------------
+                            562 ;	adc.c:39: unsigned int TEMP_calibration(void)
+                            563 ;	-----------------------------------------
+                            564 ;	 function TEMP_calibration
+                            565 ;	-----------------------------------------
+   0031                     566 _TEMP_calibration:
+                            567 ;	adc.c:42: calib = (ADC_read(ADC_TEMP));
                             568 ;	genCall
-   0032 AA 82               569 	mov	r2,dpl
-   0034 7B 00               570 	mov	r3,#0x00
-                            571 ;	Peephole 177.d	removed redundant move
-   0036 8B 83               572 	mov	dph,r3
-   0038 12s00r00            573 	lcall	___uint2fs
-   003B AA 82               574 	mov	r2,dpl
-   003D AB 83               575 	mov	r3,dph
-   003F AC F0               576 	mov	r4,b
-   0041 FD                  577 	mov	r5,a
-                            578 ;	genIpush
-                            579 ;	Peephole 181	changed mov to clr
-   0042 E4                  580 	clr	a
-   0043 C0 E0               581 	push	acc
-   0045 C0 E0               582 	push	acc
-   0047 C0 E0               583 	push	acc
-   0049 74 3F               584 	mov	a,#0x3F
-   004B C0 E0               585 	push	acc
-                            586 ;	genCall
-   004D 8A 82               587 	mov	dpl,r2
-   004F 8B 83               588 	mov	dph,r3
-   0051 8C F0               589 	mov	b,r4
-   0053 ED                  590 	mov	a,r5
-   0054 12s00r00            591 	lcall	___fssub
-   0057 AA 82               592 	mov	r2,dpl
-   0059 AB 83               593 	mov	r3,dph
-   005B AC F0               594 	mov	r4,b
-   005D FD                  595 	mov	r5,a
-   005E E5 81               596 	mov	a,sp
-   0060 24 FC               597 	add	a,#0xfc
-   0062 F5 81               598 	mov	sp,a
-                            599 ;	genIpush
-                            600 ;	Peephole 181	changed mov to clr
-   0064 E4                  601 	clr	a
-   0065 C0 E0               602 	push	acc
-   0067 C0 E0               603 	push	acc
-   0069 74 C0               604 	mov	a,#0xC0
-   006B C0 E0               605 	push	acc
-   006D 74 3F               606 	mov	a,#0x3F
-   006F C0 E0               607 	push	acc
-                            608 ;	genCall
-   0071 8A 82               609 	mov	dpl,r2
-   0073 8B 83               610 	mov	dph,r3
-   0075 8C F0               611 	mov	b,r4
-   0077 ED                  612 	mov	a,r5
-   0078 12s00r00            613 	lcall	___fsdiv
-   007B AA 82               614 	mov	r2,dpl
-   007D AB 83               615 	mov	r3,dph
-   007F AC F0               616 	mov	r4,b
-   0081 FD                  617 	mov	r5,a
-   0082 E5 81               618 	mov	a,sp
-   0084 24 FC               619 	add	a,#0xfc
-   0086 F5 81               620 	mov	sp,a
-                            621 ;	genCall
-   0088 8A 82               622 	mov	dpl,r2
-   008A 8B 83               623 	mov	dph,r3
-   008C 8C F0               624 	mov	b,r4
-   008E ED                  625 	mov	a,r5
-                            626 ;	adc.c:45: return calib;
-                            627 ;	genRet
-                            628 ;	Peephole 150.b	removed misc moves via dph, dpl before return
-                            629 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   008F 02s00r00            630 	ljmp	___fs2uint
-                            631 ;
-                            632 ;------------------------------------------------------------
-                            633 ;Allocation info for local variables in function 'HUMIDITY_calibration'
-                            634 ;------------------------------------------------------------
-                            635 ;calib                     Allocated with name '_HUMIDITY_calibration_calib_1_1'
-                            636 ;------------------------------------------------------------
-                            637 ;	adc.c:52: unsigned int HUMIDITY_calibration(void)
-                            638 ;	-----------------------------------------
-                            639 ;	 function HUMIDITY_calibration
-                            640 ;	-----------------------------------------
-   0092                     641 _HUMIDITY_calibration:
-                            642 ;	adc.c:56: calib = (ADC_read(ADC_HUMIDITY));
-                            643 ;	genCall
-   0092 75 82 0A            644 	mov	dpl,#0x0A
-   0095 12s00r15            645 	lcall	_ADC_read
-                            646 ;	genCast
-                            647 ;	adc.c:57: calib = (calib-0.75)/2.5;
+   0031 75 82 09            569 	mov	dpl,#0x09
+   0034 12s00r1A            570 	lcall	_ADC_read
+                            571 ;	genCast
+                            572 ;	adc.c:43: calib = (calib-0.5)/1.5;
+                            573 ;	genCall
+   0037 AA 82               574 	mov	r2,dpl
+   0039 7B 00               575 	mov	r3,#0x00
+                            576 ;	Peephole 177.d	removed redundant move
+   003B 8B 83               577 	mov	dph,r3
+   003D 12s00r00            578 	lcall	___uint2fs
+   0040 AA 82               579 	mov	r2,dpl
+   0042 AB 83               580 	mov	r3,dph
+   0044 AC F0               581 	mov	r4,b
+   0046 FD                  582 	mov	r5,a
+                            583 ;	genIpush
+                            584 ;	Peephole 181	changed mov to clr
+   0047 E4                  585 	clr	a
+   0048 C0 E0               586 	push	acc
+   004A C0 E0               587 	push	acc
+   004C C0 E0               588 	push	acc
+   004E 74 3F               589 	mov	a,#0x3F
+   0050 C0 E0               590 	push	acc
+                            591 ;	genCall
+   0052 8A 82               592 	mov	dpl,r2
+   0054 8B 83               593 	mov	dph,r3
+   0056 8C F0               594 	mov	b,r4
+   0058 ED                  595 	mov	a,r5
+   0059 12s00r00            596 	lcall	___fssub
+   005C AA 82               597 	mov	r2,dpl
+   005E AB 83               598 	mov	r3,dph
+   0060 AC F0               599 	mov	r4,b
+   0062 FD                  600 	mov	r5,a
+   0063 E5 81               601 	mov	a,sp
+   0065 24 FC               602 	add	a,#0xfc
+   0067 F5 81               603 	mov	sp,a
+                            604 ;	genIpush
+                            605 ;	Peephole 181	changed mov to clr
+   0069 E4                  606 	clr	a
+   006A C0 E0               607 	push	acc
+   006C C0 E0               608 	push	acc
+   006E 74 C0               609 	mov	a,#0xC0
+   0070 C0 E0               610 	push	acc
+   0072 74 3F               611 	mov	a,#0x3F
+   0074 C0 E0               612 	push	acc
+                            613 ;	genCall
+   0076 8A 82               614 	mov	dpl,r2
+   0078 8B 83               615 	mov	dph,r3
+   007A 8C F0               616 	mov	b,r4
+   007C ED                  617 	mov	a,r5
+   007D 12s00r00            618 	lcall	___fsdiv
+   0080 AA 82               619 	mov	r2,dpl
+   0082 AB 83               620 	mov	r3,dph
+   0084 AC F0               621 	mov	r4,b
+   0086 FD                  622 	mov	r5,a
+   0087 E5 81               623 	mov	a,sp
+   0089 24 FC               624 	add	a,#0xfc
+   008B F5 81               625 	mov	sp,a
+                            626 ;	genCall
+   008D 8A 82               627 	mov	dpl,r2
+   008F 8B 83               628 	mov	dph,r3
+   0091 8C F0               629 	mov	b,r4
+   0093 ED                  630 	mov	a,r5
+                            631 ;	adc.c:45: return calib;
+                            632 ;	genRet
+                            633 ;	Peephole 150.b	removed misc moves via dph, dpl before return
+                            634 ;	Peephole 253.b	replaced lcall/ret with ljmp
+   0094 02s00r00            635 	ljmp	___fs2uint
+                            636 ;
+                            637 ;------------------------------------------------------------
+                            638 ;Allocation info for local variables in function 'HUMIDITY_calibration'
+                            639 ;------------------------------------------------------------
+                            640 ;calib                     Allocated with name '_HUMIDITY_calibration_calib_1_1'
+                            641 ;------------------------------------------------------------
+                            642 ;	adc.c:52: unsigned int HUMIDITY_calibration(void)
+                            643 ;	-----------------------------------------
+                            644 ;	 function HUMIDITY_calibration
+                            645 ;	-----------------------------------------
+   0097                     646 _HUMIDITY_calibration:
+                            647 ;	adc.c:56: calib = (ADC_read(ADC_HUMIDITY));
                             648 ;	genCall
-   0098 AA 82               649 	mov	r2,dpl
-   009A 7B 00               650 	mov	r3,#0x00
-                            651 ;	Peephole 177.d	removed redundant move
-   009C 8B 83               652 	mov	dph,r3
-   009E 12s00r00            653 	lcall	___uint2fs
-   00A1 AA 82               654 	mov	r2,dpl
-   00A3 AB 83               655 	mov	r3,dph
-   00A5 AC F0               656 	mov	r4,b
-   00A7 FD                  657 	mov	r5,a
-                            658 ;	genIpush
-                            659 ;	Peephole 181	changed mov to clr
-   00A8 E4                  660 	clr	a
-   00A9 C0 E0               661 	push	acc
-   00AB C0 E0               662 	push	acc
-   00AD 74 40               663 	mov	a,#0x40
-   00AF C0 E0               664 	push	acc
-   00B1 74 3F               665 	mov	a,#0x3F
-   00B3 C0 E0               666 	push	acc
-                            667 ;	genCall
-   00B5 8A 82               668 	mov	dpl,r2
-   00B7 8B 83               669 	mov	dph,r3
-   00B9 8C F0               670 	mov	b,r4
-   00BB ED                  671 	mov	a,r5
-   00BC 12s00r00            672 	lcall	___fssub
-   00BF AA 82               673 	mov	r2,dpl
-   00C1 AB 83               674 	mov	r3,dph
-   00C3 AC F0               675 	mov	r4,b
-   00C5 FD                  676 	mov	r5,a
-   00C6 E5 81               677 	mov	a,sp
-   00C8 24 FC               678 	add	a,#0xfc
-   00CA F5 81               679 	mov	sp,a
-                            680 ;	genIpush
-                            681 ;	Peephole 181	changed mov to clr
-   00CC E4                  682 	clr	a
-   00CD C0 E0               683 	push	acc
-   00CF C0 E0               684 	push	acc
-   00D1 74 20               685 	mov	a,#0x20
-   00D3 C0 E0               686 	push	acc
-   00D5 74 40               687 	mov	a,#0x40
-   00D7 C0 E0               688 	push	acc
-                            689 ;	genCall
-   00D9 8A 82               690 	mov	dpl,r2
-   00DB 8B 83               691 	mov	dph,r3
-   00DD 8C F0               692 	mov	b,r4
-   00DF ED                  693 	mov	a,r5
-   00E0 12s00r00            694 	lcall	___fsdiv
-   00E3 AA 82               695 	mov	r2,dpl
-   00E5 AB 83               696 	mov	r3,dph
-   00E7 AC F0               697 	mov	r4,b
-   00E9 FD                  698 	mov	r5,a
-   00EA E5 81               699 	mov	a,sp
-   00EC 24 FC               700 	add	a,#0xfc
-   00EE F5 81               701 	mov	sp,a
-                            702 ;	genCall
-   00F0 8A 82               703 	mov	dpl,r2
-   00F2 8B 83               704 	mov	dph,r3
-   00F4 8C F0               705 	mov	b,r4
-   00F6 ED                  706 	mov	a,r5
-                            707 ;	adc.c:58: return calib;
-                            708 ;	genRet
-                            709 ;	Peephole 150.b	removed misc moves via dph, dpl before return
-                            710 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   00F7 02s00r00            711 	ljmp	___fs2uint
-                            712 ;
-                            713 ;------------------------------------------------------------
-                            714 ;Allocation info for local variables in function 'LIGHT_calibration'
-                            715 ;------------------------------------------------------------
-                            716 ;calib                     Allocated with name '_LIGHT_calibration_calib_1_1'
-                            717 ;------------------------------------------------------------
-                            718 ;	adc.c:64: unsigned int` LIGHT_calibration(void)
-                            719 ;	-----------------------------------------
-                            720 ;	 function LIGHT_calibration
-                            721 ;	-----------------------------------------
-   00FA                     722 _LIGHT_calibration:
-                            723 ;	adc.c:67: calib = (ADC_read(ADC_LIGHT));
-                            724 ;	genCall
-   00FA 75 82 08            725 	mov	dpl,#0x08
-   00FD 12s00r15            726 	lcall	_ADC_read
-   0100 AA 82               727 	mov	r2,dpl
-                            728 ;	genCast
-   0102 7B 00               729 	mov	r3,#0x00
-                            730 ;	adc.c:68: calib = (calib*100/255);
-                            731 ;	genAssign
-   0104 90s00r00            732 	mov	dptr,#__mulint_PARM_2
-   0107 74 64               733 	mov	a,#0x64
-   0109 F0                  734 	movx	@dptr,a
-   010A E4                  735 	clr	a
-   010B A3                  736 	inc	dptr
-   010C F0                  737 	movx	@dptr,a
-                            738 ;	genCall
-   010D 8A 82               739 	mov	dpl,r2
-   010F 8B 83               740 	mov	dph,r3
-   0111 12s00r00            741 	lcall	__mulint
-   0114 AA 82               742 	mov	r2,dpl
-   0116 AB 83               743 	mov	r3,dph
-                            744 ;	genAssign
-   0118 90s00r00            745 	mov	dptr,#__divuint_PARM_2
-   011B 74 FF               746 	mov	a,#0xFF
-   011D F0                  747 	movx	@dptr,a
-   011E E4                  748 	clr	a
-   011F A3                  749 	inc	dptr
-   0120 F0                  750 	movx	@dptr,a
-                            751 ;	adc.c:69: return calib;
-                            752 ;	genCall
-   0121 8A 82               753 	mov	dpl,r2
-   0123 8B 83               754 	mov	dph,r3
-                            755 ;	genRet
-                            756 ;	Peephole 150.b	removed misc moves via dph, dpl before return
-                            757 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   0125 02s00r00            758 	ljmp	__divuint
-                            759 ;
-                            760 	.area CSEG    (CODE)
-                            761 	.area CONST   (CODE)
-                            762 	.area XINIT   (CODE)
+   0097 75 82 0A            649 	mov	dpl,#0x0A
+   009A 12s00r1A            650 	lcall	_ADC_read
+                            651 ;	genCast
+                            652 ;	adc.c:57: calib = (calib-0.75)/2.5;
+                            653 ;	genCall
+   009D AA 82               654 	mov	r2,dpl
+   009F 7B 00               655 	mov	r3,#0x00
+                            656 ;	Peephole 177.d	removed redundant move
+   00A1 8B 83               657 	mov	dph,r3
+   00A3 12s00r00            658 	lcall	___uint2fs
+   00A6 AA 82               659 	mov	r2,dpl
+   00A8 AB 83               660 	mov	r3,dph
+   00AA AC F0               661 	mov	r4,b
+   00AC FD                  662 	mov	r5,a
+                            663 ;	genIpush
+                            664 ;	Peephole 181	changed mov to clr
+   00AD E4                  665 	clr	a
+   00AE C0 E0               666 	push	acc
+   00B0 C0 E0               667 	push	acc
+   00B2 74 40               668 	mov	a,#0x40
+   00B4 C0 E0               669 	push	acc
+   00B6 74 3F               670 	mov	a,#0x3F
+   00B8 C0 E0               671 	push	acc
+                            672 ;	genCall
+   00BA 8A 82               673 	mov	dpl,r2
+   00BC 8B 83               674 	mov	dph,r3
+   00BE 8C F0               675 	mov	b,r4
+   00C0 ED                  676 	mov	a,r5
+   00C1 12s00r00            677 	lcall	___fssub
+   00C4 AA 82               678 	mov	r2,dpl
+   00C6 AB 83               679 	mov	r3,dph
+   00C8 AC F0               680 	mov	r4,b
+   00CA FD                  681 	mov	r5,a
+   00CB E5 81               682 	mov	a,sp
+   00CD 24 FC               683 	add	a,#0xfc
+   00CF F5 81               684 	mov	sp,a
+                            685 ;	genIpush
+                            686 ;	Peephole 181	changed mov to clr
+   00D1 E4                  687 	clr	a
+   00D2 C0 E0               688 	push	acc
+   00D4 C0 E0               689 	push	acc
+   00D6 74 20               690 	mov	a,#0x20
+   00D8 C0 E0               691 	push	acc
+   00DA 74 40               692 	mov	a,#0x40
+   00DC C0 E0               693 	push	acc
+                            694 ;	genCall
+   00DE 8A 82               695 	mov	dpl,r2
+   00E0 8B 83               696 	mov	dph,r3
+   00E2 8C F0               697 	mov	b,r4
+   00E4 ED                  698 	mov	a,r5
+   00E5 12s00r00            699 	lcall	___fsdiv
+   00E8 AA 82               700 	mov	r2,dpl
+   00EA AB 83               701 	mov	r3,dph
+   00EC AC F0               702 	mov	r4,b
+   00EE FD                  703 	mov	r5,a
+   00EF E5 81               704 	mov	a,sp
+   00F1 24 FC               705 	add	a,#0xfc
+   00F3 F5 81               706 	mov	sp,a
+                            707 ;	genCall
+   00F5 8A 82               708 	mov	dpl,r2
+   00F7 8B 83               709 	mov	dph,r3
+   00F9 8C F0               710 	mov	b,r4
+   00FB ED                  711 	mov	a,r5
+                            712 ;	adc.c:58: return calib;
+                            713 ;	genRet
+                            714 ;	Peephole 150.b	removed misc moves via dph, dpl before return
+                            715 ;	Peephole 253.b	replaced lcall/ret with ljmp
+   00FC 02s00r00            716 	ljmp	___fs2uint
+                            717 ;
+                            718 ;------------------------------------------------------------
+                            719 ;Allocation info for local variables in function 'LIGHT_calibration'
+                            720 ;------------------------------------------------------------
+                            721 ;calib                     Allocated with name '_LIGHT_calibration_calib_1_1'
+                            722 ;------------------------------------------------------------
+                            723 ;	adc.c:64: unsigned int` LIGHT_calibration(void)
+                            724 ;	-----------------------------------------
+                            725 ;	 function LIGHT_calibration
+                            726 ;	-----------------------------------------
+   00FF                     727 _LIGHT_calibration:
+                            728 ;	adc.c:67: calib = (ADC_read(ADC_LIGHT));
+                            729 ;	genCall
+   00FF 75 82 08            730 	mov	dpl,#0x08
+   0102 12s00r1A            731 	lcall	_ADC_read
+   0105 AA 82               732 	mov	r2,dpl
+                            733 ;	genCast
+   0107 7B 00               734 	mov	r3,#0x00
+                            735 ;	adc.c:68: calib = (calib*100/255);
+                            736 ;	genAssign
+   0109 90s00r00            737 	mov	dptr,#__mulint_PARM_2
+   010C 74 64               738 	mov	a,#0x64
+   010E F0                  739 	movx	@dptr,a
+   010F E4                  740 	clr	a
+   0110 A3                  741 	inc	dptr
+   0111 F0                  742 	movx	@dptr,a
+                            743 ;	genCall
+   0112 8A 82               744 	mov	dpl,r2
+   0114 8B 83               745 	mov	dph,r3
+   0116 12s00r00            746 	lcall	__mulint
+   0119 AA 82               747 	mov	r2,dpl
+   011B AB 83               748 	mov	r3,dph
+                            749 ;	genAssign
+   011D 90s00r00            750 	mov	dptr,#__divuint_PARM_2
+   0120 74 FF               751 	mov	a,#0xFF
+   0122 F0                  752 	movx	@dptr,a
+   0123 E4                  753 	clr	a
+   0124 A3                  754 	inc	dptr
+   0125 F0                  755 	movx	@dptr,a
+                            756 ;	adc.c:69: return calib;
+                            757 ;	genCall
+   0126 8A 82               758 	mov	dpl,r2
+   0128 8B 83               759 	mov	dph,r3
+                            760 ;	genRet
+                            761 ;	Peephole 150.b	removed misc moves via dph, dpl before return
+                            762 ;	Peephole 253.b	replaced lcall/ret with ljmp
+   012A 02s00r00            763 	ljmp	__divuint
+                            764 ;
+                            765 	.area CSEG    (CODE)
+                            766 	.area CONST   (CODE)
+                            767 	.area XINIT   (CODE)

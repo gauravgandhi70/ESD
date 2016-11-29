@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.6.0 #4309 (Jul 28 2006)
-; This file generated Sun Nov 27 23:19:22 2016
+; This file generated Mon Nov 28 03:05:59 2016
 ;--------------------------------------------------------
 	.module adc
 	.optsdcc -mmcs51 --model-large
@@ -9,9 +9,6 @@
 ;--------------------------------------------------------
 ; Public variables in this module
 ;--------------------------------------------------------
-	.globl _LIGHT_calibration
-	.globl _HUMIDITY_calibration
-	.globl _TEMP_calibration
 	.globl _P5_7
 	.globl _P5_6
 	.globl _P5_5
@@ -210,6 +207,9 @@
 	.globl _P0
 	.globl _ADC_write
 	.globl _ADC_read
+	.globl _TEMP_calibration
+	.globl _HUMIDITY_calibration
+	.globl _LIGHT_calibration
 ;--------------------------------------------------------
 ; special function registers
 ;--------------------------------------------------------
@@ -513,8 +513,13 @@ _ADC_write:
 	mov	dph,r3
 ;	Peephole 136	removed redundant move
 	movx	@dptr,a
-;	Peephole 300	removed redundant label 00101$
-	ret
+;	adc.c:25: delay_us(50);
+;	genCall
+;	Peephole 182.b	used 16 bit load of dptr
+	mov	dptr,#0x0032
+;	Peephole 253.b	replaced lcall/ret with ljmp
+	ljmp	_delay_us
+;
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'ADC_read'
 ;------------------------------------------------------------

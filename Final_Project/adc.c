@@ -22,7 +22,7 @@ void ADC_write(char adc_data)
 {
 
     *adc_address = adc_data ;                 // Write data at address 0x8000
-
+    delay_us(50);
 }
 
 unsigned char ADC_read(char adc_channel)
@@ -71,5 +71,5 @@ unsigned int` LIGHT_calibration(void)
 }
 
 
-unsigned char PRESSURE_calibration(void);
+
 

@@ -70,7 +70,7 @@ void lcd_init()
 -----------------------------------------------------------------------------------------*/
 
 
-void lcdputch(char c)
+void lcdputch(char c)  __critical
 {
     RS=1;                       // DATA register selected
     delay_ms(1);

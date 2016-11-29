@@ -14,22 +14,27 @@
 #include"io_exp.h"
 #include"profile.h"
 #include"gps.h"
-
+#define UART P1_4
 
 
 char* gps_read()  __critical
 {
-        char c[64],d[6]="$GPRMC",*p;
+        char c[80],d[6]="$GPRMC",*p;
+
+        UART=0;
+        delay_ms(100);
+
                 gets(c);
+
+                delay_ms(50);
+                UART=1;
+
                 p=strstr(c,d);
-                if(p)
-                {
-                   return p;
-                }
-                else
-                {
-                    return p;
-                }
+
+
+
+                return p;
+
 }
 
 

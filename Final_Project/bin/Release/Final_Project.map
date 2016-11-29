@@ -26,34 +26,34 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
      0000    s_XSEG
      0000    s__CODE
      0001    l_BSEG_BYTES
+     0001    l_XINIT
+     0001    l_XISEG
      0002    l_BSEG
      0003    l_GSFINAL
      0003    l_GSINIT0
-     0003    l_XINIT
-     0003    l_XISEG
      0006    l_OSEG
      0008    l_REG_BANK_0
      0008    s_REG_BANK_1
      000A    l_GSINIT2
-     000E    l_HOME
-     000E    s_GSINIT0
      0010    s_REG_BANK_2
-     0011    s_GSINIT1
-     0011    s_GSINIT2
+     0016    l_HOME
+     0016    s_GSINIT0
      0018    s_REG_BANK_3
-     001B    s_GSINIT3
+     0019    s_GSINIT1
+     0019    s_GSINIT2
      0020    s_BSEG_BYTES
      0021    s_BIT_BANK
      0021    s_OSEG
      0022    l_GSINIT3
+     0023    s_GSINIT3
      0027    s_RSEG
      0027    s_SSEG
      002A    l_GSINIT4
-     003D    s_GSINIT4
-     0067    s_GSFINAL
-     0067    s_GSINIT
-     0067    s_GSINIT5
-     006A    s_CSEG
+     0045    s_GSINIT4
+     006F    s_GSFINAL
+     006F    s_GSINIT
+     006F    s_GSINIT5
+     0072    s_CSEG
      0080    _P0
      0080    _P0_0
      0080    l_DSEG
@@ -258,12 +258,12 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
      00FD    _CCAP3H
      00FE    _CCAP4H
      0100    l_IRAM
-     0185    l_XSEG
-     0185    s_XISEG
-     05DE    l_CONST
-     3229    l_CSEG
-     3293    s_CONST
-     3871    s_XINIT
+     018B    l_XSEG
+     018B    s_XISEG
+     0665    l_CONST
+     37A4    l_CSEG
+     3816    s_CONST
+     3E7B    s_XINIT
 
 Hexadecimal
 
@@ -366,7 +366,7 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-XSEG                               0000   0185 =    389. bytes (REL,CON,XDATA)
+XSEG                               0000   018B =    395. bytes (REL,CON,XDATA)
 
       Value  Global
    --------  --------------------------------
@@ -384,244 +384,243 @@ XSEG                               0000   0185 =    389. bytes (REL,CON,XDATA)
   0D:005A    _page_write_block_PARM_2
   0D:005B    _page_write_block_PARM_3
   0D:005C    _page_write_block_PARM_4
-  0D:00F5    _lcdgotoxy_PARM_2
-  0D:00F7    _lcd_display_PARM_2
-  0D:0107    _lcdcreatechar_PARM_2
-  0D:0119    _lcd_dis_cus_PARM_2
-  0D:011A    _lcd_dis_cus_PARM_3
-  0D:011C    _cnt
-  0D:011F    _nms
-  0D:0125    _nsec
-  0D:012B    _nmi
-  0D:0131    _io_counter
-  0D:0133    _i
-  0D:0135    _h
-  0D:0136    _m
-  0D:0137    _s
-  0D:0138    _sensor_data
-  0D:0150    _PRESSURE_WriteByte_PARM_2
-  0D:0153    __divuint_PARM_2
-  0D:015C    _strstr_PARM_2
-  0D:016D    __gptrput_PARM_2
-  0D:016E    __mulint_PARM_2
-  0D:0170    _powf_PARM_2
-  0D:0178    __modsint_PARM_2
-  0D:017C    __moduint_PARM_2
-  0D:0181    __divsint_PARM_2
+  0D:0105    _lcdgotoxy_PARM_2
+  0D:0107    _lcd_display_PARM_2
+  0D:0117    _lcdcreatechar_PARM_2
+  0D:0129    _lcd_dis_cus_PARM_2
+  0D:012A    _lcd_dis_cus_PARM_3
+  0D:012C    _fr
+  0D:012E    _display
+  0D:0130    _h
+  0D:0131    _m
+  0D:0132    _s
+  0D:0133    _sensor_data
+  0D:0138    _log_f
+  0D:0139    _sensor
+  0D:0156    _PRESSURE_WriteByte_PARM_2
+  0D:0159    __divuint_PARM_2
+  0D:0162    _strstr_PARM_2
+  0D:0173    __gptrput_PARM_2
+  0D:0174    __mulint_PARM_2
+  0D:0176    _powf_PARM_2
+  0D:017E    __modsint_PARM_2
+  0D:0182    __moduint_PARM_2
+  0D:0187    __divsint_PARM_2
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-XISEG                              0185   0003 =      3. bytes (REL,CON,XDATA)
+XISEG                              018B   0001 =      1. bytes (REL,CON,XDATA)
 
       Value  Global
    --------  --------------------------------
-  0D:0185    _flag
-  0D:0186    _timers
+  0D:018B    _flag
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-HOME                               0000   000E =     14. bytes (REL,CON,CODE)
+HOME                               0000   0016 =     22. bytes (REL,CON,CODE)
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-GSINIT0                            000E   0003 =      3. bytes (REL,CON,CODE)
+GSINIT0                            0016   0003 =      3. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
-  0C:000E    __sdcc_gsinit_startup
+  0C:0016    __sdcc_gsinit_startup
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-GSINIT1                            0011   0000 =      0. bytes (REL,CON,CODE)
+GSINIT1                            0019   0000 =      0. bytes (REL,CON,CODE)
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-GSINIT2                            0011   000A =     10. bytes (REL,CON,CODE)
+GSINIT2                            0019   000A =     10. bytes (REL,CON,CODE)
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-GSINIT3                            001B   0022 =     34. bytes (REL,CON,CODE)
+GSINIT3                            0023   0022 =     34. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
-  0C:001B    __mcs51_genXINIT
+  0C:0023    __mcs51_genXINIT
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-GSINIT4                            003D   002A =     42. bytes (REL,CON,CODE)
+GSINIT4                            0045   002A =     42. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
-  0C:003D    __mcs51_genRAMCLEAR
-  0C:0043    __mcs51_genXRAMCLEAR
+  0C:0045    __mcs51_genRAMCLEAR
+  0C:004B    __mcs51_genXRAMCLEAR
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-GSINIT5                            0067   0000 =      0. bytes (REL,CON,CODE)
+GSINIT5                            006F   0000 =      0. bytes (REL,CON,CODE)
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-GSINIT                             0067   0000 =      0. bytes (REL,CON,CODE)
+GSINIT                             006F   0000 =      0. bytes (REL,CON,CODE)
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-GSFINAL                            0067   0003 =      3. bytes (REL,CON,CODE)
+GSFINAL                            006F   0003 =      3. bytes (REL,CON,CODE)
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CSEG                               006A   3229 =  12841. bytes (REL,CON,CODE)
+CSEG                               0072   37A4 =  14244. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
-  0C:006A    _ADC_write
-  0C:007F    _ADC_read
-  0C:0096    _TEMP_calibration
-  0C:00FC    _HUMIDITY_calibration
-  0C:0164    _LIGHT_calibration
-  0C:0192    _atoh
-  0C:0426    _atoh_data
-  0C:0648    _ctoa
-  0C:06DE    _atob
-  0C:0720    _timer_init
-  0C:0733    _clock_reset
-  0C:0742    _clock_control
-  0C:08F8    _DDRAM_dump
-  0C:0A4E    _CGRAM_dump
-  0C:0AFC    _hex_dump
-  0C:0D81    _delay_us
-  0C:0DB4    _delay_ms
-  0C:0DF5    _delay_sec
-  0C:0E1D    _seq_read
-  0C:0F0D    _page_write
-  0C:0FD8    _EEPROM_WriteByte
-  0C:1032    _EEPROM_ReadByte
-  0C:109D    _eereset
-  0C:10BF    _eeprom_block_fill
-  0C:1427    _page_write_block
-  0C:14C7    _EEPROM_ACK_Poll
-  0C:14F3    _gps_read
-  0C:155C    _gps_time
-  0C:15A9    _gps_status
-  0C:1608    _gps_latitude
-  0C:16A1    _gps_longitude
-  0C:173A    _gps_date
-  0C:17B5    _I2C_Clock
-  0C:17C6    _I2C_Start
-  0C:17E3    _I2C_Stop
-  0C:17FE    _I2C_Write
-  0C:182B    _I2C_Read
-  0C:1875    _I2C_Ack
-  0C:1889    _I2C_Ack_seq
-  0C:1891    _I2C_NoAck
-  0C:1899    _IOEX_WriteByte
-  0C:18C1    _IOEX_ReadByte
-  0C:18ED    _io_cnt
-  0C:1977    _io_exp_dir
-  0C:1AFC    _lcd_init
-  0C:1B5B    _lcdputch
-  0C:1B7A    _lcdputcmd
-  0C:1B99    _lcdread
-  0C:1BB0    _lcdgotoaddr
-  0C:1BCF    _lcdbusywait
-  0C:1BFA    _lcdputstr
-  0C:1CED    _lcdgotoxy
-  0C:1D7C    _lcd_display
-  0C:1E66    _lcdcreatechar
-  0C:1ED2    _logo_creator
-  0C:202C    _lcd_dis_cus
-  0C:205B    __sdcc_program_startup
-  0C:2060    __sdcc_external_startup
-  0C:2067    _main
-  0C:20DA    _ext_zero
-  0C:2154    _timer_isr
-  0C:22DB    _eeprom_profile
-  0C:23D8    _putchar
-  0C:23EA    _getchar
-  0C:23F4    _uart_init
-  0C:240A    _PRESSURE_WriteByte
-  0C:243F    _PRESSURE_ReadByte
-  0C:248A    ___fssub
-  0C:2495    __divuint
-  0C:2530    _atoi
-  0C:2663    _strstr
-  0C:2735    _gets
-  0C:2849    __gptrput
-  0C:2862    _printf_tiny
-  0C:296A    __mulint
-  0C:298A    _powf
-  0C:2A9C    __modsint
-  0C:2B0A    __moduint
-  0C:2BB8    ___fsadd
-  0C:2BBB    fsadd_direct_entry
-  0C:2C11    __divsint
-  0C:2C89    ___uint2fs
-  0C:2C95    ___fs2uint
-  0C:2CA0    fs_round_and_return
-  0C:2CB8    fs_zerocheck_return
-  0C:2CC1    fs_return_zero
-  0C:2CC9    fs_direct_return
-  0C:2CD7    fs_return_inf
-  0C:2CE4    fs_return_nan
-  0C:2CEF    fs_swap_a_b
-  0C:2D09    ___fsdiv
-  0C:2DCC    __gptrget
-  0C:2DE8    ___ulong2fs
-  0C:2DF1    ulong2fs_doit
-  0C:2DFB    ___fsmul
-  0C:2E9E    fsgetargs
-  0C:2ECC    _logf
-  0C:2F8D    __fs_cordic_rshift_r765_unsigned
-  0C:2FCE    fs_rshift_a
-  0C:3011    fs_normalize_a
-  0C:303A    ___fseq
-  0C:304B    ___fsgt
-  0C:307B    _expf
-  0C:31E7    fs_lshift_a
-  0C:31FE    fsgetarg
-  0C:3210    ___fs2ulong
-  0C:3212    fs2ulong_begin
-  0C:3237    fs_compare_uint32
-  0C:3255    fs_check_negative_zeros
-  0C:3280    ___fs2uchar
-  0C:3288    ___uchar2fs
+  0C:0072    _ADC_write
+  0C:008C    _ADC_read
+  0C:00A3    _TEMP_calibration
+  0C:0109    _HUMIDITY_calibration
+  0C:0171    _LIGHT_calibration
+  0C:019F    _atoh
+  0C:0433    _atoh_data
+  0C:0655    _ctoa
+  0C:06EB    _atob
+  0C:072D    _timer_init
+  0C:0740    _clock_reset
+  0C:074F    _clock_control
+  0C:0905    _DDRAM_dump
+  0C:0A5B    _CGRAM_dump
+  0C:0B09    _hex_dump
+  0C:0D8E    _delay_us
+  0C:0DC1    _delay_ms
+  0C:0E02    _delay_sec
+  0C:0E2A    _seq_read
+  0C:0F1A    _page_write
+  0C:0FE5    _EEPROM_WriteByte
+  0C:103F    _EEPROM_ReadByte
+  0C:10AA    _eereset
+  0C:10CC    _eeprom_block_fill
+  0C:1434    _page_write_block
+  0C:14D4    _EEPROM_ACK_Poll
+  0C:1500    _gps_read
+  0C:1566    _gps_time
+  0C:15B3    _gps_status
+  0C:1612    _gps_latitude
+  0C:16AB    _gps_longitude
+  0C:1744    _gps_date
+  0C:17BF    _I2C_Clock
+  0C:17D0    _I2C_Start
+  0C:17ED    _I2C_Stop
+  0C:1808    _I2C_Write
+  0C:1835    _I2C_Read
+  0C:187F    _I2C_Ack
+  0C:1893    _I2C_Ack_seq
+  0C:189B    _I2C_NoAck
+  0C:18A3    _IOEX_WriteByte
+  0C:18CB    _IOEX_ReadByte
+  0C:18F7    _io_cnt
+  0C:1981    _io_exp_dir
+  0C:1B06    _lcd_init
+  0C:1B65    _lcdputch
+  0C:1B90    _lcdputcmd
+  0C:1BAF    _lcdread
+  0C:1BC6    _lcdgotoaddr
+  0C:1BE5    _lcdbusywait
+  0C:1C10    _lcdputstr
+  0C:1D03    _lcdgotoxy
+  0C:1D92    _lcd_display
+  0C:1E7C    _lcdcreatechar
+  0C:1EE8    _logo_creator
+  0C:2042    _lcd_dis_cus
+  0C:2071    __sdcc_program_startup
+  0C:2076    __sdcc_external_startup
+  0C:207D    _main
+  0C:25BC    _s_one
+  0C:264B    _s_two
+  0C:26DB    _timer_isr
+  0C:27E8    _eeprom_profile
+  0C:28E5    _putchar
+  0C:28F7    _getchar
+  0C:2901    _uart_init
+  0C:2917    _PRESSURE_WriteByte
+  0C:294C    _PRESSURE_ReadByte
+  0C:2997    _PRESSURE_calibration
+  0C:2A0D    ___fssub
+  0C:2A18    __divuint
+  0C:2AB3    _atoi
+  0C:2BE6    _strstr
+  0C:2CB8    _gets
+  0C:2DCC    __gptrput
+  0C:2DE5    _printf_tiny
+  0C:2EED    __mulint
+  0C:2F0D    _powf
+  0C:301F    __modsint
+  0C:308D    __moduint
+  0C:313B    ___fsadd
+  0C:313E    fsadd_direct_entry
+  0C:3194    __divsint
+  0C:320C    ___uint2fs
+  0C:3218    ___fs2uint
+  0C:3223    fs_round_and_return
+  0C:323B    fs_zerocheck_return
+  0C:3244    fs_return_zero
+  0C:324C    fs_direct_return
+  0C:325A    fs_return_inf
+  0C:3267    fs_return_nan
+  0C:3272    fs_swap_a_b
+  0C:328C    ___fsdiv
+  0C:334F    __gptrget
+  0C:336B    ___ulong2fs
+  0C:3374    ulong2fs_doit
+  0C:337E    ___fsmul
+  0C:3421    fsgetargs
+  0C:344F    _logf
+  0C:3510    __fs_cordic_rshift_r765_unsigned
+  0C:3551    fs_rshift_a
+  0C:3594    fs_normalize_a
+  0C:35BD    ___fseq
+  0C:35CE    ___fsgt
+  0C:35FE    _expf
+  0C:376A    fs_lshift_a
+  0C:3781    fsgetarg
+  0C:3793    ___fs2ulong
+  0C:3795    fs2ulong_begin
+  0C:37BA    fs_compare_uint32
+  0C:37D8    fs_check_negative_zeros
+  0C:3803    ___fs2uchar
+  0C:380B    ___uchar2fs
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CONST                              3293   05DE =   1502. bytes (REL,CON,CODE)
+CONST                              3816   0665 =   1637. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
-  0C:37F9    __fs_natural_log_table
+  0C:3E03    __fs_natural_log_table
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-XINIT                              3871   0003 =      3. bytes (REL,CON,CODE)
+XINIT                              3E7B   0001 =      1. bytes (REL,CON,CODE)
 ASxxxx Linker V01.70 + NoICE + SDCC Feb 1999,  page 1.
 
 Files Linked      [ module(s) ]

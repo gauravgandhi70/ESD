@@ -7,5 +7,8 @@
 #define ADC_HUMIDITY 0x0A
 void ADC_write(char adc_data);
 unsigned char ADC_read(char adc_channel);
+unsigned int TEMP_calibration(void);
+unsigned int HUMIDITY_calibration(void);
+unsigned int LIGHT_calibration(void);
 #endif // _LCDH_
 

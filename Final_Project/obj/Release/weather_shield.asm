@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.6.0 #4309 (Jul 28 2006)
-; This file generated Sun Nov 27 14:06:39 2016
+; This file generated Mon Nov 28 19:52:33 2016
 ;--------------------------------------------------------
 	.module weather_shield
 	.optsdcc -mmcs51 --model-large
@@ -208,6 +208,7 @@
 	.globl _PRESSURE_WriteByte_PARM_2
 	.globl _PRESSURE_WriteByte
 	.globl _PRESSURE_ReadByte
+	.globl _PRESSURE_calibration
 ;--------------------------------------------------------
 ; special function registers
 ;--------------------------------------------------------
@@ -616,6 +617,103 @@ _PRESSURE_ReadByte:
 ;	genRet
 	mov	dpl,r2
 ;	Peephole 300	removed redundant label 00101$
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'PRESSURE_calibration'
+;------------------------------------------------------------
+;msb                       Allocated with name '_PRESSURE_calibration_msb_1_1'
+;csb                       Allocated with name '_PRESSURE_calibration_csb_1_1'
+;pressure                  Allocated with name '_PRESSURE_calibration_pressure_1_1'
+;------------------------------------------------------------
+;	weather_shield.c:64: unsigned int PRESSURE_calibration(void) __critical
+;	-----------------------------------------
+;	 function PRESSURE_calibration
+;	-----------------------------------------
+_PRESSURE_calibration:
+	setb	c
+	jbc	ea,00103$
+	clr	c
+00103$:
+	push	psw
+;	weather_shield.c:68: PRESSURE_WriteByte(0x26,0x02);
+;	genAssign
+	mov	dptr,#_PRESSURE_WriteByte_PARM_2
+	mov	a,#0x02
+	movx	@dptr,a
+;	genCall
+	mov	dpl,#0x26
+	lcall	_PRESSURE_WriteByte
+;	weather_shield.c:70: msb= PRESSURE_ReadByte(0x01);
+;	genCall
+	mov	dpl,#0x01
+	lcall	_PRESSURE_ReadByte
+	mov	r2,dpl
+;	genCast
+	mov	r3,#0x00
+;	weather_shield.c:72: csb = PRESSURE_ReadByte(0x02);
+;	genCall
+	mov	dpl,#0x02
+	push	ar2
+	push	ar3
+	lcall	_PRESSURE_ReadByte
+	mov	r4,dpl
+	pop	ar3
+	pop	ar2
+;	genCast
+	mov	r5,#0x00
+;	weather_shield.c:74: pressure= (msb)*(1024/133) + (csb/133);
+;	genAssign
+	mov	dptr,#__mulint_PARM_2
+	mov	a,#0x07
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+;	genCall
+	mov	dpl,r2
+	mov	dph,r3
+	push	ar4
+	push	ar5
+	lcall	__mulint
+	mov	r2,dpl
+	mov	r3,dph
+	pop	ar5
+	pop	ar4
+;	genAssign
+	mov	dptr,#__divuint_PARM_2
+	mov	a,#0x85
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+;	genCall
+	mov	dpl,r4
+	mov	dph,r5
+	push	ar2
+	push	ar3
+	lcall	__divuint
+	mov	r4,dpl
+	mov	r5,dph
+	pop	ar3
+	pop	ar2
+;	genPlus
+;	Peephole 236.g	used r4 instead of ar4
+	mov	a,r4
+;	Peephole 236.a	used r2 instead of ar2
+	add	a,r2
+	mov	r2,a
+;	Peephole 236.g	used r5 instead of ar5
+	mov	a,r5
+;	Peephole 236.b	used r3 instead of ar3
+	addc	a,r3
+	mov	r3,a
+;	weather_shield.c:76: return pressure;
+;	genRet
+	mov	dpl,r2
+	mov	dph,r3
+;	Peephole 300	removed redundant label 00101$
+	pop	psw
+	mov	ea,c
 	ret
 	.area CSEG    (CODE)
 	.area CONST   (CODE)
