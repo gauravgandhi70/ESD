@@ -172,6 +172,7 @@ Symbol Table
     TXD                                                            00B1 
     _AC                                                         =  00D6 G
     _ACC                                                        =  00E0 G
+ 13 _ALTITUDE_calibration                                          010F GR
     _AUXR                                                       =  008E G
     _AUXR1                                                      =  00A2 G
     _B                                                          =  00F0 G
@@ -360,6 +361,7 @@ Symbol Table
     _TB8                                                        =  009B G
     _TCLK                                                       =  00CC G
     _TCON                                                       =  0088 G
+ 13 _TEMP_calibration                                              00F6 GR
     _TF0                                                        =  008D G
     _TF1                                                        =  008F G
     _TF2                                                        =  00CF G
@@ -382,8 +384,12 @@ Symbol Table
     __divuint_PARM_2                                               **** GX
     __mulint                                                       **** GX
     __mulint_PARM_2                                                **** GX
+ 14 __str_0                                                        0000 R
+ 14 __str_1                                                        000F R
+ 14 __str_2                                                        001E R
     _delay_ms                                                      **** GX
     _delay_us                                                      **** GX
+    _printf_tiny                                                   **** GX
     a                                                              00D6 
     ac                                                             00D6 
     acc                                                            00E0 
@@ -584,6 +590,6 @@ Area Table
   10 GSINIT5                                                                            size    0   flags 20
   11 GSINIT                                                                             size    0   flags 20
   12 GSFINAL                                                                            size    0   flags 20
-  13 CSEG                                                                               size   F6   flags 20
-  14 CONST                                                                              size    0   flags 20
+  13 CSEG                                                                               size  206   flags 20
+  14 CONST                                                                              size   2D   flags 20
   15 XINIT                                                                              size    0   flags 20

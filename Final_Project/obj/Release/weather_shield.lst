@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.6.0 #4309 (Jul 28 2006)
-                              4 ; This file generated Mon Nov 28 19:52:33 2016
+                              4 ; This file generated Mon Dec 05 02:56:40 2016
                               5 ;--------------------------------------------------------
                               6 	.module weather_shield
                               7 	.optsdcc -mmcs51 --model-large
@@ -209,512 +209,738 @@
                             209 	.globl _PRESSURE_WriteByte
                             210 	.globl _PRESSURE_ReadByte
                             211 	.globl _PRESSURE_calibration
-                            212 ;--------------------------------------------------------
-                            213 ; special function registers
+                            212 	.globl _TEMP_calibration
+                            213 	.globl _ALTITUDE_calibration
                             214 ;--------------------------------------------------------
-                            215 	.area RSEG    (DATA)
-                    0080    216 _P0	=	0x0080
-                    0081    217 _SP	=	0x0081
-                    0082    218 _DPL	=	0x0082
-                    0083    219 _DPH	=	0x0083
-                    0087    220 _PCON	=	0x0087
-                    0088    221 _TCON	=	0x0088
-                    0089    222 _TMOD	=	0x0089
-                    008A    223 _TL0	=	0x008a
-                    008B    224 _TL1	=	0x008b
-                    008C    225 _TH0	=	0x008c
-                    008D    226 _TH1	=	0x008d
-                    0090    227 _P1	=	0x0090
-                    0098    228 _SCON	=	0x0098
-                    0099    229 _SBUF	=	0x0099
-                    00A0    230 _P2	=	0x00a0
-                    00A8    231 _IE	=	0x00a8
-                    00B0    232 _P3	=	0x00b0
-                    00B8    233 _IP	=	0x00b8
-                    00D0    234 _PSW	=	0x00d0
-                    00E0    235 _ACC	=	0x00e0
-                    00F0    236 _B	=	0x00f0
-                    00C8    237 _T2CON	=	0x00c8
-                    00CA    238 _RCAP2L	=	0x00ca
-                    00CB    239 _RCAP2H	=	0x00cb
-                    00CC    240 _TL2	=	0x00cc
-                    00CD    241 _TH2	=	0x00cd
-                    008E    242 _AUXR	=	0x008e
-                    00A2    243 _AUXR1	=	0x00a2
-                    0097    244 _CKRL	=	0x0097
-                    008F    245 _CKCKON0	=	0x008f
-                    008F    246 _CKCKON1	=	0x008f
-                    00FA    247 _CCAP0H	=	0x00fa
-                    00FB    248 _CCAP1H	=	0x00fb
-                    00FC    249 _CCAP2H	=	0x00fc
-                    00FD    250 _CCAP3H	=	0x00fd
-                    00FE    251 _CCAP4H	=	0x00fe
-                    00EA    252 _CCAP0L	=	0x00ea
-                    00EB    253 _CCAP1L	=	0x00eb
-                    00EC    254 _CCAP2L	=	0x00ec
-                    00ED    255 _CCAP3L	=	0x00ed
-                    00EE    256 _CCAP4L	=	0x00ee
-                    00DA    257 _CCAPM0	=	0x00da
-                    00DB    258 _CCAPM1	=	0x00db
-                    00DC    259 _CCAPM2	=	0x00dc
-                    00DD    260 _CCAPM3	=	0x00dd
-                    00DE    261 _CCAPM4	=	0x00de
-                    00D8    262 _CCON	=	0x00d8
-                    00F9    263 _CH	=	0x00f9
-                    00E9    264 _CL	=	0x00e9
-                    00D9    265 _CMOD	=	0x00d9
-                    00A8    266 _IEN0	=	0x00a8
-                    00B1    267 _IEN1	=	0x00b1
-                    00B8    268 _IPL0	=	0x00b8
-                    00B7    269 _IPH0	=	0x00b7
-                    00B2    270 _IPL1	=	0x00b2
-                    00B3    271 _IPH1	=	0x00b3
-                    00C0    272 _P4	=	0x00c0
-                    00D8    273 _P5	=	0x00d8
-                    00A6    274 _WDTRST	=	0x00a6
-                    00A7    275 _WDTPRG	=	0x00a7
-                    00A9    276 _SADDR	=	0x00a9
-                    00B9    277 _SADEN	=	0x00b9
-                    00C3    278 _SPCON	=	0x00c3
-                    00C4    279 _SPSTA	=	0x00c4
-                    00C5    280 _SPDAT	=	0x00c5
-                    00C9    281 _T2MOD	=	0x00c9
-                    009B    282 _BDRCON	=	0x009b
-                    009A    283 _BRL	=	0x009a
-                    009C    284 _KBLS	=	0x009c
-                    009D    285 _KBE	=	0x009d
-                    009E    286 _KBF	=	0x009e
-                    00D2    287 _EECON	=	0x00d2
-                            288 ;--------------------------------------------------------
-                            289 ; special function bits
+                            215 ; special function registers
+                            216 ;--------------------------------------------------------
+                            217 	.area RSEG    (DATA)
+                    0080    218 _P0	=	0x0080
+                    0081    219 _SP	=	0x0081
+                    0082    220 _DPL	=	0x0082
+                    0083    221 _DPH	=	0x0083
+                    0087    222 _PCON	=	0x0087
+                    0088    223 _TCON	=	0x0088
+                    0089    224 _TMOD	=	0x0089
+                    008A    225 _TL0	=	0x008a
+                    008B    226 _TL1	=	0x008b
+                    008C    227 _TH0	=	0x008c
+                    008D    228 _TH1	=	0x008d
+                    0090    229 _P1	=	0x0090
+                    0098    230 _SCON	=	0x0098
+                    0099    231 _SBUF	=	0x0099
+                    00A0    232 _P2	=	0x00a0
+                    00A8    233 _IE	=	0x00a8
+                    00B0    234 _P3	=	0x00b0
+                    00B8    235 _IP	=	0x00b8
+                    00D0    236 _PSW	=	0x00d0
+                    00E0    237 _ACC	=	0x00e0
+                    00F0    238 _B	=	0x00f0
+                    00C8    239 _T2CON	=	0x00c8
+                    00CA    240 _RCAP2L	=	0x00ca
+                    00CB    241 _RCAP2H	=	0x00cb
+                    00CC    242 _TL2	=	0x00cc
+                    00CD    243 _TH2	=	0x00cd
+                    008E    244 _AUXR	=	0x008e
+                    00A2    245 _AUXR1	=	0x00a2
+                    0097    246 _CKRL	=	0x0097
+                    008F    247 _CKCKON0	=	0x008f
+                    008F    248 _CKCKON1	=	0x008f
+                    00FA    249 _CCAP0H	=	0x00fa
+                    00FB    250 _CCAP1H	=	0x00fb
+                    00FC    251 _CCAP2H	=	0x00fc
+                    00FD    252 _CCAP3H	=	0x00fd
+                    00FE    253 _CCAP4H	=	0x00fe
+                    00EA    254 _CCAP0L	=	0x00ea
+                    00EB    255 _CCAP1L	=	0x00eb
+                    00EC    256 _CCAP2L	=	0x00ec
+                    00ED    257 _CCAP3L	=	0x00ed
+                    00EE    258 _CCAP4L	=	0x00ee
+                    00DA    259 _CCAPM0	=	0x00da
+                    00DB    260 _CCAPM1	=	0x00db
+                    00DC    261 _CCAPM2	=	0x00dc
+                    00DD    262 _CCAPM3	=	0x00dd
+                    00DE    263 _CCAPM4	=	0x00de
+                    00D8    264 _CCON	=	0x00d8
+                    00F9    265 _CH	=	0x00f9
+                    00E9    266 _CL	=	0x00e9
+                    00D9    267 _CMOD	=	0x00d9
+                    00A8    268 _IEN0	=	0x00a8
+                    00B1    269 _IEN1	=	0x00b1
+                    00B8    270 _IPL0	=	0x00b8
+                    00B7    271 _IPH0	=	0x00b7
+                    00B2    272 _IPL1	=	0x00b2
+                    00B3    273 _IPH1	=	0x00b3
+                    00C0    274 _P4	=	0x00c0
+                    00D8    275 _P5	=	0x00d8
+                    00A6    276 _WDTRST	=	0x00a6
+                    00A7    277 _WDTPRG	=	0x00a7
+                    00A9    278 _SADDR	=	0x00a9
+                    00B9    279 _SADEN	=	0x00b9
+                    00C3    280 _SPCON	=	0x00c3
+                    00C4    281 _SPSTA	=	0x00c4
+                    00C5    282 _SPDAT	=	0x00c5
+                    00C9    283 _T2MOD	=	0x00c9
+                    009B    284 _BDRCON	=	0x009b
+                    009A    285 _BRL	=	0x009a
+                    009C    286 _KBLS	=	0x009c
+                    009D    287 _KBE	=	0x009d
+                    009E    288 _KBF	=	0x009e
+                    00D2    289 _EECON	=	0x00d2
                             290 ;--------------------------------------------------------
-                            291 	.area RSEG    (DATA)
-                    0080    292 _P0_0	=	0x0080
-                    0081    293 _P0_1	=	0x0081
-                    0082    294 _P0_2	=	0x0082
-                    0083    295 _P0_3	=	0x0083
-                    0084    296 _P0_4	=	0x0084
-                    0085    297 _P0_5	=	0x0085
-                    0086    298 _P0_6	=	0x0086
-                    0087    299 _P0_7	=	0x0087
-                    0088    300 _IT0	=	0x0088
-                    0089    301 _IE0	=	0x0089
-                    008A    302 _IT1	=	0x008a
-                    008B    303 _IE1	=	0x008b
-                    008C    304 _TR0	=	0x008c
-                    008D    305 _TF0	=	0x008d
-                    008E    306 _TR1	=	0x008e
-                    008F    307 _TF1	=	0x008f
-                    0090    308 _P1_0	=	0x0090
-                    0091    309 _P1_1	=	0x0091
-                    0092    310 _P1_2	=	0x0092
-                    0093    311 _P1_3	=	0x0093
-                    0094    312 _P1_4	=	0x0094
-                    0095    313 _P1_5	=	0x0095
-                    0096    314 _P1_6	=	0x0096
-                    0097    315 _P1_7	=	0x0097
-                    0098    316 _RI	=	0x0098
-                    0099    317 _TI	=	0x0099
-                    009A    318 _RB8	=	0x009a
-                    009B    319 _TB8	=	0x009b
-                    009C    320 _REN	=	0x009c
-                    009D    321 _SM2	=	0x009d
-                    009E    322 _SM1	=	0x009e
-                    009F    323 _SM0	=	0x009f
-                    00A0    324 _P2_0	=	0x00a0
-                    00A1    325 _P2_1	=	0x00a1
-                    00A2    326 _P2_2	=	0x00a2
-                    00A3    327 _P2_3	=	0x00a3
-                    00A4    328 _P2_4	=	0x00a4
-                    00A5    329 _P2_5	=	0x00a5
-                    00A6    330 _P2_6	=	0x00a6
-                    00A7    331 _P2_7	=	0x00a7
-                    00A8    332 _EX0	=	0x00a8
-                    00A9    333 _ET0	=	0x00a9
-                    00AA    334 _EX1	=	0x00aa
-                    00AB    335 _ET1	=	0x00ab
-                    00AC    336 _ES	=	0x00ac
-                    00AF    337 _EA	=	0x00af
-                    00B0    338 _P3_0	=	0x00b0
-                    00B1    339 _P3_1	=	0x00b1
-                    00B2    340 _P3_2	=	0x00b2
-                    00B3    341 _P3_3	=	0x00b3
-                    00B4    342 _P3_4	=	0x00b4
-                    00B5    343 _P3_5	=	0x00b5
-                    00B6    344 _P3_6	=	0x00b6
-                    00B7    345 _P3_7	=	0x00b7
-                    00B0    346 _RXD	=	0x00b0
-                    00B1    347 _TXD	=	0x00b1
-                    00B2    348 _INT0	=	0x00b2
-                    00B3    349 _INT1	=	0x00b3
-                    00B4    350 _T0	=	0x00b4
-                    00B5    351 _T1	=	0x00b5
-                    00B6    352 _WR	=	0x00b6
-                    00B7    353 _RD	=	0x00b7
-                    00B8    354 _PX0	=	0x00b8
-                    00B9    355 _PT0	=	0x00b9
-                    00BA    356 _PX1	=	0x00ba
-                    00BB    357 _PT1	=	0x00bb
-                    00BC    358 _PS	=	0x00bc
-                    00D0    359 _P	=	0x00d0
-                    00D1    360 _F1	=	0x00d1
-                    00D2    361 _OV	=	0x00d2
-                    00D3    362 _RS0	=	0x00d3
-                    00D4    363 _RS1	=	0x00d4
-                    00D5    364 _F0	=	0x00d5
-                    00D6    365 _AC	=	0x00d6
-                    00D7    366 _CY	=	0x00d7
-                    00AD    367 _ET2	=	0x00ad
-                    00BD    368 _PT2	=	0x00bd
-                    00C8    369 _T2CON_0	=	0x00c8
-                    00C9    370 _T2CON_1	=	0x00c9
-                    00CA    371 _T2CON_2	=	0x00ca
-                    00CB    372 _T2CON_3	=	0x00cb
-                    00CC    373 _T2CON_4	=	0x00cc
-                    00CD    374 _T2CON_5	=	0x00cd
-                    00CE    375 _T2CON_6	=	0x00ce
-                    00CF    376 _T2CON_7	=	0x00cf
-                    00C8    377 _CP_RL2	=	0x00c8
-                    00C9    378 _C_T2	=	0x00c9
-                    00CA    379 _TR2	=	0x00ca
-                    00CB    380 _EXEN2	=	0x00cb
-                    00CC    381 _TCLK	=	0x00cc
-                    00CD    382 _RCLK	=	0x00cd
-                    00CE    383 _EXF2	=	0x00ce
-                    00CF    384 _TF2	=	0x00cf
-                    00DF    385 _CF	=	0x00df
-                    00DE    386 _CR	=	0x00de
-                    00DC    387 _CCF4	=	0x00dc
-                    00DB    388 _CCF3	=	0x00db
-                    00DA    389 _CCF2	=	0x00da
-                    00D9    390 _CCF1	=	0x00d9
-                    00D8    391 _CCF0	=	0x00d8
-                    00AE    392 _EC	=	0x00ae
-                    00BE    393 _PPCL	=	0x00be
-                    00BD    394 _PT2L	=	0x00bd
-                    00BC    395 _PLS	=	0x00bc
-                    00BB    396 _PT1L	=	0x00bb
-                    00BA    397 _PX1L	=	0x00ba
-                    00B9    398 _PT0L	=	0x00b9
-                    00B8    399 _PX0L	=	0x00b8
-                    00C0    400 _P4_0	=	0x00c0
-                    00C1    401 _P4_1	=	0x00c1
-                    00C2    402 _P4_2	=	0x00c2
-                    00C3    403 _P4_3	=	0x00c3
-                    00C4    404 _P4_4	=	0x00c4
-                    00C5    405 _P4_5	=	0x00c5
-                    00C6    406 _P4_6	=	0x00c6
-                    00C7    407 _P4_7	=	0x00c7
-                    00D8    408 _P5_0	=	0x00d8
-                    00D9    409 _P5_1	=	0x00d9
-                    00DA    410 _P5_2	=	0x00da
-                    00DB    411 _P5_3	=	0x00db
-                    00DC    412 _P5_4	=	0x00dc
-                    00DD    413 _P5_5	=	0x00dd
-                    00DE    414 _P5_6	=	0x00de
-                    00DF    415 _P5_7	=	0x00df
-                            416 ;--------------------------------------------------------
-                            417 ; overlayable register banks
+                            291 ; special function bits
+                            292 ;--------------------------------------------------------
+                            293 	.area RSEG    (DATA)
+                    0080    294 _P0_0	=	0x0080
+                    0081    295 _P0_1	=	0x0081
+                    0082    296 _P0_2	=	0x0082
+                    0083    297 _P0_3	=	0x0083
+                    0084    298 _P0_4	=	0x0084
+                    0085    299 _P0_5	=	0x0085
+                    0086    300 _P0_6	=	0x0086
+                    0087    301 _P0_7	=	0x0087
+                    0088    302 _IT0	=	0x0088
+                    0089    303 _IE0	=	0x0089
+                    008A    304 _IT1	=	0x008a
+                    008B    305 _IE1	=	0x008b
+                    008C    306 _TR0	=	0x008c
+                    008D    307 _TF0	=	0x008d
+                    008E    308 _TR1	=	0x008e
+                    008F    309 _TF1	=	0x008f
+                    0090    310 _P1_0	=	0x0090
+                    0091    311 _P1_1	=	0x0091
+                    0092    312 _P1_2	=	0x0092
+                    0093    313 _P1_3	=	0x0093
+                    0094    314 _P1_4	=	0x0094
+                    0095    315 _P1_5	=	0x0095
+                    0096    316 _P1_6	=	0x0096
+                    0097    317 _P1_7	=	0x0097
+                    0098    318 _RI	=	0x0098
+                    0099    319 _TI	=	0x0099
+                    009A    320 _RB8	=	0x009a
+                    009B    321 _TB8	=	0x009b
+                    009C    322 _REN	=	0x009c
+                    009D    323 _SM2	=	0x009d
+                    009E    324 _SM1	=	0x009e
+                    009F    325 _SM0	=	0x009f
+                    00A0    326 _P2_0	=	0x00a0
+                    00A1    327 _P2_1	=	0x00a1
+                    00A2    328 _P2_2	=	0x00a2
+                    00A3    329 _P2_3	=	0x00a3
+                    00A4    330 _P2_4	=	0x00a4
+                    00A5    331 _P2_5	=	0x00a5
+                    00A6    332 _P2_6	=	0x00a6
+                    00A7    333 _P2_7	=	0x00a7
+                    00A8    334 _EX0	=	0x00a8
+                    00A9    335 _ET0	=	0x00a9
+                    00AA    336 _EX1	=	0x00aa
+                    00AB    337 _ET1	=	0x00ab
+                    00AC    338 _ES	=	0x00ac
+                    00AF    339 _EA	=	0x00af
+                    00B0    340 _P3_0	=	0x00b0
+                    00B1    341 _P3_1	=	0x00b1
+                    00B2    342 _P3_2	=	0x00b2
+                    00B3    343 _P3_3	=	0x00b3
+                    00B4    344 _P3_4	=	0x00b4
+                    00B5    345 _P3_5	=	0x00b5
+                    00B6    346 _P3_6	=	0x00b6
+                    00B7    347 _P3_7	=	0x00b7
+                    00B0    348 _RXD	=	0x00b0
+                    00B1    349 _TXD	=	0x00b1
+                    00B2    350 _INT0	=	0x00b2
+                    00B3    351 _INT1	=	0x00b3
+                    00B4    352 _T0	=	0x00b4
+                    00B5    353 _T1	=	0x00b5
+                    00B6    354 _WR	=	0x00b6
+                    00B7    355 _RD	=	0x00b7
+                    00B8    356 _PX0	=	0x00b8
+                    00B9    357 _PT0	=	0x00b9
+                    00BA    358 _PX1	=	0x00ba
+                    00BB    359 _PT1	=	0x00bb
+                    00BC    360 _PS	=	0x00bc
+                    00D0    361 _P	=	0x00d0
+                    00D1    362 _F1	=	0x00d1
+                    00D2    363 _OV	=	0x00d2
+                    00D3    364 _RS0	=	0x00d3
+                    00D4    365 _RS1	=	0x00d4
+                    00D5    366 _F0	=	0x00d5
+                    00D6    367 _AC	=	0x00d6
+                    00D7    368 _CY	=	0x00d7
+                    00AD    369 _ET2	=	0x00ad
+                    00BD    370 _PT2	=	0x00bd
+                    00C8    371 _T2CON_0	=	0x00c8
+                    00C9    372 _T2CON_1	=	0x00c9
+                    00CA    373 _T2CON_2	=	0x00ca
+                    00CB    374 _T2CON_3	=	0x00cb
+                    00CC    375 _T2CON_4	=	0x00cc
+                    00CD    376 _T2CON_5	=	0x00cd
+                    00CE    377 _T2CON_6	=	0x00ce
+                    00CF    378 _T2CON_7	=	0x00cf
+                    00C8    379 _CP_RL2	=	0x00c8
+                    00C9    380 _C_T2	=	0x00c9
+                    00CA    381 _TR2	=	0x00ca
+                    00CB    382 _EXEN2	=	0x00cb
+                    00CC    383 _TCLK	=	0x00cc
+                    00CD    384 _RCLK	=	0x00cd
+                    00CE    385 _EXF2	=	0x00ce
+                    00CF    386 _TF2	=	0x00cf
+                    00DF    387 _CF	=	0x00df
+                    00DE    388 _CR	=	0x00de
+                    00DC    389 _CCF4	=	0x00dc
+                    00DB    390 _CCF3	=	0x00db
+                    00DA    391 _CCF2	=	0x00da
+                    00D9    392 _CCF1	=	0x00d9
+                    00D8    393 _CCF0	=	0x00d8
+                    00AE    394 _EC	=	0x00ae
+                    00BE    395 _PPCL	=	0x00be
+                    00BD    396 _PT2L	=	0x00bd
+                    00BC    397 _PLS	=	0x00bc
+                    00BB    398 _PT1L	=	0x00bb
+                    00BA    399 _PX1L	=	0x00ba
+                    00B9    400 _PT0L	=	0x00b9
+                    00B8    401 _PX0L	=	0x00b8
+                    00C0    402 _P4_0	=	0x00c0
+                    00C1    403 _P4_1	=	0x00c1
+                    00C2    404 _P4_2	=	0x00c2
+                    00C3    405 _P4_3	=	0x00c3
+                    00C4    406 _P4_4	=	0x00c4
+                    00C5    407 _P4_5	=	0x00c5
+                    00C6    408 _P4_6	=	0x00c6
+                    00C7    409 _P4_7	=	0x00c7
+                    00D8    410 _P5_0	=	0x00d8
+                    00D9    411 _P5_1	=	0x00d9
+                    00DA    412 _P5_2	=	0x00da
+                    00DB    413 _P5_3	=	0x00db
+                    00DC    414 _P5_4	=	0x00dc
+                    00DD    415 _P5_5	=	0x00dd
+                    00DE    416 _P5_6	=	0x00de
+                    00DF    417 _P5_7	=	0x00df
                             418 ;--------------------------------------------------------
-                            419 	.area REG_BANK_0	(REL,OVR,DATA)
-   0000                     420 	.ds 8
-                            421 ;--------------------------------------------------------
-                            422 ; internal ram data
+                            419 ; overlayable register banks
+                            420 ;--------------------------------------------------------
+                            421 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                     422 	.ds 8
                             423 ;--------------------------------------------------------
-                            424 	.area DSEG    (DATA)
+                            424 ; internal ram data
                             425 ;--------------------------------------------------------
-                            426 ; overlayable items in internal ram 
+                            426 	.area DSEG    (DATA)
                             427 ;--------------------------------------------------------
-                            428 	.area OSEG    (OVR,DATA)
+                            428 ; overlayable items in internal ram 
                             429 ;--------------------------------------------------------
-                            430 ; indirectly addressable internal ram data
+                            430 	.area OSEG    (OVR,DATA)
                             431 ;--------------------------------------------------------
-                            432 	.area ISEG    (DATA)
+                            432 ; indirectly addressable internal ram data
                             433 ;--------------------------------------------------------
-                            434 ; bit data
+                            434 	.area ISEG    (DATA)
                             435 ;--------------------------------------------------------
-                            436 	.area BSEG    (BIT)
+                            436 ; bit data
                             437 ;--------------------------------------------------------
-                            438 ; paged external ram data
+                            438 	.area BSEG    (BIT)
                             439 ;--------------------------------------------------------
-                            440 	.area PSEG    (PAG,XDATA)
+                            440 ; paged external ram data
                             441 ;--------------------------------------------------------
-                            442 ; external ram data
+                            442 	.area PSEG    (PAG,XDATA)
                             443 ;--------------------------------------------------------
-                            444 	.area XSEG    (XDATA)
-   0000                     445 _PRESSURE_WriteByte_PARM_2:
-   0000                     446 	.ds 1
-   0001                     447 _PRESSURE_WriteByte_addr_1_1:
-   0001                     448 	.ds 1
-   0002                     449 _PRESSURE_ReadByte_reg_1_1:
-   0002                     450 	.ds 1
-                            451 ;--------------------------------------------------------
-                            452 ; external initialized ram data
+                            444 ; external ram data
+                            445 ;--------------------------------------------------------
+                            446 	.area XSEG    (XDATA)
+   0000                     447 _PRESSURE_WriteByte_PARM_2:
+   0000                     448 	.ds 1
+   0001                     449 _PRESSURE_WriteByte_addr_1_1:
+   0001                     450 	.ds 1
+   0002                     451 _PRESSURE_ReadByte_reg_1_1:
+   0002                     452 	.ds 1
                             453 ;--------------------------------------------------------
-                            454 	.area XISEG   (XDATA)
-                            455 	.area HOME    (CODE)
-                            456 	.area GSINIT0 (CODE)
-                            457 	.area GSINIT1 (CODE)
-                            458 	.area GSINIT2 (CODE)
-                            459 	.area GSINIT3 (CODE)
-                            460 	.area GSINIT4 (CODE)
-                            461 	.area GSINIT5 (CODE)
-                            462 	.area GSINIT  (CODE)
-                            463 	.area GSFINAL (CODE)
-                            464 	.area CSEG    (CODE)
-                            465 ;--------------------------------------------------------
-                            466 ; global & static initialisations
+                            454 ; external initialized ram data
+                            455 ;--------------------------------------------------------
+                            456 	.area XISEG   (XDATA)
+                            457 	.area HOME    (CODE)
+                            458 	.area GSINIT0 (CODE)
+                            459 	.area GSINIT1 (CODE)
+                            460 	.area GSINIT2 (CODE)
+                            461 	.area GSINIT3 (CODE)
+                            462 	.area GSINIT4 (CODE)
+                            463 	.area GSINIT5 (CODE)
+                            464 	.area GSINIT  (CODE)
+                            465 	.area GSFINAL (CODE)
+                            466 	.area CSEG    (CODE)
                             467 ;--------------------------------------------------------
-                            468 	.area HOME    (CODE)
-                            469 	.area GSINIT  (CODE)
-                            470 	.area GSFINAL (CODE)
+                            468 ; global & static initialisations
+                            469 ;--------------------------------------------------------
+                            470 	.area HOME    (CODE)
                             471 	.area GSINIT  (CODE)
-                            472 ;--------------------------------------------------------
-                            473 ; Home
+                            472 	.area GSFINAL (CODE)
+                            473 	.area GSINIT  (CODE)
                             474 ;--------------------------------------------------------
-                            475 	.area HOME    (CODE)
-                            476 	.area CSEG    (CODE)
-                            477 ;--------------------------------------------------------
-                            478 ; code
+                            475 ; Home
+                            476 ;--------------------------------------------------------
+                            477 	.area HOME    (CODE)
+                            478 	.area CSEG    (CODE)
                             479 ;--------------------------------------------------------
-                            480 	.area CSEG    (CODE)
-                            481 ;------------------------------------------------------------
-                            482 ;Allocation info for local variables in function 'PRESSURE_WriteByte'
+                            480 ; code
+                            481 ;--------------------------------------------------------
+                            482 	.area CSEG    (CODE)
                             483 ;------------------------------------------------------------
-                            484 ;p_Data                    Allocated with name '_PRESSURE_WriteByte_PARM_2'
-                            485 ;addr                      Allocated with name '_PRESSURE_WriteByte_addr_1_1'
-                            486 ;------------------------------------------------------------
-                            487 ;	weather_shield.c:21: void PRESSURE_WriteByte(unsigned char addr, unsigned char p_Data)
-                            488 ;	-----------------------------------------
-                            489 ;	 function PRESSURE_WriteByte
+                            484 ;Allocation info for local variables in function 'PRESSURE_WriteByte'
+                            485 ;------------------------------------------------------------
+                            486 ;p_Data                    Allocated with name '_PRESSURE_WriteByte_PARM_2'
+                            487 ;addr                      Allocated with name '_PRESSURE_WriteByte_addr_1_1'
+                            488 ;------------------------------------------------------------
+                            489 ;	weather_shield.c:21: void PRESSURE_WriteByte(unsigned char addr, unsigned char p_Data)
                             490 ;	-----------------------------------------
-   0000                     491 _PRESSURE_WriteByte:
-                    0002    492 	ar2 = 0x02
-                    0003    493 	ar3 = 0x03
-                    0004    494 	ar4 = 0x04
-                    0005    495 	ar5 = 0x05
-                    0006    496 	ar6 = 0x06
-                    0007    497 	ar7 = 0x07
-                    0000    498 	ar0 = 0x00
-                    0001    499 	ar1 = 0x01
-                            500 ;	genReceive
-   0000 E5 82               501 	mov	a,dpl
-   0002 90s00r01            502 	mov	dptr,#_PRESSURE_WriteByte_addr_1_1
-   0005 F0                  503 	movx	@dptr,a
-                            504 ;	weather_shield.c:24: I2C_Start();               // Start i2c communication
-                            505 ;	genCall
-   0006 12s00r00            506 	lcall	_I2C_Start
-                            507 ;	weather_shield.c:25: I2C_Write(PRESSURE_ID);	   // Select IO_expander as the SLAVE by sending its ID (01110000)
-                            508 ;	genCall
-   0009 75 82 C0            509 	mov	dpl,#0xC0
-   000C 12s00r00            510 	lcall	_I2C_Write
-                            511 ;	weather_shield.c:26: I2C_Ack();
-                            512 ;	genCall
-   000F 12s00r00            513 	lcall	_I2C_Ack
-                            514 ;	weather_shield.c:28: I2C_Write(addr); // Select the Specified EEPROM address of AT2404
-                            515 ;	genAssign
-   0012 90s00r01            516 	mov	dptr,#_PRESSURE_WriteByte_addr_1_1
-   0015 E0                  517 	movx	a,@dptr
-                            518 ;	genCall
-   0016 FA                  519 	mov	r2,a
-                            520 ;	Peephole 244.c	loading dpl from a instead of r2
-   0017 F5 82               521 	mov	dpl,a
-   0019 12s00r00            522 	lcall	_I2C_Write
-                            523 ;	weather_shield.c:29: I2C_Ack();
-                            524 ;	genCall
-   001C 12s00r00            525 	lcall	_I2C_Ack
-                            526 ;	weather_shield.c:31: I2C_Write(p_Data);    // Write the data at specified address
-                            527 ;	genAssign
-   001F 90s00r00            528 	mov	dptr,#_PRESSURE_WriteByte_PARM_2
-   0022 E0                  529 	movx	a,@dptr
-                            530 ;	genCall
-   0023 FA                  531 	mov	r2,a
-                            532 ;	Peephole 244.c	loading dpl from a instead of r2
-   0024 F5 82               533 	mov	dpl,a
-   0026 12s00r00            534 	lcall	_I2C_Write
-                            535 ;	weather_shield.c:32: I2C_Ack();
-                            536 ;	genCall
-   0029 12s00r00            537 	lcall	_I2C_Ack
-                            538 ;	weather_shield.c:33: I2C_Stop();           	   // Stop i2c communication after Writing the data
-                            539 ;	genCall
-   002C 12s00r00            540 	lcall	_I2C_Stop
-                            541 ;	weather_shield.c:34: delay_ms(5);               // Write operation takes max 5ms, refer At2404 datasheet
-                            542 ;	genCall
-                            543 ;	Peephole 182.b	used 16 bit load of dptr
-   002F 90 00 05            544 	mov	dptr,#0x0005
-                            545 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   0032 02s00r00            546 	ljmp	_delay_ms
-                            547 ;
-                            548 ;------------------------------------------------------------
-                            549 ;Allocation info for local variables in function 'PRESSURE_ReadByte'
+                            491 ;	 function PRESSURE_WriteByte
+                            492 ;	-----------------------------------------
+   0000                     493 _PRESSURE_WriteByte:
+                    0002    494 	ar2 = 0x02
+                    0003    495 	ar3 = 0x03
+                    0004    496 	ar4 = 0x04
+                    0005    497 	ar5 = 0x05
+                    0006    498 	ar6 = 0x06
+                    0007    499 	ar7 = 0x07
+                    0000    500 	ar0 = 0x00
+                    0001    501 	ar1 = 0x01
+                            502 ;	genReceive
+   0000 E5 82               503 	mov	a,dpl
+   0002 90s00r01            504 	mov	dptr,#_PRESSURE_WriteByte_addr_1_1
+   0005 F0                  505 	movx	@dptr,a
+                            506 ;	weather_shield.c:24: I2C_Start();               // Start i2c communication
+                            507 ;	genCall
+   0006 12s00r00            508 	lcall	_I2C_Start
+                            509 ;	weather_shield.c:25: I2C_Write(PRESSURE_ID);	   // Select IO_expander as the SLAVE by sending its ID (01110000)
+                            510 ;	genCall
+   0009 75 82 C0            511 	mov	dpl,#0xC0
+   000C 12s00r00            512 	lcall	_I2C_Write
+                            513 ;	weather_shield.c:26: I2C_Ack();
+                            514 ;	genCall
+   000F 12s00r00            515 	lcall	_I2C_Ack
+                            516 ;	weather_shield.c:28: I2C_Write(addr); // Select the Specified EEPROM address of AT2404
+                            517 ;	genAssign
+   0012 90s00r01            518 	mov	dptr,#_PRESSURE_WriteByte_addr_1_1
+   0015 E0                  519 	movx	a,@dptr
+                            520 ;	genCall
+   0016 FA                  521 	mov	r2,a
+                            522 ;	Peephole 244.c	loading dpl from a instead of r2
+   0017 F5 82               523 	mov	dpl,a
+   0019 12s00r00            524 	lcall	_I2C_Write
+                            525 ;	weather_shield.c:29: I2C_Ack();
+                            526 ;	genCall
+   001C 12s00r00            527 	lcall	_I2C_Ack
+                            528 ;	weather_shield.c:31: I2C_Write(p_Data);    // Write the data at specified address
+                            529 ;	genAssign
+   001F 90s00r00            530 	mov	dptr,#_PRESSURE_WriteByte_PARM_2
+   0022 E0                  531 	movx	a,@dptr
+                            532 ;	genCall
+   0023 FA                  533 	mov	r2,a
+                            534 ;	Peephole 244.c	loading dpl from a instead of r2
+   0024 F5 82               535 	mov	dpl,a
+   0026 12s00r00            536 	lcall	_I2C_Write
+                            537 ;	weather_shield.c:32: I2C_Ack();
+                            538 ;	genCall
+   0029 12s00r00            539 	lcall	_I2C_Ack
+                            540 ;	weather_shield.c:33: I2C_Stop();           	   // Stop i2c communication after Writing the data
+                            541 ;	genCall
+   002C 12s00r00            542 	lcall	_I2C_Stop
+                            543 ;	weather_shield.c:34: delay_ms(5);               // Write operation takes max 5ms, refer At2404 datasheet
+                            544 ;	genCall
+                            545 ;	Peephole 182.b	used 16 bit load of dptr
+   002F 90 00 05            546 	mov	dptr,#0x0005
+                            547 ;	Peephole 253.b	replaced lcall/ret with ljmp
+   0032 02s00r00            548 	ljmp	_delay_ms
+                            549 ;
                             550 ;------------------------------------------------------------
-                            551 ;reg                       Allocated with name '_PRESSURE_ReadByte_reg_1_1'
-                            552 ;p_Data                    Allocated with name '_PRESSURE_ReadByte_p_Data_1_1'
-                            553 ;------------------------------------------------------------
-                            554 ;	weather_shield.c:42: unsigned char PRESSURE_ReadByte(char reg)
-                            555 ;	-----------------------------------------
-                            556 ;	 function PRESSURE_ReadByte
+                            551 ;Allocation info for local variables in function 'PRESSURE_ReadByte'
+                            552 ;------------------------------------------------------------
+                            553 ;reg                       Allocated with name '_PRESSURE_ReadByte_reg_1_1'
+                            554 ;p_Data                    Allocated with name '_PRESSURE_ReadByte_p_Data_1_1'
+                            555 ;------------------------------------------------------------
+                            556 ;	weather_shield.c:42: unsigned char PRESSURE_ReadByte(char reg)
                             557 ;	-----------------------------------------
-   0035                     558 _PRESSURE_ReadByte:
-                            559 ;	genReceive
-   0035 E5 82               560 	mov	a,dpl
-   0037 90s00r02            561 	mov	dptr,#_PRESSURE_ReadByte_reg_1_1
-   003A F0                  562 	movx	@dptr,a
-                            563 ;	weather_shield.c:46: I2C_Start();               // Start i2c communication
-                            564 ;	genCall
-   003B 12s00r00            565 	lcall	_I2C_Start
-                            566 ;	weather_shield.c:47: I2C_Write(PRESSURE_ID);	   // connect to AT2404(write) by sending its ID on I2c Bus
-                            567 ;	genCall
-   003E 75 82 C0            568 	mov	dpl,#0xC0
-   0041 12s00r00            569 	lcall	_I2C_Write
-                            570 ;	weather_shield.c:48: I2C_Ack();
-                            571 ;	genCall
-   0044 12s00r00            572 	lcall	_I2C_Ack
-                            573 ;	weather_shield.c:49: I2C_Write(reg); // Select the Specified EEPROM address of AT2404
-                            574 ;	genAssign
-   0047 90s00r02            575 	mov	dptr,#_PRESSURE_ReadByte_reg_1_1
-   004A E0                  576 	movx	a,@dptr
-                            577 ;	genCall
-   004B FA                  578 	mov	r2,a
-                            579 ;	Peephole 244.c	loading dpl from a instead of r2
-   004C F5 82               580 	mov	dpl,a
-   004E 12s00r00            581 	lcall	_I2C_Write
-                            582 ;	weather_shield.c:50: I2C_Ack();
-                            583 ;	genCall
-   0051 12s00r00            584 	lcall	_I2C_Ack
-                            585 ;	weather_shield.c:52: I2C_Start();               // Start i2c communication
-                            586 ;	genCall
-   0054 12s00r00            587 	lcall	_I2C_Start
-                            588 ;	weather_shield.c:53: I2C_Write(PRESSURE_ID+1);	  // Select IO_expander as the SLAVE by sending its ID (01110000)
-                            589 ;	genCall
-   0057 75 82 C1            590 	mov	dpl,#0xC1
-   005A 12s00r00            591 	lcall	_I2C_Write
-                            592 ;	weather_shield.c:54: I2C_Ack();
-                            593 ;	genCall
-   005D 12s00r00            594 	lcall	_I2C_Ack
-                            595 ;	weather_shield.c:56: p_Data = I2C_Read();  // Read the data from specified address
-                            596 ;	genCall
-   0060 12s00r00            597 	lcall	_I2C_Read
-   0063 AA 82               598 	mov	r2,dpl
-                            599 ;	weather_shield.c:57: I2C_NoAck();
-                            600 ;	genCall
-   0065 C0 02               601 	push	ar2
-   0067 12s00r00            602 	lcall	_I2C_NoAck
-   006A D0 02               603 	pop	ar2
-                            604 ;	weather_shield.c:58: I2C_Stop();		           // Stop i2c communication after Reading the data
-                            605 ;	genCall
-   006C C0 02               606 	push	ar2
-   006E 12s00r00            607 	lcall	_I2C_Stop
-   0071 D0 02               608 	pop	ar2
-                            609 ;	weather_shield.c:59: delay_us(10);
-                            610 ;	genCall
-                            611 ;	Peephole 182.b	used 16 bit load of dptr
-   0073 90 00 0A            612 	mov	dptr,#0x000A
-   0076 C0 02               613 	push	ar2
-   0078 12s00r00            614 	lcall	_delay_us
-   007B D0 02               615 	pop	ar2
-                            616 ;	weather_shield.c:60: return p_Data;          // Return the Read data
-                            617 ;	genRet
-   007D 8A 82               618 	mov	dpl,r2
-                            619 ;	Peephole 300	removed redundant label 00101$
-   007F 22                  620 	ret
-                            621 ;------------------------------------------------------------
-                            622 ;Allocation info for local variables in function 'PRESSURE_calibration'
+                            558 ;	 function PRESSURE_ReadByte
+                            559 ;	-----------------------------------------
+   0035                     560 _PRESSURE_ReadByte:
+                            561 ;	genReceive
+   0035 E5 82               562 	mov	a,dpl
+   0037 90s00r02            563 	mov	dptr,#_PRESSURE_ReadByte_reg_1_1
+   003A F0                  564 	movx	@dptr,a
+                            565 ;	weather_shield.c:46: I2C_Start();               // Start i2c communication
+                            566 ;	genCall
+   003B 12s00r00            567 	lcall	_I2C_Start
+                            568 ;	weather_shield.c:47: I2C_Write(PRESSURE_ID);	   // connect to AT2404(write) by sending its ID on I2c Bus
+                            569 ;	genCall
+   003E 75 82 C0            570 	mov	dpl,#0xC0
+   0041 12s00r00            571 	lcall	_I2C_Write
+                            572 ;	weather_shield.c:48: I2C_Ack();
+                            573 ;	genCall
+   0044 12s00r00            574 	lcall	_I2C_Ack
+                            575 ;	weather_shield.c:49: I2C_Write(reg); // Select the Specified EEPROM address of AT2404
+                            576 ;	genAssign
+   0047 90s00r02            577 	mov	dptr,#_PRESSURE_ReadByte_reg_1_1
+   004A E0                  578 	movx	a,@dptr
+                            579 ;	genCall
+   004B FA                  580 	mov	r2,a
+                            581 ;	Peephole 244.c	loading dpl from a instead of r2
+   004C F5 82               582 	mov	dpl,a
+   004E 12s00r00            583 	lcall	_I2C_Write
+                            584 ;	weather_shield.c:50: I2C_Ack();
+                            585 ;	genCall
+   0051 12s00r00            586 	lcall	_I2C_Ack
+                            587 ;	weather_shield.c:52: I2C_Start();               // Start i2c communication
+                            588 ;	genCall
+   0054 12s00r00            589 	lcall	_I2C_Start
+                            590 ;	weather_shield.c:53: I2C_Write(PRESSURE_ID+1);	  // Select IO_expander as the SLAVE by sending its ID (01110000)
+                            591 ;	genCall
+   0057 75 82 C1            592 	mov	dpl,#0xC1
+   005A 12s00r00            593 	lcall	_I2C_Write
+                            594 ;	weather_shield.c:54: I2C_Ack();
+                            595 ;	genCall
+   005D 12s00r00            596 	lcall	_I2C_Ack
+                            597 ;	weather_shield.c:56: p_Data = I2C_Read();  // Read the data from specified address
+                            598 ;	genCall
+   0060 12s00r00            599 	lcall	_I2C_Read
+   0063 AA 82               600 	mov	r2,dpl
+                            601 ;	weather_shield.c:57: I2C_NoAck();
+                            602 ;	genCall
+   0065 C0 02               603 	push	ar2
+   0067 12s00r00            604 	lcall	_I2C_NoAck
+   006A D0 02               605 	pop	ar2
+                            606 ;	weather_shield.c:58: I2C_Stop();		           // Stop i2c communication after Reading the data
+                            607 ;	genCall
+   006C C0 02               608 	push	ar2
+   006E 12s00r00            609 	lcall	_I2C_Stop
+   0071 D0 02               610 	pop	ar2
+                            611 ;	weather_shield.c:59: delay_us(10);
+                            612 ;	genCall
+                            613 ;	Peephole 182.b	used 16 bit load of dptr
+   0073 90 00 0A            614 	mov	dptr,#0x000A
+   0076 C0 02               615 	push	ar2
+   0078 12s00r00            616 	lcall	_delay_us
+   007B D0 02               617 	pop	ar2
+                            618 ;	weather_shield.c:60: return p_Data;          // Return the Read data
+                            619 ;	genRet
+   007D 8A 82               620 	mov	dpl,r2
+                            621 ;	Peephole 300	removed redundant label 00101$
+   007F 22                  622 	ret
                             623 ;------------------------------------------------------------
-                            624 ;msb                       Allocated with name '_PRESSURE_calibration_msb_1_1'
-                            625 ;csb                       Allocated with name '_PRESSURE_calibration_csb_1_1'
-                            626 ;pressure                  Allocated with name '_PRESSURE_calibration_pressure_1_1'
-                            627 ;------------------------------------------------------------
-                            628 ;	weather_shield.c:64: unsigned int PRESSURE_calibration(void) __critical
-                            629 ;	-----------------------------------------
-                            630 ;	 function PRESSURE_calibration
+                            624 ;Allocation info for local variables in function 'PRESSURE_calibration'
+                            625 ;------------------------------------------------------------
+                            626 ;msb                       Allocated with name '_PRESSURE_calibration_msb_1_1'
+                            627 ;csb                       Allocated with name '_PRESSURE_calibration_csb_1_1'
+                            628 ;pressure                  Allocated with name '_PRESSURE_calibration_pressure_1_1'
+                            629 ;------------------------------------------------------------
+                            630 ;	weather_shield.c:64: unsigned int PRESSURE_calibration(void) __critical
                             631 ;	-----------------------------------------
-   0080                     632 _PRESSURE_calibration:
-   0080 D3                  633 	setb	c
-   0081 10 AF 01            634 	jbc	ea,00103$
-   0084 C3                  635 	clr	c
-   0085                     636 00103$:
-   0085 C0 D0               637 	push	psw
-                            638 ;	weather_shield.c:68: PRESSURE_WriteByte(0x26,0x02);
-                            639 ;	genAssign
-   0087 90s00r00            640 	mov	dptr,#_PRESSURE_WriteByte_PARM_2
-   008A 74 02               641 	mov	a,#0x02
-   008C F0                  642 	movx	@dptr,a
-                            643 ;	genCall
-   008D 75 82 26            644 	mov	dpl,#0x26
-   0090 12s00r00            645 	lcall	_PRESSURE_WriteByte
-                            646 ;	weather_shield.c:70: msb= PRESSURE_ReadByte(0x01);
-                            647 ;	genCall
-   0093 75 82 01            648 	mov	dpl,#0x01
-   0096 12s00r35            649 	lcall	_PRESSURE_ReadByte
-   0099 AA 82               650 	mov	r2,dpl
-                            651 ;	genCast
-   009B 7B 00               652 	mov	r3,#0x00
-                            653 ;	weather_shield.c:72: csb = PRESSURE_ReadByte(0x02);
-                            654 ;	genCall
-   009D 75 82 02            655 	mov	dpl,#0x02
-   00A0 C0 02               656 	push	ar2
-   00A2 C0 03               657 	push	ar3
-   00A4 12s00r35            658 	lcall	_PRESSURE_ReadByte
-   00A7 AC 82               659 	mov	r4,dpl
-   00A9 D0 03               660 	pop	ar3
-   00AB D0 02               661 	pop	ar2
-                            662 ;	genCast
-   00AD 7D 00               663 	mov	r5,#0x00
-                            664 ;	weather_shield.c:74: pressure= (msb)*(1024/133) + (csb/133);
-                            665 ;	genAssign
-   00AF 90s00r00            666 	mov	dptr,#__mulint_PARM_2
-   00B2 74 07               667 	mov	a,#0x07
-   00B4 F0                  668 	movx	@dptr,a
-   00B5 E4                  669 	clr	a
-   00B6 A3                  670 	inc	dptr
-   00B7 F0                  671 	movx	@dptr,a
-                            672 ;	genCall
-   00B8 8A 82               673 	mov	dpl,r2
-   00BA 8B 83               674 	mov	dph,r3
-   00BC C0 04               675 	push	ar4
-   00BE C0 05               676 	push	ar5
-   00C0 12s00r00            677 	lcall	__mulint
-   00C3 AA 82               678 	mov	r2,dpl
-   00C5 AB 83               679 	mov	r3,dph
-   00C7 D0 05               680 	pop	ar5
-   00C9 D0 04               681 	pop	ar4
-                            682 ;	genAssign
-   00CB 90s00r00            683 	mov	dptr,#__divuint_PARM_2
-   00CE 74 85               684 	mov	a,#0x85
-   00D0 F0                  685 	movx	@dptr,a
-   00D1 E4                  686 	clr	a
-   00D2 A3                  687 	inc	dptr
-   00D3 F0                  688 	movx	@dptr,a
-                            689 ;	genCall
-   00D4 8C 82               690 	mov	dpl,r4
-   00D6 8D 83               691 	mov	dph,r5
-   00D8 C0 02               692 	push	ar2
-   00DA C0 03               693 	push	ar3
-   00DC 12s00r00            694 	lcall	__divuint
-   00DF AC 82               695 	mov	r4,dpl
-   00E1 AD 83               696 	mov	r5,dph
-   00E3 D0 03               697 	pop	ar3
-   00E5 D0 02               698 	pop	ar2
-                            699 ;	genPlus
-                            700 ;	Peephole 236.g	used r4 instead of ar4
-   00E7 EC                  701 	mov	a,r4
-                            702 ;	Peephole 236.a	used r2 instead of ar2
-   00E8 2A                  703 	add	a,r2
-   00E9 FA                  704 	mov	r2,a
-                            705 ;	Peephole 236.g	used r5 instead of ar5
-   00EA ED                  706 	mov	a,r5
-                            707 ;	Peephole 236.b	used r3 instead of ar3
-   00EB 3B                  708 	addc	a,r3
-   00EC FB                  709 	mov	r3,a
-                            710 ;	weather_shield.c:76: return pressure;
-                            711 ;	genRet
-   00ED 8A 82               712 	mov	dpl,r2
-   00EF 8B 83               713 	mov	dph,r3
-                            714 ;	Peephole 300	removed redundant label 00101$
-   00F1 D0 D0               715 	pop	psw
-   00F3 92 AF               716 	mov	ea,c
-   00F5 22                  717 	ret
-                            718 	.area CSEG    (CODE)
-                            719 	.area CONST   (CODE)
-                            720 	.area XINIT   (CODE)
+                            632 ;	 function PRESSURE_calibration
+                            633 ;	-----------------------------------------
+   0080                     634 _PRESSURE_calibration:
+   0080 D3                  635 	setb	c
+   0081 10 AF 01            636 	jbc	ea,00103$
+   0084 C3                  637 	clr	c
+   0085                     638 00103$:
+   0085 C0 D0               639 	push	psw
+                            640 ;	weather_shield.c:68: PRESSURE_WriteByte(0x26,0x02);
+                            641 ;	genAssign
+   0087 90s00r00            642 	mov	dptr,#_PRESSURE_WriteByte_PARM_2
+   008A 74 02               643 	mov	a,#0x02
+   008C F0                  644 	movx	@dptr,a
+                            645 ;	genCall
+   008D 75 82 26            646 	mov	dpl,#0x26
+   0090 12s00r00            647 	lcall	_PRESSURE_WriteByte
+                            648 ;	weather_shield.c:70: msb= PRESSURE_ReadByte(0x01);
+                            649 ;	genCall
+   0093 75 82 01            650 	mov	dpl,#0x01
+   0096 12s00r35            651 	lcall	_PRESSURE_ReadByte
+   0099 AA 82               652 	mov	r2,dpl
+                            653 ;	genCast
+   009B 7B 00               654 	mov	r3,#0x00
+                            655 ;	weather_shield.c:72: csb = PRESSURE_ReadByte(0x02);
+                            656 ;	genCall
+   009D 75 82 02            657 	mov	dpl,#0x02
+   00A0 C0 02               658 	push	ar2
+   00A2 C0 03               659 	push	ar3
+   00A4 12s00r35            660 	lcall	_PRESSURE_ReadByte
+   00A7 AC 82               661 	mov	r4,dpl
+   00A9 D0 03               662 	pop	ar3
+   00AB D0 02               663 	pop	ar2
+                            664 ;	genCast
+   00AD 7D 00               665 	mov	r5,#0x00
+                            666 ;	weather_shield.c:74: pressure= (msb)*(1024/133) + (csb/133);
+                            667 ;	genAssign
+   00AF 90s00r00            668 	mov	dptr,#__mulint_PARM_2
+   00B2 74 07               669 	mov	a,#0x07
+   00B4 F0                  670 	movx	@dptr,a
+   00B5 E4                  671 	clr	a
+   00B6 A3                  672 	inc	dptr
+   00B7 F0                  673 	movx	@dptr,a
+                            674 ;	genCall
+   00B8 8A 82               675 	mov	dpl,r2
+   00BA 8B 83               676 	mov	dph,r3
+   00BC C0 04               677 	push	ar4
+   00BE C0 05               678 	push	ar5
+   00C0 12s00r00            679 	lcall	__mulint
+   00C3 AA 82               680 	mov	r2,dpl
+   00C5 AB 83               681 	mov	r3,dph
+   00C7 D0 05               682 	pop	ar5
+   00C9 D0 04               683 	pop	ar4
+                            684 ;	genAssign
+   00CB 90s00r00            685 	mov	dptr,#__divuint_PARM_2
+   00CE 74 85               686 	mov	a,#0x85
+   00D0 F0                  687 	movx	@dptr,a
+   00D1 E4                  688 	clr	a
+   00D2 A3                  689 	inc	dptr
+   00D3 F0                  690 	movx	@dptr,a
+                            691 ;	genCall
+   00D4 8C 82               692 	mov	dpl,r4
+   00D6 8D 83               693 	mov	dph,r5
+   00D8 C0 02               694 	push	ar2
+   00DA C0 03               695 	push	ar3
+   00DC 12s00r00            696 	lcall	__divuint
+   00DF AC 82               697 	mov	r4,dpl
+   00E1 AD 83               698 	mov	r5,dph
+   00E3 D0 03               699 	pop	ar3
+   00E5 D0 02               700 	pop	ar2
+                            701 ;	genPlus
+                            702 ;	Peephole 236.g	used r4 instead of ar4
+   00E7 EC                  703 	mov	a,r4
+                            704 ;	Peephole 236.a	used r2 instead of ar2
+   00E8 2A                  705 	add	a,r2
+   00E9 FA                  706 	mov	r2,a
+                            707 ;	Peephole 236.g	used r5 instead of ar5
+   00EA ED                  708 	mov	a,r5
+                            709 ;	Peephole 236.b	used r3 instead of ar3
+   00EB 3B                  710 	addc	a,r3
+   00EC FB                  711 	mov	r3,a
+                            712 ;	weather_shield.c:76: return pressure;
+                            713 ;	genRet
+   00ED 8A 82               714 	mov	dpl,r2
+   00EF 8B 83               715 	mov	dph,r3
+                            716 ;	Peephole 300	removed redundant label 00101$
+   00F1 D0 D0               717 	pop	psw
+   00F3 92 AF               718 	mov	ea,c
+   00F5 22                  719 	ret
+                            720 ;------------------------------------------------------------
+                            721 ;Allocation info for local variables in function 'TEMP_calibration'
+                            722 ;------------------------------------------------------------
+                            723 ;temp                      Allocated with name '_TEMP_calibration_temp_1_1'
+                            724 ;------------------------------------------------------------
+                            725 ;	weather_shield.c:81: unsigned int TEMP_calibration(void)
+                            726 ;	-----------------------------------------
+                            727 ;	 function TEMP_calibration
+                            728 ;	-----------------------------------------
+   00F6                     729 _TEMP_calibration:
+                            730 ;	weather_shield.c:85: PRESSURE_WriteByte(0x26,0x02);
+                            731 ;	genAssign
+   00F6 90s00r00            732 	mov	dptr,#_PRESSURE_WriteByte_PARM_2
+   00F9 74 02               733 	mov	a,#0x02
+   00FB F0                  734 	movx	@dptr,a
+                            735 ;	genCall
+   00FC 75 82 26            736 	mov	dpl,#0x26
+   00FF 12s00r00            737 	lcall	_PRESSURE_WriteByte
+                            738 ;	weather_shield.c:87: temp= PRESSURE_ReadByte(0x04);
+                            739 ;	genCall
+   0102 75 82 04            740 	mov	dpl,#0x04
+   0105 12s00r35            741 	lcall	_PRESSURE_ReadByte
+                            742 ;	genCast
+                            743 ;	weather_shield.c:92: return temp;
+                            744 ;	genRet
+   0108 AA 82               745 	mov	r2,dpl
+   010A 7B 00               746 	mov	r3,#0x00
+                            747 ;	Peephole 177.d	removed redundant move
+   010C 8B 83               748 	mov	dph,r3
+                            749 ;	Peephole 300	removed redundant label 00101$
+   010E 22                  750 	ret
+                            751 ;------------------------------------------------------------
+                            752 ;Allocation info for local variables in function 'ALTITUDE_calibration'
+                            753 ;------------------------------------------------------------
+                            754 ;msb                       Allocated with name '_ALTITUDE_calibration_msb_1_1'
+                            755 ;csb                       Allocated with name '_ALTITUDE_calibration_csb_1_1'
+                            756 ;alt                       Allocated with name '_ALTITUDE_calibration_alt_1_1'
+                            757 ;lsb                       Allocated with name '_ALTITUDE_calibration_lsb_1_1'
+                            758 ;------------------------------------------------------------
+                            759 ;	weather_shield.c:96: unsigned int ALTITUDE_calibration(void) __critical
+                            760 ;	-----------------------------------------
+                            761 ;	 function ALTITUDE_calibration
+                            762 ;	-----------------------------------------
+   010F                     763 _ALTITUDE_calibration:
+   010F D3                  764 	setb	c
+   0110 10 AF 01            765 	jbc	ea,00103$
+   0113 C3                  766 	clr	c
+   0114                     767 00103$:
+   0114 C0 D0               768 	push	psw
+                            769 ;	weather_shield.c:100: PRESSURE_WriteByte(0x26,0x82);
+                            770 ;	genAssign
+   0116 90s00r00            771 	mov	dptr,#_PRESSURE_WriteByte_PARM_2
+   0119 74 82               772 	mov	a,#0x82
+   011B F0                  773 	movx	@dptr,a
+                            774 ;	genCall
+   011C 75 82 26            775 	mov	dpl,#0x26
+   011F 12s00r00            776 	lcall	_PRESSURE_WriteByte
+                            777 ;	weather_shield.c:102: msb= PRESSURE_ReadByte(0x01);
+                            778 ;	genCall
+   0122 75 82 01            779 	mov	dpl,#0x01
+   0125 12s00r35            780 	lcall	_PRESSURE_ReadByte
+   0128 AA 82               781 	mov	r2,dpl
+                            782 ;	genCast
+   012A 7B 00               783 	mov	r3,#0x00
+                            784 ;	weather_shield.c:103: printf_tiny("\n\r alt msb: %d",msb);
+                            785 ;	genIpush
+   012C C0 02               786 	push	ar2
+   012E C0 03               787 	push	ar3
+   0130 C0 02               788 	push	ar2
+   0132 C0 03               789 	push	ar3
+                            790 ;	genIpush
+   0134 74r00               791 	mov	a,#__str_0
+   0136 C0 E0               792 	push	acc
+   0138 74s00               793 	mov	a,#(__str_0 >> 8)
+   013A C0 E0               794 	push	acc
+                            795 ;	genCall
+   013C 12s00r00            796 	lcall	_printf_tiny
+   013F E5 81               797 	mov	a,sp
+   0141 24 FC               798 	add	a,#0xfc
+   0143 F5 81               799 	mov	sp,a
+   0145 D0 03               800 	pop	ar3
+   0147 D0 02               801 	pop	ar2
+                            802 ;	weather_shield.c:105: csb = PRESSURE_ReadByte(0x02);
+                            803 ;	genCall
+   0149 75 82 02            804 	mov	dpl,#0x02
+   014C C0 02               805 	push	ar2
+   014E C0 03               806 	push	ar3
+   0150 12s00r35            807 	lcall	_PRESSURE_ReadByte
+   0153 AC 82               808 	mov	r4,dpl
+   0155 D0 03               809 	pop	ar3
+   0157 D0 02               810 	pop	ar2
+                            811 ;	genCast
+   0159 7D 00               812 	mov	r5,#0x00
+                            813 ;	weather_shield.c:106: printf_tiny("\n\r alt csb: %d",csb);
+                            814 ;	genIpush
+   015B C0 02               815 	push	ar2
+   015D C0 03               816 	push	ar3
+   015F C0 04               817 	push	ar4
+   0161 C0 05               818 	push	ar5
+   0163 C0 04               819 	push	ar4
+   0165 C0 05               820 	push	ar5
+                            821 ;	genIpush
+   0167 74r0F               822 	mov	a,#__str_1
+   0169 C0 E0               823 	push	acc
+   016B 74s00               824 	mov	a,#(__str_1 >> 8)
+   016D C0 E0               825 	push	acc
+                            826 ;	genCall
+   016F 12s00r00            827 	lcall	_printf_tiny
+   0172 E5 81               828 	mov	a,sp
+   0174 24 FC               829 	add	a,#0xfc
+   0176 F5 81               830 	mov	sp,a
+   0178 D0 05               831 	pop	ar5
+   017A D0 04               832 	pop	ar4
+   017C D0 03               833 	pop	ar3
+   017E D0 02               834 	pop	ar2
+                            835 ;	weather_shield.c:108: lsb = PRESSURE_ReadByte(0x03);
+                            836 ;	genCall
+   0180 75 82 03            837 	mov	dpl,#0x03
+   0183 C0 02               838 	push	ar2
+   0185 C0 03               839 	push	ar3
+   0187 C0 04               840 	push	ar4
+   0189 C0 05               841 	push	ar5
+   018B 12s00r35            842 	lcall	_PRESSURE_ReadByte
+   018E AE 82               843 	mov	r6,dpl
+   0190 D0 05               844 	pop	ar5
+   0192 D0 04               845 	pop	ar4
+   0194 D0 03               846 	pop	ar3
+   0196 D0 02               847 	pop	ar2
+                            848 ;	genCast
+   0198 7F 00               849 	mov	r7,#0x00
+                            850 ;	weather_shield.c:109: printf_tiny("\n\r alt lsb: %d",lsb);
+                            851 ;	genIpush
+   019A C0 02               852 	push	ar2
+   019C C0 03               853 	push	ar3
+   019E C0 04               854 	push	ar4
+   01A0 C0 05               855 	push	ar5
+   01A2 C0 06               856 	push	ar6
+   01A4 C0 07               857 	push	ar7
+                            858 ;	genIpush
+   01A6 74r1E               859 	mov	a,#__str_2
+   01A8 C0 E0               860 	push	acc
+   01AA 74s00               861 	mov	a,#(__str_2 >> 8)
+   01AC C0 E0               862 	push	acc
+                            863 ;	genCall
+   01AE 12s00r00            864 	lcall	_printf_tiny
+   01B1 E5 81               865 	mov	a,sp
+   01B3 24 FC               866 	add	a,#0xfc
+   01B5 F5 81               867 	mov	sp,a
+   01B7 D0 05               868 	pop	ar5
+   01B9 D0 04               869 	pop	ar4
+   01BB D0 03               870 	pop	ar3
+   01BD D0 02               871 	pop	ar2
+                            872 ;	weather_shield.c:111: alt= (msb)*(1024/133) + (csb/133);
+                            873 ;	genAssign
+   01BF 90s00r00            874 	mov	dptr,#__mulint_PARM_2
+   01C2 74 07               875 	mov	a,#0x07
+   01C4 F0                  876 	movx	@dptr,a
+   01C5 E4                  877 	clr	a
+   01C6 A3                  878 	inc	dptr
+   01C7 F0                  879 	movx	@dptr,a
+                            880 ;	genCall
+   01C8 8A 82               881 	mov	dpl,r2
+   01CA 8B 83               882 	mov	dph,r3
+   01CC C0 04               883 	push	ar4
+   01CE C0 05               884 	push	ar5
+   01D0 12s00r00            885 	lcall	__mulint
+   01D3 AA 82               886 	mov	r2,dpl
+   01D5 AB 83               887 	mov	r3,dph
+   01D7 D0 05               888 	pop	ar5
+   01D9 D0 04               889 	pop	ar4
+                            890 ;	genAssign
+   01DB 90s00r00            891 	mov	dptr,#__divuint_PARM_2
+   01DE 74 85               892 	mov	a,#0x85
+   01E0 F0                  893 	movx	@dptr,a
+   01E1 E4                  894 	clr	a
+   01E2 A3                  895 	inc	dptr
+   01E3 F0                  896 	movx	@dptr,a
+                            897 ;	genCall
+   01E4 8C 82               898 	mov	dpl,r4
+   01E6 8D 83               899 	mov	dph,r5
+   01E8 C0 02               900 	push	ar2
+   01EA C0 03               901 	push	ar3
+   01EC 12s00r00            902 	lcall	__divuint
+   01EF AC 82               903 	mov	r4,dpl
+   01F1 AD 83               904 	mov	r5,dph
+   01F3 D0 03               905 	pop	ar3
+   01F5 D0 02               906 	pop	ar2
+                            907 ;	genPlus
+                            908 ;	Peephole 236.g	used r4 instead of ar4
+   01F7 EC                  909 	mov	a,r4
+                            910 ;	Peephole 236.a	used r2 instead of ar2
+   01F8 2A                  911 	add	a,r2
+   01F9 FA                  912 	mov	r2,a
+                            913 ;	Peephole 236.g	used r5 instead of ar5
+   01FA ED                  914 	mov	a,r5
+                            915 ;	Peephole 236.b	used r3 instead of ar3
+   01FB 3B                  916 	addc	a,r3
+   01FC FB                  917 	mov	r3,a
+                            918 ;	weather_shield.c:113: return alt;
+                            919 ;	genRet
+   01FD 8A 82               920 	mov	dpl,r2
+   01FF 8B 83               921 	mov	dph,r3
+                            922 ;	Peephole 300	removed redundant label 00101$
+   0201 D0 D0               923 	pop	psw
+   0203 92 AF               924 	mov	ea,c
+   0205 22                  925 	ret
+                            926 	.area CSEG    (CODE)
+                            927 	.area CONST   (CODE)
+   0000                     928 __str_0:
+   0000 0A                  929 	.db 0x0A
+   0001 0D                  930 	.db 0x0D
+   0002 20 61 6C 74 20 6D   931 	.ascii " alt msb: %d"
+        73 62 3A 20 25 64
+   000E 00                  932 	.db 0x00
+   000F                     933 __str_1:
+   000F 0A                  934 	.db 0x0A
+   0010 0D                  935 	.db 0x0D
+   0011 20 61 6C 74 20 63   936 	.ascii " alt csb: %d"
+        73 62 3A 20 25 64
+   001D 00                  937 	.db 0x00
+   001E                     938 __str_2:
+   001E 0A                  939 	.db 0x0A
+   001F 0D                  940 	.db 0x0D
+   0020 20 61 6C 74 20 6C   941 	.ascii " alt lsb: %d"
+        73 62 3A 20 25 64
+   002C 00                  942 	.db 0x00
+                            943 	.area XINIT   (CODE)

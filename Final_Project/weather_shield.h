@@ -5,7 +5,8 @@ unsigned char PRESSURE_ReadByte(char reg);
 unsigned char HUMIDITY_ReadByte(void);
 void PRESSURE_WriteByte(unsigned char addr, unsigned char p_Data);
 unsigned int PRESSURE_calibration(void);
-
+unsigned int TEMP_calibration(void);
+unsigned int ALTITUDE_calibration(void);
 
 
 

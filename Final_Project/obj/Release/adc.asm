@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.6.0 #4309 (Jul 28 2006)
-; This file generated Mon Nov 28 03:05:59 2016
+; This file generated Mon Dec 05 02:44:18 2016
 ;--------------------------------------------------------
 	.module adc
 	.optsdcc -mmcs51 --model-large
@@ -207,7 +207,6 @@
 	.globl _P0
 	.globl _ADC_write
 	.globl _ADC_read
-	.globl _TEMP_calibration
 	.globl _HUMIDITY_calibration
 	.globl _LIGHT_calibration
 ;--------------------------------------------------------
@@ -555,86 +554,6 @@ _ADC_read:
 ;	Peephole 300	removed redundant label 00101$
 	ret
 ;------------------------------------------------------------
-;Allocation info for local variables in function 'TEMP_calibration'
-;------------------------------------------------------------
-;calib                     Allocated with name '_TEMP_calibration_calib_1_1'
-;------------------------------------------------------------
-;	adc.c:39: unsigned int TEMP_calibration(void)
-;	-----------------------------------------
-;	 function TEMP_calibration
-;	-----------------------------------------
-_TEMP_calibration:
-;	adc.c:42: calib = (ADC_read(ADC_TEMP));
-;	genCall
-	mov	dpl,#0x09
-	lcall	_ADC_read
-;	genCast
-;	adc.c:43: calib = (calib-0.5)/1.5;
-;	genCall
-	mov	r2,dpl
-	mov	r3,#0x00
-;	Peephole 177.d	removed redundant move
-	mov	dph,r3
-	lcall	___uint2fs
-	mov	r2,dpl
-	mov	r3,dph
-	mov	r4,b
-	mov	r5,a
-;	genIpush
-;	Peephole 181	changed mov to clr
-	clr	a
-	push	acc
-	push	acc
-	push	acc
-	mov	a,#0x3F
-	push	acc
-;	genCall
-	mov	dpl,r2
-	mov	dph,r3
-	mov	b,r4
-	mov	a,r5
-	lcall	___fssub
-	mov	r2,dpl
-	mov	r3,dph
-	mov	r4,b
-	mov	r5,a
-	mov	a,sp
-	add	a,#0xfc
-	mov	sp,a
-;	genIpush
-;	Peephole 181	changed mov to clr
-	clr	a
-	push	acc
-	push	acc
-	mov	a,#0xC0
-	push	acc
-	mov	a,#0x3F
-	push	acc
-;	genCall
-	mov	dpl,r2
-	mov	dph,r3
-	mov	b,r4
-	mov	a,r5
-	lcall	___fsdiv
-	mov	r2,dpl
-	mov	r3,dph
-	mov	r4,b
-	mov	r5,a
-	mov	a,sp
-	add	a,#0xfc
-	mov	sp,a
-;	genCall
-	mov	dpl,r2
-	mov	dph,r3
-	mov	b,r4
-	mov	a,r5
-;	adc.c:45: return calib;
-;	genRet
-;	Peephole 150.b	removed misc moves via dph, dpl before return
-;	Peephole 253.b	replaced lcall/ret with ljmp
-	ljmp	___fs2uint
-;
-;------------------------------------------------------------
 ;Allocation info for local variables in function 'HUMIDITY_calibration'
 ;------------------------------------------------------------
 ;calib                     Allocated with name '_HUMIDITY_calibration_calib_1_1'
@@ -720,7 +639,7 @@ _HUMIDITY_calibration:
 ;------------------------------------------------------------
 ;calib                     Allocated with name '_LIGHT_calibration_calib_1_1'
 ;------------------------------------------------------------
-;	adc.c:64: unsigned int` LIGHT_calibration(void)
+;	adc.c:64: unsigned int LIGHT_calibration(void)
 ;	-----------------------------------------
 ;	 function LIGHT_calibration
 ;	-----------------------------------------

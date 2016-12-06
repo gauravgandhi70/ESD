@@ -77,3 +77,39 @@ unsigned int PRESSURE_calibration(void) __critical
 
 }
 
+
+unsigned int TEMP_calibration(void)
+{
+    unsigned int  temp;
+
+             PRESSURE_WriteByte(0x26,0x02);
+
+             temp= PRESSURE_ReadByte(0x04);
+
+
+
+
+            return temp;
+
+}
+
+unsigned int ALTITUDE_calibration(void) __critical
+{
+    unsigned int  msb,csb,alt,lsb;
+
+             PRESSURE_WriteByte(0x26,0x82);
+
+             msb= PRESSURE_ReadByte(0x01);
+             printf_tiny("\n\r alt msb: %d",msb);
+
+             csb = PRESSURE_ReadByte(0x02);
+             printf_tiny("\n\r alt csb: %d",csb);
+
+             lsb = PRESSURE_ReadByte(0x03);
+             printf_tiny("\n\r alt lsb: %d",lsb);
+
+            alt= (msb)*(1024/133) + (csb/133);
+
+            return alt;
+
+}

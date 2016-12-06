@@ -19,28 +19,38 @@
 
 char* gps_read()  __critical
 {
-        char c[80],d[6]="$GPRMC",*p;
+        char c[80],d[6]="$GPRMC",*p,x=1;
+        int i=0;
 
         UART=0;
         delay_ms(100);
 
-                gets(c);
+        while(x != '\n')
+            {
+                x=getchar();
+                *(c+i) = x;
+                i++;
+            }
 
                 delay_ms(50);
-                UART=1;
+        UART=1;
+
 
                 p=strstr(c,d);
 
-
-
-                return p;
+                return c;
 
 }
 
 
  char* gps_time(char *s)
  {
-     char temp[6],i=7,j=0;
+      char temp[14],i=0,j=0,k=0;
+    while(k<1)
+    {
+        if(*(s+i)==','){k++;}
+       i++;
+    }
 
      while(*(s+i)!= ',')
     {

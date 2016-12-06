@@ -374,11 +374,11 @@ Symbol Table
     _ctoa                                                          **** GX
     _delay_ms                                                      **** GX
     _gets                                                          **** GX
- 13 _lcd_dis_cus                                                   053C GR
+ 13 _lcd_dis_cus                                                   055F GR
   8 _lcd_dis_cus_PARM_2                                            002B GR
   8 _lcd_dis_cus_PARM_3                                            002C GR
   8 _lcd_dis_cus_ccode_1_1                                         002D R
- 13 _lcd_display                                                   028C GR
+ 13 _lcd_display                                                   02AF GR
   8 _lcd_display_PARM_2                                            0009 GR
   8 _lcd_display_c_1_1                                             0012 R
   8 _lcd_display_d_1_1                                             000D R
@@ -387,12 +387,12 @@ Symbol Table
  13 _lcd_init                                                      0000 GR
  13 _lcdbusywait                                                   00DF GR
   8 _lcdbusywait_temp_1_1                                          0003 R
- 13 _lcdcreatechar                                                 0376 GR
+ 13 _lcdcreatechar                                                 0399 GR
   8 _lcdcreatechar_PARM_2                                          0019 GR
   8 _lcdcreatechar_ccode_1_1                                       001C R
  13 _lcdgotoaddr                                                   00C0 GR
   8 _lcdgotoaddr_addr_1_1                                          0002 R
- 13 _lcdgotoxy                                                     01FD GR
+ 13 _lcdgotoxy                                                     0220 GR
   8 _lcdgotoxy_PARM_2                                              0007 GR
   8 _lcdgotoxy_row_1_1                                             0008 R
  13 _lcdputch                                                      005F GR
@@ -402,7 +402,7 @@ Symbol Table
  13 _lcdputstr                                                     010A GR
   8 _lcdputstr_str_1_1                                             0004 R
  13 _lcdread                                                       00A9 GR
- 13 _logo_creator                                                  03E2 GR
+ 13 _logo_creator                                                  0405 GR
   8 _logo_creator_column_1_1                                       0024 R
   8 _logo_creator_row_1_1                                          001D R
     _printf_tiny                                                   **** GX
@@ -606,6 +606,6 @@ Area Table
   10 GSINIT5                                                                            size    0   flags 20
   11 GSINIT                                                                             size    0   flags 20
   12 GSFINAL                                                                            size    0   flags 20
-  13 CSEG                                                                               size  56B   flags 20
+  13 CSEG                                                                               size  58E   flags 20
   14 CONST                                                                              size   59   flags 20
   15 XINIT                                                                              size    0   flags 20

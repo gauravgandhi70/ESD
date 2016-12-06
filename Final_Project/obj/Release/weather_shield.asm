@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.6.0 #4309 (Jul 28 2006)
-; This file generated Mon Nov 28 19:52:33 2016
+; This file generated Mon Dec 05 02:56:40 2016
 ;--------------------------------------------------------
 	.module weather_shield
 	.optsdcc -mmcs51 --model-large
@@ -209,6 +209,8 @@
 	.globl _PRESSURE_WriteByte
 	.globl _PRESSURE_ReadByte
 	.globl _PRESSURE_calibration
+	.globl _TEMP_calibration
+	.globl _ALTITUDE_calibration
 ;--------------------------------------------------------
 ; special function registers
 ;--------------------------------------------------------
@@ -715,6 +717,227 @@ _PRESSURE_calibration:
 	pop	psw
 	mov	ea,c
 	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'TEMP_calibration'
+;------------------------------------------------------------
+;temp                      Allocated with name '_TEMP_calibration_temp_1_1'
+;------------------------------------------------------------
+;	weather_shield.c:81: unsigned int TEMP_calibration(void)
+;	-----------------------------------------
+;	 function TEMP_calibration
+;	-----------------------------------------
+_TEMP_calibration:
+;	weather_shield.c:85: PRESSURE_WriteByte(0x26,0x02);
+;	genAssign
+	mov	dptr,#_PRESSURE_WriteByte_PARM_2
+	mov	a,#0x02
+	movx	@dptr,a
+;	genCall
+	mov	dpl,#0x26
+	lcall	_PRESSURE_WriteByte
+;	weather_shield.c:87: temp= PRESSURE_ReadByte(0x04);
+;	genCall
+	mov	dpl,#0x04
+	lcall	_PRESSURE_ReadByte
+;	genCast
+;	weather_shield.c:92: return temp;
+;	genRet
+	mov	r2,dpl
+	mov	r3,#0x00
+;	Peephole 177.d	removed redundant move
+	mov	dph,r3
+;	Peephole 300	removed redundant label 00101$
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'ALTITUDE_calibration'
+;------------------------------------------------------------
+;msb                       Allocated with name '_ALTITUDE_calibration_msb_1_1'
+;csb                       Allocated with name '_ALTITUDE_calibration_csb_1_1'
+;alt                       Allocated with name '_ALTITUDE_calibration_alt_1_1'
+;lsb                       Allocated with name '_ALTITUDE_calibration_lsb_1_1'
+;------------------------------------------------------------
+;	weather_shield.c:96: unsigned int ALTITUDE_calibration(void) __critical
+;	-----------------------------------------
+;	 function ALTITUDE_calibration
+;	-----------------------------------------
+_ALTITUDE_calibration:
+	setb	c
+	jbc	ea,00103$
+	clr	c
+00103$:
+	push	psw
+;	weather_shield.c:100: PRESSURE_WriteByte(0x26,0x82);
+;	genAssign
+	mov	dptr,#_PRESSURE_WriteByte_PARM_2
+	mov	a,#0x82
+	movx	@dptr,a
+;	genCall
+	mov	dpl,#0x26
+	lcall	_PRESSURE_WriteByte
+;	weather_shield.c:102: msb= PRESSURE_ReadByte(0x01);
+;	genCall
+	mov	dpl,#0x01
+	lcall	_PRESSURE_ReadByte
+	mov	r2,dpl
+;	genCast
+	mov	r3,#0x00
+;	weather_shield.c:103: printf_tiny("\n\r alt msb: %d",msb);
+;	genIpush
+	push	ar2
+	push	ar3
+	push	ar2
+	push	ar3
+;	genIpush
+	mov	a,#__str_0
+	push	acc
+	mov	a,#(__str_0 >> 8)
+	push	acc
+;	genCall
+	lcall	_printf_tiny
+	mov	a,sp
+	add	a,#0xfc
+	mov	sp,a
+	pop	ar3
+	pop	ar2
+;	weather_shield.c:105: csb = PRESSURE_ReadByte(0x02);
+;	genCall
+	mov	dpl,#0x02
+	push	ar2
+	push	ar3
+	lcall	_PRESSURE_ReadByte
+	mov	r4,dpl
+	pop	ar3
+	pop	ar2
+;	genCast
+	mov	r5,#0x00
+;	weather_shield.c:106: printf_tiny("\n\r alt csb: %d",csb);
+;	genIpush
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	push	ar4
+	push	ar5
+;	genIpush
+	mov	a,#__str_1
+	push	acc
+	mov	a,#(__str_1 >> 8)
+	push	acc
+;	genCall
+	lcall	_printf_tiny
+	mov	a,sp
+	add	a,#0xfc
+	mov	sp,a
+	pop	ar5
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	weather_shield.c:108: lsb = PRESSURE_ReadByte(0x03);
+;	genCall
+	mov	dpl,#0x03
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	lcall	_PRESSURE_ReadByte
+	mov	r6,dpl
+	pop	ar5
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	genCast
+	mov	r7,#0x00
+;	weather_shield.c:109: printf_tiny("\n\r alt lsb: %d",lsb);
+;	genIpush
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	push	ar6
+	push	ar7
+;	genIpush
+	mov	a,#__str_2
+	push	acc
+	mov	a,#(__str_2 >> 8)
+	push	acc
+;	genCall
+	lcall	_printf_tiny
+	mov	a,sp
+	add	a,#0xfc
+	mov	sp,a
+	pop	ar5
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	weather_shield.c:111: alt= (msb)*(1024/133) + (csb/133);
+;	genAssign
+	mov	dptr,#__mulint_PARM_2
+	mov	a,#0x07
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+;	genCall
+	mov	dpl,r2
+	mov	dph,r3
+	push	ar4
+	push	ar5
+	lcall	__mulint
+	mov	r2,dpl
+	mov	r3,dph
+	pop	ar5
+	pop	ar4
+;	genAssign
+	mov	dptr,#__divuint_PARM_2
+	mov	a,#0x85
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+;	genCall
+	mov	dpl,r4
+	mov	dph,r5
+	push	ar2
+	push	ar3
+	lcall	__divuint
+	mov	r4,dpl
+	mov	r5,dph
+	pop	ar3
+	pop	ar2
+;	genPlus
+;	Peephole 236.g	used r4 instead of ar4
+	mov	a,r4
+;	Peephole 236.a	used r2 instead of ar2
+	add	a,r2
+	mov	r2,a
+;	Peephole 236.g	used r5 instead of ar5
+	mov	a,r5
+;	Peephole 236.b	used r3 instead of ar3
+	addc	a,r3
+	mov	r3,a
+;	weather_shield.c:113: return alt;
+;	genRet
+	mov	dpl,r2
+	mov	dph,r3
+;	Peephole 300	removed redundant label 00101$
+	pop	psw
+	mov	ea,c
+	ret
 	.area CSEG    (CODE)
 	.area CONST   (CODE)
+__str_0:
+	.db 0x0A
+	.db 0x0D
+	.ascii " alt msb: %d"
+	.db 0x00
+__str_1:
+	.db 0x0A
+	.db 0x0D
+	.ascii " alt csb: %d"
+	.db 0x00
+__str_2:
+	.db 0x0A
+	.db 0x0D
+	.ascii " alt lsb: %d"
+	.db 0x00
 	.area XINIT   (CODE)

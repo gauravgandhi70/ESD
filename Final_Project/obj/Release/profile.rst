@@ -439,10 +439,10 @@
                             439 ; external ram data
                             440 ;--------------------------------------------------------
                             441 	.area XSEG    (XDATA)
-   0141                     442 _eeprom_profile_d_1_1:
-   0141                     443 	.ds 16
-   0151                     444 _eeprom_profile_c_1_1:
-   0151                     445 	.ds 4
+   036E                     442 _eeprom_profile_d_1_1:
+   036E                     443 	.ds 16
+   037E                     444 _eeprom_profile_c_1_1:
+   037E                     445 	.ds 4
                             446 ;--------------------------------------------------------
                             447 ; external initialized ram data
                             448 ;--------------------------------------------------------
@@ -484,7 +484,7 @@
                             484 ;	-----------------------------------------
                             485 ;	 function eeprom_profile
                             486 ;	-----------------------------------------
-   27E8                     487 _eeprom_profile:
+   2D67                     487 _eeprom_profile:
                     0002    488 	ar2 = 0x02
                     0003    489 	ar3 = 0x03
                     0004    490 	ar4 = 0x04
@@ -496,241 +496,241 @@
                             496 ;	profile.c:18: char d[16]="ABCDEFGHIJKLMNOP",c[4];
                             497 ;	genPointerSet
                             498 ;     genFarPointerSet
-   27E8 90 01 41            499 	mov	dptr,#_eeprom_profile_d_1_1
-   27EB 74 41               500 	mov	a,#0x41
-   27ED F0                  501 	movx	@dptr,a
+   2D67 90 03 6E            499 	mov	dptr,#_eeprom_profile_d_1_1
+   2D6A 74 41               500 	mov	a,#0x41
+   2D6C F0                  501 	movx	@dptr,a
                             502 ;	genPointerSet
                             503 ;     genFarPointerSet
-   27EE 90 01 42            504 	mov	dptr,#(_eeprom_profile_d_1_1 + 0x0001)
-   27F1 74 42               505 	mov	a,#0x42
-   27F3 F0                  506 	movx	@dptr,a
+   2D6D 90 03 6F            504 	mov	dptr,#(_eeprom_profile_d_1_1 + 0x0001)
+   2D70 74 42               505 	mov	a,#0x42
+   2D72 F0                  506 	movx	@dptr,a
                             507 ;	genPointerSet
                             508 ;     genFarPointerSet
-   27F4 90 01 43            509 	mov	dptr,#(_eeprom_profile_d_1_1 + 0x0002)
-   27F7 74 43               510 	mov	a,#0x43
-   27F9 F0                  511 	movx	@dptr,a
+   2D73 90 03 70            509 	mov	dptr,#(_eeprom_profile_d_1_1 + 0x0002)
+   2D76 74 43               510 	mov	a,#0x43
+   2D78 F0                  511 	movx	@dptr,a
                             512 ;	genPointerSet
                             513 ;     genFarPointerSet
-   27FA 90 01 44            514 	mov	dptr,#(_eeprom_profile_d_1_1 + 0x0003)
-   27FD 74 44               515 	mov	a,#0x44
-   27FF F0                  516 	movx	@dptr,a
+   2D79 90 03 71            514 	mov	dptr,#(_eeprom_profile_d_1_1 + 0x0003)
+   2D7C 74 44               515 	mov	a,#0x44
+   2D7E F0                  516 	movx	@dptr,a
                             517 ;	genPointerSet
                             518 ;     genFarPointerSet
-   2800 90 01 45            519 	mov	dptr,#(_eeprom_profile_d_1_1 + 0x0004)
-   2803 74 45               520 	mov	a,#0x45
-   2805 F0                  521 	movx	@dptr,a
+   2D7F 90 03 72            519 	mov	dptr,#(_eeprom_profile_d_1_1 + 0x0004)
+   2D82 74 45               520 	mov	a,#0x45
+   2D84 F0                  521 	movx	@dptr,a
                             522 ;	genPointerSet
                             523 ;     genFarPointerSet
-   2806 90 01 46            524 	mov	dptr,#(_eeprom_profile_d_1_1 + 0x0005)
-   2809 74 46               525 	mov	a,#0x46
-   280B F0                  526 	movx	@dptr,a
+   2D85 90 03 73            524 	mov	dptr,#(_eeprom_profile_d_1_1 + 0x0005)
+   2D88 74 46               525 	mov	a,#0x46
+   2D8A F0                  526 	movx	@dptr,a
                             527 ;	genPointerSet
                             528 ;     genFarPointerSet
-   280C 90 01 47            529 	mov	dptr,#(_eeprom_profile_d_1_1 + 0x0006)
-   280F 74 47               530 	mov	a,#0x47
-   2811 F0                  531 	movx	@dptr,a
+   2D8B 90 03 74            529 	mov	dptr,#(_eeprom_profile_d_1_1 + 0x0006)
+   2D8E 74 47               530 	mov	a,#0x47
+   2D90 F0                  531 	movx	@dptr,a
                             532 ;	genPointerSet
                             533 ;     genFarPointerSet
-   2812 90 01 48            534 	mov	dptr,#(_eeprom_profile_d_1_1 + 0x0007)
-   2815 74 48               535 	mov	a,#0x48
-   2817 F0                  536 	movx	@dptr,a
+   2D91 90 03 75            534 	mov	dptr,#(_eeprom_profile_d_1_1 + 0x0007)
+   2D94 74 48               535 	mov	a,#0x48
+   2D96 F0                  536 	movx	@dptr,a
                             537 ;	genPointerSet
                             538 ;     genFarPointerSet
-   2818 90 01 49            539 	mov	dptr,#(_eeprom_profile_d_1_1 + 0x0008)
-   281B 74 49               540 	mov	a,#0x49
-   281D F0                  541 	movx	@dptr,a
+   2D97 90 03 76            539 	mov	dptr,#(_eeprom_profile_d_1_1 + 0x0008)
+   2D9A 74 49               540 	mov	a,#0x49
+   2D9C F0                  541 	movx	@dptr,a
                             542 ;	genPointerSet
                             543 ;     genFarPointerSet
-   281E 90 01 4A            544 	mov	dptr,#(_eeprom_profile_d_1_1 + 0x0009)
-   2821 74 4A               545 	mov	a,#0x4A
-   2823 F0                  546 	movx	@dptr,a
+   2D9D 90 03 77            544 	mov	dptr,#(_eeprom_profile_d_1_1 + 0x0009)
+   2DA0 74 4A               545 	mov	a,#0x4A
+   2DA2 F0                  546 	movx	@dptr,a
                             547 ;	genPointerSet
                             548 ;     genFarPointerSet
-   2824 90 01 4B            549 	mov	dptr,#(_eeprom_profile_d_1_1 + 0x000a)
-   2827 74 4B               550 	mov	a,#0x4B
-   2829 F0                  551 	movx	@dptr,a
+   2DA3 90 03 78            549 	mov	dptr,#(_eeprom_profile_d_1_1 + 0x000a)
+   2DA6 74 4B               550 	mov	a,#0x4B
+   2DA8 F0                  551 	movx	@dptr,a
                             552 ;	genPointerSet
                             553 ;     genFarPointerSet
-   282A 90 01 4C            554 	mov	dptr,#(_eeprom_profile_d_1_1 + 0x000b)
-   282D 74 4C               555 	mov	a,#0x4C
-   282F F0                  556 	movx	@dptr,a
+   2DA9 90 03 79            554 	mov	dptr,#(_eeprom_profile_d_1_1 + 0x000b)
+   2DAC 74 4C               555 	mov	a,#0x4C
+   2DAE F0                  556 	movx	@dptr,a
                             557 ;	genPointerSet
                             558 ;     genFarPointerSet
-   2830 90 01 4D            559 	mov	dptr,#(_eeprom_profile_d_1_1 + 0x000c)
-   2833 74 4D               560 	mov	a,#0x4D
-   2835 F0                  561 	movx	@dptr,a
+   2DAF 90 03 7A            559 	mov	dptr,#(_eeprom_profile_d_1_1 + 0x000c)
+   2DB2 74 4D               560 	mov	a,#0x4D
+   2DB4 F0                  561 	movx	@dptr,a
                             562 ;	genPointerSet
                             563 ;     genFarPointerSet
-   2836 90 01 4E            564 	mov	dptr,#(_eeprom_profile_d_1_1 + 0x000d)
-   2839 74 4E               565 	mov	a,#0x4E
-   283B F0                  566 	movx	@dptr,a
+   2DB5 90 03 7B            564 	mov	dptr,#(_eeprom_profile_d_1_1 + 0x000d)
+   2DB8 74 4E               565 	mov	a,#0x4E
+   2DBA F0                  566 	movx	@dptr,a
                             567 ;	genPointerSet
                             568 ;     genFarPointerSet
-   283C 90 01 4F            569 	mov	dptr,#(_eeprom_profile_d_1_1 + 0x000e)
-   283F 74 4F               570 	mov	a,#0x4F
-   2841 F0                  571 	movx	@dptr,a
+   2DBB 90 03 7C            569 	mov	dptr,#(_eeprom_profile_d_1_1 + 0x000e)
+   2DBE 74 4F               570 	mov	a,#0x4F
+   2DC0 F0                  571 	movx	@dptr,a
                             572 ;	genPointerSet
                             573 ;     genFarPointerSet
-   2842 90 01 50            574 	mov	dptr,#(_eeprom_profile_d_1_1 + 0x000f)
-   2845 74 50               575 	mov	a,#0x50
-   2847 F0                  576 	movx	@dptr,a
+   2DC1 90 03 7D            574 	mov	dptr,#(_eeprom_profile_d_1_1 + 0x000f)
+   2DC4 74 50               575 	mov	a,#0x50
+   2DC6 F0                  576 	movx	@dptr,a
                             577 ;	profile.c:20: printf_tiny("\n\n\rTiming profiling of the EEPROM, \n\rP1_4 for byte write\n\rP1_5 for page write\n\n\r");
                             578 ;	genIpush
-   2848 74 85               579 	mov	a,#__str_1
-   284A C0 E0               580 	push	acc
-   284C 74 3D               581 	mov	a,#(__str_1 >> 8)
-   284E C0 E0               582 	push	acc
+   2DC7 74 5F               579 	mov	a,#__str_1
+   2DC9 C0 E0               580 	push	acc
+   2DCB 74 4D               581 	mov	a,#(__str_1 >> 8)
+   2DCD C0 E0               582 	push	acc
                             583 ;	genCall
-   2850 12 2D E5            584 	lcall	_printf_tiny
-   2853 15 81               585 	dec	sp
-   2855 15 81               586 	dec	sp
+   2DCF 12 3C 93            584 	lcall	_printf_tiny
+   2DD2 15 81               585 	dec	sp
+   2DD4 15 81               586 	dec	sp
                             587 ;	profile.c:21: printf_tiny("\n\n\r\tEnter Start address for the page write: ");
                             588 ;	genIpush
-   2857 74 D6               589 	mov	a,#__str_2
-   2859 C0 E0               590 	push	acc
-   285B 74 3D               591 	mov	a,#(__str_2 >> 8)
-   285D C0 E0               592 	push	acc
+   2DD6 74 B0               589 	mov	a,#__str_2
+   2DD8 C0 E0               590 	push	acc
+   2DDA 74 4D               591 	mov	a,#(__str_2 >> 8)
+   2DDC C0 E0               592 	push	acc
                             593 ;	genCall
-   285F 12 2D E5            594 	lcall	_printf_tiny
-   2862 15 81               595 	dec	sp
-   2864 15 81               596 	dec	sp
+   2DDE 12 3C 93            594 	lcall	_printf_tiny
+   2DE1 15 81               595 	dec	sp
+   2DE3 15 81               596 	dec	sp
                             597 ;	profile.c:22: gets(c);
                             598 ;	genCall
                             599 ;	Peephole 182.a	used 16 bit load of DPTR
-   2866 90 01 51            600 	mov	dptr,#_eeprom_profile_c_1_1
-   2869 75 F0 00            601 	mov	b,#0x00
-   286C 12 2C B8            602 	lcall	_gets
+   2DE5 90 03 7E            600 	mov	dptr,#_eeprom_profile_c_1_1
+   2DE8 75 F0 00            601 	mov	b,#0x00
+   2DEB 12 3B 66            602 	lcall	_gets
                             603 ;	profile.c:23: num=atoh(c);
                             604 ;	genCall
                             605 ;	Peephole 182.a	used 16 bit load of DPTR
-   286F 90 01 51            606 	mov	dptr,#_eeprom_profile_c_1_1
-   2872 75 F0 00            607 	mov	b,#0x00
-   2875 12 01 9F            608 	lcall	_atoh
-   2878 AA 82               609 	mov	r2,dpl
-   287A AB 83               610 	mov	r3,dph
+   2DEE 90 03 7E            606 	mov	dptr,#_eeprom_profile_c_1_1
+   2DF1 75 F0 00            607 	mov	b,#0x00
+   2DF4 12 01 39            608 	lcall	_atoh
+   2DF7 AA 82               609 	mov	r2,dpl
+   2DF9 AB 83               610 	mov	r3,dph
                             611 ;	profile.c:26: P1_4 = !(P1_4);
                             612 ;	genNot
-   287C B2 94               613 	cpl	_P1_4
+   2DFB B2 94               613 	cpl	_P1_4
                             614 ;	profile.c:27: EEPROM_WriteByte((num-(num/256)*256),0xAA,num/256);
                             615 ;	genCast
-   287E 8A 04               616 	mov	ar4,r2
+   2DFD 8A 04               616 	mov	ar4,r2
                             617 ;	genAssign
-   2880 90 01 87            618 	mov	dptr,#__divsint_PARM_2
+   2DFF 90 06 02            618 	mov	dptr,#__divsint_PARM_2
                             619 ;	Peephole 181	changed mov to clr
-   2883 E4                  620 	clr	a
-   2884 F0                  621 	movx	@dptr,a
-   2885 A3                  622 	inc	dptr
-   2886 74 01               623 	mov	a,#0x01
-   2888 F0                  624 	movx	@dptr,a
+   2E02 E4                  620 	clr	a
+   2E03 F0                  621 	movx	@dptr,a
+   2E04 A3                  622 	inc	dptr
+   2E05 74 01               623 	mov	a,#0x01
+   2E07 F0                  624 	movx	@dptr,a
                             625 ;	genCall
-   2889 8A 82               626 	mov	dpl,r2
-   288B 8B 83               627 	mov	dph,r3
-   288D C0 04               628 	push	ar4
-   288F 12 31 94            629 	lcall	__divsint
-   2892 AA 82               630 	mov	r2,dpl
-   2894 AB 83               631 	mov	r3,dph
-   2896 D0 04               632 	pop	ar4
+   2E08 8A 82               626 	mov	dpl,r2
+   2E0A 8B 83               627 	mov	dph,r3
+   2E0C C0 04               628 	push	ar4
+   2E0E 12 40 42            629 	lcall	__divsint
+   2E11 AA 82               630 	mov	r2,dpl
+   2E13 AB 83               631 	mov	r3,dph
+   2E15 D0 04               632 	pop	ar4
                             633 ;	genCast
                             634 ;	genAssign
-   2898 90 00 4B            635 	mov	dptr,#_EEPROM_WriteByte_PARM_2
-   289B 74 AA               636 	mov	a,#0xAA
-   289D F0                  637 	movx	@dptr,a
+   2E17 90 00 4B            635 	mov	dptr,#_EEPROM_WriteByte_PARM_2
+   2E1A 74 AA               636 	mov	a,#0xAA
+   2E1C F0                  637 	movx	@dptr,a
                             638 ;	genAssign
-   289E 90 00 4C            639 	mov	dptr,#_EEPROM_WriteByte_PARM_3
-   28A1 EA                  640 	mov	a,r2
-   28A2 F0                  641 	movx	@dptr,a
+   2E1D 90 00 4C            639 	mov	dptr,#_EEPROM_WriteByte_PARM_3
+   2E20 EA                  640 	mov	a,r2
+   2E21 F0                  641 	movx	@dptr,a
                             642 ;	genCall
-   28A3 8C 82               643 	mov	dpl,r4
-   28A5 C0 02               644 	push	ar2
-   28A7 C0 04               645 	push	ar4
-   28A9 12 0F E5            646 	lcall	_EEPROM_WriteByte
-   28AC D0 04               647 	pop	ar4
-   28AE D0 02               648 	pop	ar2
+   2E22 8C 82               643 	mov	dpl,r4
+   2E24 C0 02               644 	push	ar2
+   2E26 C0 04               645 	push	ar4
+   2E28 12 0F 7F            646 	lcall	_EEPROM_WriteByte
+   2E2B D0 04               647 	pop	ar4
+   2E2D D0 02               648 	pop	ar2
                             649 ;	profile.c:28: P1_4 = !(P1_4);
                             650 ;	genNot
-   28B0 B2 94               651 	cpl	_P1_4
+   2E2F B2 94               651 	cpl	_P1_4
                             652 ;	profile.c:30: delay_ms(5);
                             653 ;	genCall
                             654 ;	Peephole 182.b	used 16 bit load of dptr
-   28B2 90 00 05            655 	mov	dptr,#0x0005
-   28B5 C0 02               656 	push	ar2
-   28B7 C0 04               657 	push	ar4
-   28B9 12 0D C1            658 	lcall	_delay_ms
-   28BC D0 04               659 	pop	ar4
-   28BE D0 02               660 	pop	ar2
+   2E31 90 00 05            655 	mov	dptr,#0x0005
+   2E34 C0 02               656 	push	ar2
+   2E36 C0 04               657 	push	ar4
+   2E38 12 0D 5B            658 	lcall	_delay_ms
+   2E3B D0 04               659 	pop	ar4
+   2E3D D0 02               660 	pop	ar2
                             661 ;	profile.c:32: P1_5 = !(P1_5);
                             662 ;	genNot
-   28C0 B2 95               663 	cpl	_P1_5
+   2E3F B2 95               663 	cpl	_P1_5
                             664 ;	profile.c:33: page_write((num-(num/256)*256),num/256,d,16);
                             665 ;	genAssign
-   28C2 90 00 44            666 	mov	dptr,#_page_write_PARM_2
-   28C5 EA                  667 	mov	a,r2
-   28C6 F0                  668 	movx	@dptr,a
+   2E41 90 00 44            666 	mov	dptr,#_page_write_PARM_2
+   2E44 EA                  667 	mov	a,r2
+   2E45 F0                  668 	movx	@dptr,a
                             669 ;	genAssign
-   28C7 90 00 45            670 	mov	dptr,#_page_write_PARM_3
-   28CA 74 41               671 	mov	a,#_eeprom_profile_d_1_1
-   28CC F0                  672 	movx	@dptr,a
-   28CD A3                  673 	inc	dptr
-   28CE 74 01               674 	mov	a,#(_eeprom_profile_d_1_1 >> 8)
-   28D0 F0                  675 	movx	@dptr,a
-   28D1 A3                  676 	inc	dptr
+   2E46 90 00 45            670 	mov	dptr,#_page_write_PARM_3
+   2E49 74 6E               671 	mov	a,#_eeprom_profile_d_1_1
+   2E4B F0                  672 	movx	@dptr,a
+   2E4C A3                  673 	inc	dptr
+   2E4D 74 03               674 	mov	a,#(_eeprom_profile_d_1_1 >> 8)
+   2E4F F0                  675 	movx	@dptr,a
+   2E50 A3                  676 	inc	dptr
                             677 ;	Peephole 181	changed mov to clr
-   28D2 E4                  678 	clr	a
-   28D3 F0                  679 	movx	@dptr,a
+   2E51 E4                  678 	clr	a
+   2E52 F0                  679 	movx	@dptr,a
                             680 ;	genAssign
-   28D4 90 00 48            681 	mov	dptr,#_page_write_PARM_4
-   28D7 74 10               682 	mov	a,#0x10
-   28D9 F0                  683 	movx	@dptr,a
-   28DA E4                  684 	clr	a
-   28DB A3                  685 	inc	dptr
-   28DC F0                  686 	movx	@dptr,a
+   2E53 90 00 48            681 	mov	dptr,#_page_write_PARM_4
+   2E56 74 10               682 	mov	a,#0x10
+   2E58 F0                  683 	movx	@dptr,a
+   2E59 E4                  684 	clr	a
+   2E5A A3                  685 	inc	dptr
+   2E5B F0                  686 	movx	@dptr,a
                             687 ;	genCall
-   28DD 8C 82               688 	mov	dpl,r4
-   28DF 12 0F 1A            689 	lcall	_page_write
+   2E5C 8C 82               688 	mov	dpl,r4
+   2E5E 12 0E B4            689 	lcall	_page_write
                             690 ;	profile.c:34: P1_5 = !(P1_5);
                             691 ;	genNot
-   28E2 B2 95               692 	cpl	_P1_5
+   2E61 B2 95               692 	cpl	_P1_5
                             693 ;	Peephole 300	removed redundant label 00101$
-   28E4 22                  694 	ret
+   2E63 22                  694 	ret
                             695 	.area CSEG    (CODE)
                             696 	.area CONST   (CODE)
-   3D85                     697 __str_1:
-   3D85 0A                  698 	.db 0x0A
-   3D86 0A                  699 	.db 0x0A
-   3D87 0D                  700 	.db 0x0D
-   3D88 54 69 6D 69 6E 67   701 	.ascii "Timing profiling of the EEPROM, "
+   4D5F                     697 __str_1:
+   4D5F 0A                  698 	.db 0x0A
+   4D60 0A                  699 	.db 0x0A
+   4D61 0D                  700 	.db 0x0D
+   4D62 54 69 6D 69 6E 67   701 	.ascii "Timing profiling of the EEPROM, "
         20 70 72 6F 66 69
         6C 69 6E 67 20 6F
         66 20 74 68 65 20
         45 45 50 52 4F 4D
         2C 20
-   3DA8 0A                  702 	.db 0x0A
-   3DA9 0D                  703 	.db 0x0D
-   3DAA 50 31 5F 34 20 66   704 	.ascii "P1_4 for byte write"
+   4D82 0A                  702 	.db 0x0A
+   4D83 0D                  703 	.db 0x0D
+   4D84 50 31 5F 34 20 66   704 	.ascii "P1_4 for byte write"
         6F 72 20 62 79 74
         65 20 77 72 69 74
         65
-   3DBD 0A                  705 	.db 0x0A
-   3DBE 0D                  706 	.db 0x0D
-   3DBF 50 31               707 	.ascii "P1"
-   3DC1 5F 35 20 66 6F 72   708 	.ascii "_5 for page write"
+   4D97 0A                  705 	.db 0x0A
+   4D98 0D                  706 	.db 0x0D
+   4D99 50 31               707 	.ascii "P1"
+   4D9B 5F 35 20 66 6F 72   708 	.ascii "_5 for page write"
         20 70 61 67 65 20
         77 72 69 74 65
-   3DD2 0A                  709 	.db 0x0A
-   3DD3 0A                  710 	.db 0x0A
-   3DD4 0D                  711 	.db 0x0D
-   3DD5 00                  712 	.db 0x00
-   3DD6                     713 __str_2:
-   3DD6 0A                  714 	.db 0x0A
-   3DD7 0A                  715 	.db 0x0A
-   3DD8 0D                  716 	.db 0x0D
-   3DD9 09                  717 	.db 0x09
-   3DDA 45 6E 74 65 72 20   718 	.ascii "Enter Start address for the page write: "
+   4DAC 0A                  709 	.db 0x0A
+   4DAD 0A                  710 	.db 0x0A
+   4DAE 0D                  711 	.db 0x0D
+   4DAF 00                  712 	.db 0x00
+   4DB0                     713 __str_2:
+   4DB0 0A                  714 	.db 0x0A
+   4DB1 0A                  715 	.db 0x0A
+   4DB2 0D                  716 	.db 0x0D
+   4DB3 09                  717 	.db 0x09
+   4DB4 45 6E 74 65 72 20   718 	.ascii "Enter Start address for the page write: "
         53 74 61 72 74 20
         61 64 64 72 65 73
         73 20 66 6F 72 20
         74 68 65 20 70 61
         67 65 20 77 72 69
         74 65 3A 20
-   3E02 00                  719 	.db 0x00
+   4DDC 00                  719 	.db 0x00
                             720 	.area XINIT   (CODE)

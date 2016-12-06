@@ -214,6 +214,11 @@ Symbol Table
     _EA                                                         =  00AF G
     _EC                                                         =  00AE G
     _EECON                                                      =  00D2 G
+    _EEPROM_ReadByte                                               **** GX
+    _EEPROM_ReadByte_PARM_2                                        **** GX
+    _EEPROM_WriteByte                                              **** GX
+    _EEPROM_WriteByte_PARM_2                                       **** GX
+    _EEPROM_WriteByte_PARM_3                                       **** GX
     _ES                                                         =  00AC G
     _ET0                                                        =  00A9 G
     _ET1                                                        =  00AB G
@@ -373,6 +378,7 @@ Symbol Table
     _WR                                                         =  00B6 G
     __divuint                                                      **** GX
     __divuint_PARM_2                                               **** GX
+    __gptrget                                                      **** GX
   B __interrupt_vect                                               0000 R
     __mcs51_genRAMCLEAR                                            **** GX
     __mcs51_genXINIT                                               **** GX
@@ -386,51 +392,82 @@ Symbol Table
  14 __sdcc_program_startup                                         0000 GR
   5 __start__stack                                                 0000 GR
  15 __str_0                                                        0000 R
- 15 __str_1                                                        0021 R
- 15 __str_10                                                       00A6 R
- 15 __str_11                                                       00AB R
- 15 __str_12                                                       00B0 R
- 15 __str_2                                                        0043 R
- 15 __str_3                                                        0056 R
- 15 __str_4                                                        0069 R
- 15 __str_5                                                        0071 R
- 15 __str_6                                                        0078 R
- 15 __str_7                                                        0083 R
- 15 __str_8                                                        008E R
- 15 __str_9                                                        009A R
+ 15 __str_1                                                        0011 R
+ 15 __str_10                                                       0183 R
+ 15 __str_11                                                       018B R
+ 15 __str_12                                                       0192 R
+ 15 __str_13                                                       019D R
+ 15 __str_14                                                       01A1 R
+ 15 __str_15                                                       01A8 R
+ 15 __str_16                                                       01AD R
+ 15 __str_17                                                       01B9 R
+ 15 __str_18                                                       01C5 R
+ 15 __str_19                                                       01D2 R
+ 15 __str_2                                                        0022 R
+ 15 __str_20                                                       01D7 R
+ 15 __str_21                                                       01DC R
+ 15 __str_3                                                        0033 R
+ 15 __str_4                                                        0062 R
+ 15 __str_5                                                        0099 R
+ 15 __str_6                                                        00BB R
+ 15 __str_7                                                        00CE R
+ 15 __str_8                                                        00F8 R
+ 15 __str_9                                                        0124 R
+ 16 __xinit__date                                                  0001 R
  16 __xinit__flag                                                  0000 R
+    _atoi                                                          **** GX
     _clock_control                                                 **** GX
     _clock_control_PARM_2                                          **** GX
     _clock_control_PARM_3                                          **** GX
     _ctoa                                                          **** GX
-  9 _display                                                       0002 GR
+  A _date                                                          0001 GR
+    _delay_sec                                                     **** GX
+  9 _display                                                       0207 GR
     _eereset                                                       **** GX
   A _flag                                                          0000 GR
-  9 _fr                                                            0000 GR
+  9 _fr                                                            0205 GR
+    _gps_date                                                      **** GX
+  9 _gps_flag                                                      0204 GR
     _gps_latitude                                                  **** GX
     _gps_longitude                                                 **** GX
     _gps_read                                                      **** GX
     _gps_status                                                    **** GX
-  9 _h                                                             0004 GR
+    _gps_time                                                      **** GX
+  9 _h                                                             0209 GR
     _lcd_init                                                      **** GX
     _lcdgotoxy                                                     **** GX
     _lcdgotoxy_PARM_2                                              **** GX
     _lcdputch                                                      **** GX
     _lcdputcmd                                                     **** GX
     _lcdputstr                                                     **** GX
-  9 _log_f                                                         000C GR
-  9 _m                                                             0005 GR
+  9 _log_f                                                         0211 GR
+  9 _m                                                             020A GR
  14 _main                                                          000C GR
-  9 _main_c_1_1                                                    000E R
-  9 _main_te_1_1                                                   0013 R
+  9 _main_arr_1_1                                                  0218 R
+  9 _main_c_1_1                                                    0213 R
+  9 _main_gps_d_1_1                                                022F R
+  9 _main_latitude_1_1                                             0228 R
+  9 _main_longitude_1_1                                            022B R
+  9 _main_sd_logf_1_1                                              0237 R
+  3 _main_sloc0_1_0                                                0000 R
+  9 _main_status_1_1                                               022E R
+  9 _main_te_1_1                                                   0235 R
+  9 _main_temp_1_1                                                 0232 R
     _printf_tiny                                                   **** GX
-  9 _s                                                             0006 GR
- 14 _s_one                                                         054B GR
- 14 _s_two                                                         05DA GR
-  9 _sensor                                                        000D GR
-  9 _sensor_data                                                   0007 GR
+  9 _s                                                             020B GR
+ 14 _s_one                                                         0ABD GR
+ 14 _s_two                                                         0B4C GR
+  9 _sd_log_data                                                   0000 GR
+  9 _sd_sector                                                     0200 GR
+    _sdcard_init                                                   **** GX
+    _sdcard_write_block                                            **** GX
+    _sdcard_write_block_PARM_2                                     **** GX
+  9 _sensor                                                        0212 GR
+  9 _sensor_data                                                   020C GR
+    _spi_init                                                      **** GX
+  9 _timeout                                                       0203 GR
     _timer_init                                                    **** GX
- 14 _timer_isr                                                     066A GR
+ 14 _timer_isr                                                     0BDC GR
     _uart_init                                                     **** GX
     a                                                              00D6 
     ac                                                             00D6 
@@ -616,14 +653,14 @@ Area Table
    0 _CODE                                                                              size    0   flags 0
    1 RSEG                                                                               size    0   flags 0
    2 REG_BANK_0                                                                         size    8   flags 4
-   3 DSEG                                                                               size    0   flags 0
+   3 DSEG                                                                               size    3   flags 0
    4 OSEG                                                                               size    0   flags 4
    5 SSEG                                                                               size    1   flags 0
    6 ISEG                                                                               size    0   flags 0
    7 BSEG                                                                               size    0   flags 80
    8 PSEG                                                                               size    0   flags 50
-   9 XSEG                                                                               size   15   flags 40
-   A XISEG                                                                              size    1   flags 40
+   9 XSEG                                                                               size  239   flags 40
+   A XISEG                                                                              size    4   flags 40
    B HOME                                                                               size   16   flags 20
    C GSINIT0                                                                            size    0   flags 20
    D GSINIT1                                                                            size    0   flags 20
@@ -633,6 +670,6 @@ Area Table
   11 GSINIT5                                                                            size    0   flags 20
   12 GSINIT                                                                             size    0   flags 20
   13 GSFINAL                                                                            size    3   flags 20
-  14 CSEG                                                                               size  777   flags 20
-  15 CONST                                                                              size   B7   flags 20
-  16 XINIT                                                                              size    1   flags 20
+  14 CSEG                                                                               size  CDB   flags 20
+  15 CONST                                                                              size  1E3   flags 20
+  16 XINIT                                                                              size    4   flags 20

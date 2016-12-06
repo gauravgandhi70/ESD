@@ -36,7 +36,7 @@ unsigned char ADC_read(char adc_channel)
 
 
 
-unsigned int TEMP_calibration(void)
+/*unsigned int TEMP_calibration(void)
 {
     unsigned int calib;
     calib = (ADC_read(ADC_TEMP));
@@ -46,7 +46,7 @@ unsigned int TEMP_calibration(void)
 
 
 
-}
+}*/
 
 
 unsigned int HUMIDITY_calibration(void)
@@ -61,7 +61,7 @@ unsigned int HUMIDITY_calibration(void)
 
 }
 
-unsigned int` LIGHT_calibration(void)
+unsigned int LIGHT_calibration(void)
 {
     unsigned int calib;
     calib = (ADC_read(ADC_LIGHT));

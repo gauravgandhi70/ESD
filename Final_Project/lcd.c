@@ -176,8 +176,9 @@ void lcdputstr(char *str)  __critical
         i++;
         addr=lcdbusywait();
         if(addr==0x10){lcdgotoxy(2,1);}
-         if(addr==0x50){lcdgotoxy(3,1);}
-         if(addr==0x40){lcdgotoxy(4,1);}
+        else if(addr==0x50){lcdgotoxy(3,1);}
+        else if(addr==0x20){lcdgotoxy(4,1);}
+        else if(addr==0x60){lcdgotoxy(4,1);}
     }
 }
 

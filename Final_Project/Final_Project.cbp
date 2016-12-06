@@ -84,6 +84,14 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="profile.h" />
+		<Unit filename="sdcard.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="sdcard.h" />
+		<Unit filename="spi.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="spi.h" />
 		<Unit filename="uart.c">
 			<Option compilerVar="CC" />
 		</Unit>
